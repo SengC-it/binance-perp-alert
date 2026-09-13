@@ -336,50 +336,82 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
         threshold(cfg, "xs_max_scale", 3.0),
     )
 
-    long_lines = "\n".join(
-        f"  做多  {v.symbol:<12} 年化波动 {v.realized_vol_pct:>6.1f}%"
-        f"  窗口涨跌 {v.return_window_pct:+7.2f}%"
-        for v in signal.longs
-    )
-    short_lines = "\n".join(
-        f"  做空  {v.symbol:<12} 年化波动 {v.realized_vol_pct:>6.1f}%"
-        f"  窗口涨跌 {v.return_window_pct:+7.2f}%"
-        for v in signal.shorts
-    )
+    # 面向普通投资者：默认只给可执行的结论，不用专业术语。
+    # 想看统计依据的人把 email.detail_level 设为 detailed。
+    detailed = getattr(cfg, "detail_level", "simple") == "detailed"
+    rebalance = int(threshold(cfg, "xs_rebalance_days", 7))
+
+    if detailed:
+        long_lines = "\n".join(
+            f"  做多  {v.symbol:<12} 年化波动 {v.realized_vol_pct:>6.1f}%"
+            f"  窗口涨跌 {v.return_window_pct:+7.2f}%"
+            for v in signal.longs
+        )
+        short_lines = "\n".join(
+            f"  做空  {v.symbol:<12} 年化波动 {v.realized_vol_pct:>6.1f}%"
+            f"  窗口涨跌 {v.return_window_pct:+7.2f}%"
+            for v in signal.shorts
+        )
+        legs = (
+            f"【做多腿】\n{long_lines or '  （无）'}\n\n"
+            f"【做空腿】\n{short_lines or '  （无）'}\n\n"
+        )
+    else:
+        legs = (
+            f"买入这 {len(signal.longs)} 个（近期波动小，走势稳）：\n"
+            f"  {' · '.join(v.symbol for v in signal.longs)}\n\n"
+            f"做空这 {len(signal.shorts)} 个（近期波动大，风险高）：\n"
+            f"  {' · '.join(v.symbol for v in signal.shorts)}\n\n"
+        )
 
     body = (
-        f"调仓时点：{signal.as_of}\n"
-        f"打分窗口：{signal.lookback} 天已实现波动率 ｜ 全市场 {signal.universe_size} 个标的\n"
-        f"组合：做多波动率最低的 {len(signal.longs)} 个，"
-        f"做空波动率最高的 {len(signal.shorts)} 个\n\n"
-        f"【做多腿】\n{long_lines or '  （无）'}\n\n"
-        f"【做空腿】\n{short_lines or '  （无）'}\n\n"
-        f"建议仓位缩放：{scale:.2f}x（按组合层面波动率目标 "
-        f"{threshold(cfg, 'xs_target_vol_pct', 80.0):.0f}% 计算，已封顶）\n"
-        f"组合名义敞口：约 {k} 个槽位等权\n\n"
-        f"【执行前请自行确认】\n"
-        f"  1. 成本：往返约 0.18%~0.36%（视 maker/taker 与 BNB 抵扣），"
-        f"先确认预期收益能否覆盖\n"
-        f"  2. 保证金：做空高波动山寨币是尾部风险来源，"
-        f"逐腿确认保证金率与强平距离\n"
-        f"  3. 仓位缩放 {scale:.2f}x 是按波动率目标的参考值，"
-        f"请按你自己的单笔风险预算调整\n\n"
-        f"【本信号何时失效】\n"
-        f"  · 市场进入普涨且高波动标的领涨时，做空腿会反复被打穿——"
-        f"此时低波动因子的超额收益反转\n"
-        f"  · 回测样本期是单边熊市（BTC −28%、ETH −43%），"
-        f"策略 11/12 个月为正受益于该环境；若市场切换为单边牛市，需重新验证\n"
-        f"  · 若连续 3 次调仓的组合收益为负，停止使用并重新跑一遍去伪检验\n\n"
-        f"为什么是这两个方向：低波动异象——低风险资产的风险调整后收益被系统性低估。\n\n"
-        f"{evidence_block()}"
+        f"【今天的操作建议】{signal.as_of}\n\n"
+        f"{legs}"
+        f"每个合约投入相同金额，建议 {rebalance} 天后调仓。\n"
     )
+
+    if detailed:
+        body += (
+            f"\n建议仓位缩放：{scale:.2f}x（按组合层面波动率目标 "
+            f"{threshold(cfg, 'xs_target_vol_pct', 80.0):.0f}% 计算，已封顶）\n"
+            f"组合名义敞口：约 {k} 个槽位等权\n"
+            f"打分窗口：{signal.lookback} 天已实现波动率 "
+            f"｜ 全市场 {signal.universe_size} 个标的\n"
+        )
+
+    body += (
+        "\n----\n"
+        "下单前请确认\n"
+        "  1. 做空不等于稳赚：标的上涨你就亏，且理论上亏损没有上限\n"
+        "  2. 手续费往返约 0.2%，持有时间太短可能不划算\n"
+        "  3. 先小仓位试，熟悉后再加大\n"
+    )
+
+    if detailed:
+        body += (
+            "\n----\n"
+            "【本信号何时失效】\n"
+            "  · 市场进入普涨且高波动标的领涨时，做空腿会反复被打穿\n"
+            "  · 回测样本期是单边熊市（BTC −28%、ETH −43%），"
+            "策略 11/12 个月为正受益于该环境；若市场切换为单边牛市，需重新验证\n"
+            "  · 若连续 3 次调仓的组合收益为负，停止使用并重新跑一遍去伪检验\n"
+        )
+
+    body += (
+        "\n----\n"
+        "为什么推荐这些\n"
+        "  波动小的品种，长期赚钱概率高于波动大的。\n"
+    )
+
+    if detailed:
+        body += f"\n{evidence_block()}"
     return RuleResult(
         rule_id="xs_lowvol_signal",
         dedup_key=f"XSLOWVOL:{signal.as_of}",
         symbol="PORTFOLIO",
         triggered=ready,
         severity=Severity.INFO,
-        title=f"截面低波动调仓信号（{signal.as_of}）",
+        title=f"今日操作建议（{signal.as_of}）",
         body=body,
     )
 
@@ -393,21 +425,28 @@ def _rule_xs_lowvol_squeeze(cfg: Config, signal: DirectionalSignal) -> RuleResul
     limit = threshold(cfg, "xs_squeeze_1d_pct", 15.0)
     hot = signal.squeeze_warnings(limit)
 
-    lines = "\n".join(
-        f"  {v.symbol:<12} 近 1 日 {v.return_1d_pct:+7.2f}%"
-        f"  年化波动 {v.realized_vol_pct:>6.1f}%"
-        f"  24h 成交额 {v.quote_volume_24h / 1e8:.2f} 亿"
-        for v in hot
-    )
+    detailed = getattr(cfg, "detail_level", "simple") == "detailed"
+    if detailed:
+        lines = "\n".join(
+            f"  {v.symbol:<12} 近 1 日 {v.return_1d_pct:+7.2f}%"
+            f"  年化波动 {v.realized_vol_pct:>6.1f}%"
+            f"  24h 成交额 {v.quote_volume_24h / 1e8:.2f} 亿"
+            for v in hot
+        )
+    else:
+        lines = "  " + " · ".join(
+            f"{v.symbol}（涨 {v.return_1d_pct:+.1f}%）" for v in hot
+        )
+
     body = (
-        f"截至 {signal.as_of}，空头候选中有 {len(hot)} 个标的单日涨幅超过 {limit:.0f}%：\n\n"
-        f"{lines or '  （无）'}\n\n"
-        f"含义：做空腿正在被逼空。高波动标的的上涨往往又快又猛，\n"
-        f"而日线回测**完全看不到盘中挤空**——回撤数字会低估这条腿的真实风险。\n\n"
-        f"动作建议：\n"
-        f"  1. 核对空头腿的实际保证金率与强平距离\n"
-        f"  2. 考虑按交易计划书的止损规则主动减掉被逼空的腿，而不是等强平\n"
-        f"  3. 不要因为「策略回测夏普 2.36」就放大仓位扛过去"
+        f"【风险提醒】{signal.as_of}\n\n"
+        f"下面 {len(hot)} 个标的一天涨超 {limit:.0f}%，"
+        f"而你在做空它们：\n{lines or '  （无）'}\n\n"
+        f"这意味着：这些标的正在快速上涨，做空会持续亏钱。\n\n"
+        f"建议：\n"
+        f"  1. 如果已经做空，考虑先平掉这几个，别硬扛\n"
+        f"  2. 不要加仓摊薄——越涨亏得越多\n"
+        f"  3. 检查账户保证金是否充足，避免被强制平仓\n"
     )
     return RuleResult(
         rule_id="xs_lowvol_squeeze",
@@ -415,7 +454,7 @@ def _rule_xs_lowvol_squeeze(cfg: Config, signal: DirectionalSignal) -> RuleResul
         symbol="PORTFOLIO",
         triggered=bool(hot),
         severity=Severity.WARN,
-        title=f"截面低波动空头腿挤空风险（{len(hot)} 个标的急涨）",
+        title=f"风险提醒：{len(hot)} 个做空标的正在急涨",
         body=body,
     )
 

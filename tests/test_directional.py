@@ -228,8 +228,32 @@ def test_signal_rule_triggers_when_portfolio_ready():
     signal_rule = next(r for r in results if r.rule_id == "xs_lowvol_signal")
     assert signal_rule.triggered is True
     assert signal_rule.severity == Severity.INFO
+    # 简洁版：给的是可执行的买入/做空清单，不是统计术语
     assert "S0" in signal_rule.body
+    assert "买入这" in signal_rule.body
+    assert "做空这" in signal_rule.body
+    assert "不跨 0" not in signal_rule.body
+
+
+def test_signal_rule_detailed_includes_evidence():
+    """detail_level=detailed 时才附上统计依据。"""
+    vols = [make_vol(f"S{i}", 10.0 * (i + 1)) for i in range(12)]
+    sig = build_signal(vols, 3, 3, 30, "2026-09-13")
+    cfg = Config(detail_level="detailed")
+    results = evaluate_directional_rules(cfg, sig)
+    signal_rule = next(r for r in results if r.rule_id == "xs_lowvol_signal")
     assert "不跨 0" in signal_rule.body
+    assert "年化波动" in signal_rule.body
+
+
+def test_signal_rule_simple_hides_volatility_numbers():
+    """简洁版不应出现年化波动这类专业字段。"""
+    vols = [make_vol(f"S{i}", 10.0 * (i + 1)) for i in range(12)]
+    sig = build_signal(vols, 3, 3, 30, "2026-09-13")
+    results = evaluate_directional_rules(Config(), sig)
+    signal_rule = next(r for r in results if r.rule_id == "xs_lowvol_signal")
+    assert "年化波动" not in signal_rule.body
+    assert "夏普" not in signal_rule.body
 
 
 def test_signal_rule_silent_when_universe_too_small():

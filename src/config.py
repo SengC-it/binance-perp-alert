@@ -16,6 +16,8 @@ from typing import Any
 import yaml
 
 VALID_SEVERITIES = {"CRITICAL", "WARN", "INFO"}
+# simple 面向普通投资者（只给结论与操作），detailed 附带统计依据
+VALID_DETAIL_LEVELS = ("simple", "detailed")
 
 
 class ConfigError(Exception):
@@ -80,6 +82,9 @@ class Config:
 
     # email
     email_from_name: str = "Work Alert"
+    # simple  : 面向普通投资者，只给可执行的结论，不用专业术语
+    # detailed: 附带波动率、夏普、回测证据等，适合想看懂依据的人
+    detail_level: str = "simple"
     max_per_hour: int = 12
     quiet_start: time = time(23, 30)
     quiet_end: time = time(7, 0)
@@ -153,6 +158,11 @@ class Config:
                 )
         if self.max_per_hour <= 0:
             problems.append("email.max_per_hour 必须为正整数")
+        if self.detail_level not in VALID_DETAIL_LEVELS:
+            problems.append(
+                f"email.detail_level 只能是 {' / '.join(VALID_DETAIL_LEVELS)}，"
+                f"收到：{self.detail_level!r}"
+            )
         for rule_id, rc in self.rules.items():
             if rc.severity is not None and rc.severity not in VALID_SEVERITIES:
                 problems.append(f"规则 {rule_id} 的 severity 非法：{rc.severity}")
@@ -270,6 +280,7 @@ def load_config(
         cross_seconds=_as_int(poll.get("cross_seconds"), 600),
         directional_seconds=_as_int(poll.get("directional_seconds"), 3600),
         email_from_name=str(email.get("from_name", "Work Alert")),
+        detail_level=str(email.get("detail_level", "simple")).strip().lower(),
         max_per_hour=_as_int(email.get("max_per_hour"), 12),
         quiet_start=_parse_hhmm(quiet.get("start"), time(23, 30)),
         quiet_end=_parse_hhmm(quiet.get("end"), time(7, 0)),

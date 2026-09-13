@@ -34,6 +34,9 @@ cross_exchange:
 
 email:
   from_name: Work Alert
+  # simple   = 只给可执行的结论，不出现专业术语（推荐，普通投资者可读）
+  # detailed = 附带波动率、夏普、回测证据等，适合想看懂依据的人
+  detail_level: simple
   max_per_hour: 12              # 全局限流：每小时最多发多少封（CRITICAL 也计入）
   quiet_hours:
     start: "23:30"
