@@ -1,0 +1,170 @@
+# 币安永续合约持仓风险邮件提醒 —— 配置示例
+# 复制为 config.yaml 后按需修改。密钥不要写在这里，写在 .env。
+
+app:
+  timezone: Asia/Singapore      # 所有静默期、每日摘要时间按此时区解释
+  db_path: ./data/alerts.db
+  log_level: INFO
+
+binance:
+  base_url: https://fapi.binance.com
+  recv_window: 5000
+  timeout_seconds: 15
+
+poll:
+  positions_seconds: 30         # 持仓轮询间隔
+  opportunity_seconds: 300      # 资金费/基差扫描间隔（资金费 8 小时才结算一次，无需高频）
+  cross_seconds: 600            # 跨所扫描间隔（OKX 需要逐个查费率，请求量较大，放慢一些）
+  directional_seconds: 3600     # 方向性信号基于日线，每小时检查一次足够
+  heartbeat_seconds: 60         # 心跳写入间隔
+  heartbeat_stale_seconds: 180  # 超过该秒数未成功轮询 -> 发心跳告警
+  api_error_threshold: 5        # 连续失败次数达到该值 -> 发 API 告警
+
+# 跨交易所资金费价差扫描（只读各所公开接口，不需要在其他交易所开户）
+cross_exchange:
+  enabled: true
+  exchanges: [bybit, okx]       # 币安始终作为基准参与，不需要在此列出
+  bybit_base_url: https://api.bybit.com
+  okx_base_url: https://www.okx.com
+  okx_max_symbols: 60           # OKX 查费率必须逐个 instId，只查成交额最高的 N 个
+
+email:
+  from_name: Work Alert
+  max_per_hour: 12              # 全局限流：每小时最多发多少封（CRITICAL 也计入）
+  quiet_hours:
+    start: "23:30"
+    end: "07:00"
+  digest_at: "08:00"            # 每日摘要发送时间
+
+# 投递通道与分级路由。
+# URL 一律从环境变量读取（url_env），不要把 token / 密码写进这个文件。
+notify:
+  channels:
+    # Telegram：即时通道，只接风险类告警，不接每日摘要。
+    - name: telegram
+      enabled: true
+      url_env: APPRISE_TELEGRAM_URL      # tgram://<bot_token>/<chat_id>
+      severities: [CRITICAL, WARN]       # 机会类 INFO 不进 Telegram
+      digest: false
+      max_per_hour: 20                   # 该通道单独的上限（可选）
+
+    # 邮件：全量通道，同时承接每日摘要。
+    - name: email
+      enabled: true
+      url_env: APPRISE_EMAIL_URL         # mailtos://用户:应用密码@gmail.com?to=收件人
+      severities: [CRITICAL, WARN, INFO]
+      digest: true
+
+  # 说明：
+  #   · 未填 URL 的通道会被静默跳过，不会阻塞其他通道。
+  #     例如只配了 Telegram 但没配邮件密码时，Telegram 照常工作。
+  #   · 若 notify.channels 整个为空，则回退到旧的单一 APPRISE_URL。
+  #   · quiet_hours 只影响即时投递，不影响摘要。
+
+# 持仓风险阈值
+thresholds:
+  margin_ratio_warn: 0.60       # 保证金率 = 维持保证金 / 保证金余额，1.00 即触发强平
+  margin_ratio_critical: 0.80
+  liq_to_stop_min_ratio: 3.0    # 强平距离 / 止损距离，低于该值即 CRITICAL
+  funding_cost_r_warn: 0.30     # 累计资金费成本超过该 R 值
+  portfolio_heat_max_pct: 4.0   # 全部持仓止损同时触发时的风险占权益比例上限
+  daily_loss_warn_pct: 2.0
+  daily_loss_critical_pct: 3.0
+  drawdown_stop_pct: 20.0       # 自峰值回撤达到该比例 -> CRITICAL，对应交易计划停机线
+  assumed_mmr: 0.005            # 维持保证金率假设值，仅在币安 v3 接口不可用时用于估算保证金率
+
+  # --- 机会类（资金费 / 基差）---
+  assumed_hold_days: 30.0       # 计算净收益时假设的持有天数；持有越短，往返成本对年化侵蚀越大
+  min_volume_usdt_24h: 50000000 # 24h 成交额低于该值的合约直接跳过，避免滑点吃掉收益
+  min_net_annual_pct: 10.0      # 扣费后年化资金费收益达到该值才提醒
+  basis_warn_pct: 0.30          # 标记价相对指数价的偏离达到该值（%）才提醒
+  max_alerts_per_scan: 10       # 每类机会规则单次扫描最多评估多少个标的，防止全市场普涨时告警爆炸
+  # 成本假设（VIP0），用于把毛收益折算成净收益
+  spot_taker_fee_pct: 0.10
+  perp_taker_fee_pct: 0.05
+  slippage_pct: 0.03
+
+  # --- 方向性：截面低波动 ---
+  # 这是唯一通过全部统计检验的方向性策略，详见 src/directional_engine.py 顶部说明
+  xs_scan_top_n: 60             # 每次扫描最多拉取多少个标的的日线（控制请求数）
+  xs_lookback_days: 30          # 打分窗口：过去多少天的已实现波动率
+  xs_k_long: 5                  # 做多波动率最低的几个
+  xs_k_short: 5                 # 做空波动率最高的几个
+  xs_rebalance_days: 7          # 调仓间隔（提醒节奏，不是自动交易）
+  xs_min_symbols: 20            # 参与排序的标的最少数量，不够就保持沉默
+  xs_target_vol_pct: 80.0       # 组合波动率目标；回测显示 80% 时回撤从 11.11% 降到 7.66%
+  xs_max_scale: 3.0             # 缩放上限，防止低波期杠杆失控
+  xs_squeeze_1d_pct: 15.0       # 空头候选单日涨幅超过该值即报挤空风险
+
+  # --- 前向验证 ---
+  # 一年回测在统计上不足以证明正期望，系统必须能自己持续证伪。
+  paper_horizon_days: 30        # 信号登记后等这么多天，用真实行情回填核对
+  cross_min_net_annual_pct: 15.0  # 跨所价差扣费后年化达到该值才提醒
+
+# 每个标的的计划止损距离（%）。用于计算 R 值与"强平距离/止损距离"倍数。
+# 不配置的标的会跳过依赖止损距离的规则。
+symbols:
+  BTCUSDT:
+    planned_stop_pct: 2.0
+  ETHUSDT:
+    planned_stop_pct: 2.5
+
+# 规则开关与覆盖。未列出的规则使用代码内置默认值。
+rules:
+  liq_distance_insufficient:
+    enabled: true
+    severity: CRITICAL
+    confirmations: 2            # 连续 N 次评估为真才告警
+  margin_ratio_low:
+    enabled: true
+    severity: WARN
+    confirmations: 3
+  funding_cost_high:
+    enabled: true
+    severity: WARN
+    confirmations: 3
+  portfolio_heat_exceeded:
+    enabled: true
+    severity: WARN
+    confirmations: 3
+  daily_loss_limit:
+    enabled: true
+    severity: WARN
+    confirmations: 2
+  drawdown_stop:
+    enabled: true
+    severity: CRITICAL
+    confirmations: 1
+  heartbeat_stale:
+    enabled: true
+    severity: CRITICAL
+    confirmations: 1
+  api_error:
+    enabled: true
+    severity: WARN
+    confirmations: 1
+  funding_opportunity:
+    enabled: false              # 回测为负期望（见 src/rules.py 的说明），默认关闭
+    severity: INFO              # INFO 一律走每日摘要，不占用即时通道
+    confirmations: 2
+  basis_wide:
+    enabled: true
+    severity: WARN
+    confirmations: 3
+  # 方向性：唯一通过回测验证的截面策略
+  xs_lowvol_signal:
+    enabled: true
+    severity: INFO              # 调仓提醒属于机会信息，走摘要
+    confirmations: 1
+  xs_lowvol_squeeze:
+    enabled: true
+    severity: WARN              # 挤空是风险，走即时通道
+    confirmations: 1
+  cross_exchange_funding:
+    enabled: true
+    severity: INFO
+    confirmations: 2
+
+cooldown:
+  default_seconds: 14400        # 同一 (规则, 标的, 方向) 4 小时内不重复发
+  critical_seconds: 1800        # CRITICAL 冷却 30 分钟
