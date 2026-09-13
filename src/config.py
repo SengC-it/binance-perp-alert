@@ -133,10 +133,19 @@ class Config:
         """
         problems: list[str] = []
         if require_credentials:
-            if not self.api_key:
-                problems.append("缺少 BINANCE_API_KEY（请检查 .env）")
-            if not self.api_secret:
-                problems.append("缺少 BINANCE_API_SECRET（请检查 .env）")
+            # 纯信号模式（positions_enabled=false）完全不读账户，
+            # 因此不该要求账户凭证——否则用户会被迫为一个用不到的能力配密钥。
+            if self.positions_enabled:
+                if not self.api_key:
+                    problems.append(
+                        "缺少 BINANCE_API_KEY（请检查 .env；"
+                        "若只做信号提醒，可在 config.yaml 设 poll.positions_enabled: false）"
+                    )
+                if not self.api_secret:
+                    problems.append(
+                        "缺少 BINANCE_API_SECRET（请检查 .env；"
+                        "若只做信号提醒，可在 config.yaml 设 poll.positions_enabled: false）"
+                    )
             if not self.apprise_url and not self.notify_channels and not self.dry_run:
                 problems.append(
                     "没有可用的投递通道：请设置 APPRISE_URL，"

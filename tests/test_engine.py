@@ -104,3 +104,41 @@ cross_exchange:
     )
     cfg = load_config(path, tmp_path / ".env", dry_run=True, require_credentials=False)
     assert cfg.positions_enabled is True
+
+
+def _cfg_with(tmp_path: Path, enabled: bool):
+    path = tmp_path / "config.yaml"
+    path.write_text(
+        f"""
+timezone: UTC
+db_path: {tmp_path / "t.db"}
+poll:
+  positions_enabled: {"true" if enabled else "false"}
+cross_exchange:
+  enabled: false
+""",
+        encoding="utf-8",
+    )
+    return load_config(
+        path, tmp_path / ".env", dry_run=True, require_credentials=False
+    )
+
+
+def test_validate_allows_missing_api_key_when_positions_disabled(tmp_path):
+    """纯信号模式不读账户，因此不该要求账户凭证。"""
+    cfg = _cfg_with(tmp_path, False)
+    cfg.api_key = ""
+    cfg.api_secret = ""
+    cfg.validate(require_credentials=True)  # 不应抛异常
+
+
+def test_validate_still_requires_api_key_when_positions_enabled(tmp_path):
+    """开启持仓轮询时，缺凭证必须报错（不能因为加了开关就放松）。"""
+    import pytest
+
+    cfg = _cfg_with(tmp_path, True)
+    cfg.api_key = ""
+    cfg.api_secret = ""
+    with pytest.raises(Exception) as exc:
+        cfg.validate(require_credentials=True)
+    assert "BINANCE_API_KEY" in str(exc.value)

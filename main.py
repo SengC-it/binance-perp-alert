@@ -89,9 +89,11 @@ def main(argv: list[str] | None = None) -> int:
         print(render_report(report))
         return 0 if report.passed else 1
 
-    # scan / cross / check-config 只依赖公开接口或本地配置，不要求填密钥
+    # scan / cross / check-config 只依赖公开接口或本地配置，不要求填密钥。
+    # test-email / digest 只走投递通道与本地数据库，同样不读账户。
     needs_credentials = args.command not in (
-        "scan", "cross", "directional", "verify", "check-config"
+        "scan", "cross", "directional", "verify", "check-config",
+        "test-email", "digest",
     )
     try:
         cfg = load_config(
