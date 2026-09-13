@@ -8,7 +8,7 @@ import pytest
 
 from src.config import ChannelConfig, Config
 from src.models import Alert, Severity
-from src.notifier import Notifier
+from src.notifier import Notifier, with_from_name
 from src.store import Store
 
 NOW = datetime(2026, 9, 12, 6, 0, tzinfo=timezone.utc)
@@ -249,3 +249,37 @@ def test_send_digest_marks_all_sent(store):
 def test_render_digest_returns_none_when_empty(store):
     n = make_notifier(store, [(ChannelConfig("email", "mailtos://x"), FakeApprise())])
     assert n.render_digest(NOW) is None
+
+
+# ---------------------------------------------------------------------------
+# 发件人名称：config.yaml 的 email.from_name 必须真正传到 Apprise
+# ---------------------------------------------------------------------------
+
+
+def test_with_from_name_appends_name_to_smtp_url():
+    out = with_from_name("mailtos://u:p@gmail.com?to=recv@x.com", "Work Alert")
+    assert "name=Work%20Alert" in out
+    assert "to=recv@x.com" in out
+
+
+def test_with_from_name_uses_percent20_not_plus():
+    """空格必须是 %20。Apprise 不解码 +，用默认 quote_plus 会显示成 "Work+Alert"。"""
+    out = with_from_name("mailtos://u:p@gmail.com?to=r@x.com", "Work Alert")
+    assert "+" not in out.split("?", 1)[1]
+
+
+def test_with_from_name_leaves_telegram_untouched():
+    url = "tgram://123:ABC/xyz"
+    assert with_from_name(url, "Work Alert") == url
+
+
+def test_with_from_name_overwrites_existing_name():
+    out = with_from_name("mailtos://u:p@gmail.com?to=r@x.com&name=Old", "Work Alert")
+    assert "Old" not in out
+    assert "name=Work%20Alert" in out
+
+
+def test_with_from_name_keeps_multiple_recipients():
+    out = with_from_name("mailtos://u:p@gmail.com?to=a@x.com,b@y.com", "Work Alert")
+    assert "a@x.com" in out
+    assert "b@y.com" in out

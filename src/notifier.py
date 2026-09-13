@@ -22,6 +22,7 @@ import logging
 from collections import defaultdict
 from datetime import datetime, timedelta, tzinfo
 from typing import Any
+from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
 
 from .config import ChannelConfig, Config
 from .models import Alert, Severity
@@ -32,6 +33,33 @@ from .timeutil import fmt_local
 log = logging.getLogger(__name__)
 
 DIGEST_COMPONENT = "digest"
+
+
+def with_from_name(url: str, name: str) -> str:
+    """给 SMTP 类 URL 补上发件人名称参数。
+
+    Apprise 的 mailto 插件默认把发件人名写成 "Apprise"，config.yaml 的
+    email.from_name 只有显式作为 URL 的 name 参数传入才生效——
+    否则那项配置形同虚设，收件人看到的是 "Apprise" 而不是设定的名字。
+
+    safe 里保留 : / @ , 是为了不破坏收件人邮箱（to=a@x.com,b@y.com）。
+    """
+    if not name or not url.lower().startswith(("mailto:", "mailtos:")):
+        return url
+    parts = urlsplit(url)
+    query = dict(parse_qsl(parts.query, keep_blank_values=True))
+    query["name"] = name
+    return urlunsplit(
+        (
+            parts.scheme,
+            parts.netloc,
+            parts.path,
+            # quote_via=quote：空格编码为 %20 而非 +。Apprise 不解码 +，
+            # 用默认的 quote_plus 会让发件人名显示成 "Work+Alert"。
+            urlencode(query, safe=":/@,", quote_via=quote),
+            parts.fragment,
+        )
+    )
 
 
 class Notifier:
@@ -65,7 +93,7 @@ class Notifier:
         built: list[tuple[ChannelConfig, Any]] = []
         for spec in specs:
             obj = apprise.Apprise()
-            if not obj.add(spec.url):
+            if not obj.add(with_from_name(spec.url, self.cfg.email_from_name)):
                 # 单个通道解析失败不应拖垮其他通道，但要让人看得见。
                 log.error("通道 %s 的 URL 无法解析，已跳过（检查环境变量是否填对）", spec.name)
                 continue
