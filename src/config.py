@@ -67,6 +67,9 @@ class Config:
     timeout_seconds: int = 15
 
     # poll
+    # 关闭后完全不读取账户，守护循环只跑公开行情类扫描。
+    # 只想要信号提醒、不想配置 API Key 时设为 false。
+    positions_enabled: bool = True
     positions_seconds: int = 30
     heartbeat_seconds: int = 60
     heartbeat_stale_seconds: int = 180
@@ -249,6 +252,7 @@ def load_config(
         binance_base_url=str(bnc.get("base_url", "https://fapi.binance.com")).rstrip("/"),
         recv_window=_as_int(bnc.get("recv_window"), 5000),
         timeout_seconds=_as_int(bnc.get("timeout_seconds"), 15),
+        positions_enabled=bool(poll.get("positions_enabled", True)),
         positions_seconds=_as_int(poll.get("positions_seconds"), 30),
         heartbeat_seconds=_as_int(poll.get("heartbeat_seconds"), 60),
         heartbeat_stale_seconds=_as_int(poll.get("heartbeat_stale_seconds"), 180),

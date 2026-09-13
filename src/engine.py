@@ -355,8 +355,10 @@ class AlertService:
 
     def run_forever(self) -> None:
         log.info(
-            "启动守护循环 | 持仓 %ds | 机会 %ds | 跨所 %ds | 方向性 %ds | 心跳 %ds | 摘要 %s | 时区 %s",
-            self.cfg.positions_seconds,
+            "启动守护循环 | 持仓 %s | 机会 %ds | 跨所 %ds | 方向性 %ds | 心跳 %ds | 摘要 %s | 时区 %s",
+            f"{self.cfg.positions_seconds}s"
+            if self.cfg.positions_enabled
+            else "已关闭（纯信号模式，无需 API Key）",
             self.cfg.opportunity_seconds,
             self.cfg.cross_seconds,
             self.cfg.directional_seconds,
@@ -374,7 +376,9 @@ class AlertService:
             now = datetime.now(timezone.utc)
             monotonic = time.monotonic()
             try:
-                if monotonic - last_positions >= self.cfg.positions_seconds:
+                if self.cfg.positions_enabled and (
+                    monotonic - last_positions >= self.cfg.positions_seconds
+                ):
                     self.poll_positions(now)
                     last_positions = monotonic
                 if monotonic - last_opportunity >= self.cfg.opportunity_seconds:

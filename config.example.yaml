@@ -12,7 +12,11 @@ binance:
   timeout_seconds: 15
 
 poll:
-  positions_seconds: 30         # 持仓轮询间隔
+  # 设为 false 则完全不读取你的账户，只跑公开行情类扫描。
+  # 纯信号模式下【不需要配置币安 API Key】，没有任何密钥泄露风险。
+  # 代价：持仓风险类规则（强平距离、保证金率、回撤）全部停用。
+  positions_enabled: true
+  positions_seconds: 30         # 持仓轮询间隔（positions_enabled=false 时此项无效）
   opportunity_seconds: 300      # 资金费/基差扫描间隔（资金费 8 小时才结算一次，无需高频）
   cross_seconds: 600            # 跨所扫描间隔（OKX 需要逐个查费率，请求量较大，放慢一些）
   directional_seconds: 3600     # 方向性信号基于日线，每小时检查一次足够
