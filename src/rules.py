@@ -39,7 +39,9 @@ DEFAULTS: dict[str, dict] = {
     "basis_wide": {"severity": Severity.WARN, "confirmations": 3},
     "cross_exchange_funding": {"severity": Severity.INFO, "confirmations": 2},
     # 方向性：唯一通过全部统计检验的截面策略（见 src/directional_engine.py）
-    "xs_lowvol_signal": {"severity": Severity.INFO, "confirmations": 1},
+    # 调仓信号走即时通道：用户要的是「出现即知道」，
+    # 等到每日摘要会错过当日的下单窗口。
+    "xs_lowvol_signal": {"severity": Severity.WARN, "confirmations": 1},
     "xs_lowvol_squeeze": {"severity": Severity.WARN, "confirmations": 1},
 }
 
@@ -322,6 +324,18 @@ def _rule_basis_wide(cfg: Config, opp: FundingOpportunity) -> RuleResult:
     )
 
 
+def _fmt_price(p: float) -> str:
+    """价格自适应格式：BTC 量级保留 1 位小数，低价山寨币保留 6 位。
+
+    人工下单要照着价格输，格式必须能直接抄，不能是科学计数法。
+    """
+    if p >= 1000:
+        return f"{p:,.1f}"
+    if p >= 1:
+        return f"{p:.4f}"
+    return f"{p:.6f}"
+
+
 def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult:
     """截面低波动调仓提醒。
 
@@ -343,12 +357,14 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
 
     if detailed:
         long_lines = "\n".join(
-            f"  做多  {v.symbol:<12} 年化波动 {v.realized_vol_pct:>6.1f}%"
+            f"  做多  {v.symbol:<12} 现价 {_fmt_price(v.last_price):>12}"
+            f"  年化波动 {v.realized_vol_pct:>6.1f}%"
             f"  窗口涨跌 {v.return_window_pct:+7.2f}%"
             for v in signal.longs
         )
         short_lines = "\n".join(
-            f"  做空  {v.symbol:<12} 年化波动 {v.realized_vol_pct:>6.1f}%"
+            f"  做空  {v.symbol:<12} 现价 {_fmt_price(v.last_price):>12}"
+            f"  年化波动 {v.realized_vol_pct:>6.1f}%"
             f"  窗口涨跌 {v.return_window_pct:+7.2f}%"
             for v in signal.shorts
         )
@@ -357,17 +373,41 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
             f"【做空腿】\n{short_lines or '  （无）'}\n\n"
         )
     else:
+        buy_lines = "\n".join(
+            f"  {v.symbol:<12} 现价 {_fmt_price(v.last_price)}"
+            for v in signal.longs
+        )
+        sell_lines = "\n".join(
+            f"  {v.symbol:<12} 现价 {_fmt_price(v.last_price)}"
+            for v in signal.shorts
+        )
         legs = (
             f"买入这 {len(signal.longs)} 个（近期波动小，走势稳）：\n"
-            f"  {' · '.join(v.symbol for v in signal.longs)}\n\n"
+            f"{buy_lines or '  （无）'}\n\n"
             f"做空这 {len(signal.shorts)} 个（近期波动大，风险高）：\n"
-            f"  {' · '.join(v.symbol for v in signal.shorts)}\n\n"
+            f"{sell_lines or '  （无）'}\n\n"
         )
 
     body = (
         f"【今天的操作建议】{signal.as_of}\n\n"
         f"{legs}"
-        f"每个合约投入相同金额，建议 {rebalance} 天后调仓。\n"
+        f"每个合约投入相同金额。\n"
+    )
+
+    # 人工下单最需要的三件事：怎么平、亏多少认输、这个信号还新不新鲜
+    stop_pct = threshold(cfg, "xs_stop_loss_pct", 8.0)
+    body += (
+        f"\n----\n"
+        f"怎么平仓\n"
+        f"  正常：{rebalance} 天后调仓时一起平（下次收到本提醒时）\n"
+        f"  想提前止损：单个标的亏 {stop_pct:.0f}% 就先平掉\n"
+        f"  注意：{stop_pct:.0f}% 是额外风控建议，回测里没用过止损\n"
+    )
+    body += (
+        f"\n----\n"
+        f"这个信号什么时候失效\n"
+        f"  基于 {signal.as_of} 收盘数据，下一个交易日开始前有效。\n"
+        f"  错过就等下次提醒，不要用旧价格追单。\n"
     )
 
     if detailed:
@@ -410,7 +450,7 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
         dedup_key=f"XSLOWVOL:{signal.as_of}",
         symbol="PORTFOLIO",
         triggered=ready,
-        severity=Severity.INFO,
+        severity=Severity.WARN,
         title=f"今日操作建议（{signal.as_of}）",
         body=body,
     )

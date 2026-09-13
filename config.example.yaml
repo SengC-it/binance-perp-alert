@@ -102,6 +102,8 @@ thresholds:
   xs_target_vol_pct: 80.0       # 组合波动率目标；回测显示 80% 时回撤从 11.11% 降到 7.66%
   xs_max_scale: 3.0             # 缩放上限，防止低波期杠杆失控
   xs_squeeze_1d_pct: 15.0       # 空头候选单日涨幅超过该值即报挤空风险
+  xs_stop_loss_pct: 8.0         # 提醒里给出的建议止损（%）。仅为额外风控建议，
+                                # 回测中该策略是持有到下次调仓，并未使用止损
 
   # --- 前向验证 ---
   # 一年回测在统计上不足以证明正期望，系统必须能自己持续证伪。
@@ -161,7 +163,7 @@ rules:
   # 方向性：唯一通过回测验证的截面策略
   xs_lowvol_signal:
     enabled: true
-    severity: INFO              # 调仓提醒属于机会信息，走摘要
+    severity: WARN              # 出现即推送（走即时通道），不进每日摘要
     confirmations: 1
   xs_lowvol_squeeze:
     enabled: true

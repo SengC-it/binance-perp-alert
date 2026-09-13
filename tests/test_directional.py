@@ -227,7 +227,8 @@ def test_signal_rule_triggers_when_portfolio_ready():
     results = evaluate_directional_rules(Config(), sig)
     signal_rule = next(r for r in results if r.rule_id == "xs_lowvol_signal")
     assert signal_rule.triggered is True
-    assert signal_rule.severity == Severity.INFO
+    # WARN：出现即推送，不进每日摘要
+    assert signal_rule.severity == Severity.WARN
     # 简洁版：给的是可执行的买入/做空清单，不是统计术语
     assert "S0" in signal_rule.body
     assert "买入这" in signal_rule.body
