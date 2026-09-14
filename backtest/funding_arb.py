@@ -116,6 +116,21 @@ class MarketSeries:
     perp_open: dict[date, float] = field(default_factory=dict)
     perp_high: dict[date, float] = field(default_factory=dict)
     perp_low: dict[date, float] = field(default_factory=dict)
+    quote_asset: str = "USDT"
+    contract_type: str = "PERPETUAL"
+    status: str = "TRADING"
+    listed_from: date | None = None
+    delisted_at: date | None = None
+
+    def is_active_on(self, day: date) -> bool:
+        """按观测日处理挂牌/下架边界，缺 metadata 时保持旧缓存兼容。"""
+        if self.quote_asset.upper() != "USDT" or self.contract_type.upper() != "PERPETUAL":
+            return False
+        if self.listed_from is not None and day < self.listed_from:
+            return False
+        if self.delisted_at is not None and day >= self.delisted_at:
+            return False
+        return self.status.upper() in {"TRADING", "ACTIVE", ""}
 
     def basis_pct(self, day: date) -> float | None:
         perp = self.perp_close.get(day)
@@ -183,6 +198,17 @@ def build_series(record: dict[str, Any]) -> MarketSeries:
     funding_rate = [float(r[1]) for r in record["funding"]]
     funding_interval = [float(r[2]) if len(r) > 2 else 8.0 for r in record["funding"]]
 
+    observed_days = sorted(perp_close)
+    listed_from = (
+        date.fromisoformat(str(record["listed_from"]))
+        if record.get("listed_from") else
+        (observed_days[0] if observed_days else None)
+    )
+    delisted_at = (
+        date.fromisoformat(str(record["delisted_at"]))
+        if record.get("delisted_at") else
+        (observed_days[-1] + timedelta(days=1) if observed_days else None)
+    )
     return MarketSeries(
         symbol=record["symbol"],
         dates=dates,
@@ -196,6 +222,11 @@ def build_series(record: dict[str, Any]) -> MarketSeries:
         perp_open=perp_open,
         perp_high=perp_high,
         perp_low=perp_low,
+        quote_asset=str(record.get("quote_asset", "USDT")),
+        contract_type=str(record.get("contract_type", "PERPETUAL")),
+        status=str(record.get("status", "TRADING")),
+        listed_from=listed_from,
+        delisted_at=delisted_at,
     )
 
 

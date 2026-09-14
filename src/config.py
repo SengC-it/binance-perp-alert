@@ -19,6 +19,9 @@ VALID_SEVERITIES = {"CRITICAL", "WARN", "INFO"}
 # simple 面向普通投资者（只给结论与操作），detailed 附带统计依据
 VALID_DETAIL_LEVELS = ("simple", "detailed")
 
+# M0 永久边界：本项目只做提醒与 PAPER 记账，不启用任何实盘路径。
+LIVE_TRADING: bool = False
+
 
 class ConfigError(Exception):
     """配置缺失或非法。"""

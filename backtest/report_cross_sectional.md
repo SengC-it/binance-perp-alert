@@ -1,5 +1,16 @@
 # 截面方向性策略：验证报告
 
+> **LEGACY / EVIDENCE_STALE（M0 前快照）**：本文件的数值是在 V1 ledger、
+> completed-candle 和 target-diff 口径冻结前生成的历史快照，不代表当前报告结果，
+> 不应作为 Scanner 或 PAPER 的统计依据。请运行 `python -m backtest.cross_sectional`
+> 重新生成当前报告。
+>
+> 当前 Control：`XS-LOWVOL-V1-Control`；spec SHA-256：
+> `5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678`
+>
+> 当前 VT80 Shadow：`XS-LOWVOL-V1-VT80-Shadow`；spec SHA-256：
+> `97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd`
+
 > 时间序列策略（双均线、通道突破）在单边行情里赚的钱，本质是押对了方向。
 > 截面策略在同一时点横向比较所有标的，做多相对强的、做空相对弱的，
 > 组合接近市场中性，理论上更不依赖大盘方向。本报告检验这个「理论上」。

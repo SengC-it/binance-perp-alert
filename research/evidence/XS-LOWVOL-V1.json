@@ -1,0 +1,67 @@
+{
+  "strategy": "xs_lowvol",
+  "strategy_id": "XS-LOWVOL-V1-Control",
+  "variant": "Control",
+  "spec_hash": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+  "dataset_id": "binance-um-usdt-perpetual-daily-2025-09-2026-08-baseline",
+  "date_range": {
+    "start": "2025-09-01",
+    "end": "2026-08-31"
+  },
+  "universe": {
+    "eligible_symbols": 73,
+    "selection": "historical cached symbols with daily data",
+    "quote_volume_threshold_usdt": 50000000
+  },
+  "total_return_pct": 63.79,
+  "max_drawdown_pct": 11.11,
+  "sharpe": 2.36,
+  "sharpe_ci90": [
+    0.76,
+    4.05
+  ],
+  "bootstrap_interval": {
+    "method": "iid",
+    "confidence": 0.9,
+    "metric": "sharpe",
+    "lower": 0.76,
+    "upper": 4.05
+  },
+  "funding": {
+    "pnl_usdt": -1018,
+    "source": "real_settled_funding_events"
+  },
+  "costs": {
+    "pnl_usdt": -242,
+    "taker_pct_per_side": 0.05,
+    "slippage_pct_per_side": 0.03
+  },
+  "long_leg": {
+    "pnl_usdt": -1856,
+    "sharpe": null,
+    "note": "legacy baseline did not persist daily leg returns; regenerated reports calculate this field"
+  },
+  "short_leg": {
+    "pnl_usdt": 9494,
+    "sharpe": null,
+    "note": "legacy baseline did not persist daily leg returns; regenerated reports calculate this field"
+  },
+  "long_short_contribution_ratio": {
+    "long_pct_of_price_pnl": -24.3,
+    "short_pct_of_price_pnl": 124.3,
+    "status": "baseline_price_pnl_attribution"
+  },
+  "bull_bear_regime_attribution": {
+    "status": "not_available_in_baseline_artifact",
+    "note": "regenerated reports calculate bull/bear attribution from daily market returns"
+  },
+  "months_positive": 11,
+  "months_total": 12,
+  "max_month_share_pct": 19,
+  "beta": -0.17,
+  "annual_alpha_pct": 38.68,
+  "loo_positive": 73,
+  "loo_total": 73,
+  "top2_concentration_pct": 24,
+  "generated_at": "2026-09-14T00:00:00Z"
+}

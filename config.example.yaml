@@ -92,22 +92,23 @@ thresholds:
   slippage_pct: 0.03
 
   # --- 方向性：截面低波动 ---
-  # 这是唯一通过全部统计检验的方向性策略，详见 src/directional_engine.py 顶部说明
-  xs_scan_top_n: 60             # 每次扫描最多拉取多少个标的的日线（控制请求数）
-  xs_lookback_days: 30          # 打分窗口：过去多少天的已实现波动率
-  xs_k_long: 5                  # 做多波动率最低的几个
-  xs_k_short: 5                 # 做空波动率最高的几个
-  xs_rebalance_days: 7          # 调仓间隔（提醒节奏，不是自动交易）
-  xs_min_symbols: 20            # 参与排序的标的最少数量，不够就保持沉默
-  xs_target_vol_pct: 80.0       # 组合波动率目标；回测显示 80% 时回撤从 11.11% 降到 7.66%
-  xs_max_scale: 3.0             # 缩放上限，防止低波期杠杆失控
+  # 规则唯一来源：research/xs_lowvol_v1.yaml；这里不允许覆盖冻结参数。
+  # Scanner 会读取完整 eligible universe，不按请求方便截断为 top-N。
+  xs_lookback_days: 30          # 兼容旧配置的显示字段，运行时以 frozen spec 为准
+  xs_k_long: 5                  # 兼容旧配置的显示字段，运行时以 frozen spec 为准
+  xs_k_short: 5                 # 兼容旧配置的显示字段，运行时以 frozen spec 为准
+  xs_rebalance_days: 7          # 兼容旧配置的显示字段，运行时以 frozen spec 为准
+  xs_min_symbols: 10            # eligible universe 最少数量，不够就保持沉默
+  xs_target_vol_pct: 0.0        # Control：关闭 volatility targeting
+  xs_shadow_target_vol_pct: 80.0
+  xs_shadow_max_scale: 3.0
   xs_squeeze_1d_pct: 15.0       # 空头候选单日涨幅超过该值即报挤空风险
   xs_stop_loss_pct: 8.0         # 提醒里给出的建议止损（%）。仅为额外风控建议，
                                 # 回测中该策略是持有到下次调仓，并未使用止损
 
   # --- 前向验证 ---
   # 一年回测在统计上不足以证明正期望，系统必须能自己持续证伪。
-  paper_horizon_days: 30        # 信号登记后等这么多天，用真实行情回填核对
+  # Forward PAPER 使用每 7 天 target-diff 的连续 portfolio ledger，不是一次性 30 天交易。
   cross_min_net_annual_pct: 15.0  # 跨所价差扣费后年化达到该值才提醒
 
 # 每个标的的计划止损距离（%）。用于计算 R 值与"强平距离/止损距离"倍数。

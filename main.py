@@ -195,56 +195,47 @@ def main(argv: list[str] | None = None) -> int:
 
         if args.command == "directional":
             from src.directional_engine import (
-                build_signal,
-                build_symbol_vol,
+                build_directional_scan,
                 evidence_block,
                 format_signal_table,
-                parse_klines,
             )
+            from src.xs_lowvol_spec import CONTROL_RULES
 
-            min_volume = cfg.thresholds.get("min_volume_usdt_24h", 50_000_000.0)
-            top_n = int(cfg.thresholds.get("xs_scan_top_n", 60))
-            lookback = int(cfg.thresholds.get("xs_lookback_days", 30))
-            k_long = int(cfg.thresholds.get("xs_k_long", 5))
-            k_short = int(cfg.thresholds.get("xs_k_short", 5))
-
-            pairs: list[tuple[str, float]] = []
-            for item in ticker_raw:
-                symbol = str(item.get("symbol", "")).upper()
-                if not symbol.endswith("USDT"):
-                    continue
-                try:
-                    volume = float(item.get("quoteVolume") or 0.0)
-                except (TypeError, ValueError):
-                    continue
-                if volume >= min_volume:
-                    pairs.append((symbol, volume))
-            pairs.sort(key=lambda kv: kv[1], reverse=True)
-            pairs = pairs[:top_n]
-
-            print(f"从 {len(pairs)} 个流动性达标的合约中拉取日线，计算 {lookback} 天已实现波动率…")
-            vols = []
-            failed = 0
-            for symbol, volume in pairs:
-                try:
-                    raw = client.klines(symbol, "1d", lookback + 2)
-                except BinanceError:
-                    failed += 1
-                    continue
-                snap = build_symbol_vol(symbol, parse_klines(raw), volume, lookback)
-                if snap is not None:
-                    vols.append(snap)
-            if failed:
-                print(f"（{failed} 个标的的日线拉取失败，已跳过）")
-
-            if len(vols) < max(int(cfg.thresholds.get("xs_min_symbols", 20)), k_long + k_short):
-                print(f"只有 {len(vols)} 个标的可用，不足以构建截面组合，本次不出信号。")
+            valid_symbols = None
+            try:
+                info = client.exchange_info()
+                valid_symbols = {
+                    str(item.get("symbol", "")).upper()
+                    for item in info.get("symbols", [])
+                    if str(item.get("status", "")).upper() == "TRADING"
+                    and str(item.get("contractType", "")).upper() == "PERPETUAL"
+                    and str(item.get("quoteAsset", "")).upper() == "USDT"
+                }
+            except AttributeError:
+                valid_symbols = None
+            except BinanceError as exc:
+                print(f"无法确认完整合约 universe，本次不出信号：{exc}", file=sys.stderr)
                 return 1
 
-            signal = build_signal(
-                vols, k_long, k_short, lookback,
-                datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            scan = build_directional_scan(
+                ticker_raw,
+                lambda symbol, interval, limit: client.klines(symbol, interval, limit),
+                datetime.now(timezone.utc),
+                min_volume=CONTROL_RULES.min_quote_volume_usdt,
+                lookback=CONTROL_RULES.lookback_days,
+                k_long=CONTROL_RULES.k_long,
+                k_short=CONTROL_RULES.k_short,
+                min_symbols=CONTROL_RULES.min_symbols,
+                valid_symbols=valid_symbols,
             )
+            print(f"从完整 eligible universe（{scan.candidate_count} 个）读取已完成日线…")
+            if scan.signal is None:
+                print(f"{scan.reason}，本次不出信号。")
+                if scan.missing_symbols:
+                    print(f"缺失数据：{', '.join(scan.missing_symbols)}")
+                return 1
+
+            signal = scan.signal
             print(format_signal_table(signal))
             print(evidence_block())
             return 0

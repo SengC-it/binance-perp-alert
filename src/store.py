@@ -68,7 +68,13 @@ CREATE TABLE IF NOT EXISTS positions_seen (
 CREATE TABLE IF NOT EXISTS paper_trades (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     strategy      TEXT NOT NULL,
+    strategy_id   TEXT NOT NULL DEFAULT '',
+    spec_hash     TEXT NOT NULL DEFAULT '',
+    variant       TEXT NOT NULL DEFAULT '',
     signal_date   TEXT NOT NULL,
+    signal_timestamp TEXT,
+    execution_date TEXT,
+    execution_lag_days INTEGER NOT NULL DEFAULT 1,
     horizon_days  INTEGER NOT NULL,
     lookback_days INTEGER NOT NULL,
     k_long        INTEGER NOT NULL,
@@ -83,6 +89,42 @@ CREATE TABLE IF NOT EXISTS paper_trades (
     short_return_pct REAL,
     error         TEXT,
     UNIQUE (strategy, signal_date, horizon_days)
+);
+
+-- XS-LOWVOL 周度 PAPER portfolio 的连续 NAV 与换仓审计。
+CREATE TABLE IF NOT EXISTS paper_nav (
+    strategy_id    TEXT NOT NULL,
+    spec_hash      TEXT NOT NULL,
+    day            TEXT NOT NULL,
+    nav            REAL NOT NULL,
+    daily_pnl      REAL NOT NULL,
+    long_pnl       REAL NOT NULL,
+    short_pnl      REAL NOT NULL,
+    funding_pnl    REAL NOT NULL,
+    cost_pnl       REAL NOT NULL,
+    rebalance      INTEGER NOT NULL DEFAULT 0,
+    changed_json   TEXT NOT NULL DEFAULT '[]',
+    positions_json TEXT NOT NULL DEFAULT '{}',
+    PRIMARY KEY (strategy_id, day)
+);
+
+CREATE TABLE IF NOT EXISTS paper_rebalances (
+    strategy_id    TEXT NOT NULL,
+    spec_hash      TEXT NOT NULL,
+    rebalance_date TEXT NOT NULL,
+    signal_date    TEXT NOT NULL,
+    execution_date TEXT NOT NULL,
+    targets_json   TEXT NOT NULL,
+    changed_json   TEXT NOT NULL DEFAULT '[]',
+    PRIMARY KEY (strategy_id, rebalance_date)
+);
+
+CREATE TABLE IF NOT EXISTS paper_portfolios (
+    strategy_id TEXT PRIMARY KEY,
+    spec_hash   TEXT NOT NULL,
+    last_day    TEXT,
+    state_json  TEXT NOT NULL DEFAULT '{}',
+    updated_at  TEXT NOT NULL
 );
 """
 
@@ -114,7 +156,27 @@ class Store:
         self._conn.row_factory = sqlite3.Row
         self._conn.execute("PRAGMA journal_mode=WAL")
         self._conn.executescript(SCHEMA)
+        self._migrate_paper_columns()
         self._conn.commit()
+
+    def _migrate_paper_columns(self) -> None:
+        """为旧数据库补齐 M0 的策略身份与执行时间字段。"""
+        columns = {
+            str(row[1]) for row in self._conn.execute("PRAGMA table_info(paper_trades)")
+        }
+        additions = {
+            "strategy_id": "TEXT NOT NULL DEFAULT ''",
+            "spec_hash": "TEXT NOT NULL DEFAULT ''",
+            "variant": "TEXT NOT NULL DEFAULT ''",
+            "signal_timestamp": "TEXT",
+            "execution_date": "TEXT",
+            "execution_lag_days": "INTEGER NOT NULL DEFAULT 1",
+        }
+        for name, definition in additions.items():
+            if name not in columns:
+                self._conn.execute(
+                    f"ALTER TABLE paper_trades ADD COLUMN {name} {definition}"
+                )
 
     def close(self) -> None:
         with self._lock:
@@ -339,20 +401,36 @@ class Store:
         longs: list[str],
         shorts: list[str],
         entry_prices: dict[str, float],
+        *,
+        strategy_id: str | None = None,
+        spec_hash: str = "",
+        variant: str = "",
+        signal_timestamp: str | None = None,
+        execution_date: str | None = None,
+        execution_lag_days: int = 1,
     ) -> int | None:
-        """登记一条待验证信号。已存在同一 (策略, 信号日, 持有期) 时返回 None。"""
+        """登记一条待验证信号，重复 key 时返回 None。"""
+        strategy_id = strategy_id or strategy
         with self._lock:
             try:
                 cur = self._conn.execute(
                     """
                     INSERT INTO paper_trades
-                        (strategy, signal_date, horizon_days, lookback_days,
-                         k_long, k_short, longs_json, shorts_json, entry_prices)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        (strategy, strategy_id, spec_hash, variant, signal_date,
+                         signal_timestamp, execution_date, execution_lag_days,
+                         horizon_days, lookback_days, k_long, k_short,
+                         longs_json, shorts_json, entry_prices)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         strategy,
+                        strategy_id,
+                        spec_hash,
+                        variant,
                         signal_date,
+                        signal_timestamp,
+                        execution_date,
+                        execution_lag_days,
                         horizon_days,
                         lookback_days,
                         k_long,
@@ -421,22 +499,61 @@ class Store:
                 ).fetchall()
         return [dict(r) for r in rows]
 
-    def paper_stats(self) -> dict[str, Any]:
-        """滚动对账统计。"""
+    def update_paper_entry_prices(
+        self,
+        strategy_id: str,
+        execution_date: str,
+        entry_prices: dict[str, float],
+    ) -> None:
+        """在完成 execution candle 后，把登记快照替换为实际入场价。"""
+        with self._lock:
+            self._conn.execute(
+                """
+                UPDATE paper_trades
+                   SET entry_prices=?
+                 WHERE strategy_id=? AND execution_date=?
+                """,
+                (
+                    json.dumps(entry_prices, ensure_ascii=False, sort_keys=True),
+                    strategy_id,
+                    str(execution_date)[:10],
+                ),
+            )
+            self._conn.commit()
+
+    def paper_stats(
+        self,
+        strategy_id: str | None = None,
+        spec_hash: str | None = None,
+    ) -> dict[str, Any]:
+        """滚动对账统计，可按版本身份隔离。"""
+        filters = ["1=1"]
+        params: list[Any] = []
+        if strategy_id is not None:
+            filters.append("strategy_id=?")
+            params.append(strategy_id)
+        if spec_hash is not None:
+            filters.append("spec_hash=?")
+            params.append(spec_hash)
+        where = " AND ".join(filters)
         with self._lock:
             row = self._conn.execute(
-                """
+                f"""
                 SELECT COUNT(*) AS total,
                        SUM(CASE WHEN status='verified' THEN 1 ELSE 0 END) AS verified,
                        SUM(CASE WHEN status='pending'  THEN 1 ELSE 0 END) AS pending,
                        SUM(CASE WHEN status='failed'   THEN 1 ELSE 0 END) AS failed
                   FROM paper_trades
-                """
+                 WHERE {where}
+                """,
+                params,
             ).fetchone()
             rets = [
                 float(r["net_return_pct"])
                 for r in self._conn.execute(
-                    "SELECT net_return_pct FROM paper_trades WHERE status='verified'"
+                    f"SELECT net_return_pct FROM paper_trades "
+                    f"WHERE {where} AND status='verified'",
+                    params,
                 ).fetchall()
                 if r["net_return_pct"] is not None
             ]
@@ -451,3 +568,198 @@ class Store:
             "best_pct": max(rets) if rets else 0.0,
             "worst_pct": min(rets) if rets else 0.0,
         }
+
+    # ---------- 周度 PAPER portfolio ledger ----------
+
+    def record_paper_nav(
+        self,
+        strategy_id: str,
+        spec_hash: str,
+        day: str,
+        nav: float,
+        daily_pnl: float,
+        long_pnl: float,
+        short_pnl: float,
+        funding_pnl: float,
+        cost_pnl: float,
+        rebalance: bool,
+        changed_symbols: list[str],
+        positions: dict[str, int],
+    ) -> None:
+        """按 (strategy, completed day) 幂等写入连续 NAV。"""
+        with self._lock:
+            existing = self._conn.execute(
+                "SELECT spec_hash FROM paper_nav WHERE strategy_id=? AND day=?",
+                (strategy_id, str(day)[:10]),
+            ).fetchone()
+            if existing is not None and existing["spec_hash"] != spec_hash:
+                raise ValueError("同一 PAPER strategy_id 不能混用不同 spec hash")
+            self._conn.execute(
+                """
+                INSERT INTO paper_nav
+                    (strategy_id, spec_hash, day, nav, daily_pnl, long_pnl,
+                     short_pnl, funding_pnl, cost_pnl, rebalance,
+                     changed_json, positions_json)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(strategy_id, day) DO UPDATE SET
+                    spec_hash=excluded.spec_hash,
+                    nav=excluded.nav,
+                    daily_pnl=excluded.daily_pnl,
+                    long_pnl=excluded.long_pnl,
+                    short_pnl=excluded.short_pnl,
+                    funding_pnl=excluded.funding_pnl,
+                    cost_pnl=excluded.cost_pnl,
+                    rebalance=excluded.rebalance,
+                    changed_json=excluded.changed_json,
+                    positions_json=excluded.positions_json
+                """,
+                (
+                    strategy_id,
+                    spec_hash,
+                    str(day)[:10],
+                    float(nav),
+                    float(daily_pnl),
+                    float(long_pnl),
+                    float(short_pnl),
+                    float(funding_pnl),
+                    float(cost_pnl),
+                    int(bool(rebalance)),
+                    json.dumps(changed_symbols, ensure_ascii=False),
+                    json.dumps(positions, ensure_ascii=False),
+                ),
+            )
+            self._conn.commit()
+
+    def paper_nav(self, strategy_id: str | None = None) -> list[dict[str, Any]]:
+        with self._lock:
+            if strategy_id:
+                rows = self._conn.execute(
+                    "SELECT * FROM paper_nav WHERE strategy_id=? ORDER BY day ASC",
+                    (strategy_id,),
+                ).fetchall()
+            else:
+                rows = self._conn.execute(
+                    "SELECT * FROM paper_nav ORDER BY strategy_id ASC, day ASC"
+                ).fetchall()
+        return [dict(row) for row in rows]
+
+    def record_paper_rebalance(
+        self,
+        strategy_id: str,
+        spec_hash: str,
+        rebalance_date: str,
+        signal_date: str,
+        execution_date: str,
+        targets: dict[str, int],
+        changed_symbols: list[str],
+    ) -> None:
+        """记录 signal→execution→target-diff 事件；相同事件可重复写入。"""
+        with self._lock:
+            targets_json = json.dumps(targets, ensure_ascii=False, sort_keys=True)
+            changed_json = json.dumps(
+                sorted(set(changed_symbols)), ensure_ascii=False
+            )
+            existing = self._conn.execute(
+                "SELECT * FROM paper_rebalances WHERE strategy_id=? AND rebalance_date=?",
+                (strategy_id, str(rebalance_date)[:10]),
+            ).fetchone()
+            if existing is not None:
+                if (
+                    existing["spec_hash"] != spec_hash
+                    or existing["targets_json"] != targets_json
+                ):
+                    raise ValueError("同一 PAPER rebalance 日的 target 或 spec 不一致")
+                self._conn.execute(
+                    """
+                    UPDATE paper_rebalances
+                       SET signal_date=?, execution_date=?, changed_json=?
+                     WHERE strategy_id=? AND rebalance_date=?
+                    """,
+                    (
+                        str(signal_date)[:10],
+                        str(execution_date)[:10],
+                        changed_json,
+                        strategy_id,
+                        str(rebalance_date)[:10],
+                    ),
+                )
+                self._conn.commit()
+                return
+            self._conn.execute(
+                """
+                INSERT INTO paper_rebalances
+                    (strategy_id, spec_hash, rebalance_date, signal_date,
+                     execution_date, targets_json, changed_json)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    strategy_id,
+                    spec_hash,
+                    str(rebalance_date)[:10],
+                    str(signal_date)[:10],
+                    str(execution_date)[:10],
+                    targets_json,
+                    changed_json,
+                ),
+            )
+            self._conn.commit()
+
+    def paper_rebalances(self, strategy_id: str | None = None) -> list[dict[str, Any]]:
+        with self._lock:
+            if strategy_id:
+                rows = self._conn.execute(
+                    "SELECT * FROM paper_rebalances WHERE strategy_id=? ORDER BY rebalance_date ASC",
+                    (strategy_id,),
+                ).fetchall()
+            else:
+                rows = self._conn.execute(
+                    "SELECT * FROM paper_rebalances ORDER BY strategy_id ASC, rebalance_date ASC"
+                ).fetchall()
+        return [dict(row) for row in rows]
+
+    def save_paper_portfolio(
+        self,
+        strategy_id: str,
+        spec_hash: str,
+        last_day: str | None,
+        state: dict[str, Any],
+        updated_at: datetime,
+    ) -> None:
+        with self._lock:
+            existing = self._conn.execute(
+                "SELECT spec_hash FROM paper_portfolios WHERE strategy_id=?",
+                (strategy_id,),
+            ).fetchone()
+            if existing is not None and existing["spec_hash"] != spec_hash:
+                raise ValueError("同一 PAPER strategy_id 不能混用不同 spec hash")
+            self._conn.execute(
+                """
+                INSERT INTO paper_portfolios
+                    (strategy_id, spec_hash, last_day, state_json, updated_at)
+                VALUES (?, ?, ?, ?, ?)
+                ON CONFLICT(strategy_id) DO UPDATE SET
+                    spec_hash=excluded.spec_hash,
+                    last_day=excluded.last_day,
+                    state_json=excluded.state_json,
+                    updated_at=excluded.updated_at
+                """,
+                (
+                    strategy_id,
+                    spec_hash,
+                    str(last_day)[:10] if last_day is not None else None,
+                    json.dumps(state, ensure_ascii=False, sort_keys=True),
+                    _iso(updated_at),
+                ),
+            )
+            self._conn.commit()
+
+    def paper_portfolio(self, strategy_id: str) -> dict[str, Any] | None:
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM paper_portfolios WHERE strategy_id=?", (strategy_id,)
+            ).fetchone()
+        if row is None:
+            return None
+        out = dict(row)
+        out["state"] = json.loads(out.pop("state_json"))
+        return out

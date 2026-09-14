@@ -18,6 +18,7 @@ from .directional_engine import DirectionalSignal, evidence_block, position_scal
 from .models import AccountSnapshot, Alert, FundingOpportunity, PositionRisk, Severity
 from .store import Store
 from .timeutil import fmt_local, in_quiet_hours
+from .xs_lowvol_spec import SHADOW_STRATEGY_ID
 
 # 规则默认值。此处只有 confirmations 会被引擎消费；
 # severity 记录的是规则的"基础分级"，仅作文档用途——
@@ -344,10 +345,20 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
     """
     ready = bool(signal.longs) and bool(signal.shorts)
     k = len(signal.longs) + len(signal.shorts)
+    target_vol = (
+        threshold(cfg, "xs_shadow_target_vol_pct", 80.0)
+        if signal.strategy_id == SHADOW_STRATEGY_ID
+        else 0.0
+    )
+    max_scale = (
+        threshold(cfg, "xs_shadow_max_scale", 3.0)
+        if signal.strategy_id == SHADOW_STRATEGY_ID
+        else 1.0
+    )
     scale = position_scale(
         [v.realized_vol_pct for v in signal.longs + signal.shorts],
-        threshold(cfg, "xs_target_vol_pct", 80.0),
-        threshold(cfg, "xs_max_scale", 3.0),
+        target_vol,
+        max_scale,
     )
 
     # 面向普通投资者：默认只给可执行的结论，不用专业术语。
@@ -412,8 +423,9 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
 
     if detailed:
         body += (
+            f"\n策略：{signal.strategy_id} ｜ spec hash：{signal.spec_hash}\n"
             f"\n建议仓位缩放：{scale:.2f}x（按组合层面波动率目标 "
-            f"{threshold(cfg, 'xs_target_vol_pct', 80.0):.0f}% 计算，已封顶）\n"
+            f"{target_vol:.0f}% 计算，已封顶）\n"
             f"组合名义敞口：约 {k} 个槽位等权\n"
             f"打分窗口：{signal.lookback} 天已实现波动率 "
             f"｜ 全市场 {signal.universe_size} 个标的\n"
@@ -432,8 +444,8 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
             "\n----\n"
             "【本信号何时失效】\n"
             "  · 市场进入普涨且高波动标的领涨时，做空腿会反复被打穿\n"
-            "  · 回测样本期是单边熊市（BTC −28%、ETH −43%），"
-            "策略 11/12 个月为正受益于该环境；若市场切换为单边牛市，需重新验证\n"
+            "  · 历史样本的市场状态、月度分布和归因以当前 spec hash 匹配的 evidence artifact 为准；"
+            "市场状态切换后必须重新验证\n"
             "  · 若连续 3 次调仓的组合收益为负，停止使用并重新跑一遍去伪检验\n"
         )
 

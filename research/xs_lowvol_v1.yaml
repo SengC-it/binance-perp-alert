@@ -1,0 +1,70 @@
+strategy_id: XS-LOWVOL-V1
+name: Cross-sectional low-volatility perpetuals
+status: frozen-control
+
+market:
+  venue: Binance
+  segment: USD-M
+  contract_type: PERPETUAL
+  quote_asset: USDT
+
+universe:
+  symbol_status: valid_at_signal_time
+  quote_asset: USDT
+  contract_type: PERPETUAL
+  min_quote_volume_24h_usdt: 50000000
+  complete_eligible_universe_required: true
+  min_symbols_for_signal: 10
+
+signal:
+  candle_interval: 1d
+  completed_candles_only: true
+  realized_volatility:
+    lookback_days: 30
+    annualization_days: 365
+
+ranking:
+  long: lowest_realized_volatility
+  short: highest_realized_volatility
+  k_long: 5
+  k_short: 5
+
+rebalance:
+  interval_days: 7
+
+execution:
+  signal_timestamp: completed_candle_close
+  execution_price: next_completed_candle_close
+  execution_lag_days: 1
+  future_data: forbidden
+
+fees:
+  taker_pct_per_side: 0.05
+
+slippage:
+  pct_per_side: 0.03
+
+funding:
+  source: actual_settled_funding_events
+  positive_rate_long: pays
+  positive_rate_short: receives
+
+position_sizing:
+  method: equal_notional_per_leg_slot
+  volatility_targeting: disabled
+  target_vol_pct: 0
+  max_scale: 1
+
+data_policy:
+  missing_data: no_signal
+  insufficient_universe: no_signal
+  missing_funding_events: record_zero_only_when_no_settlement_is_due
+  delisted_symbol: remove_from_targets_at_effective_date
+
+shadow:
+  strategy_id: XS-LOWVOL-V1-VT80-Shadow
+  inherits: XS-LOWVOL-V1
+  position_sizing:
+    volatility_targeting: enabled
+    target_vol_pct: 80
+    max_scale: 3

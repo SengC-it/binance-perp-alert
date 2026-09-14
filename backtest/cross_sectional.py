@@ -35,8 +35,8 @@ import logging
 import math
 import random
 import statistics
-from dataclasses import dataclass, field, replace
-from datetime import date, datetime, time, timezone
+from dataclasses import dataclass, field
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable, Sequence
 
@@ -50,6 +50,14 @@ from .metrics import (
     sortino,
     volatility_pct,
 )
+from src.xs_lowvol_spec import (
+    CONTROL_RULES,
+    CONTROL_SPEC_HASH,
+    CONTROL_STRATEGY_ID,
+    SHADOW_RULES,
+    SHADOW_SPEC_HASH,
+    SHADOW_STRATEGY_ID,
+)
 
 log = logging.getLogger("backtest.xs")
 OUT_DIR = Path(__file__).resolve().parent
@@ -61,18 +69,32 @@ BOOTSTRAP_SEED = 20260913
 @dataclass
 class XsParams:
     capital: float = 10_000.0
-    k_long: int = 5                 # 做多几个
-    k_short: int = 5                # 做空几个
-    lookback: int = 30              # 打分窗口（天）
-    rebalance_days: int = 7         # 调仓间隔
-    taker_fee_pct: float = 0.05     # 单边手续费
-    slippage_pct: float = 0.03      # 单边滑点
+    k_long: int = CONTROL_RULES.k_long                 # 做多几个
+    k_short: int = CONTROL_RULES.k_short                # 做空几个
+    lookback: int = CONTROL_RULES.lookback_days         # 打分窗口（天）
+    rebalance_days: int = CONTROL_RULES.rebalance_days # 调仓间隔
+    taker_fee_pct: float = CONTROL_RULES.taker_fee_pct  # 单边手续费
+    slippage_pct: float = CONTROL_RULES.slippage_pct    # 单边滑点
     # 波动率目标化（0 表示关闭）
     target_vol_pct: float = 0.0     # 目标年化波动（%）
     vol_window: int = 30
-    max_scale: float = 3.0          # 缩放上限，防止低波时杠杆失控
-    min_volume_usdt_24h: float = 50_000_000.0
-    exec_lag_days: int = 1
+    max_scale: float = CONTROL_RULES.max_scale  # Control 不启用波动率缩放
+    min_volume_usdt_24h: float = CONTROL_RULES.min_quote_volume_usdt
+    exec_lag_days: int = CONTROL_RULES.execution_lag_days
+    min_universe_size: int = CONTROL_RULES.min_symbols
+    strategy_id: str = CONTROL_STRATEGY_ID
+    spec_hash: str = CONTROL_SPEC_HASH
+
+    @classmethod
+    def for_variant(cls, variant: str = "control") -> "XsParams":
+        if variant in ("shadow", "vt80-shadow"):
+            return cls(
+                target_vol_pct=SHADOW_RULES.target_vol_pct,
+                max_scale=SHADOW_RULES.max_scale,
+                strategy_id=SHADOW_STRATEGY_ID,
+                spec_hash=SHADOW_SPEC_HASH,
+            )
+        return cls()
 
     def slot_notional(self) -> float:
         n = self.k_long + self.k_short
@@ -103,6 +125,9 @@ def _days_before(s: MarketSeries, day: date, n: int) -> date | None:
     i = s.index_of.get(day)
     if i is None or i - n < 0:
         return None
+    window = s.dates[i - n:i + 1]
+    if any((later - earlier).days != 1 for earlier, later in zip(window, window[1:])):
+        return None
     return s.dates[i - n]
 
 
@@ -112,6 +137,8 @@ def score_momentum(
     """过去 lookback 日收益率。涨得多的分数高。"""
     out: dict[str, float] = {}
     for sym, s in markets.items():
+        if not s.is_active_on(day):
+            continue
         past = _days_before(s, day, lookback)
         if past is None:
             continue
@@ -133,6 +160,8 @@ def score_carry(
         datetime.combine(day, time(23, 59, 59), tzinfo=timezone.utc).timestamp() * 1000
     )
     for sym, s in markets.items():
+        if not s.is_active_on(day):
+            continue
         n, total = s.funding_trailing(ts, lookback)
         if n > 0:
             out[sym] = -total
@@ -145,6 +174,8 @@ def score_lowvol(
     """过去 lookback 日的日收益波动率，取负号。波动低的分高。"""
     out: dict[str, float] = {}
     for sym, s in markets.items():
+        if not s.is_active_on(day):
+            continue
         i = s.index_of.get(day)
         if i is None or i - lookback < 0:
             continue
@@ -175,8 +206,12 @@ class XsResult:
     strategy: str
     label: str
     params: XsParams
+    strategy_id: str = CONTROL_STRATEGY_ID
+    spec_hash: str = CONTROL_SPEC_HASH
     dates: list[date] = field(default_factory=list)
     equity: list[float] = field(default_factory=list)
+    long_equity: list[float] = field(default_factory=list)
+    short_equity: list[float] = field(default_factory=list)
     net_pnl: float = 0.0
     cost_pnl: float = 0.0
     funding_pnl: float = 0.0
@@ -185,6 +220,8 @@ class XsResult:
     long_pnl: float = 0.0
     short_pnl: float = 0.0
     avg_gross_exposure_pct: float = 0.0
+    no_signal_reasons: list[str] = field(default_factory=list)
+    complete: bool = True
 
     @property
     def final_equity(self) -> float:
@@ -211,6 +248,23 @@ class XsResult:
     @property
     def sharpe(self) -> float:
         return sharpe(daily_returns(self.equity))
+
+    @property
+    def long_sharpe(self) -> float:
+        return sharpe(daily_returns(self.long_equity))
+
+    @property
+    def short_sharpe(self) -> float:
+        return sharpe(daily_returns(self.short_equity))
+
+    @property
+    def long_short_contribution_ratio(self) -> dict[str, float]:
+        if self.net_pnl == 0:
+            return {"long": 0.0, "short": 0.0}
+        return {
+            "long": self.long_pnl / self.net_pnl * 100.0,
+            "short": self.short_pnl / self.net_pnl * 100.0,
+        }
 
     @property
     def sortino(self) -> float:
@@ -257,145 +311,208 @@ def simulate_xs(
     strategy: str,
     p: XsParams,
 ) -> XsResult:
-    """跑一个截面策略。"""
+    """跑一个截面策略；xs_lowvol 的参数来源于冻结 spec。"""
     score_fn = SCORE_FNS[strategy]
     by_sym = {m.symbol: m for m in markets}
-    result = XsResult(strategy=strategy, label=strategy, params=p)
+    result = XsResult(
+        strategy=strategy,
+        label=strategy,
+        params=p,
+        strategy_id=p.strategy_id,
+        spec_hash=p.spec_hash,
+    )
 
-    # 统一交易日轴
+    # 统一交易日轴；eligible universe 在每个 signal day 重新判定。
     all_days = sorted({d for m in markets for d in m.dates})
     if not all_days:
         return result
 
     slot = p.slot_notional()
     cost_rate = p.cost_rate()
-
-    positions: dict[str, int] = {}       # 标的 -> 方向
-    entry_price: dict[str, float] = {}   # 标的 -> 入场价
-    entry_day: dict[str, date] = {}      # 标的 -> 入场日（用于累计资金费）
-    notional: dict[str, float] = {}      # 标的 -> 名义价值（波动率缩放后）
+    positions: dict[str, int] = {}
+    mark_price: dict[str, float] = {}
+    mark_day: dict[str, date] = {}
+    notional: dict[str, float] = {}
     realized = 0.0
     cost_total = 0.0
-    funding_total = 0.0
     last_rebalance: date | None = None
+    long_realized = 0.0
+    short_realized = 0.0
 
-    def exit_leg(sym: str, day: date) -> None:
-        """平掉组合中的一条腿：价格盈亏 + 资金费 − 成本。
+    def mark_positions(day: date) -> bool:
+        """按完成收盘逐日结算价格变动和已结算 funding。"""
+        nonlocal realized, long_realized, short_realized
+        ok = True
+        for sym, direction in positions.items():
+            price = by_sym[sym].perp_close.get(day)
+            if price is None:
+                result.complete = False
+                result.no_signal_reasons.append(f"NO_SIGNAL: missing mark price {sym} {day}")
+                ok = False
+                continue
+            previous_price = mark_price[sym]
+            previous_day = mark_day[sym]
+            if (day - previous_day).days != 1:
+                result.complete = False
+                result.no_signal_reasons.append(
+                    f"NO_SIGNAL: non-consecutive mark data {sym} {previous_day} -> {day}"
+                )
+                ok = False
+                continue
+            move = direction * notional[sym] * (price / previous_price - 1.0)
+            _, rate_sum = by_sym[sym].funding_sum_between(
+                _end_of_day_ms(previous_day), _end_of_day_ms(day)
+            )
+            funding = -direction * notional[sym] * rate_sum
+            leg = move + funding
+            realized += leg
+            result.funding_pnl += funding
+            result.by_symbol[sym] = result.by_symbol.get(sym, 0.0) + leg
+            if direction > 0:
+                result.long_pnl += leg
+                long_realized += leg
+            else:
+                result.short_pnl += leg
+                short_realized += leg
+            mark_price[sym] = price
+            mark_day[sym] = day
+        return ok
 
-        命名刻意避开交易所的执行类术语——组合的组成单位是「腿」，
-        而这个函数只做回测内的账面结算，不产生任何交易所调用。
-        src/scope_guard.py 会持续检查项目里不出现执行类标识符。
-
-        资金费必须计入：做空资金费为正的合约会**收到**资金费，
-        做多则会**支付**。忽略这一项会系统性高估空头收益。
-        """
-        nonlocal realized, cost_total, funding_total
-        price = by_sym[sym].perp_close.get(day)
-        if price is None:
-            return
+    def exit_leg(sym: str, day: date) -> bool:
+        """结算一条腿；缺少完成收盘价时不静默估算。"""
+        nonlocal realized, cost_total, long_realized, short_realized
+        if mark_day.get(sym) != day:
+            result.complete = False
+            result.no_signal_reasons.append(f"NO_SIGNAL: missing exit price {sym} {day}")
+            return False
         direction = positions[sym]
-        gross = direction * notional[sym] * (price / entry_price[sym] - 1.0)
-        realized += gross
-        if direction > 0:
-            result.long_pnl += gross
-        else:
-            result.short_pnl += gross
-        result.by_symbol[sym] = result.by_symbol.get(sym, 0.0) + gross
-
-        # 资金费：多头付、空头收（费率为正时）
-        start = _end_of_day_ms(entry_day[sym])
-        end = _end_of_day_ms(day)
-        _, rate_sum = by_sym[sym].funding_sum_between(start, end)
-        funding = -direction * notional[sym] * rate_sum
-        realized += funding
-        funding_total += funding
-        result.funding_pnl += funding
-
         cost = notional[sym] * cost_rate
         realized -= cost
+        result.by_symbol[sym] = result.by_symbol.get(sym, 0.0) - cost
+        if direction > 0:
+            result.long_pnl -= cost
+            long_realized -= cost
+        else:
+            result.short_pnl -= cost
+            short_realized -= cost
         cost_total += cost
-
         positions.pop(sym)
-        entry_price.pop(sym)
-        entry_day.pop(sym)
+        mark_price.pop(sym)
+        mark_day.pop(sym)
         notional.pop(sym)
-
-    def exit_all(day: date) -> None:
-        for sym in list(positions):
-            exit_leg(sym, day)
+        return True
 
     equity: list[float] = []
+    long_equity: list[float] = []
+    short_equity: list[float] = []
 
-    for i, day in enumerate(all_days):
-        # 1) 是否调仓：信号用前一交易日，执行在今日收盘
+    for day in all_days:
+        mark_ok = mark_positions(day)
         if last_rebalance is None or (day - last_rebalance).days >= p.rebalance_days:
-            signal_idx = i - p.exec_lag_days
-            if signal_idx >= 0:
-                signal_day = all_days[signal_idx]
+            signal_day = day - timedelta(days=p.exec_lag_days)
+            if signal_day in all_days:
                 scores = score_fn(by_sym, signal_day, p.lookback)
-                # 流动性过滤
                 liquid = {
                     sym: sc for sym, sc in scores.items()
                     if by_sym[sym].perp_volume.get(signal_day, 0.0)
                     >= p.min_volume_usdt_24h
                 }
-                if len(liquid) >= p.k_long + p.k_short:
-                    ranked = sorted(liquid.items(), key=lambda kv: kv[1], reverse=True)
-                    targets: dict[str, int] = {}
-                    for sym, _ in ranked[: p.k_long]:
-                        targets[sym] = 1
-                    for sym, _ in ranked[-p.k_short:]:
-                        targets[sym] = -1
-
-                    # 先平掉不在目标里、或方向变了的
-                    for sym in list(positions):
-                        if sym not in targets or targets[sym] != positions[sym]:
-                            exit_leg(sym, day)
-
-                    # 再开新仓（组合层面的统一缩放系数，保持多空平衡）
-                    port_scale = 1.0
-                    if p.target_vol_pct > 0:
-                        port_scale = _portfolio_vol_scale(
-                            by_sym, list(liquid), signal_day, p
+                if strategy == "xs_lowvol":
+                    eligible = {
+                        sym for sym, market in by_sym.items()
+                        if market.is_active_on(signal_day)
+                        and market.perp_volume.get(signal_day, 0.0)
+                        >= p.min_volume_usdt_24h
+                    }
+                    missing_history = sorted(eligible - set(liquid))
+                else:
+                    missing_history = []
+                required = max(p.min_universe_size, p.k_long + p.k_short)
+                if missing_history:
+                    # 初始 warm-up 期本来就没有 lookback；只有在已有部分
+                    # score、另一部分 eligible 数据缺失时才把回测标成不完整。
+                    if liquid:
+                        result.complete = False
+                    result.no_signal_reasons.append(
+                        "NO_SIGNAL: incomplete eligible history "
+                        + ",".join(missing_history)
+                    )
+                elif len(liquid) < required:
+                    result.no_signal_reasons.append(
+                        f"NO_SIGNAL: insufficient universe {signal_day} "
+                        f"({len(liquid)} < {required})"
+                    )
+                else:
+                    if strategy == "xs_lowvol":
+                        # 与 rank_lowvol 一致：波动率升序、symbol 升序平局，
+                        # 空头腿取尾部后反转。
+                        ranked = sorted(liquid.items(), key=lambda kv: (-kv[1], kv[0]))
+                    else:
+                        ranked = sorted(
+                            liquid.items(), key=lambda kv: (kv[1], kv[0]), reverse=True
                         )
-                    for sym, direction in targets.items():
-                        price = by_sym[sym].perp_close.get(day)
-                        if price is None:
-                            continue
-                        if sym not in positions:
+                    targets: dict[str, int] = {
+                        sym: 1 for sym, _ in ranked[: p.k_long]
+                    }
+                    targets.update({sym: -1 for sym, _ in ranked[-p.k_short:]})
+                    changed = {
+                        sym for sym in positions
+                        if sym not in targets or targets[sym] != positions[sym]
+                    }
+                    changed.update(sym for sym in targets if sym not in positions)
+                    missing_prices = [
+                        sym for sym in changed
+                        if by_sym[sym].perp_close.get(day) is None
+                    ]
+                    if missing_prices or not mark_ok:
+                        result.complete = False
+                        if missing_prices:
+                            result.no_signal_reasons.append(
+                                "NO_SIGNAL: missing execution prices "
+                                + ",".join(sorted(missing_prices))
+                            )
+                    else:
+                        for sym in list(positions):
+                            if sym in changed:
+                                exit_leg(sym, day)
+                        port_scale = 1.0
+                        if p.strategy_id == SHADOW_STRATEGY_ID:
+                            port_scale = _portfolio_vol_scale(
+                                by_sym, list(liquid), signal_day, p
+                            )
+                        for sym, direction in targets.items():
+                            if sym in positions:
+                                continue
+                            price = by_sym[sym].perp_close[day]
                             positions[sym] = direction
-                            entry_price[sym] = price
-                            entry_day[sym] = day
+                            mark_price[sym] = price
+                            mark_day[sym] = day
                             notional[sym] = slot * port_scale
                             cost = notional[sym] * cost_rate
                             realized -= cost
                             cost_total += cost
+                            if direction > 0:
+                                result.long_pnl -= cost
+                            else:
+                                result.short_pnl -= cost
+                            result.by_symbol[sym] = result.by_symbol.get(sym, 0.0) - cost
                             result.trade_count += 1
-
+                            if direction > 0:
+                                long_realized -= cost
+                            else:
+                                short_realized -= cost
                 last_rebalance = day
 
-        # 2) 盯市：必须在调仓之后算，否则被平掉的仓位会同时出现在
-        #    realized 与 unrealized 里，权益曲线出现虚假的双重计数跳变。
-        unrealized = 0.0
-        for sym, direction in positions.items():
-            price = by_sym[sym].perp_close.get(day)
-            if price is None:
-                continue
-            unrealized += direction * notional[sym] * (
-                price / entry_price[sym] - 1.0
-            )
-
-        equity.append(p.capital + realized + unrealized)
-
-    exit_all(all_days[-1])
-    if equity:
-        equity[-1] = p.capital + realized
+        equity.append(p.capital + realized)
+        long_equity.append(p.capital / 2.0 + long_realized)
+        short_equity.append(p.capital / 2.0 + short_realized)
 
     result.dates = all_days
     result.equity = equity
+    result.long_equity = long_equity
+    result.short_equity = short_equity
     result.net_pnl = realized
     result.cost_pnl = cost_total
-    # 平均名义敞口占权益比例（截面策略始终满仓，等于总槽位占比）
     result.avg_gross_exposure_pct = slot * (p.k_long + p.k_short) / p.capital * 100.0
     return result
 
@@ -452,6 +569,8 @@ def market_daily_returns(
     for prev, cur in zip(all_days, all_days[1:]):
         rets: list[float] = []
         for s in markets:
+            if not s.is_active_on(cur):
+                continue
             p0 = s.perp_close.get(prev)
             p1 = s.perp_close.get(cur)
             if p0 and p1 and p0 > 0:
@@ -486,6 +605,26 @@ def alpha_beta(
     return beta, alpha_daily * DAYS_PER_YEAR * 100.0, r2
 
 
+def regime_attribution(
+    strategy_returns: Sequence[float], market_returns: Sequence[float]
+) -> dict[str, dict[str, float]]:
+    """按大盘日收益正负拆分组合表现。"""
+    out: dict[str, dict[str, float]] = {}
+    for name, predicate in (("bull", lambda value: value > 0), ("bear", lambda value: value <= 0)):
+        values = [
+            float(strategy)
+            for strategy, market in zip(strategy_returns, market_returns)
+            if predicate(float(market))
+        ]
+        out[name] = {
+            "days": float(len(values)),
+            "mean_daily_return_pct": statistics.fmean(values) * 100.0 if values else 0.0,
+            "cumulative_return_pct": (math.prod(1.0 + value for value in values) - 1.0) * 100.0
+            if values else 0.0,
+        }
+    return out
+
+
 def bootstrap_sharpe(
     equity: list[float], rounds: int = BOOTSTRAP_ROUNDS, seed: int = BOOTSTRAP_SEED
 ) -> tuple[float, float, float]:
@@ -515,6 +654,73 @@ def bootstrap_sharpe(
     return point, lo, hi
 
 
+def block_bootstrap(
+    returns: Sequence[float],
+    block_length: int = 4 * 7,
+    rounds: int = BOOTSTRAP_ROUNDS,
+    seed: int = BOOTSTRAP_SEED,
+) -> dict[str, Any]:
+    """对日收益按连续 block 重抽样，准备 M1 所需的统计接口。
+
+    ``mean_return_pct`` 是年化算术平均日收益，区间为 90%；
+    ``probability_return_gt_zero`` 是同一观察长度下累计收益大于零的比例。
+    M0 只用 fixture/已有 equity 调用这个接口，不据此选择参数。
+    """
+    if block_length <= 0:
+        raise ValueError("block_length 必须为正")
+    values = list(returns)
+    if len(values) < block_length:
+        return {
+            "block_length": block_length,
+            "rounds": 0,
+            "mean_return_ci": (0.0, 0.0),
+            "sharpe_ci": (0.0, 0.0),
+            "probability_return_gt_zero": 0.0,
+        }
+    rng = random.Random(seed)
+    n = len(values)
+    mean_samples: list[float] = []
+    sharpe_samples: list[float] = []
+    positive = 0
+    for _ in range(rounds):
+        draw: list[float] = []
+        while len(draw) < n:
+            start = rng.randrange(0, n - block_length + 1)
+            draw.extend(values[start:start + block_length])
+        draw = draw[:n]
+        mean_samples.append(statistics.fmean(draw) * DAYS_PER_YEAR * 100.0)
+        sd = statistics.pstdev(draw)
+        sharpe_samples.append(
+            statistics.fmean(draw) / sd * math.sqrt(DAYS_PER_YEAR) if sd > 0 else 0.0
+        )
+        if math.prod(1.0 + value for value in draw) > 1.0:
+            positive += 1
+
+    def interval(samples: list[float]) -> tuple[float, float]:
+        samples.sort()
+        lo = samples[min(len(samples) - 1, int(len(samples) * 0.05))]
+        hi = samples[min(len(samples) - 1, int(len(samples) * 0.95))]
+        return lo, hi
+
+    return {
+        "block_length": block_length,
+        "rounds": rounds,
+        "mean_return_ci": interval(mean_samples),
+        "sharpe_ci": interval(sharpe_samples),
+        "probability_return_gt_zero": positive / rounds if rounds else 0.0,
+    }
+
+
+def block_bootstrap_metrics(
+    equity: Sequence[float],
+    block_length: int = 4 * 7,
+    rounds: int = BOOTSTRAP_ROUNDS,
+    seed: int = BOOTSTRAP_SEED,
+) -> dict[str, Any]:
+    """以 equity 曲线为输入的 block bootstrap 便捷入口。"""
+    return block_bootstrap(daily_returns(equity), block_length, rounds, seed)
+
+
 def leave_one_out(
     markets: Sequence[MarketSeries], strategy: str, p: XsParams
 ) -> list[tuple[str, float]]:
@@ -539,8 +745,8 @@ def leave_one_out(
 
 def comparison_table(results: dict[str, XsResult]) -> str:
     cols = ["策略", "笔数", "收益率", "最大回撤", "夏普", "索提诺",
-            "价格盈亏", "资金费", "交易成本", "多头", "空头"]
-    widths = [14, 6, 10, 11, 8, 9, 11, 10, 10, 10, 10]
+            "价格盈亏", "资金费", "交易成本", "多头", "空头", "多头夏普", "空头夏普"]
+    widths = [14, 6, 10, 11, 8, 9, 11, 10, 10, 10, 10, 10, 10]
     lines = ["| " + " | ".join(c.ljust(w) for c, w in zip(cols, widths)) + " |"]
     lines.append("|" + "|".join("-" * (w + 2) for w in widths) + "|")
     for r in results.values():
@@ -557,6 +763,8 @@ def comparison_table(results: dict[str, XsResult]) -> str:
             f"{-r.cost_pnl:+,.0f}",
             f"{r.long_pnl:+,.0f}",
             f"{r.short_pnl:+,.0f}",
+            f"{r.long_sharpe:.2f}",
+            f"{r.short_sharpe:.2f}",
         ]
         lines.append("| " + " | ".join(c.ljust(w) for c, w in zip(cells, widths)) + " |")
     return "\n".join(lines)
@@ -570,6 +778,17 @@ def build_report(markets: Sequence[MarketSeries], base: XsParams) -> str:
     lines.append("> 截面策略在同一时点横向比较所有标的，做多相对强的、做空相对弱的，")
     lines.append("> 组合接近市场中性，理论上更不依赖大盘方向。本报告检验这个「理论上」。")
     lines.append("")
+    lines.append("## 规则身份")
+    lines.append("")
+    lines.append(
+        f"- Control：`{CONTROL_STRATEGY_ID}`，spec SHA-256 `{CONTROL_SPEC_HASH}`；"
+        "volatility targeting 关闭。"
+    )
+    lines.append(
+        f"- Shadow：`{SHADOW_STRATEGY_ID}`，spec SHA-256 `{SHADOW_SPEC_HASH}`；"
+        "仅增加 target_vol_pct=80、max_scale=3.0。"
+    )
+    lines.append("")
 
     # ---- 1. 主结果 ----
     results: dict[str, XsResult] = {}
@@ -579,15 +798,35 @@ def build_report(markets: Sequence[MarketSeries], base: XsParams) -> str:
     lines.append("## 一、主结果（未做任何参数寻优）")
     lines.append("")
     lines.append(f"- 标的数：{len(markets)}")
-    lines.append(f"- 参数：做多 {base.k_long} 个 / 做空 {base.k_short} 个，"
-                 f"打分窗口 {base.lookback} 天，每 {base.rebalance_days} 天调仓")
-    lines.append(f"- 成本：单边 taker {base.taker_fee_pct}% + 滑点 {base.slippage_pct}%")
+    lines.append(f"- Control 参数：做多 {CONTROL_RULES.k_long} 个 / 做空 {CONTROL_RULES.k_short} 个，"
+                 f"打分窗口 {CONTROL_RULES.lookback_days} 天，每 {CONTROL_RULES.rebalance_days} 天调仓")
+    lines.append(f"- 成本：单边 taker {CONTROL_RULES.taker_fee_pct}% + 滑点 {CONTROL_RULES.slippage_pct}%")
     lines.append("")
     lines.append(comparison_table(results))
     lines.append("")
 
-    # ---- 2. 统计显著性 ----
-    lines.append("## 二、统计显著性：这些夏普能信吗？")
+    lines.append("## 二、永久归因内容（Control）")
+    lines.append("")
+    lowvol = results["xs_lowvol"]
+    ratio = lowvol.long_short_contribution_ratio
+    lines.append(
+        f"策略身份：`{lowvol.strategy_id}`，spec hash `{lowvol.spec_hash}`。"
+    )
+    lines.append(
+        f"Long leg PnL：{lowvol.long_pnl:+,.2f} USDT；"
+        f"Short leg PnL：{lowvol.short_pnl:+,.2f} USDT。"
+    )
+    lines.append(
+        f"Long leg Sharpe：{lowvol.long_sharpe:.2f}；"
+        f"Short leg Sharpe：{lowvol.short_sharpe:.2f}。"
+    )
+    lines.append(
+        f"Long/Short contribution ratio：{ratio['long']:.1f}% / {ratio['short']:.1f}%。"
+    )
+    lines.append("")
+
+    # ---- 3. 统计显著性 ----
+    lines.append("## 三、统计显著性：这些夏普能信吗？")
     lines.append("")
     lines.append("一年日线只有约 250 个观测，夏普的抽样误差很大。"
                  "对日收益做 2000 次有放回重抽样，得到夏普的 90% 置信区间。")
@@ -603,10 +842,10 @@ def build_report(markets: Sequence[MarketSeries], base: XsParams) -> str:
         )
     lines.append("")
 
-    # ---- 3. alpha / beta 分解 ----
+    # ---- 4. alpha / beta 分解 ----
     all_days = sorted({d for m in markets for d in m.dates})
     mkt = market_daily_returns(markets, all_days)
-    lines.append("## 三、alpha / beta 分解：真有 alpha，还是在偷偷押方向？")
+    lines.append("## 四、alpha / beta 分解：真有 alpha，还是在偷偷押方向？")
     lines.append("")
     lines.append("截面策略多空对冲，看起来市场中性。但如果它的 beta 显著为负、"
                  "而 alpha 接近 0，那它赚的其实是**做空大盘**的钱——"
@@ -632,8 +871,22 @@ def build_report(markets: Sequence[MarketSeries], base: XsParams) -> str:
                  f"{sum(mkt) * 100:+.2f}%（累计），即大盘本身是深度下跌的。")
     lines.append("")
 
-    # ---- 4. 留一标的法 ----
-    lines.append("## 四、留一标的法：结果是不是靠一两个标的撑起来的？")
+    lines.append("## 五、Bull / Bear regime attribution（Control）")
+    lines.append("")
+    regime = regime_attribution(daily_returns(lowvol.equity), mkt)
+    lines.append("| Regime | Days | Mean daily return | Cumulative return |")
+    lines.append("|---|---:|---:|---:|")
+    for name in ("bull", "bear"):
+        item = regime[name]
+        lines.append(
+            f"| {name.title()} | {int(item['days'])} | "
+            f"{item['mean_daily_return_pct']:+.4f}% | "
+            f"{item['cumulative_return_pct']:+.2f}% |"
+        )
+    lines.append("")
+
+    # ---- 6. 留一标的法 ----
+    lines.append("## 六、留一标的法：结果是不是靠一两个标的撑起来的？")
     lines.append("")
     lines.append("逐个剔除单个标的、重新跑完整回测。如果剔除任意一个标的就让结论翻转，"
                  "说明这个策略赚的不是「策略」的钱，而是「那个标的」的钱。")
@@ -661,8 +914,8 @@ def build_report(markets: Sequence[MarketSeries], base: XsParams) -> str:
         lines.append(f"- {verdict}")
         lines.append("")
 
-    # ---- 4. 分标的贡献 ----
-    lines.append("## 五、分标的贡献（前 8）")
+    # ---- 7. 分标的贡献 ----
+    lines.append("## 七、分标的贡献（前 8）")
     lines.append("")
     for key, r in results.items():
         ranked = sorted(r.by_symbol.items(), key=lambda kv: kv[1], reverse=True)
@@ -678,8 +931,8 @@ def build_report(markets: Sequence[MarketSeries], base: XsParams) -> str:
             lines.append(f"| {sym} | {v:+,.0f} |")
         lines.append("")
 
-    # ---- 6. 逐月拆解 ----
-    lines.append("## 六、逐月拆解：收益是持续的，还是等来的？")
+    # ---- 8. 逐月拆解 ----
+    lines.append("## 八、逐月拆解：收益是持续的，还是等来的？")
     lines.append("")
     lines.append("如果一个策略的全部盈利只来自一两个月，那它是「等一次行情」，"
                  "不是持续产生收益。这里看每个月的盈亏，以及**最大盈利月占总盈利的比例**。")
@@ -698,23 +951,38 @@ def build_report(markets: Sequence[MarketSeries], base: XsParams) -> str:
     lines.append("单位：USDT。最大月占比越低，说明收益越分散、越不像「等一次行情」。")
     lines.append("")
 
-    # ---- 7. 波动率目标化 ----
-    lines.append("## 七、叠加波动率目标化")
+    # ---- 9. Block Bootstrap ----
+    lines.append("## 九、Block Bootstrap（接口冻结，4 周 block）")
     lines.append("")
-    lines.append("波动率目标化按「目标波动 / 已实现波动」缩放仓位，波动放大时自动减仓。"
-                 "这是少数被广泛证实能改善风险调整后收益的仓位技术。")
+    lines.append("M0 只建立统计接口，不用新结果选择参数。")
     lines.append("")
-    lines.append("| 策略 | 目标波动 | 收益率 | 最大回撤 | 夏普 |")
+    lines.append("| 策略 | Block | Mean return CI (annualized %) | Sharpe CI | P(return > 0) |")
     lines.append("|---|---:|---:|---:|---:|")
-    for key in SCORE_FNS:
-        for tv in (0.0, 40.0, 60.0, 80.0):
-            p = replace(base, target_vol_pct=tv)
-            r = simulate_xs(markets, key, p)
-            label = "关闭" if tv == 0 else f"{tv:.0f}%"
-            lines.append(
-                f"| {results[key].label} | {label} | {r.total_return_pct:+.2f}% | "
-                f"{r.max_drawdown_pct:.2f}% | {r.sharpe:.2f} |"
-            )
+    for item in (lowvol,):
+        stats = block_bootstrap_metrics(item.equity, block_length=4 * 7)
+        mean_ci = stats["mean_return_ci"]
+        sharpe_ci = stats["sharpe_ci"]
+        lines.append(
+            f"| {item.strategy_id} | {stats['block_length']}d | "
+            f"[{mean_ci[0]:+.2f}, {mean_ci[1]:+.2f}] | "
+            f"[{sharpe_ci[0]:+.2f}, {sharpe_ci[1]:+.2f}] | "
+            f"{stats['probability_return_gt_zero']:.3f} |"
+        )
+    lines.append("")
+
+    # ---- 10. Control / Shadow ----
+    lines.append("## 十、Control 与 VT80 Shadow")
+    lines.append("")
+    lines.append("Shadow 完全复用 Control 信号，只增加 target_vol_pct=80 与 max_scale=3.0。")
+    lines.append("")
+    lines.append("| Strategy ID | Target vol | Spec hash | 收益率 | 最大回撤 | 夏普 |")
+    lines.append("|---|---:|---|---:|---:|---:|")
+    shadow = simulate_xs(markets, "xs_lowvol", XsParams.for_variant("shadow"))
+    for item, label in ((lowvol, "0%"), (shadow, "80%")):
+        lines.append(
+            f"| {item.strategy_id} | {label} | `{item.spec_hash}` | "
+            f"{item.total_return_pct:+.2f}% | {item.max_drawdown_pct:.2f}% | {item.sharpe:.2f} |"
+        )
     lines.append("")
 
     return "\n".join(lines)

@@ -89,6 +89,11 @@ class BinanceFuturesClient:
         data = self._request("/fapi/v1/ticker/24hr")
         return data if isinstance(data, list) else [data]
 
+    def exchange_info(self) -> dict[str, Any]:
+        """当前合约 metadata，用于确认 active USDT perpetual universe。"""
+        data = self._request("/fapi/v1/exchangeInfo")
+        return data if isinstance(data, dict) else {}
+
     def klines(
         self, symbol: str, interval: str = "1d", limit: int = 60
     ) -> list[list[Any]]:

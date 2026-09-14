@@ -493,6 +493,11 @@ python -m backtest.run_backtest         # 只跑资金费套利
 
 **（二）截面策略 —— 找到了唯一站得住的方向性来源**
 
+> **历史快照说明（M0）**：本节的数值来自 M0 前的 legacy 研究报告，已经不再作为
+> Scanner/PAPER 的当前证据。当前冻结规则、Control/VT80 Shadow 身份、每日 NAV、
+> target-diff 成本和 evidence hash 以 [`docs/XS_LOWVOL_PARITY_AUDIT.md`](docs/XS_LOWVOL_PARITY_AUDIT.md)
+> 与重新生成的 `backtest/report_cross_sectional.md` 为准。
+
 时间序列策略（双均线、通道突破）在单边行情里赚的钱本质是押对了方向。
 截面策略在同一时点横向比较所有标的，组合接近市场中性，理论上更不依赖大盘。
 三个预先指定的截面策略结果（已计入资金费与交易成本）：
@@ -512,8 +517,8 @@ python -m backtest.run_backtest         # 只跑资金费套利
 - beta 仅 −0.17、年化 alpha +38.68%（**不是伪装的方向押注**）
 - 已计入资金费（净拖累 −1,018 USDT）与交易成本
 
-叠加组合层面波动率目标化后，目标 80% 时收益率微升至 +64.49%、**最大回撤从 11.11% 压到 7.66%**；
-目标 40% 时回撤仅 4.40%，夏普基本不变（2.34 vs 2.36）——即可以在不损失风险调整收益的前提下降低风险。
+M0 只保留一个独立的 `XS-LOWVOL-V1-VT80-Shadow`（target_vol_pct=80、max_scale=3.0）
+作为 Control 的影子对照；不在本阶段根据历史结果选择目标波动或其他参数。
 
 `xs_carry` 虽然为正，但置信区间跨 0，属于「有迹象、未验证」，不构成自动化依据。
 
@@ -540,7 +545,7 @@ python -m backtest.run_backtest         # 只跑资金费套利
 
 | 规则 | 分级 | 说明 |
 |---|---|---|
-| `xs_lowvol_signal` | INFO | 截面低波动调仓信号，走每日摘要。正文强制附带回测证据块与失效条件 |
+| `xs_lowvol_signal` | INFO | 截面低波动调仓信号，按冻结的每 7 天节奏登记。正文强制附带回测证据块与失效条件 |
 | `xs_lowvol_squeeze` | WARN | 空头腿挤空风险，走即时通道。日线回测看不到盘中挤空，必须单独监控 |
 
 **沉默优先**：标的不够（低于 `xs_min_symbols`）时不构建半个组合，直接不出信号；
@@ -555,8 +560,9 @@ python main.py directional   # 手动跑一次截面扫描，查看候选与完�
 一年日线只有约 250 个观测。即使夏普 2.36、bootstrap 区间不跨 0，那也只是
 「在这段特定行情里我们没有找到反驳它的证据」。**统计上不足以证明正期望。**
 
-所以每条方向性信号在发出的同时会落一条 paper trade 记录（含入场价），
-到期后用真实行情回填实际结果（价格变动 + 真实资金费 − 交易成本）：
+所以每条方向性信号在发出的同时会落下版本化 target；Forward PAPER 用连续周度
+portfolio ledger，每日记录 NAV、真实资金费和成本，并在下一次调仓时只对 target
+变化的标的换仓：
 
 ```bash
 python main.py verify

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import time
-from datetime import datetime, timezone, tzinfo
+from datetime import date, datetime, timezone, tzinfo
 
 from .binance_client import BinanceError, BinanceFuturesClient
 from .config import Config
@@ -16,16 +16,12 @@ from .cross_exchange import (
     build_cross_opportunities,
     format_cross_table,
 )
-from .config import Config, threshold
+from .config import Config
 from .directional_engine import (
     DirectionalSignal,
-    SymbolVol,
-    build_signal,
-    build_symbol_vol,
-    format_signal_table,
-    parse_klines,
+    build_directional_scan,
 )
-from .forward_check import record_signal, render_reconciliation, verify_pending
+from .forward_check import record_signal
 from .models import AccountSnapshot, FundingOpportunity
 from .notifier import Notifier
 from .opportunity_engine import format_opportunity_table, scan_opportunities
@@ -41,6 +37,7 @@ from .rules import (
 )
 from .store import Store
 from .timeutil import fmt_local
+from .xs_lowvol_spec import CONTROL_RULES
 
 log = logging.getLogger(__name__)
 
@@ -189,8 +186,8 @@ class AlertService:
     def scan_directional(self, now: datetime) -> DirectionalSignal | None:
         """截面低波动扫描。
 
-        需要拉取每个标的的日线，因此先用成交额筛出流动性最好的前 N 个，
-        把请求数控制住。任何一个标的拉取失败都跳过，不影响整体。
+        先建立完整的当时 eligible universe，再为每个合约读取完整日线。
+        任意 eligible 合约缺数据时 fail closed，不能静默退化成另一个 universe。
         """
         try:
             ticker_raw = self.client.ticker_24hr()
@@ -201,58 +198,70 @@ class AlertService:
                       self.failures[DIRECTIONAL_COMPONENT], exc)
             return None
 
-        min_volume = threshold(self.cfg, "min_volume_usdt_24h", 50_000_000.0)
-        top_n = int(threshold(self.cfg, "xs_scan_top_n", 60))
-        lookback = int(threshold(self.cfg, "xs_lookback_days", 30))
-
-        candidates: list[tuple[str, float]] = []
-        for item in ticker_raw:
-            symbol = str(item.get("symbol", "")).upper()
-            if not symbol.endswith("USDT"):
-                continue
+        valid_symbols: set[str] | None = None
+        exchange_info = getattr(self.client, "exchange_info", None)
+        if exchange_info is not None:
             try:
-                volume = float(item.get("quoteVolume") or 0.0)
-            except (TypeError, ValueError):
-                continue
-            if volume >= min_volume:
-                candidates.append((symbol, volume))
-        candidates.sort(key=lambda kv: kv[1], reverse=True)
-        candidates = candidates[:top_n]
-
-        vols: list[SymbolVol] = []
-        failures = 0
-        for symbol, volume in candidates:
-            try:
-                raw = self.client.klines(symbol, "1d", lookback + 2)
+                info = exchange_info()
+                rows = info.get("symbols", []) if isinstance(info, dict) else []
+                valid_symbols = {
+                    str(item.get("symbol", "")).upper()
+                    for item in rows
+                    if str(item.get("status", "")).upper() == "TRADING"
+                    and str(item.get("contractType", "")).upper() == "PERPETUAL"
+                    and str(item.get("quoteAsset", "")).upper() == "USDT"
+                }
             except BinanceError as exc:
-                failures += 1
-                log.debug("K 线拉取失败 %s：%s", symbol, exc)
-                continue
-            closes = parse_klines(raw)
-            snap = build_symbol_vol(symbol, closes, volume, lookback)
-            if snap is not None:
-                vols.append(snap)
+                self.failures[DIRECTIONAL_COMPONENT] += 1
+                self.last_errors[DIRECTIONAL_COMPONENT] = str(exc)
+                log.error("方向性扫描无法确认合约 universe，保持沉默：%s", exc)
+                return None
 
-        if failures:
-            log.warning("方向性扫描：%d 个标的的 K 线拉取失败", failures)
+        scan = build_directional_scan(
+            ticker_raw,
+            lambda symbol, interval, limit: self.client.klines(symbol, interval, limit),
+            now,
+            min_volume=CONTROL_RULES.min_quote_volume_usdt,
+            lookback=CONTROL_RULES.lookback_days,
+            k_long=CONTROL_RULES.k_long,
+            k_short=CONTROL_RULES.k_short,
+            min_symbols=CONTROL_RULES.min_symbols,
+            valid_symbols=valid_symbols,
+        )
 
         self.failures[DIRECTIONAL_COMPONENT] = 0
         self.last_errors[DIRECTIONAL_COMPONENT] = ""
-
-        min_symbols = int(threshold(self.cfg, "xs_min_symbols", 20))
-        k_long = int(threshold(self.cfg, "xs_k_long", 5))
-        k_short = int(threshold(self.cfg, "xs_k_short", 5))
-
-        if len(vols) < max(min_symbols, k_long + k_short):
-            # 标的不足时保持沉默，而不是拿半个组合凑数
-            log.info("方向性扫描 | 仅 %d 个标的可用，低于下限 %d，保持沉默",
-                     len(vols), max(min_symbols, k_long + k_short))
+        if scan.signal is None:
+            log.info("方向性扫描 | %s | eligible=%d complete=%d missing=%s",
+                     scan.reason, scan.candidate_count, scan.completed_count,
+                     ",".join(scan.missing_symbols) or "-")
             self.last_directional = None
             return None
 
-        signal = build_signal(
-            vols, k_long, k_short, lookback, now.astimezone(self.tz).strftime("%Y-%m-%d")
-        )
+        signal = scan.signal
+        try:
+            signal_day = date.fromisoformat(signal.as_of)
+        except ValueError:
+            signal_day = None
+        if signal_day is not None:
+            previous = self.store.paper_rebalances(CONTROL_RULES.strategy_id)
+            if isinstance(previous, list) and previous:
+                try:
+                    last_signal_day = date.fromisoformat(
+                        str(previous[-1]["signal_date"])[:10]
+                    )
+                except (KeyError, TypeError, ValueError):
+                    last_signal_day = None
+                if (
+                    last_signal_day is not None
+                    and (signal_day - last_signal_day).days
+                    < CONTROL_RULES.rebalance_days
+                ):
+                    log.info(
+                        "方向性扫描 | %s 尚未到下一次周度调仓日，保持当前 target",
+                        signal.as_of,
+                    )
+                    return None
         self.last_directional = signal
 
         # 前向验证：每条信号都登记下来，到期后用真实行情回填。
@@ -267,7 +276,7 @@ class AlertService:
             self.notifier.dispatch(decision.alert, decision.immediate, now)
 
         log.info("方向性扫描 | %d 个标的 | 做多 %s | 做空 %s",
-                 len(vols),
+                 signal.universe_size,
                  ",".join(v.symbol for v in signal.longs),
                  ",".join(v.symbol for v in signal.shorts))
         return signal
