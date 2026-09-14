@@ -11,7 +11,7 @@ from __future__ import annotations
 import hashlib
 import hmac
 import time
-from typing import Any
+from typing import Any, Mapping
 from urllib.parse import urlencode
 
 import requests
@@ -19,6 +19,75 @@ import requests
 
 class BinanceError(Exception):
     """币安接口返回错误或网络异常。"""
+
+
+FUNDING_API_MAX_LIMIT = 1000
+DEFAULT_FUNDING_MAX_PAGES = 1000
+
+
+def _funding_time(event: Mapping[str, Any]) -> int:
+    try:
+        return int(event["fundingTime"])
+    except (KeyError, TypeError, ValueError, OverflowError) as exc:
+        raise BinanceError("funding history 缺少合法 fundingTime") from exc
+
+
+def validate_funding_coverage(
+    events: list[dict[str, Any]],
+    start_ms: int,
+    end_ms: int,
+    *,
+    expected_interval_hours: float | None = None,
+) -> list[dict[str, Any]]:
+    """校验 funding 时间窗、去重并按 fundingTime 排序。
+
+    Binance 响应本身通过 ``startTime``/``endTime`` 和分页边界确认覆盖范围；
+    如果调用方还知道结算间隔，则额外检查中间是否存在 coverage gap。
+    """
+    if end_ms < start_ms:
+        raise BinanceError("funding history endTime 早于 startTime")
+    by_time: dict[int, dict[str, Any]] = {}
+    for event in events:
+        if not isinstance(event, dict):
+            raise BinanceError("funding history 响应包含非法事件")
+        timestamp = _funding_time(event)
+        if timestamp < start_ms or timestamp > end_ms:
+            raise BinanceError("funding history 返回 requested 时间窗之外的事件")
+        previous = by_time.get(timestamp)
+        if previous is not None and previous != event:
+            raise BinanceError("同一 fundingTime 返回了冲突事件")
+        by_time[timestamp] = event
+    ordered = [by_time[timestamp] for timestamp in sorted(by_time)]
+    if not ordered and end_ms > start_ms:
+        raise BinanceError("funding history 为空，requested coverage 无法确认")
+    if len(ordered) > 2 and expected_interval_hours is None:
+        intervals = [
+            current - previous
+            for previous, current in zip(
+                (_funding_time(event) for event in ordered),
+                (_funding_time(event) for event in ordered[1:]),
+            )
+        ]
+        if any(interval <= 0 for interval in intervals) or len(set(intervals)) != 1:
+            raise BinanceError(
+                "funding history settlement interval 不一致，coverage 无法确认"
+            )
+    if expected_interval_hours is not None and len(ordered) > 1:
+        interval_ms = int(float(expected_interval_hours) * 3_600_000)
+        if interval_ms <= 0:
+            raise BinanceError("expected funding interval 必须为正数")
+        timestamps = [_funding_time(event) for event in ordered]
+        gaps = [
+            (previous, current)
+            for previous, current in zip(timestamps, timestamps[1:])
+            if current - previous != interval_ms
+        ]
+        if gaps:
+            previous, current = gaps[0]
+            raise BinanceError(
+                f"funding history coverage gap: {previous} -> {current}"
+            )
+    return ordered
 
 
 class BinanceFuturesClient:
@@ -109,14 +178,81 @@ class BinanceFuturesClient:
         return data if isinstance(data, list) else []
 
     def funding_history(
-        self, symbol: str, start_ms: int, limit: int = 200
+        self,
+        symbol: str,
+        start_ms: int,
+        limit: int = 200,
+        *,
+        end_ms: int | None = None,
+        max_pages: int = DEFAULT_FUNDING_MAX_PAGES,
+        expected_interval_hours: float | None = None,
     ) -> list[dict[str, Any]]:
-        """历史资金费结算记录，用于前向验证时回填真实资金费收支。"""
-        data = self._request(
-            "/fapi/v1/fundingRate",
-            {"symbol": symbol, "startTime": start_ms, "limit": limit},
+        """分页读取完整 funding history，覆盖 ``[startTime, endTime]``。
+
+        ``limit`` 保留为第三个位置参数以兼容旧的只读 fixture；真实请求始终
+        带明确的 ``startTime`` 和 ``endTime``。每次继续使用上一页最大
+        ``fundingTime + 1``，并在页数、边界、重复和 coverage gap 异常时失败。
+        """
+        try:
+            start_ms = int(start_ms)
+            end_ms = int(time.time() * 1000) if end_ms is None else int(end_ms)
+            page_limit = max(1, min(int(limit), FUNDING_API_MAX_LIMIT))
+            max_pages = int(max_pages)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise BinanceError("funding history 分页参数非法") from exc
+        if end_ms < start_ms:
+            raise BinanceError("funding history endTime 早于 startTime")
+        if max_pages <= 0:
+            raise BinanceError("funding history max_pages 必须为正数")
+
+        cursor = start_ms
+        collected: dict[int, dict[str, Any]] = {}
+        for _ in range(max_pages):
+            data = self._request(
+                "/fapi/v1/fundingRate",
+                {
+                    "symbol": symbol,
+                    "startTime": cursor,
+                    "endTime": end_ms,
+                    "limit": page_limit,
+                },
+            )
+            if not isinstance(data, list):
+                raise BinanceError("funding history 响应不是数组")
+            if not data:
+                break
+
+            page_times: list[int] = []
+            for item in data:
+                if not isinstance(item, dict):
+                    raise BinanceError("funding history 响应包含非法事件")
+                timestamp = _funding_time(item)
+                if timestamp < start_ms or timestamp > end_ms:
+                    raise BinanceError("funding history 返回 requested 时间窗之外的事件")
+                if timestamp < cursor and timestamp not in collected:
+                    raise BinanceError("funding history 分页出现未预期的旧事件")
+                previous = collected.get(timestamp)
+                if previous is not None and previous != item:
+                    raise BinanceError("同一 fundingTime 返回了冲突事件")
+                collected[timestamp] = item
+                page_times.append(timestamp)
+
+            page_max = max(page_times)
+            next_cursor = page_max + 1
+            if next_cursor <= cursor:
+                raise BinanceError("funding history 分页没有前进，coverage 无法确认")
+            if page_max >= end_ms or len(data) < page_limit:
+                break
+            cursor = next_cursor
+        else:
+            raise BinanceError("funding history 超过最大分页数，coverage 无法确认")
+
+        return validate_funding_coverage(
+            list(collected.values()),
+            start_ms,
+            end_ms,
+            expected_interval_hours=expected_interval_hours,
         )
-        return data if isinstance(data, list) else []
 
     # ---------- 私有只读接口 ----------
 

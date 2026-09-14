@@ -19,11 +19,14 @@ from __future__ import annotations
 
 import json
 import logging
+import math
 import statistics
+import inspect
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from typing import Any, Mapping, Sequence
 
+from .binance_client import BinanceError, validate_funding_coverage
 from .config import Config, threshold
 from .directional_engine import (
     DirectionalSignal,
@@ -36,6 +39,7 @@ from .weekly_paper import (
     WeeklyPaperPortfolioLedger,
     WeeklyPaperResult,
     execution_day,
+    scale_for_strategy,
     target_map,
 )
 from .xs_lowvol_spec import (
@@ -70,6 +74,8 @@ def record_signal(
     store: Store,
     signal: DirectionalSignal,
     cfg: Config,
+    *,
+    scale: float | None = None,
 ) -> int | None:
     """把一次信号登记为待验证的 paper trade。重复登记返回 None。"""
     if not signal.longs or not signal.shorts:
@@ -78,6 +84,15 @@ def record_signal(
     rules = SHADOW_RULES if is_shadow else CONTROL_RULES
     strategy_id = SHADOW_STRATEGY_ID if is_shadow else CONTROL_STRATEGY_ID
     spec_hash = SHADOW_SPEC_HASH if is_shadow else CONTROL_SPEC_HASH
+    resolved_scale = (
+        scale
+        if scale is not None
+        else scale_for_strategy(
+            strategy_id,
+            signal.universe_vols
+            or [v.realized_vol_pct for v in signal.longs + signal.shorts],
+        )
+    )
     try:
         signal_day = date.fromisoformat(signal.as_of)
     except ValueError:
@@ -124,6 +139,7 @@ def record_signal(
             execution_date=execution_date,
             targets=target_map(signal),
             changed_symbols=[],
+            scale=resolved_scale,
         )
     except Exception as exc:
         log.warning("周度 PAPER 调仓事件登记失败：%s", exc)
@@ -220,6 +236,10 @@ def _day_start_ms(day: date) -> int:
     return int(datetime.combine(day, time.min, tzinfo=timezone.utc).timestamp() * 1000)
 
 
+def _day_end_ms(day: date) -> int:
+    return _day_start_ms(day + timedelta(days=1)) - 1
+
+
 def _completed_observation_ms(today: date) -> int:
     """只把观察时刻前已经收盘的日线交给 PAPER。"""
     now = datetime.now(timezone.utc)
@@ -230,25 +250,81 @@ def _completed_observation_ms(today: date) -> int:
     return int(now.timestamp() * 1000)
 
 
+def _funding_history(
+    client: Any,
+    symbol: str,
+    start_ms: int,
+    end_ms: int,
+) -> Sequence[Any]:
+    """读取明确时间窗内的 funding；仅为旧测试 fixture 保留无 end_ms 兼容。"""
+    method = getattr(client, "funding_history")
+    try:
+        parameters = inspect.signature(method).parameters.values()
+        supports_end = any(
+            parameter.name == "end_ms"
+            or parameter.kind == inspect.Parameter.VAR_KEYWORD
+            for parameter in parameters
+        )
+    except (TypeError, ValueError):
+        supports_end = True
+    if supports_end:
+        return method(symbol, start_ms, end_ms=end_ms)
+    return method(symbol, start_ms)
+
+
+def _validated_client_funding(
+    history: Sequence[Any],
+    start_ms: int,
+    end_ms: int,
+    symbol: str,
+) -> list[dict[str, Any]]:
+    """把客户端 funding 响应验证成可用于逐日记账的事件列表。"""
+    if not isinstance(history, Sequence) or isinstance(history, (str, bytes)):
+        raise PaperDataError(f"{symbol} 的 funding events 响应格式非法")
+    events: list[dict[str, Any]] = []
+    for event in history:
+        if not isinstance(event, dict) or "fundingTime" not in event:
+            raise PaperDataError(f"{symbol} 的 funding event 缺少 fundingTime")
+        try:
+            rate = float(event.get("fundingRate"))
+        except (TypeError, ValueError, OverflowError):
+            raise PaperDataError(f"{symbol} 的 funding event 缺少合法 fundingRate") from None
+        if not math.isfinite(rate):
+            raise PaperDataError(f"{symbol} 的 funding event fundingRate 非有限数")
+        events.append(event)
+    if not events:
+        raise PaperDataError(
+            f"{symbol} 的 funding events 为空，requested coverage 无法确认"
+        )
+    try:
+        return validate_funding_coverage(events, start_ms, end_ms)
+    except BinanceError as exc:
+        raise PaperDataError(f"{symbol} 的 funding coverage 无法确认：{exc}") from exc
+
+
 def _weekly_inputs_from_client(
     store: Store,
     client: Any,
     today: date,
+    strategy_id: str,
 ) -> tuple[
     dict[date, dict[str, float]],
     dict[date, dict[str, int]],
     dict[str, Sequence[Any]],
+    dict[date, float],
 ] | None:
-    """读取 Control 的 signal schedule 与完成日线，失败时保持 fail-closed。
+    """读取一个 PAPER strategy 的 signal schedule 与完成日线，失败时 fail-closed。
 
     ``None`` 表示客户端没有可识别的 completed-candle 形状，供旧的纯
     fixture 兼容路径使用；一旦部分标的有数据、部分标的没有，则抛出
     ``PaperDataError``，避免偷偷缩小 universe。
     """
-    rows = store.paper_rebalances(CONTROL_STRATEGY_ID)
+    rules = SHADOW_RULES if strategy_id == SHADOW_STRATEGY_ID else CONTROL_RULES
+    expected_hash = SHADOW_SPEC_HASH if strategy_id == SHADOW_STRATEGY_ID else CONTROL_SPEC_HASH
+    rows = store.paper_rebalances(strategy_id)
     usable_rows: list[dict[str, Any]] = []
     for row in rows:
-        if row["spec_hash"] != CONTROL_SPEC_HASH:
+        if row["spec_hash"] != expected_hash:
             raise PaperDataError("PAPER rebalance 的 spec hash 已过期")
         try:
             rebalance_day = date.fromisoformat(str(row["rebalance_date"])[:10])
@@ -260,6 +336,7 @@ def _weekly_inputs_from_client(
         return None
 
     targets_by_signal_day: dict[date, dict[str, int]] = {}
+    scales_by_signal_day: dict[date, float] = {}
     symbols: set[str] = set()
     for row in usable_rows:
         try:
@@ -271,7 +348,14 @@ def _weekly_inputs_from_client(
         if execution > today or not isinstance(targets, dict):
             continue
         clean_targets = {str(symbol): int(direction) for symbol, direction in targets.items()}
+        scale = float(row.get("scale", 1.0) or 1.0)
+        if signal_day in targets_by_signal_day and (
+            targets_by_signal_day[signal_day] != clean_targets
+            or scales_by_signal_day[signal_day] != scale
+        ):
+            raise PaperDataError("PAPER 同一 signal day 的 target 或 scale 不一致")
         targets_by_signal_day[signal_day] = clean_targets
+        scales_by_signal_day[signal_day] = scale
         symbols.update(clean_targets)
     if not symbols:
         return None
@@ -308,17 +392,18 @@ def _weekly_inputs_from_client(
 
     first_signal = min(targets_by_signal_day)
     start_ms = _day_start_ms(first_signal - timedelta(days=1))
+    end_ms = _completed_observation_ms(today)
     funding_events: dict[str, Sequence[Any]] = {}
     for symbol in sorted(symbols):
         try:
-            history = client.funding_history(symbol, start_ms)
+            history = _funding_history(client, symbol, start_ms, end_ms)
         except Exception as exc:
             raise PaperDataError(f"无法读取 {symbol} 的已结算 funding events") from exc
-        if not isinstance(history, Sequence) or isinstance(history, (str, bytes)):
-            raise PaperDataError(f"{symbol} 的 funding events 响应格式非法")
-        funding_events[symbol] = list(history)
+        funding_events[symbol] = _validated_client_funding(
+            history, start_ms, end_ms, symbol
+        )
 
-    return prices_by_day, targets_by_signal_day, funding_events
+    return prices_by_day, targets_by_signal_day, funding_events, scales_by_signal_day
 
 
 def _verify_weekly_pending(
@@ -327,28 +412,33 @@ def _verify_weekly_pending(
     client: Any,
     today: date,
     max_trades: int,
+    strategy_id: str,
 ) -> tuple[dict[str, int], set[int]] | None:
-    """用连续 ledger 核对 Control，并返回已接管的 paper id。"""
-    inputs = _weekly_inputs_from_client(store, client, today)
+    """用连续 ledger 核对一个 strategy，并返回已接管的 paper id。"""
+    inputs = _weekly_inputs_from_client(store, client, today, strategy_id)
     if inputs is None:
         return None
-    prices_by_day, targets_by_signal_day, funding_events = inputs
+    prices_by_day, targets_by_signal_day, funding_events, scales_by_signal_day = inputs
     result = run_weekly_paper(
         store,
         cfg,
         prices_by_day,
         targets_by_signal_day,
         funding_events,
+        strategy_id=strategy_id,
+        scales_by_signal_day=scales_by_signal_day,
     )
     rows = list(result.nav)
     by_day = {row.day: row for row in rows}
+    rules = SHADOW_RULES if strategy_id == SHADOW_STRATEGY_ID else CONTROL_RULES
     execution_days = sorted(
-        execution_day(signal_day) for signal_day in targets_by_signal_day
+        execution_day(signal_day, rules.execution_lag_days)
+        for signal_day in targets_by_signal_day
     )
     pending = [
         trade
         for trade in store.pending_paper_trades()
-        if trade.get("strategy_id") == CONTROL_STRATEGY_ID
+        if trade.get("strategy_id") == strategy_id
     ]
     verified_ids: set[int] = set()
     stats = {"verified": 0, "failed": 0, "skipped": 0}
@@ -407,40 +497,49 @@ def verify_pending(
     cost_pct = 2 * (taker + slip)   # 单条腿的往返成本
 
     stats = {"verified": 0, "failed": 0, "skipped": 0}
-    weekly_mode = False
-    weekly_control_ids: set[int] = set()
-    try:
-        weekly_result = _verify_weekly_pending(
-            store, cfg, client, today, max_trades
-        )
-    except PaperDataError as exc:
-        log.error("周度 PAPER 数据不完整，保持 fail-closed：%s", exc)
-        weekly_result = ({"verified": 0, "failed": 0, "skipped": 0}, set())
-        for trade in store.pending_paper_trades():
-            if (
-                trade.get("strategy_id") == CONTROL_STRATEGY_ID
-                and is_due(trade, today)
-            ):
-                store.mark_paper_failed(int(trade["id"]), str(exc))
-                stats["failed"] += 1
-        weekly_mode = True
-    if weekly_result is not None:
-        weekly_mode = True
+    weekly_strategies: set[str] = set()
+    weekly_ids: set[int] = set()
+    for strategy_id in (CONTROL_STRATEGY_ID, SHADOW_STRATEGY_ID):
+        try:
+            weekly_result = _verify_weekly_pending(
+                store, cfg, client, today, max_trades, strategy_id
+            )
+        except PaperDataError as exc:
+            log.error("%s 周度 PAPER 数据不完整，保持 fail-closed：%s", strategy_id, exc)
+            weekly_strategies.add(strategy_id)
+            pending_for_strategy = [
+                trade
+                for trade in store.pending_paper_trades()
+                if trade.get("strategy_id") == strategy_id
+            ]
+            weekly_ids.update(int(trade["id"]) for trade in pending_for_strategy)
+            for trade in pending_for_strategy:
+                if is_due(trade, today):
+                    store.mark_paper_failed(int(trade["id"]), str(exc))
+                    stats["failed"] += 1
+            continue
+        if weekly_result is None:
+            continue
+        weekly_strategies.add(strategy_id)
         weekly_stats, verified_ids = weekly_result
         stats["verified"] += weekly_stats["verified"]
         stats["failed"] += weekly_stats["failed"]
         stats["skipped"] += weekly_stats["skipped"]
-        weekly_control_ids = {
+        weekly_ids.update(verified_ids)
+        weekly_ids.update(
             int(trade["id"])
             for trade in store.pending_paper_trades()
-            if trade.get("strategy_id") == CONTROL_STRATEGY_ID
-        } | verified_ids
+            if trade.get("strategy_id") == strategy_id
+        )
 
     pending = [
         trade
         for trade in store.pending_paper_trades()
         if is_due(trade, today)
-        and (not weekly_mode or int(trade["id"]) not in weekly_control_ids)
+        and (
+            trade.get("strategy_id") not in weekly_strategies
+            or int(trade["id"]) not in weekly_ids
+        )
     ]
 
     for trade in pending[:max_trades]:
@@ -462,20 +561,18 @@ def verify_pending(
                     entry_prices.get(symbol, closes[0]),
                     closes[-1],
                 )
-                try:
-                    start_ms = int(
-                        datetime.fromisoformat(str(trade["signal_date"]))
-                        .replace(tzinfo=timezone.utc)
-                        .timestamp()
-                        * 1000
-                    )
-                    history = client.funding_history(symbol, start_ms)
-                    funding_lookup[symbol] = sum(
-                        float(h.get("fundingRate") or 0.0) for h in history
-                    )
-                except Exception as exc:  # 资金费取不到时不阻塞，但要留痕
-                    log.warning("资金费回填失败 %s：%s", symbol, exc)
-                    funding_lookup[symbol] = 0.0
+                signal_day = date.fromisoformat(str(trade["signal_date"])[:10])
+                end_day = signal_day + timedelta(days=int(trade["horizon_days"]))
+                start_ms = _day_start_ms(signal_day)
+                history = _funding_history(
+                    client, symbol, start_ms, _day_end_ms(end_day)
+                )
+                validated = _validated_client_funding(
+                    history, start_ms, _day_end_ms(end_day), symbol
+                )
+                funding_lookup[symbol] = sum(
+                    float(h["fundingRate"]) for h in validated
+                )
         except Exception as exc:
             store.mark_paper_failed(int(trade["id"]), str(exc))
             stats["failed"] += 1
@@ -568,6 +665,11 @@ def run_weekly_paper(
             rebalance=row.rebalance,
             changed_symbols=list(row.changed_symbols),
             positions=row.positions,
+            resized_symbols=list(row.resized_symbols),
+            turnover_notional=row.turnover_notional,
+            position_notionals=row.position_notionals,
+            targets=row.targets,
+            scale=row.scale,
         )
     for rebalance_date, targets in scheduled.items():
         row = next((item for item in result.nav if item.day == rebalance_date), None)
@@ -579,6 +681,9 @@ def run_weekly_paper(
             execution_date=rebalance_date.isoformat(),
             targets=targets,
             changed_symbols=list(row.changed_symbols) if row else [],
+            resized_symbols=list(row.resized_symbols) if row else [],
+            turnover_notional=row.turnover_notional if row else 0.0,
+            scale=row.scale if row else float(scheduled_scales.get(rebalance_date, 1.0)),
         )
         if rebalance_date in prices_by_day:
             execution_prices = {
@@ -597,7 +702,13 @@ def run_weekly_paper(
         strategy_id=result.strategy_id,
         spec_hash=result.spec_hash,
         last_day=last.day.isoformat() if last else None,
-        state={"nav": result.final_nav, "positions": last.positions if last else {}},
+        state={
+            "nav": result.final_nav,
+            "positions": last.positions if last else {},
+            "position_notionals": last.position_notionals if last else {},
+            "targets": last.targets if last else {},
+            "scale": last.scale if last else 1.0,
+        },
         updated_at=datetime.now(timezone.utc),
     )
     return result
@@ -637,6 +748,8 @@ def render_reconciliation(store: Store) -> str:
     evidence = load_evidence()
     ledger_rows = store.paper_nav(CONTROL_STRATEGY_ID)
     shadow_rows = store.paper_nav(SHADOW_STRATEGY_ID)
+    control_stats = store.paper_stats(CONTROL_STRATEGY_ID, CONTROL_SPEC_HASH)
+    shadow_stats = store.paper_stats(SHADOW_STRATEGY_ID, SHADOW_SPEC_HASH)
     lines: list[str] = []
     lines.append("=" * 78)
     lines.append("前向验证滚动对账")
@@ -648,6 +761,14 @@ def render_reconciliation(store: Store) -> str:
     lines.append(f"核对失败    : {stats['failed']}")
     lines.append(f"PAPER Control: {CONTROL_STRATEGY_ID} / {CONTROL_SPEC_HASH}")
     lines.append(f"PAPER Shadow : {SHADOW_STRATEGY_ID} / {SHADOW_SPEC_HASH}")
+    lines.append(
+        f"Control 记录 : total={control_stats['total']} verified={control_stats['verified']} "
+        f"pending={control_stats['pending']} failed={control_stats['failed']}"
+    )
+    lines.append(
+        f"Shadow 记录  : total={shadow_stats['total']} verified={shadow_stats['verified']} "
+        f"pending={shadow_stats['pending']} failed={shadow_stats['failed']}"
+    )
     if legacy_count:
         lines.append(f"旧未版本化记录: {legacy_count} 条（不作为当前 V1 证据）")
     if ledger_rows:

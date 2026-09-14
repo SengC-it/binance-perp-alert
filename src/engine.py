@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import time
+from dataclasses import replace
 from datetime import date, datetime, timezone, tzinfo
 
 from .binance_client import BinanceError, BinanceFuturesClient
@@ -37,7 +38,11 @@ from .rules import (
 )
 from .store import Store
 from .timeutil import fmt_local
-from .xs_lowvol_spec import CONTROL_RULES
+from .xs_lowvol_spec import (
+    CONTROL_RULES,
+    SHADOW_SPEC_HASH,
+    SHADOW_STRATEGY_ID,
+)
 
 log = logging.getLogger(__name__)
 
@@ -264,12 +269,22 @@ class AlertService:
                     return None
         self.last_directional = signal
 
-        # 前向验证：每条信号都登记下来，到期后用真实行情回填。
-        # 一年回测在统计上不足以证明正期望，只有持续对账才能。
-        try:
-            record_signal(self.store, signal, self.cfg)
-        except Exception as exc:
-            log.warning("前向验证登记失败（不影响告警）：%s", exc)
+        # 前向验证：同一份 Control ranking 同时驱动两个独立 PAPER portfolio。
+        # Shadow 只改变 position sizing，不重新选币或共享 NAV/funding/cost 状态。
+        shadow_signal = replace(
+            signal,
+            strategy_id=SHADOW_STRATEGY_ID,
+            spec_hash=SHADOW_SPEC_HASH,
+        )
+        for paper_signal in (signal, shadow_signal):
+            try:
+                record_signal(self.store, paper_signal, self.cfg)
+            except Exception as exc:
+                log.warning(
+                    "%s 前向验证登记失败（不影响 Control 告警）：%s",
+                    paper_signal.strategy_id,
+                    exc,
+                )
 
         results = evaluate_directional_rules(self.cfg, signal)
         for decision in self.engine.process(results, now):

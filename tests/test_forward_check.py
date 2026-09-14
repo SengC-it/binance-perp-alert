@@ -213,7 +213,7 @@ class FakeClient:
         return [[0, "100", "100", "100", "100"], [1, "100", "100", "100", str(self.exit_price)]]
 
     def funding_history(self, symbol, start_ms, limit=200):
-        return [{"fundingRate": "0.0001"}]
+        return [{"fundingTime": start_ms, "fundingRate": "0.0001"}]
 
 
 def test_verify_pending_backfills_due_trade(store):

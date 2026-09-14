@@ -32,6 +32,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable, Iterable, Sequence
 
+from .evidence import validate_current_evidence
 from .xs_lowvol_spec import (
     CONTROL_RULES,
     CONTROL_SPEC_HASH,
@@ -53,32 +54,35 @@ def load_evidence(
     path: str | Path = EVIDENCE_PATH,
     expected_spec_hash: str = CONTROL_SPEC_HASH,
 ) -> dict[str, Any]:
-    """读取并校验 evidence artifact；hash 不匹配时只返回 stale 状态。"""
+    """读取并校验 evidence artifact；provenance 不完整时只返回 stale 状态。"""
+    def stale(raw: Any, reason: str) -> dict[str, Any]:
+        out: dict[str, Any] = {
+            "status": "EVIDENCE_STALE",
+            "strategy_id": CONTROL_STRATEGY_ID,
+            "spec_hash": expected_spec_hash,
+            "stale_reason": reason,
+        }
+        if isinstance(raw, dict):
+            out["strategy_id"] = raw.get("strategy_id", CONTROL_STRATEGY_ID)
+            out["spec_hash"] = raw.get("spec_hash")
+            if raw.get("dataset_id") is not None:
+                out["dataset_id"] = raw["dataset_id"]
+            if raw.get("generated_at") is not None:
+                out["generated_at"] = raw["generated_at"]
+        return out
+
     try:
         raw = json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return {
-            "status": "EVIDENCE_STALE",
-            "strategy_id": CONTROL_STRATEGY_ID,
-            "spec_hash": expected_spec_hash,
-        }
-    if not isinstance(raw, dict):
-        return {
-            "status": "EVIDENCE_STALE",
-            "strategy_id": CONTROL_STRATEGY_ID,
-            "spec_hash": expected_spec_hash,
-        }
-    if (
-        raw.get("strategy_id") != CONTROL_STRATEGY_ID
-        or raw.get("spec_hash") != expected_spec_hash
-    ):
-        return {
-            "status": "EVIDENCE_STALE",
-            "strategy_id": raw.get("strategy_id", CONTROL_STRATEGY_ID),
-            "spec_hash": raw.get("spec_hash"),
-            "expected_spec_hash": expected_spec_hash,
-        }
-    raw["status"] = "CURRENT"
+        return stale(None, "evidence 文件不存在或不是合法 JSON")
+    valid, reason = validate_current_evidence(
+        raw,
+        expected_strategy_id=CONTROL_STRATEGY_ID,
+        expected_spec_hash=expected_spec_hash,
+    )
+    if not valid:
+        return stale(raw, reason)
+    assert isinstance(raw, dict)
     ci = raw.get("sharpe_ci90")
     if isinstance(ci, list):
         raw["sharpe_ci90"] = tuple(ci)
@@ -100,7 +104,10 @@ def evidence_block(evidence: dict[str, Any] | None = None) -> str:
             "EVIDENCE_STALE\n"
             f"策略：{evidence.get('strategy_id', CONTROL_STRATEGY_ID)}\n"
             f"当前 spec hash：{CONTROL_SPEC_HASH}\n"
-            "旧 evidence 不会展示，必须重新生成与当前 spec hash 匹配的研究 artifact。"
+            f"原因：{evidence.get('stale_reason', 'provenance/schema 未通过校验')}\n"
+            "旧 evidence 不会展示，必须由当前回测报告生成器重新生成匹配的研究 artifact。\n\n"
+            "什么时候会失效：样本状态切换、交易成本或做空挤空风险发生变化时，"
+            "都不能把历史回测当作当前结论。"
         )
     ci = evidence["sharpe_ci90"]
     return (
@@ -155,6 +162,7 @@ class DirectionalSignal:
     universe_size: int = 0
     strategy_id: str = CONTROL_STRATEGY_ID
     spec_hash: str = CONTROL_SPEC_HASH
+    universe_vols: tuple[float, ...] = ()
     signal_timestamp: str | None = None
     execution_date: str | None = None
     execution_lag_days: int = CONTROL_RULES.execution_lag_days
@@ -186,6 +194,8 @@ class DirectionalScanResult:
     signal: DirectionalSignal | None
     reason: str
     candidate_count: int = 0
+    eligible_count: int = 0
+    active_count: int = 0
     completed_count: int = 0
     missing_symbols: tuple[str, ...] = ()
 
@@ -325,6 +335,7 @@ def build_signal(
         longs=longs,
         shorts=shorts,
         universe_size=len(universe),
+        universe_vols=tuple(v.realized_vol_pct for v in universe),
         signal_timestamp=(
             f"{as_of}T23:59:59.999+00:00" if execution_date is not None else None
         ),
@@ -357,17 +368,20 @@ def build_directional_scan(
     min_symbols: int = CONTROL_RULES.min_symbols,
     valid_symbols: set[str] | None = None,
 ) -> DirectionalScanResult:
-    """用完整流动性合约池构造 Control 信号。
+    """按 active → signal-day volume → history 的顺序构造 Control 信号。
 
     ``valid_symbols`` 来自只读 exchange metadata；没有提供时，ticker 中的
-    USDT 永续格式作为兼容性约束。绝不按成交额截断候选池。
-    任意一个当前 eligible 合约缺少完整历史时整体 NO_SIGNAL，避免悄悄变成
-    另一套 universe。
+    USDT 永续格式作为兼容性约束。低流动性或尚未成为 eligible 的新合约，
+    即使历史很短也不能阻塞整个 universe；只有已经确认 eligible 的合约
+    缺少完整 lookback 时才整体 NO_SIGNAL。
     """
     ticker_volumes: dict[str, float] = {}
+    normalized_valid = {
+        str(symbol).upper() for symbol in valid_symbols
+    } if valid_symbols is not None else None
     for item in ticker_raw:
         symbol = str(item.get("symbol", "")).upper()
-        if valid_symbols is not None and symbol not in valid_symbols:
+        if normalized_valid is not None and symbol not in normalized_valid:
             continue
         if not symbol.endswith("USDT"):
             continue
@@ -377,53 +391,94 @@ def build_directional_scan(
             continue
         ticker_volumes[symbol] = volume
 
-    if valid_symbols is not None:
+    if normalized_valid is not None:
         universe_symbols = sorted(
-            symbol.upper()
-            for symbol in valid_symbols
-            if symbol.upper().endswith("USDT")
+            symbol for symbol in normalized_valid if symbol.endswith("USDT")
         )
     else:
         universe_symbols = sorted(ticker_volumes)
-    candidates = [(symbol, ticker_volumes.get(symbol, 0.0)) for symbol in universe_symbols]
 
     required = max(min_symbols, k_long + k_short)
-    if len(candidates) < required:
+    if len(universe_symbols) < required:
         return DirectionalScanResult(
             signal=None,
-            reason=f"NO_SIGNAL: insufficient eligible universe ({len(candidates)} < {required})",
-            candidate_count=len(candidates),
+            reason=f"NO_SIGNAL: insufficient active universe ({len(universe_symbols)} < {required})",
+            candidate_count=len(universe_symbols),
+            active_count=len(universe_symbols),
         )
 
     completed_by_symbol: dict[str, list[CompletedCandle]] = {}
-    missing: list[str] = []
     now_ms = int(now.astimezone(timezone.utc).timestamp() * 1000)
-    for symbol, _ in candidates:
+    for symbol in universe_symbols:
         try:
             raw = kline_loader(symbol, "1d", lookback + 2)
             candles = parse_completed_klines(raw, now_ms)
         except Exception:
             candles = []
-        if len(candles) < lookback + 1:
-            missing.append(symbol)
-        else:
-            completed_by_symbol[symbol] = candles
+        completed_by_symbol[symbol] = candles
 
-    if missing:
+    # 先用每个 active 合约最近一根已完成 K 线的成交额确认「有资格成为
+    # eligible 的候选」，再从这些候选确定共同 signal day。这样一个只有
+    # 5 天历史且成交额低于阈值的新合约，不会把自己的较新日期带进时钟，
+    # 也不会阻塞完整的高流动性 universe。
+    latest_liquidity: dict[str, float] = {}
+    possible_eligible: set[str] = set()
+    for symbol in universe_symbols:
+        candles = completed_by_symbol[symbol]
+        latest = candles[-1] if candles else None
+        volume = latest.quote_volume if latest is not None else None
+        if volume is None:
+            volume = ticker_volumes.get(symbol, 0.0)
+        if volume >= min_volume:
+            latest_liquidity[symbol] = volume
+            possible_eligible.add(symbol)
+
+    latest_days = [
+        completed_by_symbol[symbol][-1].day
+        for symbol in possible_eligible
+        if completed_by_symbol[symbol]
+    ]
+    if not latest_days:
         return DirectionalScanResult(
             signal=None,
-            reason="NO_SIGNAL: missing or incomplete eligible history",
-            candidate_count=len(candidates),
-            completed_count=len(completed_by_symbol),
-            missing_symbols=tuple(missing),
+            reason="NO_SIGNAL: no completed signal-day candle available",
+            candidate_count=0,
+            active_count=len(universe_symbols),
         )
 
-    common_day = min(candles[-1].day for candles in completed_by_symbol.values())
+    common_day = max(latest_days)
+    candidates: list[tuple[str, float]] = []
+    for symbol in universe_symbols:
+        candles = completed_by_symbol[symbol]
+        latest = candles[-1] if candles else None
+        if symbol not in possible_eligible:
+            continue
+        if latest is None or latest.day < common_day:
+            # 已有足够成交额证据、但 signal day 或更近历史缺失的合约仍是
+            # eligible；后面的完整历史检查会明确 NO_SIGNAL，而不是静默删掉。
+            candidates.append((symbol, latest_liquidity[symbol]))
+            continue
+        volume = latest.quote_volume
+        if volume is None:
+            volume = ticker_volumes.get(symbol, 0.0)
+        if volume >= min_volume:
+            candidates.append((symbol, volume))
+
+    if len(candidates) < required:
+        return DirectionalScanResult(
+            signal=None,
+            reason=f"NO_SIGNAL: insufficient eligible universe ({len(candidates)} < {required})",
+            candidate_count=len(candidates),
+            eligible_count=len(candidates),
+            active_count=len(universe_symbols),
+        )
+
+    missing: list[str] = []
     vols: list[SymbolVol] = []
     for symbol, ticker_volume in candidates:
         candles = [c for c in completed_by_symbol[symbol] if c.day <= common_day]
         window = candles[-(lookback + 1):]
-        if len(window) < lookback + 1:
+        if len(window) < lookback + 1 or not window or window[-1].day != common_day:
             missing.append(symbol)
             continue
         if any((b.day - a.day).days != 1 for a, b in zip(window, window[1:])):
@@ -455,6 +510,8 @@ def build_directional_scan(
             signal=None,
             reason="NO_SIGNAL: missing or invalid completed candle data",
             candidate_count=len(candidates),
+            eligible_count=len(candidates),
+            active_count=len(universe_symbols),
             completed_count=len(vols),
             missing_symbols=tuple(sorted(set(missing))),
         )
@@ -463,6 +520,8 @@ def build_directional_scan(
             signal=None,
             reason=f"NO_SIGNAL: insufficient complete universe ({len(vols)} < {required})",
             candidate_count=len(candidates),
+            eligible_count=len(candidates),
+            active_count=len(universe_symbols),
             completed_count=len(vols),
         )
 
@@ -483,6 +542,8 @@ def build_directional_scan(
         signal=signal,
         reason="OK",
         candidate_count=len(candidates),
+        eligible_count=len(candidates),
+        active_count=len(universe_symbols),
         completed_count=len(vols),
     )
 

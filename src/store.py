@@ -104,7 +104,12 @@ CREATE TABLE IF NOT EXISTS paper_nav (
     cost_pnl       REAL NOT NULL,
     rebalance      INTEGER NOT NULL DEFAULT 0,
     changed_json   TEXT NOT NULL DEFAULT '[]',
+    resized_json   TEXT NOT NULL DEFAULT '[]',
+    turnover_notional REAL NOT NULL DEFAULT 0,
     positions_json TEXT NOT NULL DEFAULT '{}',
+    position_notionals_json TEXT NOT NULL DEFAULT '{}',
+    targets_json   TEXT NOT NULL DEFAULT '{}',
+    scale          REAL NOT NULL DEFAULT 1,
     PRIMARY KEY (strategy_id, day)
 );
 
@@ -116,6 +121,9 @@ CREATE TABLE IF NOT EXISTS paper_rebalances (
     execution_date TEXT NOT NULL,
     targets_json   TEXT NOT NULL,
     changed_json   TEXT NOT NULL DEFAULT '[]',
+    resized_json   TEXT NOT NULL DEFAULT '[]',
+    turnover_notional REAL NOT NULL DEFAULT 0,
+    scale          REAL NOT NULL DEFAULT 1,
     PRIMARY KEY (strategy_id, rebalance_date)
 );
 
@@ -160,10 +168,12 @@ class Store:
         self._conn.commit()
 
     def _migrate_paper_columns(self) -> None:
-        """为旧数据库补齐 M0 的策略身份与执行时间字段。"""
-        columns = {
-            str(row[1]) for row in self._conn.execute("PRAGMA table_info(paper_trades)")
-        }
+        """为旧数据库补齐策略身份、执行时间和 resize 审计字段。"""
+        def columns_for(table: str) -> set[str]:
+            return {
+                str(row[1]) for row in self._conn.execute(f"PRAGMA table_info({table})")
+            }
+
         additions = {
             "strategy_id": "TEXT NOT NULL DEFAULT ''",
             "spec_hash": "TEXT NOT NULL DEFAULT ''",
@@ -173,10 +183,30 @@ class Store:
             "execution_lag_days": "INTEGER NOT NULL DEFAULT 1",
         }
         for name, definition in additions.items():
-            if name not in columns:
+            if name not in columns_for("paper_trades"):
                 self._conn.execute(
                     f"ALTER TABLE paper_trades ADD COLUMN {name} {definition}"
                 )
+        for table, fields in {
+            "paper_nav": {
+                "resized_json": "TEXT NOT NULL DEFAULT '[]'",
+                "turnover_notional": "REAL NOT NULL DEFAULT 0",
+                "position_notionals_json": "TEXT NOT NULL DEFAULT '{}'",
+                "targets_json": "TEXT NOT NULL DEFAULT '{}'",
+                "scale": "REAL NOT NULL DEFAULT 1",
+            },
+            "paper_rebalances": {
+                "resized_json": "TEXT NOT NULL DEFAULT '[]'",
+                "turnover_notional": "REAL NOT NULL DEFAULT 0",
+                "scale": "REAL NOT NULL DEFAULT 1",
+            },
+        }.items():
+            columns = columns_for(table)
+            for name, definition in fields.items():
+                if name not in columns:
+                    self._conn.execute(
+                        f"ALTER TABLE {table} ADD COLUMN {name} {definition}"
+                    )
 
     def close(self) -> None:
         with self._lock:
@@ -585,8 +615,16 @@ class Store:
         rebalance: bool,
         changed_symbols: list[str],
         positions: dict[str, int],
+        resized_symbols: list[str] | None = None,
+        turnover_notional: float = 0.0,
+        position_notionals: dict[str, float] | None = None,
+        targets: dict[str, int] | None = None,
+        scale: float = 1.0,
     ) -> None:
         """按 (strategy, completed day) 幂等写入连续 NAV。"""
+        resized_symbols = resized_symbols or []
+        position_notionals = position_notionals or {}
+        targets = targets or {}
         with self._lock:
             existing = self._conn.execute(
                 "SELECT spec_hash FROM paper_nav WHERE strategy_id=? AND day=?",
@@ -599,8 +637,9 @@ class Store:
                 INSERT INTO paper_nav
                     (strategy_id, spec_hash, day, nav, daily_pnl, long_pnl,
                      short_pnl, funding_pnl, cost_pnl, rebalance,
-                     changed_json, positions_json)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                     changed_json, resized_json, turnover_notional,
+                     positions_json, position_notionals_json, targets_json, scale)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(strategy_id, day) DO UPDATE SET
                     spec_hash=excluded.spec_hash,
                     nav=excluded.nav,
@@ -611,7 +650,12 @@ class Store:
                     cost_pnl=excluded.cost_pnl,
                     rebalance=excluded.rebalance,
                     changed_json=excluded.changed_json,
-                    positions_json=excluded.positions_json
+                    resized_json=excluded.resized_json,
+                    turnover_notional=excluded.turnover_notional,
+                    positions_json=excluded.positions_json,
+                    position_notionals_json=excluded.position_notionals_json,
+                    targets_json=excluded.targets_json,
+                    scale=excluded.scale
                 """,
                 (
                     strategy_id,
@@ -625,7 +669,12 @@ class Store:
                     float(cost_pnl),
                     int(bool(rebalance)),
                     json.dumps(changed_symbols, ensure_ascii=False),
+                    json.dumps(sorted(set(resized_symbols)), ensure_ascii=False),
+                    float(turnover_notional),
                     json.dumps(positions, ensure_ascii=False),
+                    json.dumps(position_notionals, ensure_ascii=False, sort_keys=True),
+                    json.dumps(targets, ensure_ascii=False, sort_keys=True),
+                    float(scale),
                 ),
             )
             self._conn.commit()
@@ -652,12 +701,19 @@ class Store:
         execution_date: str,
         targets: dict[str, int],
         changed_symbols: list[str],
+        resized_symbols: list[str] | None = None,
+        turnover_notional: float = 0.0,
+        scale: float = 1.0,
     ) -> None:
         """记录 signal→execution→target-diff 事件；相同事件可重复写入。"""
+        resized_symbols = resized_symbols or []
         with self._lock:
             targets_json = json.dumps(targets, ensure_ascii=False, sort_keys=True)
             changed_json = json.dumps(
                 sorted(set(changed_symbols)), ensure_ascii=False
+            )
+            resized_json = json.dumps(
+                sorted(set(resized_symbols)), ensure_ascii=False
             )
             existing = self._conn.execute(
                 "SELECT * FROM paper_rebalances WHERE strategy_id=? AND rebalance_date=?",
@@ -667,18 +723,23 @@ class Store:
                 if (
                     existing["spec_hash"] != spec_hash
                     or existing["targets_json"] != targets_json
+                    or abs(float(existing["scale"] or 1.0) - float(scale)) > 1e-12
                 ):
-                    raise ValueError("同一 PAPER rebalance 日的 target 或 spec 不一致")
+                    raise ValueError("同一 PAPER rebalance 日的 target、scale 或 spec 不一致")
                 self._conn.execute(
                     """
                     UPDATE paper_rebalances
-                       SET signal_date=?, execution_date=?, changed_json=?
+                       SET signal_date=?, execution_date=?, changed_json=?,
+                           resized_json=?, turnover_notional=?, scale=?
                      WHERE strategy_id=? AND rebalance_date=?
                     """,
                     (
                         str(signal_date)[:10],
                         str(execution_date)[:10],
                         changed_json,
+                        resized_json,
+                        float(turnover_notional),
+                        float(scale),
                         strategy_id,
                         str(rebalance_date)[:10],
                     ),
@@ -689,8 +750,9 @@ class Store:
                 """
                 INSERT INTO paper_rebalances
                     (strategy_id, spec_hash, rebalance_date, signal_date,
-                     execution_date, targets_json, changed_json)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                     execution_date, targets_json, changed_json,
+                     resized_json, turnover_notional, scale)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     strategy_id,
@@ -700,6 +762,9 @@ class Store:
                     str(execution_date)[:10],
                     targets_json,
                     changed_json,
+                    resized_json,
+                    float(turnover_notional),
+                    float(scale),
                 ),
             )
             self._conn.commit()

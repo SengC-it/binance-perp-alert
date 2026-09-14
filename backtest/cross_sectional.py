@@ -32,9 +32,12 @@
 from __future__ import annotations
 
 import logging
+import hashlib
+import json
 import math
 import random
 import statistics
+import subprocess
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
@@ -57,7 +60,9 @@ from src.xs_lowvol_spec import (
     SHADOW_RULES,
     SHADOW_SPEC_HASH,
     SHADOW_STRATEGY_ID,
+    validate_frozen_spec,
 )
+from src.evidence import EVIDENCE_GENERATOR, EVIDENCE_SCHEMA_VERSION, stale_evidence, utc_now_iso
 
 log = logging.getLogger("backtest.xs")
 OUT_DIR = Path(__file__).resolve().parent
@@ -102,6 +107,19 @@ class XsParams:
 
     def cost_rate(self) -> float:
         return (self.taker_fee_pct + self.slippage_pct) / 100.0
+
+
+@dataclass(frozen=True)
+class XsRebalanceAudit:
+    """一次成功 target rebalance 的经济审计。"""
+
+    signal_day: date
+    execution_day: date
+    targets: dict[str, int]
+    scale: float
+    changed_symbols: tuple[str, ...]
+    resized_symbols: tuple[str, ...]
+    turnover_notional: float
 
 
 # ---------------------------------------------------------------------------
@@ -179,7 +197,16 @@ def score_lowvol(
         i = s.index_of.get(day)
         if i is None or i - lookback < 0:
             continue
-        prices = [s.perp_close[s.dates[j]] for j in range(i - lookback, i + 1)]
+        window_days = s.dates[i - lookback:i + 1]
+        if any(
+            (later - earlier).days != 1
+            for earlier, later in zip(window_days, window_days[1:])
+        ):
+            continue
+        try:
+            prices = [s.perp_close[s.dates[j]] for j in range(i - lookback, i + 1)]
+        except KeyError:
+            continue
         rets = [
             prices[k] / prices[k - 1] - 1.0
             for k in range(1, len(prices))
@@ -222,6 +249,11 @@ class XsResult:
     avg_gross_exposure_pct: float = 0.0
     no_signal_reasons: list[str] = field(default_factory=list)
     complete: bool = True
+    turnover_notional: float = 0.0
+    resized_symbols: set[str] = field(default_factory=set)
+    targets_by_signal_day: dict[date, dict[str, int]] = field(default_factory=dict)
+    scales_by_signal_day: dict[date, float] = field(default_factory=dict)
+    rebalance_audits: list[XsRebalanceAudit] = field(default_factory=list)
 
     @property
     def final_equity(self) -> float:
@@ -338,6 +370,7 @@ def simulate_xs(
     last_rebalance: date | None = None
     long_realized = 0.0
     short_realized = 0.0
+    exposure_sum = 0.0
 
     def mark_positions(day: date) -> bool:
         """按完成收盘逐日结算价格变动和已结算 funding。"""
@@ -360,9 +393,16 @@ def simulate_xs(
                 ok = False
                 continue
             move = direction * notional[sym] * (price / previous_price - 1.0)
-            _, rate_sum = by_sym[sym].funding_sum_between(
+            settlements, rate_sum = by_sym[sym].funding_sum_between(
                 _end_of_day_ms(previous_day), _end_of_day_ms(day)
             )
+            if settlements <= 0:
+                result.complete = False
+                result.no_signal_reasons.append(
+                    f"NO_SIGNAL: missing funding coverage {sym} {previous_day} -> {day}"
+                )
+                ok = False
+                continue
             funding = -direction * notional[sym] * rate_sum
             leg = move + funding
             realized += leg
@@ -460,8 +500,23 @@ def simulate_xs(
                         if sym not in targets or targets[sym] != positions[sym]
                     }
                     changed.update(sym for sym in targets if sym not in positions)
+                    port_scale = 1.0
+                    if p.strategy_id == SHADOW_STRATEGY_ID:
+                        port_scale = _portfolio_vol_scale(
+                            by_sym, list(liquid), signal_day, p
+                        )
+                    target_notional = slot * port_scale
+                    resized = {
+                        sym for sym, direction in targets.items()
+                        if sym in positions
+                        and positions[sym] == direction
+                        and not math.isclose(
+                            notional[sym], target_notional, rel_tol=0.0, abs_tol=1e-12
+                        )
+                    }
+                    affected = changed | resized
                     missing_prices = [
-                        sym for sym in changed
+                        sym for sym in affected
                         if by_sym[sym].perp_close.get(day) is None
                     ]
                     if missing_prices or not mark_ok:
@@ -472,37 +527,75 @@ def simulate_xs(
                                 + ",".join(sorted(missing_prices))
                             )
                     else:
+                        turnover_notional = 0.0
+                        for sym, direction in list(positions.items()):
+                            if targets.get(sym) == direction:
+                                turnover_notional += abs(
+                                    target_notional - notional[sym]
+                                )
+                            else:
+                                turnover_notional += notional[sym]
+                        for sym, direction in targets.items():
+                            if sym not in positions or positions[sym] != direction:
+                                turnover_notional += target_notional
+
+                        transition_ok = True
                         for sym in list(positions):
                             if sym in changed:
-                                exit_leg(sym, day)
-                        port_scale = 1.0
-                        if p.strategy_id == SHADOW_STRATEGY_ID:
-                            port_scale = _portfolio_vol_scale(
-                                by_sym, list(liquid), signal_day, p
+                                transition_ok = exit_leg(sym, day) and transition_ok
+                        if transition_ok:
+                            for sym in resized:
+                                direction = positions[sym]
+                                resize_cost = abs(target_notional - notional[sym]) * cost_rate
+                                realized -= resize_cost
+                                cost_total += resize_cost
+                                result.by_symbol[sym] = (
+                                    result.by_symbol.get(sym, 0.0) - resize_cost
+                                )
+                                if direction > 0:
+                                    result.long_pnl -= resize_cost
+                                    long_realized -= resize_cost
+                                else:
+                                    result.short_pnl -= resize_cost
+                                    short_realized -= resize_cost
+                                notional[sym] = target_notional
+                            for sym, direction in targets.items():
+                                if sym in positions:
+                                    continue
+                                price = by_sym[sym].perp_close[day]
+                                positions[sym] = direction
+                                mark_price[sym] = price
+                                mark_day[sym] = day
+                                notional[sym] = target_notional
+                                cost = notional[sym] * cost_rate
+                                realized -= cost
+                                cost_total += cost
+                                if direction > 0:
+                                    result.long_pnl -= cost
+                                    long_realized -= cost
+                                else:
+                                    result.short_pnl -= cost
+                                    short_realized -= cost
+                                result.by_symbol[sym] = result.by_symbol.get(sym, 0.0) - cost
+                                result.trade_count += 1
+                            result.turnover_notional += turnover_notional
+                            result.resized_symbols.update(resized)
+                            result.targets_by_signal_day[signal_day] = dict(targets)
+                            result.scales_by_signal_day[signal_day] = port_scale
+                            result.rebalance_audits.append(
+                                XsRebalanceAudit(
+                                    signal_day=signal_day,
+                                    execution_day=day,
+                                    targets=dict(targets),
+                                    scale=port_scale,
+                                    changed_symbols=tuple(sorted(changed)),
+                                    resized_symbols=tuple(sorted(resized)),
+                                    turnover_notional=turnover_notional,
+                                )
                             )
-                        for sym, direction in targets.items():
-                            if sym in positions:
-                                continue
-                            price = by_sym[sym].perp_close[day]
-                            positions[sym] = direction
-                            mark_price[sym] = price
-                            mark_day[sym] = day
-                            notional[sym] = slot * port_scale
-                            cost = notional[sym] * cost_rate
-                            realized -= cost
-                            cost_total += cost
-                            if direction > 0:
-                                result.long_pnl -= cost
-                            else:
-                                result.short_pnl -= cost
-                            result.by_symbol[sym] = result.by_symbol.get(sym, 0.0) - cost
-                            result.trade_count += 1
-                            if direction > 0:
-                                long_realized -= cost
-                            else:
-                                short_realized -= cost
-                last_rebalance = day
+                            last_rebalance = day
 
+        exposure_sum += sum(notional.values())
         equity.append(p.capital + realized)
         long_equity.append(p.capital / 2.0 + long_realized)
         short_equity.append(p.capital / 2.0 + short_realized)
@@ -513,7 +606,11 @@ def simulate_xs(
     result.short_equity = short_equity
     result.net_pnl = realized
     result.cost_pnl = cost_total
-    result.avg_gross_exposure_pct = slot * (p.k_long + p.k_short) / p.capital * 100.0
+    result.avg_gross_exposure_pct = (
+        exposure_sum / len(all_days) / p.capital * 100.0
+        if all_days and p.capital
+        else 0.0
+    )
     return result
 
 
@@ -737,6 +834,260 @@ def leave_one_out(
         res = simulate_xs(subset, strategy, p)
         out.append((m.symbol, res.total_return_pct))
     return out
+
+
+def dataset_fingerprint(markets: Sequence[MarketSeries]) -> str:
+    """对回测实际使用的完整 MarketSeries 生成确定性 SHA-256。"""
+    def series_map(values: dict[date, float]) -> list[list[Any]]:
+        return [
+            [day.isoformat(), float(value)]
+            for day, value in sorted(values.items())
+        ]
+
+    payload = []
+    for market in sorted(markets, key=lambda item: item.symbol):
+        funding = [
+            [
+                int(timestamp),
+                float(rate),
+                float(market.funding_interval[index])
+                if index < len(market.funding_interval)
+                else 8.0,
+            ]
+            for index, (timestamp, rate) in enumerate(
+                zip(market.funding_ts, market.funding_rate)
+            )
+        ]
+        payload.append(
+            {
+                "symbol": market.symbol,
+                "dates": [day.isoformat() for day in market.dates],
+                "perp_close": series_map(market.perp_close),
+                "spot_close": series_map(market.spot_close),
+                "perp_volume": series_map(market.perp_volume),
+                "funding": funding,
+                "quote_asset": market.quote_asset,
+                "contract_type": market.contract_type,
+                "status": market.status,
+                "listed_from": market.listed_from.isoformat()
+                if market.listed_from
+                else None,
+                "delisted_at": market.delisted_at.isoformat()
+                if market.delisted_at
+                else None,
+            }
+        )
+    canonical = json.dumps(
+        payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _current_code_commit() -> str | None:
+    """只有 clean Git worktree 才把 commit 作为 CURRENT provenance。"""
+    repo_root = Path(__file__).resolve().parent.parent
+    try:
+        rev = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        dirty = subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return rev if len(rev) == 40 and not dirty else None
+
+
+def generate_evidence(
+    markets: Sequence[MarketSeries],
+    base: XsParams | None = None,
+    *,
+    generated_at: str | None = None,
+    code_commit_sha: str | None = None,
+) -> dict[str, Any]:
+    """由当前回测代码自动生成 evidence；无法完整计算则生成 stale artifact。"""
+    base = base or XsParams()
+    if base.strategy_id != CONTROL_STRATEGY_ID or base.spec_hash != CONTROL_SPEC_HASH:
+        raise ValueError("evidence generator 只能生成冻结 Control artifact")
+    validate_frozen_spec()
+    frozen_fields = (
+        "lookback",
+        "k_long",
+        "k_short",
+        "rebalance_days",
+        "taker_fee_pct",
+        "slippage_pct",
+        "min_volume_usdt_24h",
+        "exec_lag_days",
+        "min_universe_size",
+        "target_vol_pct",
+        "max_scale",
+    )
+    expected_fields = {
+        "lookback": CONTROL_RULES.lookback_days,
+        "k_long": CONTROL_RULES.k_long,
+        "k_short": CONTROL_RULES.k_short,
+        "rebalance_days": CONTROL_RULES.rebalance_days,
+        "taker_fee_pct": CONTROL_RULES.taker_fee_pct,
+        "slippage_pct": CONTROL_RULES.slippage_pct,
+        "min_volume_usdt_24h": CONTROL_RULES.min_quote_volume_usdt,
+        "exec_lag_days": CONTROL_RULES.execution_lag_days,
+        "min_universe_size": CONTROL_RULES.min_symbols,
+        "target_vol_pct": 0.0,
+        "max_scale": 1.0,
+    }
+    if any(getattr(base, field) != expected_fields[field] for field in frozen_fields):
+        raise ValueError("evidence generator 只能使用冻结 Control 参数")
+    generated_at = generated_at or utc_now_iso()
+    dataset_sha256 = dataset_fingerprint(markets)
+    dataset_id = f"market-series-{dataset_sha256[:16]}"
+    code_commit_sha = code_commit_sha or _current_code_commit()
+    if not markets:
+        return stale_evidence(
+            strategy_id=CONTROL_STRATEGY_ID,
+            spec_hash=CONTROL_SPEC_HASH,
+            reason="没有可用的本地 MarketSeries；未下载新的历史数据",
+            generated_at=generated_at,
+            dataset_id=dataset_id,
+            dataset_sha256=dataset_sha256,
+            code_commit_sha=code_commit_sha,
+        )
+
+    result = simulate_xs(markets, "xs_lowvol", base)
+    if not result.complete:
+        return stale_evidence(
+            strategy_id=CONTROL_STRATEGY_ID,
+            spec_hash=CONTROL_SPEC_HASH,
+            reason="当前冻结规则回测数据不完整："
+            + (result.no_signal_reasons[0] if result.no_signal_reasons else "unknown"),
+            generated_at=generated_at,
+            dataset_id=dataset_id,
+            dataset_sha256=dataset_sha256,
+            code_commit_sha=code_commit_sha,
+        )
+    if not result.targets_by_signal_day:
+        return stale_evidence(
+            strategy_id=CONTROL_STRATEGY_ID,
+            spec_hash=CONTROL_SPEC_HASH,
+            reason="当前数据未完成任何冻结规则 rebalance",
+            generated_at=generated_at,
+            dataset_id=dataset_id,
+            dataset_sha256=dataset_sha256,
+            code_commit_sha=code_commit_sha,
+        )
+    if code_commit_sha is None:
+        return stale_evidence(
+            strategy_id=CONTROL_STRATEGY_ID,
+            spec_hash=CONTROL_SPEC_HASH,
+            reason="无法取得 clean 当前代码 commit SHA",
+            generated_at=generated_at,
+            dataset_id=dataset_id,
+            dataset_sha256=dataset_sha256,
+            code_commit_sha=None,
+        )
+
+    point, lower, upper = bootstrap_sharpe(result.equity)
+    loo = leave_one_out(markets, "xs_lowvol", base)
+    months = result.by_month()
+    market_returns = market_daily_returns(markets, result.dates)
+    beta, alpha, r2 = alpha_beta(daily_returns(result.equity), market_returns)
+    return {
+        "schema_version": EVIDENCE_SCHEMA_VERSION,
+        "evidence_schema_version": EVIDENCE_SCHEMA_VERSION,
+        "artifact_type": "xs_lowvol_evidence",
+        "generator": EVIDENCE_GENERATOR,
+        "strategy": "xs_lowvol",
+        "strategy_id": CONTROL_STRATEGY_ID,
+        "variant": "Control",
+        "spec_hash": CONTROL_SPEC_HASH,
+        "status": "CURRENT",
+        "dataset_id": dataset_id,
+        "dataset_sha256": dataset_sha256,
+        "dataset_fingerprint": {
+            "algorithm": "sha256",
+            "sha256": dataset_sha256,
+            "market_count": len(markets),
+        },
+        "code_commit_sha": code_commit_sha,
+        "generated_at": generated_at,
+        "provenance": {
+            "dataset_id": dataset_id,
+            "dataset_sha256": dataset_sha256,
+            "code_commit_sha": code_commit_sha,
+            "generated_at": generated_at,
+            "generator": EVIDENCE_GENERATOR,
+        },
+        "date_range": {
+            "start": min(result.dates).isoformat(),
+            "end": max(result.dates).isoformat(),
+        },
+        "universe": {
+            "eligible_symbols": len(markets),
+            "selection": "current MarketSeries eligible under frozen liquidity rule",
+            "quote_volume_threshold_usdt": CONTROL_RULES.min_quote_volume_usdt,
+        },
+        "total_return_pct": result.total_return_pct,
+        "max_drawdown_pct": result.max_drawdown_pct,
+        "sharpe": point,
+        "sharpe_ci90": [lower, upper],
+        "bootstrap_interval": {
+            "method": "iid",
+            "confidence": 0.9,
+            "metric": "sharpe",
+            "lower": lower,
+            "upper": upper,
+        },
+        "funding": {
+            "pnl_usdt": result.funding_pnl,
+            "source": "real_settled_funding_events",
+        },
+        "costs": {
+            "pnl_usdt": -result.cost_pnl,
+            "taker_pct_per_side": CONTROL_RULES.taker_fee_pct,
+            "slippage_pct_per_side": CONTROL_RULES.slippage_pct,
+        },
+        "long_leg": {"pnl_usdt": result.long_pnl, "sharpe": result.long_sharpe},
+        "short_leg": {"pnl_usdt": result.short_pnl, "sharpe": result.short_sharpe},
+        "long_short_contribution_ratio": result.long_short_contribution_ratio,
+        "bull_bear_regime_attribution": regime_attribution(
+            daily_returns(result.equity), market_returns
+        ),
+        "months_positive": sum(1 for value in months.values() if value > 0),
+        "months_total": len(months),
+        "max_month_share_pct": result.positive_months_share(),
+        "beta": beta,
+        "annual_alpha_pct": alpha,
+        "r_squared": r2,
+        "loo_positive": sum(1 for _, value in loo if value > 0),
+        "loo_total": len(loo),
+        "top2_concentration_pct": result.concentration(2) or 0.0,
+    }
+
+
+def write_evidence_artifact(
+    markets: Sequence[MarketSeries],
+    path: str | Path = Path(__file__).resolve().parent.parent
+    / "research"
+    / "evidence"
+    / "XS-LOWVOL-V1.json",
+    base: XsParams | None = None,
+) -> dict[str, Any]:
+    """报告生成入口：计算并持久化 evidence artifact。"""
+    artifact = generate_evidence(markets, base)
+    output = Path(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        json.dumps(artifact, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return artifact
 
 
 # ---------------------------------------------------------------------------
@@ -999,6 +1350,8 @@ def main() -> None:
         raise SystemExit("缓存为空，请先运行 python -m backtest.fetch_history")
     log.info("载入 %d 个标的", len(series))
 
+    evidence = write_evidence_artifact(series, base=XsParams())
+    log.info("XS-LOWVOL evidence 已由当前报告生成器写入（%s）", evidence["status"])
     report = build_report(series, XsParams())
     out = OUT_DIR / "report_cross_sectional.md"
     out.write_text(report, encoding="utf-8")

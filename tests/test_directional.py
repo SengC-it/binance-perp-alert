@@ -201,20 +201,19 @@ def test_position_scale_no_data_returns_one():
 
 def test_evidence_block_reports_the_validated_numbers():
     text = evidence_block()
-    assert f"{EVIDENCE['sharpe']:.2f}" in text
-    assert "不跨 0" in text
-    assert f"{EVIDENCE['loo_positive']}/{EVIDENCE['loo_total']}" in text
+    assert EVIDENCE["status"] == "EVIDENCE_STALE"
+    assert "EVIDENCE_STALE" in text
+    assert "2.36" not in text
+    assert "旧 evidence 不会展示" in text
     # 必须带上失效条件，否则告警会诱导人过度自信
     assert "什么时候会失效" in text
     assert "挤空" in text
 
 
 def test_evidence_matches_cross_sectional_backtest():
-    """证据数字必须与回测报告一致，改了策略就得同步改这里。"""
-    assert EVIDENCE["strategy"] == "xs_lowvol"
-    assert EVIDENCE["sharpe"] == pytest.approx(2.36, abs=0.01)
-    assert EVIDENCE["sharpe_ci90"][0] > 0, "置信区间必须不跨 0 才够格做自动化依据"
-    assert EVIDENCE["loo_positive"] == EVIDENCE["loo_total"]
+    """旧 legacy metrics 即使带当前 hash，也不能被运行时接受。"""
+    assert EVIDENCE["status"] == "EVIDENCE_STALE"
+    assert "sharpe" not in EVIDENCE
 
 
 # ---------------------------------------------------------------------------
@@ -243,7 +242,8 @@ def test_signal_rule_detailed_includes_evidence():
     cfg = Config(detail_level="detailed")
     results = evaluate_directional_rules(cfg, sig)
     signal_rule = next(r for r in results if r.rule_id == "xs_lowvol_signal")
-    assert "不跨 0" in signal_rule.body
+    assert "EVIDENCE_STALE" in signal_rule.body
+    assert "2.36" not in signal_rule.body
     assert "年化波动" in signal_rule.body
 
 

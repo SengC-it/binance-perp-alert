@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import math
 from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
@@ -40,6 +40,11 @@ class PaperNav:
     rebalance: bool
     changed_symbols: tuple[str, ...]
     positions: dict[str, int]
+    position_notionals: dict[str, float] = field(default_factory=dict)
+    resized_symbols: tuple[str, ...] = ()
+    turnover_notional: float = 0.0
+    scale: float = 1.0
+    targets: dict[str, int] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -55,6 +60,10 @@ class WeeklyPaperResult:
     cost_pnl: float
     trade_count: int
     turnover_events: int
+    turnover_notional: float = 0.0
+    resized_symbols: tuple[str, ...] = ()
+    targets_by_day: dict[date, dict[str, int]] = field(default_factory=dict)
+    scales_by_day: dict[date, float] = field(default_factory=dict)
 
     @property
     def net_pnl(self) -> float:
@@ -163,12 +172,15 @@ class WeeklyPaperPortfolioLedger:
         self._positions: dict[str, _Position] = {}
         self._rows: dict[date, PaperNav] = {}
         self._targets: dict[date, dict[str, int]] = {}
+        self._scales: dict[date, float] = {}
         self._long_pnl = 0.0
         self._short_pnl = 0.0
         self._funding_pnl = 0.0
         self._cost_pnl = 0.0
         self._trade_count = 0
         self._turnover_events = 0
+        self._turnover_notional = 0.0
+        self._resized_symbols: set[str] = set()
 
     @property
     def positions(self) -> dict[str, int]:
@@ -177,6 +189,10 @@ class WeeklyPaperPortfolioLedger:
     @property
     def rows(self) -> list[PaperNav]:
         return [self._rows[day] for day in sorted(self._rows)]
+
+    @property
+    def position_notionals(self) -> dict[str, float]:
+        return {symbol: position.notional for symbol, position in self._positions.items()}
 
     def _record(
         self,
@@ -189,6 +205,10 @@ class WeeklyPaperPortfolioLedger:
         *,
         rebalance: bool = False,
         changed_symbols: Iterable[str] = (),
+        resized_symbols: Iterable[str] = (),
+        turnover_notional: float = 0.0,
+        scale: float = 1.0,
+        targets: Mapping[str, int] | None = None,
     ) -> PaperNav:
         previous = self._rows.get(day)
         if previous is not None:
@@ -199,8 +219,15 @@ class WeeklyPaperPortfolioLedger:
             cost_pnl += previous.cost_pnl
             rebalance = rebalance or previous.rebalance
             changed_symbols = tuple(sorted(set(previous.changed_symbols) | set(changed_symbols)))
+            resized_symbols = tuple(sorted(set(previous.resized_symbols) | set(resized_symbols)))
+            turnover_notional += previous.turnover_notional
+            if not rebalance:
+                scale = previous.scale
+            targets = dict(previous.targets if targets is None else targets)
         else:
             changed_symbols = tuple(sorted(set(changed_symbols)))
+            resized_symbols = tuple(sorted(set(resized_symbols)))
+            targets = dict({} if targets is None else targets)
         row = PaperNav(
             day=day,
             nav=self._nav,
@@ -212,6 +239,11 @@ class WeeklyPaperPortfolioLedger:
             rebalance=rebalance,
             changed_symbols=changed_symbols,
             positions=self.positions,
+            position_notionals=self.position_notionals,
+            resized_symbols=resized_symbols,
+            turnover_notional=float(turnover_notional),
+            scale=float(scale),
+            targets=targets,
         )
         self._rows[day] = row
         return row
@@ -288,21 +320,55 @@ class WeeklyPaperPortfolioLedger:
         if day in self._targets:
             if self._targets[day] != clean:
                 raise PaperDataError("同一 rebalance 日的 target 不一致")
+            if not math.isclose(self._scales[day], scale, rel_tol=0.0, abs_tol=1e-12):
+                raise PaperDataError("同一 rebalance 日的 scale 不一致")
             return self._rows[day]
         if not math.isfinite(scale) or scale <= 0:
             raise PaperDataError("仓位缩放必须为正数")
+        if self.strategy_id == CONTROL_STRATEGY_ID and not math.isclose(
+            scale, 1.0, rel_tol=0.0, abs_tol=1e-12
+        ):
+            raise PaperDataError("Control 的仓位缩放必须恒为 1")
+        if self.strategy_id == SHADOW_STRATEGY_ID and scale > self._rules.max_scale:
+            raise PaperDataError("Shadow 的仓位缩放超过冻结 max_scale")
+        target_notional = self._slot_notional * float(scale)
+        old_positions = {
+            symbol: _Position(position.direction, position.notional, position.mark_price)
+            for symbol, position in self._positions.items()
+        }
         changed = {
             symbol
             for symbol, direction in self.positions.items()
             if clean.get(symbol) != direction
         } | {symbol for symbol in clean if symbol not in self._positions}
-        for symbol in changed:
+        resized = {
+            symbol
+            for symbol, direction in clean.items()
+            if symbol in old_positions
+            and old_positions[symbol].direction == direction
+            and not math.isclose(
+                old_positions[symbol].notional, target_notional, rel_tol=0.0, abs_tol=1e-12
+            )
+        }
+        affected = changed | resized
+        for symbol in affected:
             try:
                 price = float(prices[symbol])
             except (KeyError, TypeError, ValueError):
                 raise PaperDataError(f"缺少 {symbol} 的 {day} 调仓价格") from None
             if price <= 0:
                 raise PaperDataError(f"{symbol} 在 {day} 的调仓价格非法")
+
+        turnover_notional = 0.0
+        for symbol, position in old_positions.items():
+            if clean.get(symbol) == position.direction:
+                turnover_notional += abs(target_notional - position.notional)
+            else:
+                turnover_notional += position.notional
+        for symbol, direction in clean.items():
+            if symbol not in old_positions or old_positions[symbol].direction != direction:
+                turnover_notional += target_notional
+
         self.mark_day(day, prices, funding_events)
         daily_cost = 0.0
         cost_long = 0.0
@@ -317,10 +383,19 @@ class WeeklyPaperPortfolioLedger:
                 cost_long -= cost
             else:
                 cost_short -= cost
+        for symbol in resized:
+            position = self._positions[symbol]
+            cost = abs(target_notional - position.notional) * self._cost_rate
+            daily_cost += cost
+            if position.direction > 0:
+                cost_long -= cost
+            else:
+                cost_short -= cost
+            position.notional = target_notional
         for symbol, direction in clean.items():
             if symbol in self._positions:
                 continue
-            notional = self._slot_notional * scale
+            notional = target_notional
             cost = notional * self._cost_rate
             daily_cost += cost
             cost_long -= cost if direction > 0 else 0.0
@@ -331,8 +406,11 @@ class WeeklyPaperPortfolioLedger:
         self._long_pnl += cost_long
         self._short_pnl += cost_short
         self._cost_pnl -= daily_cost
-        self._turnover_events += int(bool(changed))
+        self._turnover_events += int(turnover_notional > 1e-12)
+        self._turnover_notional += turnover_notional
+        self._resized_symbols.update(resized)
         self._targets[day] = clean
+        self._scales[day] = float(scale)
         return self._record(
             day,
             -daily_cost,
@@ -342,6 +420,10 @@ class WeeklyPaperPortfolioLedger:
             -daily_cost,
             rebalance=True,
             changed_symbols=changed,
+            resized_symbols=resized,
+            turnover_notional=turnover_notional,
+            scale=float(scale),
+            targets=clean,
         )
 
     def run(
@@ -394,6 +476,12 @@ class WeeklyPaperPortfolioLedger:
             cost_pnl=self._cost_pnl,
             trade_count=self._trade_count,
             turnover_events=self._turnover_events,
+            turnover_notional=self._turnover_notional,
+            resized_symbols=tuple(sorted(self._resized_symbols)),
+            targets_by_day={
+                day: dict(targets) for day, targets in sorted(self._targets.items())
+            },
+            scales_by_day=dict(sorted(self._scales.items())),
         )
 
 

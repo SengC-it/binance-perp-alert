@@ -356,7 +356,8 @@ def _rule_xs_lowvol_signal(cfg: Config, signal: DirectionalSignal) -> RuleResult
         else 1.0
     )
     scale = position_scale(
-        [v.realized_vol_pct for v in signal.longs + signal.shorts],
+        signal.universe_vols
+        or [v.realized_vol_pct for v in signal.longs + signal.shorts],
         target_vol,
         max_scale,
     )

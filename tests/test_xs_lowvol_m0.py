@@ -218,7 +218,7 @@ def test_scanner_insufficient_universe_is_no_signal():
     now, tickers, loader, valid = _scanner_fixture(count=9)
     result = build_directional_scan(tickers, loader, now, valid_symbols=valid)
     assert result.signal is None
-    assert "insufficient eligible universe" in result.reason
+    assert "insufficient active universe" in result.reason
 
 
 def test_stale_evidence_never_renders_old_statistics(tmp_path):
@@ -293,7 +293,7 @@ def test_forward_uses_weekly_ledger_when_completed_candles_are_available(tmp_pat
             return [_candle(start + timedelta(days=i), 100.0 + i) for i in range(11)]
 
         def funding_history(self, symbol, start_ms, limit=200):
-            return []
+            return [{"fundingTime": start_ms, "fundingRate": "0"}]
 
     try:
         assert record_signal(store, first, Config()) is not None
