@@ -19,6 +19,7 @@ import math
 import pickle
 import re
 import statistics
+import subprocess
 import sys
 import threading
 import time as time_module
@@ -111,10 +112,20 @@ from .xs_history import (
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+M1_ROOT_DIR = PROJECT_ROOT / "research" / "m1"
 M1_REPORT_PATH = PROJECT_ROOT / "research" / "m1" / "M1_REPORT.md"
 M1_DECISION_PATH = PROJECT_ROOT / "research" / "m1" / "M1_DECISION.json"
 M1_DATASET_MANIFEST_PATH = PROJECT_ROOT / "research" / "m1" / "M1_DATASET_MANIFEST.json"
 M1_DATASET_FREEZE_PATH = M1_NORMALIZED_CACHE / "XS_LOWVOL_M1_DATASET.pkl"
+CORRECTED_M1_RUN_ID = "XS-LOWVOL-M1-B.1B-CORRECTED-1"
+CORRECTED_M1_OUTPUT_DIR = M1_ROOT_DIR / "runs" / CORRECTED_M1_RUN_ID
+CORRECTED_M1_RUN_TYPE = "CORRECTED_RERUN"
+CORRECTED_FROM_COMMIT = "c4bb2b90ce1ef9b8e38858c7f4288b8b4d8c156b"
+CORRECTED_FROM_RUN_STATUS = "INVALIDATED_M1_RUN"
+CORRECTED_SUPERSEDES_RUN = "XS-LOWVOL-M1-B-c4bb2b90"
+CORRECTION_REASON = "FIXED_DATE_REBALANCE_SCHEDULER_VIOLATED_FROZEN_M0_RETRY_SEMANTICS"
+CORRECTIVE_VALIDATOR_COMMIT = "4672160444485fcaf827d7c0330a80f1bfec7456"
+CORRECTED_ARTIFACT_NAMES = ("RUN_METADATA.json", "M1_DECISION.json", "M1_REPORT.md")
 S3_NAMESPACE = "http://s3.amazonaws.com/doc/2006-03-01/"
 S3_MAX_KEYS = 1000
 _ARCHIVE_MONTH_RE = re.compile(r"^\d{4}-\d{2}$")
@@ -128,6 +139,10 @@ class M1BError(RuntimeError):
 
 class M1InvalidError(M1BError):
     """A frozen protocol or strategy identity changed during the run."""
+
+
+class ArtifactImmutabilityError(M1BError):
+    """A formal runner attempted to overwrite or mislineage a frozen artifact."""
 
 
 def _canonical(value: Any) -> Any:
@@ -148,6 +163,119 @@ def _json_bytes(value: Any) -> bytes:
 
 def _sha256(value: Any) -> str:
     return hashlib.sha256(_json_bytes(value)).hexdigest()
+
+
+def _path_sha256(path: Path) -> str | None:
+    if not path.is_file():
+        return None
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def legacy_m1_artifact_hashes() -> dict[str, str | None]:
+    """Return the hashes of the immutable c4bb legacy result artifacts."""
+    return {
+        "research/m1/M1_DECISION.json": _path_sha256(M1_DECISION_PATH),
+        "research/m1/M1_REPORT.md": _path_sha256(M1_REPORT_PATH),
+    }
+
+
+def _current_code_commit() -> str | None:
+    """Read HEAD for run provenance without changing the working tree."""
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    commit = result.stdout.strip()
+    return commit if re.fullmatch(r"[0-9a-f]{40}", commit) else None
+
+
+def _relative_project_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(PROJECT_ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def _write_text_exclusive(path: Path, content: str) -> None:
+    """Create an artifact once; never overwrite an existing file."""
+    try:
+        with path.open("x", encoding="utf-8", newline="") as handle:
+            handle.write(content)
+    except FileExistsError as exc:
+        raise ArtifactImmutabilityError(f"refusing to overwrite existing artifact: {path}") from exc
+
+
+def _frozen_identity_value(label: str, supplied: Any, expected: str) -> str:
+    value = expected if supplied is None else str(supplied)
+    if value != expected:
+        raise M1InvalidError(f"corrected run {label} SHA-256 does not match the frozen pin")
+    return value
+
+
+def _corrected_destination(output_dir: str | Path, run_id: str) -> Path:
+    path = Path(output_dir)
+    if run_id != CORRECTED_M1_RUN_ID:
+        raise ArtifactImmutabilityError(
+            f"corrected run_id is fixed at {CORRECTED_M1_RUN_ID}; no alternate rerun IDs are allowed"
+        )
+    resolved = path.resolve()
+    if resolved == M1_ROOT_DIR.resolve():
+        raise ArtifactImmutabilityError(
+            "corrected run cannot write legacy research/m1 root artifacts"
+        )
+    if path.name != CORRECTED_M1_RUN_ID:
+        raise ArtifactImmutabilityError(
+            f"corrected output directory must end with {CORRECTED_M1_RUN_ID}"
+        )
+    return path
+
+
+def _assert_corrected_destination_available(
+    output_dir: str | Path,
+    *,
+    run_id: str = CORRECTED_M1_RUN_ID,
+    resume: bool = False,
+) -> Path:
+    """Fail closed before a corrected run can perform result-producing work."""
+    path = _corrected_destination(output_dir, run_id)
+    if not path.exists():
+        return path
+    if not path.is_dir():
+        raise ArtifactImmutabilityError(f"corrected output path is not a directory: {path}")
+    entries = tuple(path.iterdir())
+    if not entries:
+        return path
+    metadata_path = path / "RUN_METADATA.json"
+    if not resume:
+        raise ArtifactImmutabilityError(
+            f"corrected output directory is not empty; refusing implicit overwrite: {path}"
+        )
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ArtifactImmutabilityError(
+            "deterministic resume requires an intact IN_PROGRESS RUN_METADATA.json"
+        ) from exc
+    if not isinstance(metadata, Mapping) or metadata.get("status") != "IN_PROGRESS":
+        raise ArtifactImmutabilityError(
+            "corrected output already contains a finalized or unverifiable result"
+        )
+    unexpected = [entry.name for entry in entries if entry.name not in CORRECTED_ARTIFACT_NAMES]
+    if unexpected:
+        raise ArtifactImmutabilityError(
+            f"corrected resume found unexpected files: {', '.join(sorted(unexpected))}"
+        )
+    return path
 
 
 def _utc_day_end_ms(day: date) -> int:
@@ -2126,6 +2254,270 @@ def _json_safe(value: Any) -> Any:
     return value
 
 
+def render_corrected_m1_b_report(result: Mapping[str, Any]) -> str:
+    """Render the corrected run with immutable lineage and diagnostic labeling."""
+    lines = [
+        f"# {result.get('decision', 'M1 FAIL')}",
+        "",
+        "## Corrected Run Lineage",
+        "",
+        f"- Run ID: `{result.get('run_id', CORRECTED_M1_RUN_ID)}`",
+        f"- Run type: `{result.get('run_type', CORRECTED_M1_RUN_TYPE)}`",
+        f"- Corrected from commit: `{result.get('corrected_from_commit', CORRECTED_FROM_COMMIT)}`",
+        f"- Corrected from run status: `{result.get('corrected_from_run_status', CORRECTED_FROM_RUN_STATUS)}`",
+        f"- Supersedes run: `{result.get('supersedes_run', CORRECTED_SUPERSEDES_RUN)}`",
+        f"- Correction reason: `{result.get('correction_reason', CORRECTION_REASON)}`",
+        "- The legacy c4bb run remains permanently preserved; this is a separate output directory.",
+        "",
+        "## Data Integrity and Decision",
+        "",
+        "- `G0_data_integrity`: FAIL; confirmed missing funding settlements are retained.",
+        "- Machine decision is forced to `M1 FAIL`; no manual override is permitted.",
+        "- Performance metrics status: `DIAGNOSTIC_ONLY_DUE_TO_G0`.",
+        "- Data integrity status: `FAIL_CONFIRMED_MISSING_FUNDING_SETTLEMENTS`.",
+        "- Return, Sharpe, Drawdown, Profit Factor, Bootstrap, yearly breakdown, and Long/Short attribution are diagnostic metrics only.",
+        "- This report is not validated performance, complete historical return, verified Alpha, or production evidence.",
+        "",
+        "## Machine-readable result",
+        "",
+        "```json",
+        json.dumps(_json_safe(result), ensure_ascii=False, indent=2, sort_keys=True),
+        "```",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def _prepare_corrected_result(
+    result: Mapping[str, Any],
+    *,
+    dataset_sha256: str | None,
+    normalized_dataset_sha256: str | None,
+    protocol_sha256: str | None,
+    control_sha256: str | None,
+    shadow_sha256: str | None,
+    generated_at: str,
+    code_commit: str,
+    output_dir: Path,
+) -> dict[str, Any]:
+    gates_value = result.get("gates")
+    if not isinstance(gates_value, Mapping) or gates_value.get("G0_data_integrity") is not False:
+        raise ArtifactImmutabilityError(
+            "corrected run requires explicit G0_data_integrity=false; G0 cannot be bypassed"
+        )
+    dataset_value = dataset_sha256 if dataset_sha256 is not None else result.get("dataset_sha256")
+    if not isinstance(dataset_value, str) or re.fullmatch(r"[0-9a-f]{64}", dataset_value) is None:
+        raise ArtifactImmutabilityError("corrected run requires a valid dataset_sha256")
+    if not re.fullmatch(r"[0-9a-f]{40}", code_commit):
+        raise ArtifactImmutabilityError("corrected run requires a valid code_commit")
+    prepared = dict(result)
+    gates = dict(gates_value)
+    gates["G0_data_integrity"] = False
+    prepared["gates"] = gates
+    failed_gates = list(prepared.get("failed_gates", ()))
+    if "G0_data_integrity" not in failed_gates:
+        failed_gates.insert(0, "G0_data_integrity")
+    prepared["failed_gates"] = failed_gates
+    prepared.update(
+        {
+            "decision": "M1 FAIL",
+            "formal_run": True,
+            "run_id": CORRECTED_M1_RUN_ID,
+            "run_type": CORRECTED_M1_RUN_TYPE,
+            "corrected_from_commit": CORRECTED_FROM_COMMIT,
+            "corrected_from_run_status": CORRECTED_FROM_RUN_STATUS,
+            "supersedes_run": CORRECTED_SUPERSEDES_RUN,
+            "correction_reason": CORRECTION_REASON,
+            "corrective_validator_commit": CORRECTIVE_VALIDATOR_COMMIT,
+            "protocol_sha256": _frozen_identity_value(
+                "Protocol", protocol_sha256 or result.get("protocol_sha256"), M1_APPROVED_PROTOCOL_SHA256
+            ),
+            "control_sha256": _frozen_identity_value(
+                "Control", control_sha256 or result.get("control_sha256"), CONTROL_SPEC_HASH
+            ),
+            "shadow_sha256": _frozen_identity_value(
+                "Shadow", shadow_sha256 or result.get("shadow_sha256"), SHADOW_SPEC_HASH
+            ),
+            "dataset_sha256": dataset_value,
+            "performance_metrics_status": "DIAGNOSTIC_ONLY_DUE_TO_G0",
+            "data_integrity_status": "FAIL_CONFIRMED_MISSING_FUNDING_SETTLEMENTS",
+            "performance_metrics_complete": False,
+            "g0_disposition": "G0_FAIL_RETAINED",
+            "generated_at": generated_at,
+            "code_commit": code_commit,
+            "output_dir": _relative_project_path(output_dir),
+            "legacy_artifacts_immutable": True,
+        }
+    )
+    if normalized_dataset_sha256 is not None:
+        prepared["normalized_dataset_sha256"] = normalized_dataset_sha256
+    return prepared
+
+
+def _corrected_run_metadata(
+    result: Mapping[str, Any],
+    *,
+    output_dir: Path,
+    status: str,
+    legacy_before: Mapping[str, str | None],
+    legacy_after: Mapping[str, str | None] | None = None,
+    artifact_sha256: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    return {
+        "schema_version": "M1-B.1A.1-RUN-METADATA.v1",
+        "status": status,
+        "run_id": CORRECTED_M1_RUN_ID,
+        "run_type": CORRECTED_M1_RUN_TYPE,
+        "corrected_from_commit": CORRECTED_FROM_COMMIT,
+        "corrected_from_run_status": CORRECTED_FROM_RUN_STATUS,
+        "supersedes_run": CORRECTED_SUPERSEDES_RUN,
+        "correction_reason": CORRECTION_REASON,
+        "corrective_validator_commit": CORRECTIVE_VALIDATOR_COMMIT,
+        "protocol_sha256": result["protocol_sha256"],
+        "control_sha256": result["control_sha256"],
+        "shadow_sha256": result["shadow_sha256"],
+        "dataset_sha256": result["dataset_sha256"],
+        "normalized_dataset_sha256": result.get("normalized_dataset_sha256"),
+        "generated_at": result["generated_at"],
+        "code_commit": result["code_commit"],
+        "output_dir": _relative_project_path(output_dir),
+        "legacy_run": {
+            "commit": CORRECTED_FROM_COMMIT,
+            "status": CORRECTED_FROM_RUN_STATUS,
+            "decision_path": "research/m1/M1_DECISION.json",
+            "report_path": "research/m1/M1_REPORT.md",
+            "sha256_before": dict(legacy_before),
+            "sha256_after": dict(legacy_after or {}),
+            "preserved": legacy_after is None or dict(legacy_before) == dict(legacy_after),
+        },
+        "diagnostic_status": {
+            "performance_metrics_status": result["performance_metrics_status"],
+            "data_integrity_status": result["data_integrity_status"],
+            "performance_metrics_complete": result["performance_metrics_complete"],
+            "g0_data_integrity": False,
+            "g0_disposition": result["g0_disposition"],
+        },
+        "artifact_sha256": dict(artifact_sha256 or {}),
+        "lineage": {
+            "is_corrected_rerun": True,
+            "legacy_root_artifacts_untouched": True,
+            "supersedes_legacy_run_for_corrected_scheduler_diagnostics": True,
+            "not_a_new_strategy_or_protocol": True,
+        },
+    }
+
+
+def write_corrected_m1_b_artifacts(
+    result: Mapping[str, Any],
+    *,
+    output_dir: str | Path = CORRECTED_M1_OUTPUT_DIR,
+    run_id: str = CORRECTED_M1_RUN_ID,
+    generated_at: str | None = None,
+    code_commit: str | None = None,
+    dataset_sha256: str | None = None,
+    normalized_dataset_sha256: str | None = None,
+    protocol_sha256: str | None = None,
+    control_sha256: str | None = None,
+    shadow_sha256: str | None = None,
+    resume: bool = False,
+) -> dict[str, Path]:
+    """Write a corrected run only to its fixed, fail-closed artifact directory."""
+    path = _assert_corrected_destination_available(output_dir, run_id=run_id, resume=resume)
+    if not path.exists():
+        path.mkdir(parents=True, exist_ok=False)
+    generated = generated_at or datetime.now(timezone.utc).isoformat()
+    commit = code_commit or _current_code_commit()
+    if commit is None:
+        raise ArtifactImmutabilityError("corrected run code_commit could not be determined")
+    prepared = _prepare_corrected_result(
+        result,
+        dataset_sha256=dataset_sha256,
+        normalized_dataset_sha256=normalized_dataset_sha256,
+        protocol_sha256=protocol_sha256,
+        control_sha256=control_sha256,
+        shadow_sha256=shadow_sha256,
+        generated_at=generated,
+        code_commit=commit,
+        output_dir=path,
+    )
+    legacy_before = legacy_m1_artifact_hashes()
+    metadata_path = path / "RUN_METADATA.json"
+    decision_path = path / "M1_DECISION.json"
+    report_path = path / "M1_REPORT.md"
+    metadata = _corrected_run_metadata(
+        prepared,
+        output_dir=path,
+        status="IN_PROGRESS",
+        legacy_before=legacy_before,
+    )
+    if metadata_path.exists():
+        if not resume:
+            raise ArtifactImmutabilityError(f"refusing to overwrite existing run metadata: {metadata_path}")
+        metadata_path.write_text(
+            json.dumps(_json_safe(metadata), ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    else:
+        _write_text_exclusive(
+            metadata_path,
+            json.dumps(_json_safe(metadata), ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        )
+    decision_text = json.dumps(_json_safe(prepared), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    report_text = render_corrected_m1_b_report(prepared)
+    if decision_path.exists() or report_path.exists():
+        if not resume:
+            raise ArtifactImmutabilityError(f"refusing to overwrite existing corrected artifacts: {path}")
+        for existing_path, expected_text in ((decision_path, decision_text), (report_path, report_text)):
+            if existing_path.exists() and existing_path.read_text(encoding="utf-8") != expected_text:
+                raise ArtifactImmutabilityError(
+                    f"deterministic resume payload differs from existing artifact: {existing_path}"
+                )
+    else:
+        _write_text_exclusive(decision_path, decision_text)
+        _write_text_exclusive(report_path, report_text)
+    legacy_after = legacy_m1_artifact_hashes()
+    if legacy_after != legacy_before:
+        raise ArtifactImmutabilityError("legacy c4bb artifacts changed while writing corrected output")
+    final_metadata = _corrected_run_metadata(
+        prepared,
+        output_dir=path,
+        status="FINALIZED",
+        legacy_before=legacy_before,
+        legacy_after=legacy_after,
+        artifact_sha256={
+            "M1_DECISION.json": _path_sha256(decision_path) or "",
+            "M1_REPORT.md": _path_sha256(report_path) or "",
+        },
+    )
+    metadata_path.write_text(
+        json.dumps(_json_safe(final_metadata), ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return {
+        "output_dir": path,
+        "run_metadata": metadata_path,
+        "decision": decision_path,
+        "report": report_path,
+    }
+
+
+def _assert_legacy_m1_artifacts_writable() -> None:
+    existing = [path for path in (M1_DECISION_PATH, M1_REPORT_PATH) if path.exists()]
+    if existing:
+        names = ", ".join(str(path) for path in existing)
+        raise ArtifactImmutabilityError(f"legacy c4bb artifacts are immutable; refusing overwrite: {names}")
+
+
+def _write_legacy_m1_b_artifacts(result: Mapping[str, Any]) -> None:
+    """Keep the historical writer exclusive so an old runner cannot overwrite c4bb."""
+    _assert_legacy_m1_artifacts_writable()
+    _write_text_exclusive(
+        M1_DECISION_PATH,
+        json.dumps(_json_safe(result), ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+    )
+    _write_text_exclusive(M1_REPORT_PATH, render_formal_report(result))
+
+
 def _verify_m1_identity(
     protocol_path: str | Path,
     hash_path: str | Path,
@@ -2151,6 +2543,10 @@ def _complete_formal_m1_b(
     *,
     protocol_path: str | Path,
     hash_path: str | Path,
+    output_dir: str | Path = M1_ROOT_DIR,
+    run_id: str | None = None,
+    corrected: bool = False,
+    resume: bool = False,
 ) -> dict[str, Any]:
     freeze_dataset(bundle)
     print(
@@ -2208,11 +2604,23 @@ def _complete_formal_m1_b(
     result["dataset_manifest_path"] = str(M1_DATASET_MANIFEST_PATH.relative_to(PROJECT_ROOT)).replace("\\", "/")
     result["dataset_freeze_path"] = str(M1_DATASET_FREEZE_PATH.relative_to(PROJECT_ROOT)).replace("\\", "/")
     result["ci_status"] = "PENDING_PUSH"
-    M1_DECISION_PATH.write_text(
-        json.dumps(_json_safe(result), ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    M1_REPORT_PATH.write_text(render_formal_report(result), encoding="utf-8")
+    if corrected:
+        if run_id is None:
+            run_id = CORRECTED_M1_RUN_ID
+        write_corrected_m1_b_artifacts(
+            result,
+            output_dir=output_dir,
+            run_id=run_id,
+            code_commit=_current_code_commit(),
+            dataset_sha256=bundle.dataset_sha256,
+            normalized_dataset_sha256=bundle.normalized_dataset_sha256,
+            protocol_sha256=final_protocol_hash,
+            control_sha256=final_control_hash,
+            shadow_sha256=final_shadow_hash,
+            resume=resume,
+        )
+    else:
+        _write_legacy_m1_b_artifacts(result)
     return result
 
 
@@ -2226,6 +2634,7 @@ def run_formal_m1_b(
     """Execute the complete frozen M1-B lifecycle and write its artifacts."""
     if approval != "START M1-B":
         raise M1BError("formal M1-B requires explicit approval 'START M1-B'")
+    _assert_legacy_m1_artifacts_writable()
 
     # This is intentionally the first operation that can lead to data writes.
     protocol, identities = _verify_m1_identity(protocol_path, hash_path)
@@ -2260,6 +2669,7 @@ def run_formal_m1_b_from_verified_cache(
     """
     if approval != "START M1-B":
         raise M1BError("formal M1-B requires explicit approval 'START M1-B'")
+    _assert_legacy_m1_artifacts_writable()
     protocol, identities = _verify_m1_identity(protocol_path, hash_path)
     if not M1_DATASET_FREEZE_PATH.is_file():
         raise M1BError("verified M1-B dataset cache is missing")
@@ -2280,19 +2690,83 @@ def run_formal_m1_b_from_verified_cache(
     )
 
 
+def run_formal_m1_b_corrected(
+    *,
+    approval: str,
+    output_dir: str | Path = CORRECTED_M1_OUTPUT_DIR,
+    run_id: str = CORRECTED_M1_RUN_ID,
+    resume: bool = False,
+    protocol_path: str | Path = M1_PROTOCOL_PATH,
+    hash_path: str | Path = M1_PROTOCOL_HASH_PATH,
+) -> dict[str, Any]:
+    """Run a future corrected diagnostic pass from the verified frozen cache.
+
+    The explicit M1-B.1B approval and fixed output identity are intentionally
+    separate from the legacy runner.  This function is an interface only in
+    this corrective pass and is not invoked here.
+    """
+    if approval != "START M1-B.1B":
+        raise M1BError("corrected M1-B.1B requires explicit approval 'START M1-B.1B'")
+    destination = _assert_corrected_destination_available(
+        output_dir,
+        run_id=run_id,
+        resume=resume,
+    )
+    protocol, identities = _verify_m1_identity(protocol_path, hash_path)
+    if not M1_DATASET_FREEZE_PATH.is_file():
+        raise M1BError("verified M1-B dataset cache is missing")
+    with M1_DATASET_FREEZE_PATH.open("rb") as handle:
+        previous = pickle.load(handle)
+    acquisition = AcquisitionResult(
+        catalog=previous["catalog"],
+        archive_records=tuple(previous["archive_records"]),
+        errors=tuple(previous.get("manifest", {}).get("archive_download_errors", ())),
+    )
+    bundle = normalize_m1_b_dataset(acquisition)
+    return _complete_formal_m1_b(
+        bundle,
+        protocol,
+        identities,
+        protocol_path=protocol_path,
+        hash_path=hash_path,
+        output_dir=destination,
+        run_id=run_id,
+        corrected=True,
+        resume=resume,
+    )
+
+
+def run_formal_m1_b_corrected_from_verified_cache(**kwargs: Any) -> dict[str, Any]:
+    """Compatibility spelling for the explicit corrected cache-run interface."""
+    return run_formal_m1_b_corrected(**kwargs)
+
+
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run the frozen XS-LOWVOL M1-B validation")
-    parser.add_argument("--approval", required=True, help="must be exactly START M1-B")
+    parser.add_argument("--approval", required=True, help="must be exactly the approval for the selected run")
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--reuse-verified-cache", action="store_true")
+    parser.add_argument("--corrected-run", action="store_true")
+    parser.add_argument("--run-id", default=CORRECTED_M1_RUN_ID)
+    parser.add_argument("--output-dir", default=str(CORRECTED_M1_OUTPUT_DIR))
+    parser.add_argument("--resume", action="store_true")
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     try:
         args = _build_parser().parse_args(argv)
-        runner = run_formal_m1_b_from_verified_cache if args.reuse_verified_cache else run_formal_m1_b
-        result = runner(approval=args.approval, workers=args.workers) if not args.reuse_verified_cache else runner(approval=args.approval)
+        if args.corrected_run:
+            result = run_formal_m1_b_corrected(
+                approval=args.approval,
+                output_dir=args.output_dir,
+                run_id=args.run_id,
+                resume=args.resume,
+            )
+        elif args.reuse_verified_cache:
+            result = run_formal_m1_b_from_verified_cache(approval=args.approval)
+        else:
+            result = run_formal_m1_b(approval=args.approval, workers=args.workers)
     except M1InvalidError as exc:
         print("M1 INVALID")
         print(str(exc), file=sys.stderr)
