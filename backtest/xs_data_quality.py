@@ -10,6 +10,12 @@ from typing import Iterable
 from .xs_history import FundingEvent, SymbolHistory
 
 
+# Binance's official funding exports retain millisecond-level settlement-time
+# jitter. Treat that representation noise as the same frozen interval while
+# still rejecting a real missing/extra settlement (hours apart).
+_FUNDING_TIMESTAMP_TOLERANCE_HOURS = 1e-3
+
+
 @dataclass(frozen=True)
 class QualityIssue:
     code: str
@@ -106,7 +112,12 @@ def _funding_transition_is_valid(previous: FundingEvent, current: FundingEvent) 
     return any(
         math.isfinite(interval_hours)
         and interval_hours > 0
-        and math.isclose(delta_hours, interval_hours, rel_tol=0.0, abs_tol=1e-9)
+        and math.isclose(
+            delta_hours,
+            interval_hours,
+            rel_tol=0.0,
+            abs_tol=_FUNDING_TIMESTAMP_TOLERANCE_HOURS,
+        )
         for interval_hours in (
             previous.funding_interval_hours,
             current.funding_interval_hours,
