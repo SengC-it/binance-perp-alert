@@ -1,0 +1,138 @@
+strategy_id: XS-LOWVOL-V2-RISK15
+status: frozen-m0-hypothesis
+parent_strategy_id: XS-LOWVOL-V1-Control
+parent_control_sha256: 5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678
+
+hypothesis:
+  statement: V1 cross-sectional low-volatility selection retains predictive value, while its primary weakness is excessive portfolio risk exposure.
+  change_scope: add_only_no_leverage_portfolio_volatility_targeting_layer
+  signal_research: unchanged_from_parent_control
+
+inherited_v1_control:
+  signal:
+    completed_daily_returns_lookback: 30
+    candle_interval: 1d
+    completed_candles_only: true
+    signal_day_quote_volume_min_usdt: 50000000
+  portfolio:
+    long_slots: 5
+    short_slots: 5
+    target_notional: unchanged_from_parent_control
+    target_symbols: exactly_parent_control_targets
+    long_short_construction: equal_notional_per_leg_slot
+  point_in_time_universe:
+    required: true
+    quote_asset: USDT
+    contract_type: PERPETUAL
+    delisted_symbol_semantics: active_on_signal_day_and_forced_exit_at_effective_date
+    lifecycle_ambiguity: fail_closed
+  ranking:
+    long: lowest_realized_volatility
+    short: highest_realized_volatility
+    tie_break: symbol_ascending
+  rebalance:
+    interval_days: 7
+    clock: advance_only_after_complete_successful_rebalance
+    retry_semantics: failed_attempt_retries_on_next_calendar_day
+  execution:
+    signal_timestamp: completed_candle_close
+    execution_price: next_completed_candle_close
+    execution_lag_days: 1
+    future_data: forbidden
+  funding:
+    source: actual_settled_funding_events
+    positive_rate_long: pays
+    positive_rate_short: receives
+    missing_settlement: fail_closed_no_synthetic_value
+  transaction_cost:
+    model: parent_control_taker_plus_slippage
+    same_side_resize_basis: absolute_notional_delta_only
+    direction_change: close_then_open
+
+risk_layer:
+  target_annualized_vol: 0.15
+  vol_lookback_weeks: 13
+  annualization: sqrt(52)
+  annualization_factor: sqrt(52)
+  vol_estimator: population_std
+  min_scale: 0.0
+  max_scale: 1.0
+  leverage_allowed: false
+  input_strategy: XS-LOWVOL-V1-Control
+  input_return_frequency: weekly
+  input_return_definition: completed_control_weekly_net_return
+  input_components:
+    - price_pnl
+    - funding_pnl
+    - transaction_cost
+  input_data_rule: only_completed_data_known_before_signal_time
+  invalid_input_result: V2_RISK_SCALE_INVALID
+  invalid_input_policy: fail_closed
+  formula:
+    reference_vol: population_std(last_13_completed_control_weekly_net_returns) times sqrt(52)
+    position_scale: min(1.0, target_annualized_vol / reference_vol)
+  zero_or_nonfinite_reference_vol: invalid
+  incomplete_lookback: invalid
+  all_legs_use_same_scale: true
+  scale_above_one: forbidden
+
+position_sizing:
+  v1_target_notional: unchanged
+  v2_target_notional: v1_target_notional_times_position_scale
+  low_volatility_amplification: forbidden
+  same_side_resize: trade_absolute_notional_delta_only
+  direction_flip: close_old_direction_then_open_new_direction
+
+forward_epoch:
+  rule: first eligible signal_or_rebalance strictly after the independently accepted V2-M0 freeze commit
+  pre_epoch_observations_in_forward_metrics: false
+  pre_epoch_past_data_for_13_week_lookback: allowed_when_visible_at_signal_time
+  forward_pnl_start: after_forward_epoch
+  forward_gate_start: after_forward_epoch
+  forward_sharpe_start: after_forward_epoch
+  forward_drawdown_start: after_forward_epoch
+
+paired_forward_benchmark:
+  control_strategy_id: XS-LOWVOL-V1-Control
+  v2_strategy_id: XS-LOWVOL-V2-RISK15
+  same_market_data: true
+  same_point_in_time_universe: true
+  same_targets: true
+  same_funding: true
+  same_execution_price: true
+  same_transaction_cost_model: true
+  control_is_benchmark_only: true
+  control_repass_qualification: false
+
+explicitly_forbidden_v2_features:
+  - btc_trend_filter
+  - btc_regime_filter
+  - bull_bear_switch
+  - stop_loss
+  - take_profit
+  - drawdown_throttle
+  - short_squeeze_filter
+  - funding_filter
+  - blacklist
+  - whitelist
+  - market_cap_filter
+  - dynamic_k
+  - dynamic_lookback
+  - dynamic_liquidity_threshold
+  - long_short_ratio_adjustment
+  - symbol_specific_sizing
+  - machine_learning
+  - ai_scoring
+  - parameter_sweep
+
+development_data_policy:
+  start: 2020-01-01
+  end: 2026-08-31
+  label: CONTAMINATED_DEVELOPMENT_DATA
+  may_be_used_for: engineering_replay_bug_detection_descriptive_diagnostics
+  may_not_be_used_for: forward_pass_parameter_selection_or_oos_claim
+
+safety:
+  live_trading: false
+  paper_only: true
+  http_methods: [GET]
