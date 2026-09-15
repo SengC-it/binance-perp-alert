@@ -31,6 +31,7 @@ M1_PROTOCOL_PATH = PROJECT_ROOT / "research" / "m1" / "XS_LOWVOL_M1_PROTOCOL.yam
 M1_PROTOCOL_HASH_PATH = PROJECT_ROOT / "research" / "m1" / "XS_LOWVOL_M1_PROTOCOL.sha256"
 M1_PROTOCOL_ID = "XS-LOWVOL-M1-PIT-V1"
 M1_BASE_COMMIT = "961d2e60ee34d032bed54466d309724d916b731f"
+M1_APPROVED_PROTOCOL_SHA256 = "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d"
 M1_DATA_START = date(2020, 1, 1)
 M1_DATA_END = date(2026, 8, 31)
 M1_EXTERNAL_START = date(2020, 1, 1)
@@ -63,6 +64,31 @@ class InclusiveWindow:
 
     def contains(self, value: date) -> bool:
         return self.start <= value <= self.end
+
+
+@dataclass(frozen=True)
+class FrozenGatePolicy:
+    """Gate thresholds parsed from the approved protocol, never duplicated."""
+
+    g1_total_return_pct_gt: float
+    g2_total_return_pct_gt: float
+    g3_weekly_sharpe_gt: float
+    g4_max_drawdown_pct_lt: float
+    g5_weekly_profit_factor_gt: float
+    g6_ci_lower_gt: float
+    g6_probability_mean_return_gte: float
+    g7_compound_return_pct_gt: float
+    g8_positive_runs_equals_total_runs: bool
+    g9_top2_positive_pnl_share_pct_lte: float
+    g10_positive_full_calendar_years_gte: float
+    g11_worst_full_calendar_year_return_pct_gt: float
+    g12_total_return_pct_gt: float
+    g12_max_drawdown_pct_lt: float
+    bootstrap_block_length_weeks: int
+    bootstrap_rounds: int
+    bootstrap_confidence: float
+    bootstrap_seed: int
+    best_week_removal_fraction: float
 
 
 def _canonical(value: Any) -> Any:
@@ -124,12 +150,13 @@ def verify_protocol_hash(
     protocol_path: str | Path = M1_PROTOCOL_PATH,
     hash_path: str | Path = M1_PROTOCOL_HASH_PATH,
 ) -> str:
-    """Verify the YAML and sidecar hash and return the verified digest."""
+    """Verify actual YAML, sidecar and the pinned approved digest."""
     actual = protocol_sha256(protocol_path)
     recorded = read_protocol_hash(hash_path)
-    if actual != recorded:
+    if actual != recorded or actual != M1_APPROVED_PROTOCOL_SHA256:
         raise ProtocolError(
-            f"M1 protocol hash mismatch: recorded={recorded}, actual={actual}"
+            "M1 protocol hash mismatch: "
+            f"approved={M1_APPROVED_PROTOCOL_SHA256}, recorded={recorded}, actual={actual}"
         )
     return actual
 
@@ -186,9 +213,12 @@ def validate_protocol(
     protocol: Mapping[str, Any] | None = None,
     *,
     require_current_specs: bool = True,
+    protocol_path: str | Path = M1_PROTOCOL_PATH,
+    hash_path: str | Path = M1_PROTOCOL_HASH_PATH,
+    require_approved_hash: bool = True,
 ) -> None:
     """Validate all M1-A invariants without downloading or running a backtest."""
-    protocol = protocol or load_protocol()
+    protocol = load_protocol(protocol_path) if protocol is None else protocol
     if protocol.get("protocol_id") != M1_PROTOCOL_ID:
         raise ProtocolError("protocol_id 不是 XS-LOWVOL-M1-PIT-V1")
     if protocol.get("base_commit") != M1_BASE_COMMIT:
@@ -276,12 +306,124 @@ def validate_protocol(
     if not isinstance(gates, Mapping) or set(gates) != required_gates:
         raise ProtocolError("M1 hard_gates 不完整或包含未预注册 gate")
 
+    g0 = gates["G0_data_integrity"]
+    if not isinstance(g0, Mapping) or any(g0.get(key) is not True for key in (
+        "point_in_time_universe",
+        "delisted_included",
+        "no_known_lookahead",
+        "no_unexplained_eligible_gap",
+        "strategy_hash_unchanged",
+        "protocol_hash_unchanged",
+    )):
+        raise ProtocolError("G0_data_integrity 必须全部为 true")
+
+    def gate_mapping(gate_name: str) -> Mapping[str, Any]:
+        raw_gate = gates[gate_name]
+        if not isinstance(raw_gate, Mapping):
+            raise ProtocolError(f"{gate_name} 必须为 mapping")
+        return raw_gate
+
+    def numeric_gate(gate_name: str, key: str, expected: float) -> None:
+        raw_gate = gate_mapping(gate_name)
+        value = raw_gate.get(key)
+        if isinstance(value, bool):
+            raise ProtocolError(f"{gate_name}.{key} threshold 非法")
+        try:
+            number = float(value)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ProtocolError(f"{gate_name}.{key} threshold 非法") from exc
+        if number != expected:
+            raise ProtocolError(f"{gate_name}.{key} threshold 不匹配预注册值")
+
+    numeric_gate("G1_external_return", "total_return_pct_gt", 0.0)
+    if gate_mapping("G1_external_return").get("control_cost") != "COST_1X":
+        raise ProtocolError("G1_external_return control_cost 不匹配")
+    numeric_gate("G2_cost_2x", "total_return_pct_gt", 0.0)
+    if gate_mapping("G2_cost_2x").get("control_cost") != "COST_2X":
+        raise ProtocolError("G2_cost_2x control_cost 不匹配")
+    numeric_gate("G3_weekly_sharpe", "weekly_sharpe_gt", 1.0)
+    numeric_gate("G4_drawdown", "max_drawdown_pct_lt", 20.0)
+    numeric_gate("G5_profit_factor", "weekly_profit_factor_gt", 1.2)
+    numeric_gate("G6_block_bootstrap", "mean_weekly_return_ci95_lower_gt", 0.0)
+    numeric_gate("G6_block_bootstrap", "probability_mean_return_gt", 0.95)
+    numeric_gate("G7_best_5pct_removed", "compound_return_pct_gt", 0.0)
+    if gate_mapping("G8_leave_one_out").get("positive_runs_equals_total_runs") is not True:
+        raise ProtocolError("G8_leave_one_out positive_runs_equals_total_runs 必须为 true")
+    numeric_gate("G9_symbol_concentration", "top2_positive_pnl_share_pct_lte", 40.0)
+    numeric_gate("G10_multi_year_breadth", "positive_full_calendar_years_gte", 3.0)
+    numeric_gate("G11_single_year_catastrophe", "every_full_calendar_year_return_pct_gt", -15.0)
+    numeric_gate("G12_bull_survival", "total_return_pct_gt", -10.0)
+    numeric_gate("G12_bull_survival", "max_drawdown_pct_lt", 20.0)
+
+    bootstrap = protocol.get("bootstrap")
+    if not isinstance(bootstrap, Mapping):
+        raise ProtocolError("缺少 bootstrap 配置")
+    if bootstrap.get("block_length_weeks") != 4:
+        raise ProtocolError("bootstrap.block_length_weeks 不匹配")
+    if bootstrap.get("rounds") != 10_000:
+        raise ProtocolError("bootstrap.rounds 不匹配")
+    if bootstrap.get("confidence") != 0.95:
+        raise ProtocolError("bootstrap.confidence 不匹配")
+    if bootstrap.get("seed") != 20260915:
+        raise ProtocolError("bootstrap.seed 不匹配")
+    best_week = protocol.get("best_week_removal")
+    if not isinstance(best_week, Mapping) or best_week.get("remove_highest_fraction") != 0.05:
+        raise ProtocolError("best_week_removal.remove_highest_fraction 不匹配")
+
     m1_controls = protocol.get("m1_a_controls")
     if not isinstance(m1_controls, Mapping):
         raise ProtocolError("缺少 M1-A controls")
     for key, value in m1_controls.items():
         if value != "forbidden":
             raise ProtocolError(f"M1-A control {key} 必须为 forbidden")
+
+    if require_approved_hash:
+        actual = protocol_sha256(protocol)
+        recorded = read_protocol_hash(hash_path)
+        if actual != recorded or actual != M1_APPROVED_PROTOCOL_SHA256:
+            raise ProtocolError(
+                "M1 protocol 未通过 approved hash pin: "
+                f"approved={M1_APPROVED_PROTOCOL_SHA256}, recorded={recorded}, actual={actual}"
+            )
+
+
+def frozen_gate_policy(
+    protocol: Mapping[str, Any] | None = None,
+    *,
+    protocol_path: str | Path = M1_PROTOCOL_PATH,
+    hash_path: str | Path = M1_PROTOCOL_HASH_PATH,
+) -> FrozenGatePolicy:
+    """Return the gate policy only after full approved-protocol validation."""
+    validate_protocol(
+        protocol,
+        protocol_path=protocol_path,
+        hash_path=hash_path,
+    )
+    source = load_protocol(protocol_path) if protocol is None else protocol
+    gates = source["hard_gates"]
+    bootstrap = source["bootstrap"]
+    best_week = source["best_week_removal"]
+    return FrozenGatePolicy(
+        g1_total_return_pct_gt=float(gates["G1_external_return"]["total_return_pct_gt"]),
+        g2_total_return_pct_gt=float(gates["G2_cost_2x"]["total_return_pct_gt"]),
+        g3_weekly_sharpe_gt=float(gates["G3_weekly_sharpe"]["weekly_sharpe_gt"]),
+        g4_max_drawdown_pct_lt=float(gates["G4_drawdown"]["max_drawdown_pct_lt"]),
+        g5_weekly_profit_factor_gt=float(gates["G5_profit_factor"]["weekly_profit_factor_gt"]),
+        g6_ci_lower_gt=float(gates["G6_block_bootstrap"]["mean_weekly_return_ci95_lower_gt"]),
+        g6_probability_mean_return_gte=float(gates["G6_block_bootstrap"]["probability_mean_return_gt"]),
+        g7_compound_return_pct_gt=float(gates["G7_best_5pct_removed"]["compound_return_pct_gt"]),
+        g8_positive_runs_equals_total_runs=gates["G8_leave_one_out"]["positive_runs_equals_total_runs"] is True,
+        g9_top2_positive_pnl_share_pct_lte=float(gates["G9_symbol_concentration"]["top2_positive_pnl_share_pct_lte"]),
+        g10_positive_full_calendar_years_gte=float(gates["G10_multi_year_breadth"]["positive_full_calendar_years_gte"]),
+        g11_worst_full_calendar_year_return_pct_gt=float(gates["G11_single_year_catastrophe"]["every_full_calendar_year_return_pct_gt"]),
+        g12_total_return_pct_gt=float(gates["G12_bull_survival"]["total_return_pct_gt"]),
+        g12_max_drawdown_pct_lt=float(gates["G12_bull_survival"]["max_drawdown_pct_lt"]),
+        bootstrap_block_length_weeks=int(bootstrap["block_length_weeks"]),
+        bootstrap_rounds=int(bootstrap["rounds"]),
+        bootstrap_confidence=float(bootstrap["confidence"]),
+        bootstrap_seed=int(bootstrap["seed"]),
+        best_week_removal_fraction=float(best_week["remove_highest_fraction"]),
+    )
 
 
 def verified_protocol_identity(
@@ -290,7 +432,7 @@ def verified_protocol_identity(
 ) -> dict[str, str]:
     """Return the verified protocol and frozen strategy identities."""
     protocol = load_protocol(protocol_path)
-    validate_protocol(protocol)
+    validate_protocol(protocol, protocol_path=protocol_path, hash_path=hash_path)
     protocol_hash = verify_protocol_hash(protocol_path, hash_path)
     return {
         "protocol_id": str(protocol["protocol_id"]),

@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from datetime import date
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
-from .m1_protocol import InclusiveWindow, load_protocol, protocol_windows, verify_protocol_hash
+from .m1_protocol import InclusiveWindow, frozen_gate_policy, load_protocol, protocol_windows
 
 
 class GateError(ValueError):
@@ -67,10 +67,11 @@ def evaluate_frozen_gates(
     protocol: Mapping[str, Any] | None = None,
     manual_override: Any = None,
 ) -> GateEvaluation:
-    """Evaluate G0-G12 with fixed thresholds and fail closed on missing data."""
+    """Evaluate G0-G12 from the approved protocol and fail closed on missing data."""
     if manual_override is not None or metrics.get("manual_override") is not None:
         raise ManualOverrideError("M1 gate 不允许人工 override")
-    protocol = protocol or load_protocol()
+    protocol = load_protocol() if protocol is None else protocol
+    policy = frozen_gate_policy(protocol)
     external, discovery = protocol_windows(protocol)
     if external.name != "EXTERNAL_VALIDATION" or discovery.name != "DISCOVERY_REFERENCE":
         raise GateError("external/discovery window 名称未按 protocol 冻结")
@@ -102,17 +103,37 @@ def evaluate_frozen_gates(
                 "protocol_hash_unchanged",
             )
         ),
-        "G1_external_return": required_number("external", "total_return_pct", lambda value: value > 0),
-        "G2_cost_2x": required_number("cost_2x", "total_return_pct", lambda value: value > 0),
-        "G3_weekly_sharpe": required_number("external", "weekly_sharpe", lambda value: value > 1.0),
-        "G4_drawdown": required_number("external", "max_drawdown_pct", lambda value: value < 20.0),
-        "G5_profit_factor": required_number("external", "profit_factor_weekly", lambda value: value > 1.20),
-        "G6_block_bootstrap": (
-            required_number("bootstrap", "mean_weekly_return_ci95_lower", lambda value: value > 0)
-            and required_number("bootstrap", "probability_mean_return_gt_zero", lambda value: value >= 0.95)
+        "G1_external_return": required_number(
+            "external", "total_return_pct", lambda value: value > policy.g1_total_return_pct_gt
         ),
-        "G7_best_5pct_removed": required_number("best_5pct", "compound_return_pct", lambda value: value > 0),
+        "G2_cost_2x": required_number(
+            "cost_2x", "total_return_pct", lambda value: value > policy.g2_total_return_pct_gt
+        ),
+        "G3_weekly_sharpe": required_number(
+            "external", "weekly_sharpe", lambda value: value > policy.g3_weekly_sharpe_gt
+        ),
+        "G4_drawdown": required_number(
+            "external", "max_drawdown_pct", lambda value: value < policy.g4_max_drawdown_pct_lt
+        ),
+        "G5_profit_factor": required_number(
+            "external", "profit_factor_weekly", lambda value: value > policy.g5_weekly_profit_factor_gt
+        ),
+        "G6_block_bootstrap": (
+            required_number(
+                "bootstrap", "mean_weekly_return_ci95_lower", lambda value: value > policy.g6_ci_lower_gt
+            )
+            and required_number(
+                "bootstrap",
+                "probability_mean_return_gt_zero",
+                lambda value: value >= policy.g6_probability_mean_return_gte,
+            )
+        ),
+        "G7_best_5pct_removed": required_number(
+            "best_5pct", "compound_return_pct", lambda value: value > policy.g7_compound_return_pct_gt
+        ),
         "G8_leave_one_out": (
+            policy.g8_positive_runs_equals_total_runs
+            and
             _number(_value(metrics, "leave_one_out", "positive_runs")) is not None
             and _number(_value(metrics, "leave_one_out", "total_runs")) is not None
             and _number(_value(metrics, "leave_one_out", "total_runs")) > 0
@@ -120,17 +141,31 @@ def evaluate_frozen_gates(
             == _number(_value(metrics, "leave_one_out", "total_runs"))
         ),
         "G9_symbol_concentration": required_number(
-            "concentration", "top2_positive_pnl_share_pct", lambda value: value <= 40.0
+            "concentration",
+            "top2_positive_pnl_share_pct",
+            lambda value: value <= policy.g9_top2_positive_pnl_share_pct_lte,
         ),
         "G10_multi_year_breadth": required_number(
-            "yearly", "positive_full_calendar_years", lambda value: value >= 3
+            "yearly",
+            "positive_full_calendar_years",
+            lambda value: value >= policy.g10_positive_full_calendar_years_gte,
         ),
         "G11_single_year_catastrophe": required_number(
-            "yearly", "worst_full_calendar_year_return_pct", lambda value: value > -15.0
+            "yearly",
+            "worst_full_calendar_year_return_pct",
+            lambda value: value > policy.g11_worst_full_calendar_year_return_pct_gt,
         ),
         "G12_bull_survival": (
-            required_number("bull_2020_2021", "total_return_pct", lambda value: value > -10.0)
-            and required_number("bull_2020_2021", "max_drawdown_pct", lambda value: value < 20.0)
+            required_number(
+                "bull_2020_2021",
+                "total_return_pct",
+                lambda value: value > policy.g12_total_return_pct_gt,
+            )
+            and required_number(
+                "bull_2020_2021",
+                "max_drawdown_pct",
+                lambda value: value < policy.g12_max_drawdown_pct_lt,
+            )
         ),
     }
 
@@ -209,12 +244,21 @@ def max_drawdown_pct(returns: Sequence[float]) -> float:
     return abs(worst)
 
 
-def remove_best_5pct(weekly_returns: Sequence[float]) -> dict[str, Any]:
-    """Remove exactly the pre-registered highest 5% (ceil, minimum one)."""
+def remove_best_5pct(
+    weekly_returns: Sequence[float],
+    *,
+    fraction: float | None = None,
+    protocol: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Remove exactly the approved highest fraction (ceil, minimum one)."""
+    policy = frozen_gate_policy(protocol)
     values = [float(value) for value in weekly_returns]
     if not values:
         raise GateError("best-week removal 需要 weekly returns")
-    remove_count = max(1, math.ceil(len(values) * 0.05))
+    remove_fraction = policy.best_week_removal_fraction if fraction is None else float(fraction)
+    if not math.isfinite(remove_fraction) or not 0 < remove_fraction < 1:
+        raise GateError("best-week removal fraction 非法")
+    remove_count = max(1, math.ceil(len(values) * remove_fraction))
     removed_indices = set(
         sorted(range(len(values)), key=lambda index: (values[index], index), reverse=True)[:remove_count]
     )
@@ -243,12 +287,18 @@ def _quantile(values: Sequence[float], probability: float) -> float:
 def block_bootstrap(
     weekly_returns: Sequence[float],
     *,
-    block_length: int = 4,
-    rounds: int = 10_000,
-    confidence: float = 0.95,
-    seed: int = 20260915,
+    block_length: int | None = None,
+    rounds: int | None = None,
+    confidence: float | None = None,
+    seed: int | None = None,
+    protocol: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Deterministic fixed-block bootstrap for the pre-registered gate."""
+    """Deterministic fixed-block bootstrap using approved defaults."""
+    policy = frozen_gate_policy(protocol)
+    block_length = policy.bootstrap_block_length_weeks if block_length is None else block_length
+    rounds = policy.bootstrap_rounds if rounds is None else rounds
+    confidence = policy.bootstrap_confidence if confidence is None else confidence
+    seed = policy.bootstrap_seed if seed is None else seed
     values = [float(value) for value in weekly_returns]
     if not values or block_length <= 0 or rounds <= 0 or not 0 < confidence < 1:
         raise GateError("bootstrap 参数或 returns 非法")

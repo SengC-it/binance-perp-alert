@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from typing import Iterable
 
-from .xs_history import SymbolHistory
+from .xs_history import FundingEvent, SymbolHistory
 
 
 @dataclass(frozen=True)
@@ -35,6 +35,39 @@ class DataQualityReport:
         return tuple(sorted({issue.code for issue in self.issues}))
 
 
+@dataclass(frozen=True)
+class HoldingInterval:
+    """One actual held interval, represented as (entry, exit]."""
+
+    symbol: str
+    entry_timestamp_ms: int
+    exit_timestamp_ms: int
+
+
+@dataclass(frozen=True)
+class FundingCoverageReport:
+    """Separate structural funding validity from coverage of actual holds."""
+
+    structural_issues: tuple[QualityIssue, ...] = ()
+    hold_issues: tuple[QualityIssue, ...] = ()
+
+    @property
+    def structural_passed(self) -> bool:
+        return not self.structural_issues
+
+    @property
+    def holds_passed(self) -> bool:
+        return not self.hold_issues
+
+    @property
+    def passed(self) -> bool:
+        return self.structural_passed and self.holds_passed
+
+    @property
+    def issues(self) -> tuple[QualityIssue, ...]:
+        return self.structural_issues + self.hold_issues
+
+
 def _day_start(day: date) -> int:
     return int(datetime.combine(day, time.min, tzinfo=timezone.utc).timestamp() * 1000)
 
@@ -45,6 +78,184 @@ def _day_end(day: date) -> int:
 
 def _append(issues: list[QualityIssue], code: str, symbol: str, detail: str, day: date | None = None) -> None:
     issues.append(QualityIssue(code=code, symbol=symbol, detail=detail, day=day))
+
+
+def _funding_input(
+    events_or_history: SymbolHistory | FundingEvent | Iterable[FundingEvent],
+) -> tuple[str, tuple[FundingEvent, ...]]:
+    if isinstance(events_or_history, SymbolHistory):
+        return events_or_history.symbol, tuple(events_or_history.funding_events)
+    if isinstance(events_or_history, FundingEvent):
+        return events_or_history.symbol, (events_or_history,)
+    events = tuple(events_or_history)
+    return (events[0].symbol if events else "UNKNOWN"), events
+
+
+def _same_funding_event(left: FundingEvent, right: FundingEvent) -> bool:
+    return (
+        left.symbol == right.symbol
+        and left.funding_time_ms == right.funding_time_ms
+        and left.funding_rate == right.funding_rate
+        and left.funding_interval_hours == right.funding_interval_hours
+    )
+
+
+def validate_funding_structure(
+    events_or_history: SymbolHistory | FundingEvent | Iterable[FundingEvent],
+) -> tuple[QualityIssue, ...]:
+    """Validate funding chronology and spacing without assuming a position was held.
+
+    Identical duplicate settlements are safely deduplicable.  Conflicting
+    duplicates remain a data error, and no missing settlement is converted to
+    a zero funding PnL here.
+    """
+    symbol, events = _funding_input(events_or_history)
+    issues: list[QualityIssue] = []
+    by_timestamp: dict[int, FundingEvent] = {}
+    previous_timestamp: int | None = None
+    for event in events:
+        timestamp = event.funding_time_ms
+        if not math.isfinite(event.funding_rate):
+            _append(issues, "INVALID_FUNDING_RATE", symbol, "funding rate is not finite")
+        if not math.isfinite(event.funding_interval_hours) or event.funding_interval_hours <= 0:
+            _append(issues, "INVALID_FUNDING_INTERVAL", symbol, "funding interval must be positive")
+        previous = by_timestamp.get(timestamp)
+        if previous is not None:
+            if not _same_funding_event(previous, event):
+                _append(
+                    issues,
+                    "DUPLICATE_FUNDING_EVENT",
+                    symbol,
+                    "conflicting duplicate funding timestamp",
+                )
+            # Identical duplicates are deliberately deduped for structural
+            # spacing checks and do not fail the dataset.
+            continue
+        by_timestamp[timestamp] = event
+        if previous_timestamp is not None and timestamp <= previous_timestamp:
+            _append(issues, "NON_MONOTONIC_TIMESTAMP", symbol, "funding_time is not increasing")
+        previous_timestamp = timestamp
+
+    ordered = sorted(by_timestamp.values(), key=lambda event: event.funding_time_ms)
+    for previous, current in zip(ordered, ordered[1:]):
+        delta_hours = (current.funding_time_ms - previous.funding_time_ms) / 3_600_000.0
+        allowed = (
+            previous.funding_interval_hours,
+            current.funding_interval_hours,
+        )
+        if not any(
+            math.isfinite(value)
+            and value > 0
+            and math.isclose(delta_hours, value, rel_tol=0.0, abs_tol=1e-9)
+            for value in allowed
+        ):
+            _append(issues, "FUNDING_COVERAGE_GAP", symbol, f"funding spacing {delta_hours:g}h")
+    return tuple(issues)
+
+
+def _unique_funding_events(history: SymbolHistory) -> tuple[FundingEvent, ...]:
+    unique: dict[int, FundingEvent] = {}
+    for event in history.funding_events:
+        unique.setdefault(event.funding_time_ms, event)
+    return tuple(sorted(unique.values(), key=lambda event: event.funding_time_ms))
+
+
+def validate_funding_coverage_for_holds(
+    histories: Iterable[SymbolHistory],
+    holding_intervals: Iterable[HoldingInterval],
+    *,
+    expected_interval_hours: float | None = None,
+) -> FundingCoverageReport:
+    """Require real settled events only for symbols and intervals actually held."""
+    history_by_symbol = {history.symbol.upper(): history for history in histories}
+    histories_tuple = tuple(history_by_symbol.values())
+    structural: list[QualityIssue] = []
+    for history in histories_tuple:
+        structural.extend(validate_funding_structure(history))
+
+    hold_issues: list[QualityIssue] = []
+    if expected_interval_hours is not None and (
+        not math.isfinite(expected_interval_hours) or expected_interval_hours <= 0
+    ):
+        raise ValueError("expected_interval_hours 必须为正数")
+    interval_ms = (
+        int(float(expected_interval_hours) * 3_600_000)
+        if expected_interval_hours is not None
+        else None
+    )
+    for holding in holding_intervals:
+        symbol = str(holding.symbol).upper()
+        if holding.exit_timestamp_ms <= holding.entry_timestamp_ms:
+            _append(hold_issues, "FUNDING_COVERAGE_GAP", symbol, "holding interval is not positive")
+            continue
+        history = history_by_symbol.get(symbol)
+        if history is None:
+            _append(hold_issues, "FUNDING_COVERAGE_GAP", symbol, "held symbol has no normalized history")
+            continue
+        events = _unique_funding_events(history)
+        valid_events = tuple(
+            event
+            for event in events
+            if math.isfinite(event.funding_rate)
+            and math.isfinite(event.funding_interval_hours)
+            and event.funding_interval_hours > 0
+        )
+        if not valid_events:
+            _append(hold_issues, "FUNDING_COVERAGE_GAP", symbol, "held interval has no settled funding events")
+            continue
+        step_ms = interval_ms
+        if step_ms is None:
+            inferred = valid_events[0].funding_interval_hours
+            step_ms = int(inferred * 3_600_000)
+        if step_ms <= 0:
+            _append(hold_issues, "FUNDING_COVERAGE_GAP", symbol, "funding interval is not usable")
+            continue
+
+        anchor = valid_events[0].funding_time_ms
+        first_index = (holding.entry_timestamp_ms - anchor) // step_ms + 1
+        last_index = (holding.exit_timestamp_ms - anchor) // step_ms
+        expected_slots = {
+            anchor + index * step_ms
+            for index in range(first_index, last_index + 1)
+        }
+        actual_slots = {
+            event.funding_time_ms
+            for event in valid_events
+            if holding.entry_timestamp_ms < event.funding_time_ms <= holding.exit_timestamp_ms
+        }
+        missing = sorted(expected_slots - actual_slots)
+        if missing:
+            _append(
+                hold_issues,
+                "FUNDING_COVERAGE_GAP",
+                symbol,
+                f"held interval missing {len(missing)} settled funding event(s)",
+            )
+
+    return FundingCoverageReport(tuple(structural), tuple(hold_issues))
+
+
+def funding_pnl_for_hold(
+    notional: float,
+    direction: int,
+    events: Iterable[FundingEvent],
+) -> float:
+    """Calculate signed funding only from supplied real settlements."""
+    if direction not in (-1, 1):
+        raise ValueError("direction 必须为 +1 或 -1")
+    if not math.isfinite(notional) or notional < 0:
+        raise ValueError("notional 必须为有限非负数")
+    events = tuple(events)
+    if not events:
+        raise ValueError("没有 settled funding event，不能伪造零 funding PnL")
+    if any(not math.isfinite(event.funding_rate) for event in events):
+        raise ValueError("funding event rate 非法")
+    return sum(-float(direction) * float(notional) * event.funding_rate for event in events)
+
+
+def signed_funding_pnl(notional: float, direction: int, events: Iterable[FundingEvent]) -> float:
+    """Alias exposing the frozen long-pays/short-receives sign convention."""
+    return funding_pnl_for_hold(notional, direction, events)
 
 
 def validate_symbol_history(
@@ -113,46 +324,13 @@ def validate_symbol_history(
         if history.lifecycle.status == "DATA_AMBIGUOUS":
             _append(issues, "UNEXPLAINED_SYMBOL_GAP", symbol, "lifecycle marked DATA_AMBIGUOUS")
 
-    seen_funding: set[int] = set()
-    previous_funding: int | None = None
-    ordered_funding = list(history.funding_events)
-    for event in ordered_funding:
+    issues.extend(validate_funding_structure(history))
+    for event in history.funding_events:
         timestamp = event.funding_time_ms
-        if timestamp in seen_funding:
-            _append(issues, "DUPLICATE_FUNDING_EVENT", symbol, "duplicate funding timestamp")
-        seen_funding.add(timestamp)
-        if previous_funding is not None and timestamp <= previous_funding:
-            _append(issues, "NON_MONOTONIC_TIMESTAMP", symbol, "funding_time is not increasing")
-        previous_funding = timestamp
         if timestamp < _day_start(window_start) or timestamp > _day_end(window_end):
             _append(issues, "OUT_OF_WINDOW", symbol, "funding event outside data window")
         if observation_ms is not None and timestamp > observation_ms:
             _append(issues, "FUTURE_TIMESTAMP_LEAKAGE", symbol, "funding timestamp is after observation")
-        if not math.isfinite(event.funding_rate):
-            _append(issues, "INVALID_FUNDING_RATE", symbol, "funding rate is not finite")
-        if not math.isfinite(event.funding_interval_hours) or event.funding_interval_hours <= 0:
-            _append(issues, "INVALID_FUNDING_INTERVAL", symbol, "funding interval must be positive")
-
-    ordered_for_gap = sorted({event.funding_time_ms: event for event in ordered_funding}.values(), key=lambda event: event.funding_time_ms)
-    for previous, current in zip(ordered_for_gap, ordered_for_gap[1:]):
-        delta_hours = (current.funding_time_ms - previous.funding_time_ms) / 3_600_000.0
-        allowed = {previous.funding_interval_hours, current.funding_interval_hours}
-        if not any(math.isclose(delta_hours, value, rel_tol=0.0, abs_tol=1e-9) for value in allowed):
-            _append(issues, "FUNDING_COVERAGE_GAP", symbol, f"funding spacing {delta_hours:g}h")
-
-    # A held symbol needs at least one real settlement in every consecutive
-    # active daily interval.  Missing events are never silently interpreted as 0.
-    if seen_days:
-        sorted_days = sorted(day for day in seen_days if window_start <= day <= window_end)
-        funding_times = sorted(seen_funding)
-        for previous_day, current_day in zip(sorted_days, sorted_days[1:]):
-            if (current_day - previous_day).days != 1:
-                continue
-            lower = _day_end(previous_day)
-            upper = _day_end(current_day)
-            count = sum(lower < timestamp <= upper for timestamp in funding_times)
-            if count == 0 and history.active_on(current_day):
-                _append(issues, "FUNDING_COVERAGE_GAP", symbol, "no settled funding event in held daily interval", current_day)
     return tuple(issues)
 
 

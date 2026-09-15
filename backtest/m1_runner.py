@@ -61,7 +61,7 @@ def preflight(
 ) -> M1Preflight:
     """Verify protocol and strategy identity without reading a dataset."""
     protocol = load_protocol(protocol_path)
-    validate_protocol(protocol)
+    validate_protocol(protocol, protocol_path=protocol_path, hash_path=hash_path)
     identity = verified_protocol_identity(protocol_path, hash_path)
     data_window = protocol["data_window"]
     external = protocol["primary_external_validation"]
