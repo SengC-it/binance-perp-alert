@@ -100,6 +100,35 @@ def _same_funding_event(left: FundingEvent, right: FundingEvent) -> bool:
     )
 
 
+def _funding_transition_is_valid(previous: FundingEvent, current: FundingEvent) -> bool:
+    """Validate one actual settlement transition using both event intervals."""
+    delta_hours = (current.funding_time_ms - previous.funding_time_ms) / 3_600_000.0
+    return any(
+        math.isfinite(interval_hours)
+        and interval_hours > 0
+        and math.isclose(delta_hours, interval_hours, rel_tol=0.0, abs_tol=1e-9)
+        for interval_hours in (
+            previous.funding_interval_hours,
+            current.funding_interval_hours,
+        )
+    )
+
+
+def _expected_settlement_is_held(
+    origin: FundingEvent,
+    interval_hours: Iterable[float],
+    holding: HoldingInterval,
+) -> bool:
+    """Return whether a candidate next settlement falls inside one hold."""
+    for interval in interval_hours:
+        if not math.isfinite(interval) or interval <= 0:
+            continue
+        candidate_timestamp = origin.funding_time_ms + interval * 3_600_000.0
+        if holding.entry_timestamp_ms < candidate_timestamp <= holding.exit_timestamp_ms:
+            return True
+    return False
+
+
 def validate_funding_structure(
     events_or_history: SymbolHistory | FundingEvent | Iterable[FundingEvent],
 ) -> tuple[QualityIssue, ...]:
@@ -139,16 +168,7 @@ def validate_funding_structure(
     ordered = sorted(by_timestamp.values(), key=lambda event: event.funding_time_ms)
     for previous, current in zip(ordered, ordered[1:]):
         delta_hours = (current.funding_time_ms - previous.funding_time_ms) / 3_600_000.0
-        allowed = (
-            previous.funding_interval_hours,
-            current.funding_interval_hours,
-        )
-        if not any(
-            math.isfinite(value)
-            and value > 0
-            and math.isclose(delta_hours, value, rel_tol=0.0, abs_tol=1e-9)
-            for value in allowed
-        ):
+        if not _funding_transition_is_valid(previous, current):
             _append(issues, "FUNDING_COVERAGE_GAP", symbol, f"funding spacing {delta_hours:g}h")
     return tuple(issues)
 
@@ -166,7 +186,13 @@ def validate_funding_coverage_for_holds(
     *,
     expected_interval_hours: float | None = None,
 ) -> FundingCoverageReport:
-    """Require real settled events only for symbols and intervals actually held."""
+    """Require real settled events only for symbols and intervals actually held.
+
+    Funding intervals are event metadata, not a global clock.  Coverage is
+    therefore checked against the local real-event sequence surrounding each
+    hold; an unrelated gap elsewhere in a symbol's history remains a
+    structural issue only.
+    """
     history_by_symbol = {history.symbol.upper(): history for history in histories}
     histories_tuple = tuple(history_by_symbol.values())
     structural: list[QualityIssue] = []
@@ -178,11 +204,6 @@ def validate_funding_coverage_for_holds(
         not math.isfinite(expected_interval_hours) or expected_interval_hours <= 0
     ):
         raise ValueError("expected_interval_hours 必须为正数")
-    interval_ms = (
-        int(float(expected_interval_hours) * 3_600_000)
-        if expected_interval_hours is not None
-        else None
-    )
     for holding in holding_intervals:
         symbol = str(holding.symbol).upper()
         if holding.exit_timestamp_ms <= holding.entry_timestamp_ms:
@@ -193,6 +214,23 @@ def validate_funding_coverage_for_holds(
             _append(hold_issues, "FUNDING_COVERAGE_GAP", symbol, "held symbol has no normalized history")
             continue
         events = _unique_funding_events(history)
+        invalid_held_events = tuple(
+            event
+            for event in events
+            if holding.entry_timestamp_ms < event.funding_time_ms <= holding.exit_timestamp_ms
+            and (
+                not math.isfinite(event.funding_rate)
+                or not math.isfinite(event.funding_interval_hours)
+                or event.funding_interval_hours <= 0
+            )
+        )
+        if invalid_held_events:
+            _append(
+                hold_issues,
+                "FUNDING_COVERAGE_GAP",
+                symbol,
+                "held interval contains invalid funding event metadata",
+            )
         valid_events = tuple(
             event
             for event in events
@@ -203,33 +241,98 @@ def validate_funding_coverage_for_holds(
         if not valid_events:
             _append(hold_issues, "FUNDING_COVERAGE_GAP", symbol, "held interval has no settled funding events")
             continue
-        step_ms = interval_ms
-        if step_ms is None:
-            inferred = valid_events[0].funding_interval_hours
-            step_ms = int(inferred * 3_600_000)
-        if step_ms <= 0:
-            _append(hold_issues, "FUNDING_COVERAGE_GAP", symbol, "funding interval is not usable")
-            continue
-
-        anchor = valid_events[0].funding_time_ms
-        first_index = (holding.entry_timestamp_ms - anchor) // step_ms + 1
-        last_index = (holding.exit_timestamp_ms - anchor) // step_ms
-        expected_slots = {
-            anchor + index * step_ms
-            for index in range(first_index, last_index + 1)
-        }
-        actual_slots = {
-            event.funding_time_ms
+        held_events = tuple(
+            event
             for event in valid_events
             if holding.entry_timestamp_ms < event.funding_time_ms <= holding.exit_timestamp_ms
-        }
-        missing = sorted(expected_slots - actual_slots)
-        if missing:
+        )
+        previous = next(
+            (
+                event
+                for event in reversed(valid_events)
+                if event.funding_time_ms <= holding.entry_timestamp_ms
+            ),
+            None,
+        )
+        following = next(
+            (
+                event
+                for event in valid_events
+                if event.funding_time_ms > holding.exit_timestamp_ms
+            ),
+            None,
+        )
+        context = tuple(
+            event
+            for event in (previous, *held_events, following)
+            if event is not None
+        )
+        local_gap = any(
+            not _funding_transition_is_valid(left, right)
+            for left, right in zip(held_events, held_events[1:])
+        )
+        if previous is not None and held_events:
+            first_held = held_events[0]
+            if not _funding_transition_is_valid(previous, first_held):
+                local_gap = local_gap or _expected_settlement_is_held(
+                    previous,
+                    (previous.funding_interval_hours, first_held.funding_interval_hours),
+                    holding,
+                )
+        if following is not None and held_events:
+            last_held = held_events[-1]
+            if not _funding_transition_is_valid(last_held, following):
+                local_gap = local_gap or _expected_settlement_is_held(
+                    last_held,
+                    (last_held.funding_interval_hours, following.funding_interval_hours),
+                    holding,
+                )
+        if not held_events:
+            if not context:
+                local_gap = True
+            elif previous is not None and following is None:
+                exit_gap_hours = (
+                    holding.exit_timestamp_ms - previous.funding_time_ms
+                ) / 3_600_000.0
+                local_gap = _expected_settlement_is_held(
+                    previous,
+                    (previous.funding_interval_hours,),
+                    holding,
+                ) or exit_gap_hours < 0
+            elif previous is None and following is not None:
+                entry_gap_hours = (
+                    following.funding_time_ms - holding.entry_timestamp_ms
+                ) / 3_600_000.0
+                local_gap = entry_gap_hours > following.funding_interval_hours
+            elif previous is not None and following is not None:
+                if not _funding_transition_is_valid(previous, following):
+                    local_gap = _expected_settlement_is_held(
+                        previous,
+                        (previous.funding_interval_hours, following.funding_interval_hours),
+                        holding,
+                    )
+        else:
+            first_held = held_events[0]
+            last_held = held_events[-1]
+            if previous is None:
+                entry_gap_hours = (
+                    first_held.funding_time_ms - holding.entry_timestamp_ms
+                ) / 3_600_000.0
+                if entry_gap_hours < 0 or entry_gap_hours > first_held.funding_interval_hours:
+                    local_gap = True
+            if following is None:
+                if _expected_settlement_is_held(
+                    last_held,
+                    (last_held.funding_interval_hours,),
+                    holding,
+                ):
+                    local_gap = True
+        if local_gap:
             _append(
                 hold_issues,
                 "FUNDING_COVERAGE_GAP",
                 symbol,
-                f"held interval missing {len(missing)} settled funding event(s)",
+                "held interval has an unverified funding transition or boundary",
             )
 
     return FundingCoverageReport(tuple(structural), tuple(hold_issues))

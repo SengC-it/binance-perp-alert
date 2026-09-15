@@ -21,6 +21,7 @@ from pathlib import Path
 from statistics import pstdev
 from typing import Any, Iterable, Mapping, Sequence
 from urllib.parse import quote
+from xml.etree import ElementTree
 
 import requests
 
@@ -166,6 +167,24 @@ class DiscoveredSymbolRecord:
 
 
 @dataclass(frozen=True)
+class DiscoveryListingPage:
+    """Auditable metadata for one official S3 ListObjects page."""
+
+    page_number: int
+    request_url: str
+    marker: str | None
+    is_truncated: bool
+    first_key: str | None
+    last_key: str | None
+    key_count: int
+    page_content_sha256: str
+    next_marker: str | None = None
+    continuation_token: str | None = None
+    keys: tuple[str, ...] = ()
+    key_signatures: tuple[tuple[str, str], ...] = ()
+
+
+@dataclass(frozen=True)
 class DiscoveryCatalog:
     """Official archive listing plus its deterministic content fingerprint."""
 
@@ -177,10 +196,13 @@ class DiscoveryCatalog:
     symbols: tuple[DiscoveredSymbolRecord, ...] = ()
     content_fingerprint: str = ""
     content: str | None = None
+    listing_page_count: int = 1
+    listing_complete: bool = True
+    pages: tuple[DiscoveryListingPage, ...] = ()
 
     @property
     def number_of_symbols_discovered(self) -> int:
-        return len(self.symbols)
+        return len(self.symbols) if self.listing_complete else 0
 
 
 @dataclass(frozen=True)
@@ -340,6 +362,107 @@ def official_archive_listing_url(prefix: str = OFFICIAL_ARCHIVE_PREFIX) -> str:
     return f"{OFFICIAL_ARCHIVE_LISTING_ENDPOINT}?prefix={quote(clean_prefix + '/', safe='/')}"
 
 
+def _normalized_listing_prefix(prefix: str) -> str:
+    clean_prefix = str(prefix).strip("/")
+    if not clean_prefix:
+        raise HistoryDataError("official archive listing prefix 不能为空")
+    return clean_prefix + "/"
+
+
+def _listing_request_url(prefix: str, marker: str | None) -> str:
+    url = official_archive_listing_url(prefix)
+    return f"{url}&marker={quote(marker, safe='')}" if marker is not None else url
+
+
+def _xml_local_name(tag: str) -> str:
+    return str(tag).rsplit("}", 1)[-1]
+
+
+def _xml_child_text(element: ElementTree.Element, name: str) -> str | None:
+    for child in element:
+        if _xml_local_name(child.tag) == name:
+            return (child.text or "").strip()
+    return None
+
+
+def _parse_s3_listing_page(
+    content: bytes,
+    *,
+    page_number: int,
+    request_url: str,
+    marker: str | None,
+    expected_prefix: str,
+) -> DiscoveryListingPage:
+    """Parse and strictly validate one S3 ListObjects V1 XML page."""
+    try:
+        root = ElementTree.fromstring(content)
+    except ElementTree.ParseError as exc:
+        raise HistoryDataError(f"DATA_INVALID: malformed S3 listing XML page {page_number}") from exc
+    if _xml_local_name(root.tag) != "ListBucketResult":
+        raise HistoryDataError(f"DATA_INVALID: unexpected S3 listing root page {page_number}")
+    page_prefix = _xml_child_text(root, "Prefix")
+    if page_prefix != expected_prefix:
+        raise HistoryDataError(
+            f"DATA_INVALID: S3 listing prefix mismatch page={page_number} "
+            f"expected={expected_prefix!r} actual={page_prefix!r}"
+        )
+    reported_marker = _xml_child_text(root, "Marker") or None
+    if reported_marker is not None and reported_marker != marker:
+        raise HistoryDataError(
+            f"DATA_INVALID: S3 listing marker mismatch page={page_number} "
+            f"expected={marker!r} actual={reported_marker!r}"
+        )
+    truncated_text = (_xml_child_text(root, "IsTruncated") or "").lower()
+    if truncated_text not in {"true", "false"}:
+        raise HistoryDataError(f"DATA_INVALID: S3 listing IsTruncated missing/invalid page {page_number}")
+    is_truncated = truncated_text == "true"
+    next_marker = _xml_child_text(root, "NextMarker") or None
+    keys: list[str] = []
+    key_signatures: list[tuple[str, str]] = []
+    signatures_by_key: dict[str, str] = {}
+    for element in root:
+        if _xml_local_name(element.tag) != "Contents":
+            continue
+        key = _xml_child_text(element, "Key")
+        if not key:
+            raise HistoryDataError(f"DATA_INVALID: S3 listing Contents missing Key page {page_number}")
+        if not key.startswith(expected_prefix):
+            raise HistoryDataError(
+                f"DATA_INVALID: S3 listing key outside prefix page={page_number} key={key!r}"
+            )
+        metadata = tuple(sorted(
+            (
+                str(_xml_local_name(child.tag)),
+                (child.text or "").strip(),
+            )
+            for child in element
+        ))
+        signature = hashlib.sha256(
+            json.dumps(metadata, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        previous_signature = signatures_by_key.get(key)
+        if previous_signature is not None and previous_signature != signature:
+            raise HistoryDataError(f"DATA_INVALID: conflicting duplicate S3 key {key}")
+        signatures_by_key[key] = signature
+        keys.append(key)
+        key_signatures.append((key, signature))
+    if keys != sorted(keys):
+        raise HistoryDataError(f"DATA_INVALID: S3 listing key ordering abnormal page {page_number}")
+    return DiscoveryListingPage(
+        page_number=page_number,
+        request_url=request_url,
+        marker=marker,
+        is_truncated=is_truncated,
+        first_key=keys[0] if keys else None,
+        last_key=keys[-1] if keys else None,
+        key_count=len(keys),
+        page_content_sha256=hashlib.sha256(content).hexdigest(),
+        next_marker=next_marker,
+        keys=tuple(keys),
+        key_signatures=tuple(key_signatures),
+    )
+
+
 def _catalog_symbol_records(
     refs: Sequence[ArchiveRef],
     supplied: Iterable[DiscoveredSymbolRecord] = (),
@@ -385,6 +508,8 @@ def build_discovery_catalog(
     content: str | bytes | None = None,
     content_bytes: bytes | None = None,
     symbol_records: Iterable[DiscoveredSymbolRecord] = (),
+    pages: Iterable[DiscoveryListingPage] = (),
+    listing_complete: bool = True,
 ) -> DiscoveryCatalog:
     """Build a catalog without dropping archives that later fail processing."""
     values = [refs_or_listing] if isinstance(refs_or_listing, str) else list(refs_or_listing)
@@ -418,16 +543,46 @@ def build_discovery_catalog(
         content_text = content
     else:
         content_text = content_bytes.decode("utf-8", "replace")
+    page_records = tuple(pages)
+    if not page_records:
+        page_records = (
+            DiscoveryListingPage(
+                page_number=1,
+                request_url=str(source),
+                marker=None,
+                is_truncated=not listing_complete,
+                first_key=None,
+                last_key=None,
+                key_count=0,
+                page_content_sha256=hashlib.sha256(content_bytes).hexdigest(),
+            ),
+        )
     fingerprint_payload = json.dumps(
-        [
-            {
-                "symbol": archive.symbol,
-                "kind": archive.kind,
-                "month": archive.month,
-                "url": archive.url,
-            }
-            for archive in archives
-        ],
+        {
+            "archives": [
+                {
+                    "symbol": archive.symbol,
+                    "kind": archive.kind,
+                    "month": archive.month,
+                    "url": archive.url,
+                }
+                for archive in archives
+            ],
+            "pages": [
+                {
+                    "page_number": page.page_number,
+                    "request_url": page.request_url,
+                    "marker": page.marker,
+                    "next_marker": page.next_marker,
+                    "is_truncated": page.is_truncated,
+                    "first_key": page.first_key,
+                    "last_key": page.last_key,
+                    "key_count": page.key_count,
+                    "page_content_sha256": page.page_content_sha256,
+                }
+                for page in page_records
+            ],
+        },
         sort_keys=True,
         separators=(",", ":"),
     ).encode("utf-8")
@@ -440,6 +595,9 @@ def build_discovery_catalog(
         symbols=symbols,
         content_fingerprint=hashlib.sha256(fingerprint_payload).hexdigest(),
         content=content_text,
+        listing_page_count=len(page_records),
+        listing_complete=listing_complete is True,
+        pages=page_records,
     )
 
 
@@ -479,29 +637,101 @@ def acquire_official_archive_listing(
     prefix: str = OFFICIAL_ARCHIVE_PREFIX,
     session: requests.Session | None = None,
     retrieved_at: str | None = None,
+    max_pages: int = 1000,
 ) -> DiscoveryCatalog:
     """GET the official archive index and return its auditable catalog.
 
     M1-A supplies mocked responses only; this interface is the sole intended
     discovery entry point for a later M1-B run.
     """
-    url = official_archive_listing_url(prefix)
+    if max_pages <= 0:
+        raise HistoryDataError("DATA_INVALID: max_pages 必须为正数")
+    expected_prefix = _normalized_listing_prefix(prefix)
     client = session or requests.Session()
-    response = client.get(url, timeout=60)
-    if response.status_code >= 400:
-        raise HistoryDataError(f"official archive listing GET failed: HTTP {response.status_code}")
-    raw_content = getattr(response, "content", None)
-    if not isinstance(raw_content, bytes):
-        raw_content = str(getattr(response, "text", "")).encode("utf-8")
-    text = getattr(response, "text", None)
-    if text is None:
-        text = raw_content.decode("utf-8", "strict")
+    marker: str | None = None
+    requested_markers: set[str] = set()
+    pages: list[DiscoveryListingPage] = []
+    page_contents: list[bytes] = []
+    all_keys: list[str] = []
+    signatures_by_key: dict[str, str] = {}
+    previous_last_key: str | None = None
+    listing_complete = False
+    for page_number in range(1, max_pages + 1):
+        if marker is not None:
+            if marker in requested_markers:
+                raise HistoryDataError(f"DATA_INVALID: repeated S3 listing marker {marker!r}")
+            requested_markers.add(marker)
+        request_url = _listing_request_url(prefix, marker)
+        try:
+            response = client.get(request_url, timeout=60)
+        except requests.exceptions.RequestException as exc:
+            raise HistoryDataError(
+                f"DATA_INVALID: official archive listing request failed page={page_number}"
+            ) from exc
+        status_code = getattr(response, "status_code", None)
+        if not isinstance(status_code, int):
+            raise HistoryDataError(
+                f"DATA_INVALID: official archive listing response missing HTTP status page={page_number}"
+            )
+        if status_code >= 400:
+            raise HistoryDataError(
+                f"official archive listing GET failed page={page_number}: HTTP {status_code}"
+            )
+        raw_content = getattr(response, "content", None)
+        if not isinstance(raw_content, bytes) or not raw_content:
+            response_text = getattr(response, "text", None)
+            if response_text is None:
+                raise HistoryDataError(f"DATA_INVALID: empty S3 listing page {page_number}")
+            raw_content = str(response_text).encode("utf-8")
+        page = _parse_s3_listing_page(
+            raw_content,
+            page_number=page_number,
+            request_url=request_url,
+            marker=marker,
+            expected_prefix=expected_prefix,
+        )
+        if previous_last_key is not None and any(
+            key < previous_last_key for key in page.keys
+        ):
+            raise HistoryDataError(
+                f"DATA_INVALID: S3 listing page ordering regressed at page {page_number}"
+            )
+        for key, signature in page.key_signatures:
+            previous_signature = signatures_by_key.get(key)
+            if previous_signature is not None and previous_signature != signature:
+                raise HistoryDataError(f"DATA_INVALID: conflicting duplicate S3 key {key}")
+            signatures_by_key[key] = signature
+        pages.append(page)
+        page_contents.append(raw_content)
+        all_keys.extend(page.keys)
+        previous_last_key = page.last_key or previous_last_key
+        if not page.is_truncated:
+            listing_complete = True
+            break
+        if page_number >= max_pages:
+            raise HistoryDataError("DATA_INVALID: S3 listing exceeded max_pages before completion")
+        next_marker = page.next_marker or page.last_key
+        if not next_marker:
+            raise HistoryDataError(
+                f"DATA_INVALID: truncated S3 listing page {page_number} has no next marker"
+            )
+        if marker is not None and next_marker <= marker:
+            raise HistoryDataError(
+                f"DATA_INVALID: S3 listing marker did not advance {marker!r} -> {next_marker!r}"
+            )
+        if next_marker in requested_markers:
+            raise HistoryDataError(f"DATA_INVALID: repeated S3 listing marker {next_marker!r}")
+        marker = next_marker
+    if not listing_complete:
+        raise HistoryDataError("DATA_INVALID: S3 listing completion was not confirmed")
     return build_discovery_catalog(
-        text,
-        source=url,
+        all_keys,
+        source=official_archive_listing_url(prefix),
         prefix=prefix,
         retrieved_at=retrieved_at,
-        content_bytes=raw_content,
+        content_bytes=b"".join(page_contents),
+        pages=pages,
+        listing_complete=True,
     )
 
 
@@ -1058,6 +1288,8 @@ def build_dataset_manifest(
     symbol_records: Iterable[DiscoveredSymbolRecord] = (),
 ) -> dict[str, Any]:
     """Build a manifest while retaining every discovered/excluded symbol."""
+    if catalog is not None and catalog.listing_complete is not True:
+        raise HistoryDataError("DATA_INVALID: incomplete official archive listing cannot enter dataset")
     histories = tuple(sorted(histories, key=lambda item: item.symbol.upper()))
     history_by_symbol = {history.symbol.upper(): history for history in histories}
     explicit_symbol_records = {record.symbol.upper(): record for record in symbol_records}
@@ -1230,6 +1462,9 @@ def build_dataset_manifest(
             "retrieved_at": catalog.retrieved_at,
             "content_sha256": catalog.content_sha256,
             "content_fingerprint": catalog.content_fingerprint,
+            "listing_page_count": catalog.listing_page_count,
+            "listing_complete": catalog.listing_complete,
+            "pages": [asdict(page) for page in catalog.pages],
         }
     raw_file_count = (
         sum(bool(record["local_path"]) for record in provenance_dicts)

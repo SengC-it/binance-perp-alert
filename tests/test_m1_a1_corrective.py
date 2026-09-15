@@ -214,8 +214,14 @@ class _ListingSession:
 
 
 def test_official_listing_interface_is_explicit_and_get_only():
-    url = archive_url("AUSDT", "daily_klines", "2021-01")
-    payload = f"<Key>data{url.split('/data', 1)[1]}</Key>"
+    key = _s3_key("AUSDT", "daily_klines", "2021-01")
+    payload = (
+        "<ListBucketResult>"
+        "<Prefix>data/futures/um/monthly/</Prefix>"
+        "<IsTruncated>false</IsTruncated>"
+        f"<Contents><Key>{key}</Key></Contents>"
+        "</ListBucketResult>"
+    )
     session = _ListingSession(_Response(200, payload.encode("utf-8"), payload))
     catalog = acquire_official_archive_listing(
         prefix="data/futures/um/monthly",
@@ -227,6 +233,167 @@ def test_official_listing_interface_is_explicit_and_get_only():
     assert catalog.content_sha256 == hashlib.sha256(payload.encode("utf-8")).hexdigest()
     assert len(session.calls) == 1
     assert session.calls[0][1] == 60
+
+
+def _s3_key(symbol: str, kind: str, month: str) -> str:
+    return archive_url(symbol, kind, month).split("https://data.binance.vision/", 1)[1]
+
+
+def _s3_page(
+    keys: list[str],
+    *,
+    is_truncated: bool,
+    marker: str | None = None,
+    next_marker: str | None = None,
+    prefix: str = "data/futures/um/monthly/",
+) -> bytes:
+    marker_xml = f"<Marker>{marker}</Marker>" if marker is not None else ""
+    next_xml = f"<NextMarker>{next_marker}</NextMarker>" if next_marker is not None else ""
+    contents = "".join(f"<Contents><Key>{key}</Key></Contents>" for key in keys)
+    return (
+        "<ListBucketResult>"
+        f"<Prefix>{prefix}</Prefix>"
+        f"{marker_xml}"
+        f"<IsTruncated>{str(is_truncated).lower()}</IsTruncated>"
+        f"{next_xml}{contents}</ListBucketResult>"
+    ).encode("utf-8")
+
+
+class _PagedListingSession:
+    def __init__(self, responses: list[_Response]):
+        self.responses = responses
+        self.calls: list[tuple[str, int]] = []
+
+    def get(self, url: str, *, timeout: int):
+        self.calls.append((url, timeout))
+        response = self.responses[min(len(self.calls) - 1, len(self.responses) - 1)]
+        return response
+
+
+def test_official_listing_paginates_all_pages_before_marking_complete():
+    keys = [
+        _s3_key(f"S{index:04d}USDT", "daily_klines", "2021-01")
+        for index in range(2123)
+    ]
+    pages = [
+        _Response(200, _s3_page(keys[:1000], is_truncated=True, next_marker="A")),
+        _Response(200, _s3_page(keys[1000:2000], is_truncated=True, marker="A", next_marker="B")),
+        _Response(200, _s3_page(keys[2000:], is_truncated=False, marker="B")),
+    ]
+    session = _PagedListingSession(pages)
+    catalog = acquire_official_archive_listing(
+        session=session,
+        retrieved_at="2026-09-15T00:00:00+00:00",
+    )
+    assert len(session.calls) == 3
+    assert catalog.listing_page_count == 3
+    assert catalog.listing_complete is True
+    assert [page.key_count for page in catalog.pages] == [1000, 1000, 123]
+    assert len(catalog.archives) == 2123
+    assert catalog.number_of_symbols_discovered == 2123
+    assert "marker=A" in session.calls[1][0]
+    assert "marker=B" in session.calls[2][0]
+    assert catalog.content_sha256 == hashlib.sha256(
+        b"".join(response.content for response in pages)
+    ).hexdigest()
+    assert all(len(page.page_content_sha256) == 64 for page in catalog.pages)
+    assert catalog.pages[0].first_key == keys[0]
+    assert catalog.pages[-1].last_key == keys[-1]
+
+
+@pytest.mark.parametrize(
+    "responses,match",
+    [
+        ([_Response(200, _s3_page([_s3_key("AUSDT", "daily_klines", "2021-01")], is_truncated=True))], "marker"),
+        (
+            [
+                _Response(200, _s3_page([_s3_key("AUSDT", "daily_klines", "2021-01")], is_truncated=True, next_marker="A")),
+                _Response(200, _s3_page([_s3_key("BUSDT", "daily_klines", "2021-01")], is_truncated=True, marker="A", next_marker="A")),
+            ],
+            "marker",
+        ),
+        (
+            [
+                _Response(200, _s3_page([_s3_key("AUSDT", "daily_klines", "2021-01")], is_truncated=True, next_marker="A")),
+                _Response(500, b"server error"),
+            ],
+            "HTTP 500",
+        ),
+        ([_Response(200, b"<ListBucketResult>")], "malformed"),
+        (
+            [
+                _Response(200, _s3_page([_s3_key("BUSDT", "daily_klines", "2021-01")], is_truncated=True, next_marker="A")),
+                _Response(200, _s3_page([_s3_key("AUSDT", "daily_klines", "2021-01")], is_truncated=False, marker="A")),
+            ],
+            "ordering",
+        ),
+        (
+            [_Response(200, _s3_page([_s3_key("AUSDT", "daily_klines", "2021-01")], is_truncated=False, prefix="wrong/"))],
+            "prefix mismatch",
+        ),
+    ],
+)
+def test_official_listing_pagination_fails_closed(responses: list[_Response], match: str):
+    with pytest.raises(HistoryDataError, match=match):
+        acquire_official_archive_listing(session=_PagedListingSession(responses))
+
+
+def test_official_listing_fails_closed_when_max_pages_is_exceeded():
+    key = _s3_key("AUSDT", "daily_klines", "2021-01")
+    session = _PagedListingSession(
+        [
+            _Response(200, _s3_page([key], is_truncated=True, next_marker="A")),
+            _Response(200, _s3_page([key], is_truncated=True, marker="A", next_marker="B")),
+        ]
+    )
+    with pytest.raises(HistoryDataError, match="max_pages"):
+        acquire_official_archive_listing(session=session, max_pages=2)
+
+
+def test_official_listing_rejects_conflicting_duplicate_key_metadata():
+    key = _s3_key("AUSDT", "daily_klines", "2021-01")
+    payload = (
+        "<ListBucketResult>"
+        "<Prefix>data/futures/um/monthly/</Prefix>"
+        "<IsTruncated>false</IsTruncated>"
+        f"<Contents><Key>{key}</Key><Size>1</Size></Contents>"
+        f"<Contents><Key>{key}</Key><Size>2</Size></Contents>"
+        "</ListBucketResult>"
+    ).encode("utf-8")
+    with pytest.raises(HistoryDataError, match="conflicting duplicate"):
+        acquire_official_archive_listing(
+            session=_PagedListingSession([_Response(200, payload)])
+        )
+
+
+def test_official_listing_rejects_incomplete_catalog_at_dataset_boundary():
+    key = _s3_key("AUSDT", "daily_klines", "2021-01")
+    partial = build_discovery_catalog(
+        [key],
+        pages=(),
+        listing_complete=False,
+    )
+    with pytest.raises(HistoryDataError, match="DATA_INVALID"):
+        build_dataset_manifest([], catalog=partial)
+    with pytest.raises(HistoryDataError, match="DATA_INVALID"):
+        acquire_official_archive_listing(
+            session=_PagedListingSession([_Response(200, _s3_page([key], is_truncated=True))]),
+            max_pages=1,
+        )
+
+
+def test_official_listing_allows_identical_duplicate_key_deterministically():
+    first = _s3_key("AUSDT", "daily_klines", "2021-01")
+    second = _s3_key("BUSDT", "daily_klines", "2021-01")
+    session = _PagedListingSession(
+        [
+            _Response(200, _s3_page([first], is_truncated=True, next_marker="A")),
+            _Response(200, _s3_page([first, second], is_truncated=False, marker="A")),
+        ]
+    )
+    catalog = acquire_official_archive_listing(session=session)
+    assert len(session.calls) == 2
+    assert [archive.symbol for archive in catalog.archives] == ["AUSDT", "BUSDT"]
 
 
 def _zip_bytes() -> bytes:
@@ -306,3 +473,86 @@ def test_funding_sign_is_long_pays_short_receives_for_real_events():
     event = FundingEvent("AUSDT", _ms(date(2021, 1, 1), 8), 0.001, 8.0)
     assert funding_pnl_for_hold(1_000.0, 1, [event]) == pytest.approx(-1.0)
     assert signed_funding_pnl(1_000.0, -1, [event]) == pytest.approx(1.0)
+
+
+@pytest.mark.parametrize(
+    "hours,intervals",
+    [
+        ((8, 16, 20, 24), (8.0, 8.0, 4.0, 4.0)),
+        ((4, 8, 16, 24), (4.0, 4.0, 8.0, 8.0)),
+    ],
+)
+def test_funding_hold_coverage_uses_each_event_interval_across_transitions(
+    hours: tuple[int, ...], intervals: tuple[float, ...]
+):
+    day = date(2021, 1, 1)
+    events = tuple(
+        FundingEvent("AUSDT", _ms(day, hour), 0.001, interval)
+        for hour, interval in zip(hours, intervals)
+    )
+    report = validate_funding_coverage_for_holds(
+        [_history("AUSDT", events)],
+        [HoldingInterval("AUSDT", _ms(day, 1), _ms(day, hours[-1]))],
+        expected_interval_hours=4.0,
+    )
+    assert report.structural_passed
+    assert report.holds_passed
+
+
+@pytest.mark.parametrize(
+    "hours,intervals",
+    [
+        ((8, 16, 28, 32), (8.0, 8.0, 4.0, 4.0)),
+        ((4, 8, 20, 28), (4.0, 4.0, 8.0, 8.0)),
+    ],
+)
+def test_funding_hold_coverage_fails_closed_on_missing_variable_transition(
+    hours: tuple[int, ...], intervals: tuple[float, ...]
+):
+    day = date(2021, 1, 1)
+    events = tuple(
+        FundingEvent("AUSDT", _ms(day, hour), 0.001, interval)
+        for hour, interval in zip(hours, intervals)
+    )
+    report = validate_funding_coverage_for_holds(
+        [_history("AUSDT", events)],
+        [HoldingInterval("AUSDT", _ms(day, 1), _ms(day, hours[-1]))],
+    )
+    assert not report.structural_passed
+    assert not report.holds_passed
+    assert "FUNDING_COVERAGE_GAP" in {issue.code for issue in report.issues}
+
+
+def test_nonheld_funding_gap_is_structural_but_does_not_contaminate_held_sequence():
+    day = date(2021, 1, 1)
+    held_symbol = _history(
+        "AUSDT",
+        tuple(
+            FundingEvent("AUSDT", _ms(day, hour), 0.001, 4.0)
+            for hour in (4, 8, 12, 16)
+        ),
+    )
+    same_symbol_gap_after_exit = _history(
+        "BUSDT",
+        tuple(
+            FundingEvent("BUSDT", _ms(day, hour), 0.001, 4.0)
+            for hour in (4, 8, 12, 16, 28)
+        ),
+    )
+    unrelated_gap = _history(
+        "CUSDT",
+        (
+            FundingEvent("CUSDT", _ms(day, 4), 0.001, 4.0),
+            FundingEvent("CUSDT", _ms(day, 8), 0.001, 4.0),
+            FundingEvent("CUSDT", _ms(day, 20), 0.001, 4.0),
+        ),
+    )
+    report = validate_funding_coverage_for_holds(
+        [held_symbol, same_symbol_gap_after_exit, unrelated_gap],
+        [
+            HoldingInterval("AUSDT", _ms(day, 1), _ms(day, 8)),
+            HoldingInterval("BUSDT", _ms(day, 1), _ms(day, 8)),
+        ],
+    )
+    assert not report.structural_passed
+    assert report.holds_passed

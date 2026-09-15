@@ -94,6 +94,16 @@ def run_m1(
         )
     if dataset_manifest is None:
         raise M1RunnerNotReady("M1-B dataset manifest 尚未提供")
+    discovery_catalog = dataset_manifest.get("discovery_catalog")
+    listing_complete = (
+        discovery_catalog.get("listing_complete")
+        if isinstance(discovery_catalog, Mapping)
+        else getattr(discovery_catalog, "listing_complete", None)
+    )
+    if listing_complete is not True:
+        raise M1RunnerNotReady(
+            "DATA_INVALID: M1-B dataset requires a complete paginated discovery catalog"
+        )
     raise M1RunnerNotReady(
         "M1-A runner skeleton 已完成；正式 M1-B execution 尚未在本阶段实现"
     )

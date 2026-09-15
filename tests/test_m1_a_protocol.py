@@ -139,6 +139,11 @@ def test_runner_preflight_does_not_run_formal_m1(tmp_path):
         run_m1()
     with pytest.raises(M1RunnerNotReady):
         run_m1(approval="START M1-B", dataset_manifest={})
+    with pytest.raises(M1RunnerNotReady, match="DATA_INVALID"):
+        run_m1(
+            approval="START M1-B",
+            dataset_manifest={"discovery_catalog": {"listing_complete": False}},
+        )
     assert {path.name for path in Path("research/m1").iterdir()} == before
 
 
