@@ -1,0 +1,3791 @@
+# M1 FAIL
+
+## Corrected Run Lineage
+
+- Run ID: `XS-LOWVOL-M1-B.1B-CORRECTED-1`
+- Run type: `CORRECTED_RERUN`
+- Corrected from commit: `c4bb2b90ce1ef9b8e38858c7f4288b8b4d8c156b`
+- Corrected from run status: `INVALIDATED_M1_RUN`
+- Supersedes run: `XS-LOWVOL-M1-B-c4bb2b90`
+- Correction reason: `FIXED_DATE_REBALANCE_SCHEDULER_VIOLATED_FROZEN_M0_RETRY_SEMANTICS`
+- The legacy c4bb run remains permanently preserved; this is a separate output directory.
+
+## Data Integrity and Decision
+
+- `G0_data_integrity`: FAIL; confirmed missing funding settlements are retained.
+- Machine decision is forced to `M1 FAIL`; no manual override is permitted.
+- Performance metrics status: `DIAGNOSTIC_ONLY_DUE_TO_G0`.
+- Data integrity status: `FAIL_CONFIRMED_MISSING_FUNDING_SETTLEMENTS`.
+- Return, Sharpe, Drawdown, Profit Factor, Bootstrap, yearly breakdown, and Long/Short attribution are diagnostic metrics only.
+- This report is not validated performance, complete historical return, verified Alpha, or production evidence.
+
+## Machine-readable result
+
+```json
+{
+  "attribution": {
+    "bull_2020_2021": {
+      "cost_pnl": -0.034399999999999945,
+      "funding_pnl": 0.024895429999999982,
+      "long_pnl": 1.097328304394462,
+      "net_pnl": 0.44347098928945045,
+      "pnl_by_symbol": {
+        "1000SHIBUSDT": -0.07414069584271893,
+        "1INCHUSDT": -0.0425971142308738,
+        "AAVEUSDT": -0.05622287616438965,
+        "ADAUSDT": -0.05285227438826561,
+        "AKROUSDT": -0.001754987060198438,
+        "ALGOUSDT": 0.06024334044469885,
+        "ALPHAUSDT": -0.04570292588590751,
+        "ATAUSDT": 0.010254259653349574,
+        "ATOMUSDT": -0.0013845019754143654,
+        "AVAXUSDT": -0.07896970459588565,
+        "BAKEUSDT": -0.004167861914612568,
+        "BANDUSDT": 0.07292171687633346,
+        "BATUSDT": 0.043972904036893745,
+        "BCHUSDT": 0.1993903636886202,
+        "BELUSDT": -0.004579364392991488,
+        "BLZUSDT": -0.011883122567751656,
+        "BNBUSDT": 0.17521602549918103,
+        "BTCUSDT": 0.13289805618521403,
+        "BTTUSDT": -0.005826364861874496,
+        "BZRXUSDT": 0.056185730950899994,
+        "CELRUSDT": -0.03704387600766605,
+        "CHRUSDT": -0.018242111366518935,
+        "CHZUSDT": -0.060596828885744726,
+        "COMPUSDT": 0.03789964625143044,
+        "COTIUSDT": -0.04463101270561532,
+        "CRVUSDT": -0.1443657464182217,
+        "DASHUSDT": 0.09764029350392624,
+        "DENTUSDT": -0.013864710685482744,
+        "DODOUSDT": -0.006435222384372632,
+        "DOGEUSDT": -0.13083729319983173,
+        "DOTUSDT": -0.03755753185145572,
+        "DYDXUSDT": 0.020086128287106386,
+        "EGLDUSDT": 0.06084610101696914,
+        "EOSUSDT": 0.09048779788080973,
+        "ETCUSDT": 0.09634071654806366,
+        "ETHUSDT": 0.14678077052476018,
+        "GALAUSDT": -0.10155813623287306,
+        "HNTUSDT": -0.002433178708343853,
+        "IOSTUSDT": -0.08085431258071964,
+        "IOTXUSDT": -0.049584693528916,
+        "KEEPUSDT": 0.002021295110905267,
+        "LINKUSDT": 0.04608365301748082,
+        "MATICUSDT": -0.15267020521047292,
+        "MTLUSDT": 0.027024650291730914,
+        "NEOUSDT": 0.010100753561042636,
+        "NKNUSDT": -0.0049236425414345315,
+        "QTUMUSDT": 0.06253442893347366,
+        "RENUSDT": -0.05013960243559351,
+        "RUNEUSDT": -0.0731012847536409,
+        "SFPUSDT": 0.08548415564736506,
+        "SNXUSDT": 0.005249593145505466,
+        "SXPUSDT": 0.21480175842123175,
+        "THETAUSDT": 0.02306384472078092,
+        "UNIUSDT": -0.03155813337404456,
+        "XMRUSDT": 0.08642232184350222
+      },
+      "price_pnl": 0.45297555928944944,
+      "short_pnl": -0.6538573151051421
+    },
+    "external": {
+      "cost_pnl": -0.13535999999999584,
+      "funding_pnl": -0.36370779800001096,
+      "long_pnl": 1.489097543355376,
+      "net_pnl": 2.15864582523985,
+      "pnl_by_symbol": {
+        "1000FLOKIUSDT": -0.00989927206400066,
+        "1000LUNCUSDT": -0.02433674685867465,
+        "1000PEPEUSDT": 0.07462006475933501,
+        "1000SHIBUSDT": 0.06726588714941627,
+        "1000XUSDT": 0.04730318836793476,
+        "1INCHUSDT": -0.05948284055954953,
+        "AAVEUSDT": -0.0035552211471656537,
+        "ACHUSDT": 0.07621882995284934,
+        "ADAUSDT": 0.02304945132045754,
+        "AGIXUSDT": 0.02704597871663318,
+        "AGLDUSDT": -0.007208970228003257,
+        "AI16ZUSDT": 0.09327605387191656,
+        "AIUSDT": 0.021733872245891326,
+        "AKROUSDT": 0.00395880202026134,
+        "ALGOUSDT": 0.09686647095956517,
+        "ALPACAUSDT": 0.01380081641923124,
+        "ALPHAUSDT": -0.02003630374653057,
+        "AMBUSDT": 0.028719570309382787,
+        "ANCUSDT": 0.03214186972255731,
+        "ANTUSDT": -0.040463670010749145,
+        "APEUSDT": 0.1595883025686039,
+        "APTUSDT": -0.09993187240065694,
+        "ARBUSDT": -0.03682158002595415,
+        "ARKMUSDT": 0.0488861195566895,
+        "ARPAUSDT": 0.08440455792722325,
+        "ARUSDT": -0.043064484842499605,
+        "ASTRUSDT": 0.0059915988095701435,
+        "ATAUSDT": 0.10847898537429164,
+        "ATOMUSDT": -0.027294219302465096,
+        "AUDIOUSDT": 0.06185013666378055,
+        "AVAXUSDT": -0.12019914238240768,
+        "BAKEUSDT": -0.030641938619457732,
+        "BANDUSDT": 0.07528463176048002,
+        "BATUSDT": 0.03633645551150734,
+        "BCHUSDT": 0.19349566073714014,
+        "BELUSDT": -0.024681450947324893,
+        "BIDUSDT": -0.06268352648303348,
+        "BLZUSDT": -0.18442005291188998,
+        "BNBUSDT": 0.31533569133861233,
+        "BONDUSDT": -0.0660785244788513,
+        "BSWUSDT": -0.0932152293423385,
+        "BTCDOMUSDT": 0.003004196613460899,
+        "BTCUSDT": 0.1999276879615789,
+        "BTTUSDT": -0.008077360869639717,
+        "BZRXUSDT": 0.056185730950899994,
+        "C98USDT": 0.03884764087782159,
+        "CELOUSDT": 0.008328349753611202,
+        "CELRUSDT": 0.038438198666808907,
+        "CFXUSDT": 0.014689195050989708,
+        "CHRUSDT": 0.014506483928075993,
+        "CHZUSDT": 0.02058783498794652,
+        "CKBUSDT": -0.03286691197110883,
+        "COMPUSDT": 0.013755848159774,
+        "COTIUSDT": -0.06852519528480656,
+        "CRVUSDT": -0.062311015994721344,
+        "CTSIUSDT": 0.004456762185570608,
+        "DARUSDT": 0.026250501647130244,
+        "DASHUSDT": 0.09764029350392624,
+        "DEGENUSDT": -0.020190005608302225,
+        "DEGOUSDT": 0.008973566052296883,
+        "DENTUSDT": -0.013864710685482744,
+        "DGBUSDT": 0.009593227896010985,
+        "DMCUSDT": 0.03621221286709576,
+        "DODOUSDT": -0.006435222384372632,
+        "DOGEUSDT": -0.061998762849757715,
+        "DOTUSDT": -0.00871131778698032,
+        "DYDXUSDT": 0.020326662630527497,
+        "EDUUSDT": 0.05096880255784643,
+        "EGLDUSDT": 0.08362053420460204,
+        "ENSUSDT": 0.007759533379147528,
+        "EOSUSDT": 0.258874494393828,
+        "ETCUSDT": 0.1638777101966013,
+        "ETHUSDT": 0.06977821745443444,
+        "FETUSDT": 0.02312311780192019,
+        "FISUSDT": 0.0074031985686680585,
+        "FRONTUSDT": 0.10139837044626099,
+        "FUNUSDT": -0.13242046212869368,
+        "GALAUSDT": -0.14846939353161498,
+        "GALUSDT": 0.0347769547542467,
+        "HFTUSDT": 0.03260216409730669,
+        "HIFIUSDT": -0.0009002924285822101,
+        "HIGHUSDT": 0.10426797075398912,
+        "HIPPOUSDT": 0.03755711160475212,
+        "HNTUSDT": -0.02367268182906483,
+        "HOOKUSDT": 0.04087126045758075,
+        "INJUSDT": -0.03810335047921399,
+        "IOSTUSDT": -0.07706215752350094,
+        "IOTXUSDT": -0.020952718277311322,
+        "JASMYUSDT": 0.0391096402487101,
+        "KEEPUSDT": 0.012898451722488833,
+        "KEYUSDT": 0.0032373765768427733,
+        "KLAYUSDT": 0.01653924114929279,
+        "LDOUSDT": -0.0645093030212233,
+        "LEVERUSDT": 0.051615471661874746,
+        "LINKUSDT": -0.00996937643752819,
+        "LOOMUSDT": 0.0023622407262382777,
+        "LQTYUSDT": -0.00732273024212286,
+        "MATICUSDT": -0.21746833295768253,
+        "MAVUSDT": -0.016299469358958554,
+        "MDTUSDT": 0.0047661214351453745,
+        "MEMEFIUSDT": 0.03520226065877924,
+        "MINAUSDT": -0.003974868367406692,
+        "MTLUSDT": 0.06906984628325835,
+        "MYROUSDT": 0.044380874760302315,
+        "NEIROETHUSDT": -0.07665374548667811,
+        "NEOUSDT": 0.018271585475666353,
+        "NKNUSDT": -0.00830607186279982,
+        "NTRNUSDT": 0.01556227672403123,
+        "NULSUSDT": 0.02684373134555702,
+        "OMNIUSDT": 0.020938053316929835,
+        "OMUSDT": 0.07499711790972892,
+        "OPUSDT": -0.03796412148688711,
+        "PENDLEUSDT": -0.08164277835508116,
+        "PERPUSDT": 0.07285895701982664,
+        "PHBUSDT": 0.018388577224945957,
+        "PORT3USDT": 0.007150336383275741,
+        "QTUMUSDT": 0.12352884768375919,
+        "RDNTUSDT": 0.006058516591651545,
+        "REEFUSDT": -0.12441309163856559,
+        "RENUSDT": -0.0639818216385821,
+        "RNDRUSDT": -0.02278954745153031,
+        "RUNEUSDT": -0.12098796224648001,
+        "SEIUSDT": -0.11701368509401495,
+        "SFPUSDT": 0.14525900362644908,
+        "SNXUSDT": 0.032216306649386975,
+        "SPELLUSDT": 0.07577464000713825,
+        "SRMUSDT": -0.03101881252888977,
+        "SSVUSDT": 0.015860339029887094,
+        "STRAXUSDT": -0.01494157954621499,
+        "STXUSDT": -0.049022486782510144,
+        "SUIUSDT": -0.03616475304834637,
+        "SXPUSDT": 0.18137885430470904,
+        "THETAUSDT": 0.03531846559996411,
+        "TOKENUSDT": 0.08434752328143276,
+        "TOMOUSDT": -0.11918175114604984,
+        "TONUSDT": -0.034582320647090256,
+        "TROYUSDT": 0.06617326362251487,
+        "TRUUSDT": 0.03394326778215962,
+        "UNIUSDT": 0.006103816854531224,
+        "UXLINKUSDT": 0.07236515831120201,
+        "VIDTUSDT": 0.050759870238206266,
+        "VINEUSDT": 0.04165229168342958,
+        "VOXELUSDT": -0.038631309705436004,
+        "WLDUSDT": 0.07595704253475054,
+        "WOOUSDT": 0.02651827377176489,
+        "XMRUSDT": 0.08975319530685034,
+        "XVGUSDT": 0.0635943071915613,
+        "XVSUSDT": -0.0015806857231857457,
+        "ZKJUSDT": 0.0506310608355286
+      },
+      "price_pnl": 2.6577136232398497,
+      "short_pnl": 0.669548281884224
+    },
+    "regime_external": {
+      "BEAR": {
+        "days": 329,
+        "pnl": 0.17710315586978953,
+        "return_sum_pct": 12.113571986440109
+      },
+      "BULL": {
+        "days": 871,
+        "pnl": 1.161503522358171,
+        "return_sum_pct": 64.88866703670202
+      },
+      "SIDEWAYS": {
+        "days": 870,
+        "pnl": 0.8200391470118904,
+        "return_sum_pct": 51.70629394024287
+      }
+    }
+  },
+  "best_5pct": {
+    "compound_return": 0.06739213668736288,
+    "compound_return_pct": 6.739213668736288,
+    "removed_count": 15,
+    "removed_indices": [
+      34,
+      35,
+      42,
+      51,
+      57,
+      64,
+      67,
+      99,
+      122,
+      148,
+      204,
+      216,
+      222,
+      230,
+      249
+    ]
+  },
+  "bootstrap": {
+    "primary_4_week": {
+      "block_length_weeks": 4,
+      "confidence": 0.95,
+      "mean_weekly_return_ci95": [
+        0.0006330506167759192,
+        0.008190626220343505
+      ],
+      "mean_weekly_return_ci95_lower": 0.0006330506167759192,
+      "probability_mean_return_gt_zero": 0.9889,
+      "rounds": 10000,
+      "seed": 20260915,
+      "weekly_sharpe_ci95": [
+        0.14410935994504284,
+        1.8201057862853114
+      ]
+    },
+    "sensitivity": {
+      "13": {
+        "block_length_weeks": 13,
+        "confidence": 0.95,
+        "mean_weekly_return_ci95": [
+          0.0008961951662570156,
+          0.007981007678412
+        ],
+        "mean_weekly_return_ci95_lower": 0.0008961951662570156,
+        "probability_mean_return_gt_zero": 0.9943,
+        "rounds": 10000,
+        "seed": 20260915,
+        "weekly_sharpe_ci95": [
+          0.20163430711252192,
+          1.8413282730918885
+        ]
+      },
+      "8": {
+        "block_length_weeks": 8,
+        "confidence": 0.95,
+        "mean_weekly_return_ci95": [
+          0.0009801925866620084,
+          0.007780796038013449
+        ],
+        "mean_weekly_return_ci95_lower": 0.0009801925866620084,
+        "probability_mean_return_gt_zero": 0.9929,
+        "rounds": 10000,
+        "seed": 20260915,
+        "weekly_sharpe_ci95": [
+          0.21337002589297602,
+          1.8028876175467763
+        ]
+      }
+    }
+  },
+  "bull_summary": {
+    "cagr_pct": 20.144537507514258,
+    "daily_observations": 731,
+    "end": "2021-12-31",
+    "max_drawdown_pct": 29.139491533928986,
+    "pnl": 0.44347098928944995,
+    "profit_factor_weekly": 1.4084526036434737,
+    "start": "2020-01-01",
+    "total_return_pct": 44.347098928944995,
+    "weekly_observations": 103,
+    "weekly_sharpe": 0.745745322827192
+  },
+  "ci_status": "PENDING_PUSH",
+  "code_commit": "6b2b55ec03d830aa7ce23204c7c88b07c4c75979",
+  "control": {
+    "COST_1X": {
+      "complete": false,
+      "cost_pnl": -0.13535999999999584,
+      "discovery": {
+        "cagr_pct": 3.5749491779543563,
+        "daily_observations": 365,
+        "end": "2026-08-31",
+        "max_drawdown_pct": 4.184000735216897,
+        "pnl": 0.1126051631329994,
+        "profit_factor_weekly": 1.2543783752233832,
+        "start": "2025-09-01",
+        "total_return_pct": 3.564982253888771,
+        "weekly_observations": 52,
+        "weekly_sharpe": 0.5670950289021396
+      },
+      "external": {
+        "cagr_pct": 22.495129378676747,
+        "daily_observations": 2070,
+        "end": "2025-08-31",
+        "max_drawdown_pct": 29.139491533928986,
+        "pnl": 2.158645825239849,
+        "profit_factor_weekly": 1.4996914384990903,
+        "start": "2020-01-01",
+        "total_return_pct": 215.8645825239849,
+        "weekly_observations": 295,
+        "weekly_sharpe": 0.9924682131434257
+      },
+      "funding_pnl": -0.372685042000045,
+      "issues": [
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-11 -> 2025-08-12",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-12 -> 2025-08-13",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-13 -> 2025-08-14",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-14 -> 2025-08-15",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-15 -> 2025-08-16",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-16 -> 2025-08-17",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-17 -> 2025-08-18",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-18 -> 2025-08-19",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-19 -> 2025-08-20",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-20 -> 2025-08-21",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-21 -> 2025-08-22",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-22 -> 2025-08-23",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-23 -> 2025-08-24",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-24 -> 2025-08-25",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-25 -> 2025-08-26",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-26 -> 2025-08-27",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-27 -> 2025-08-28",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-28 -> 2025-08-29",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-29 -> 2025-08-30",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-30 -> 2025-08-31",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-31 -> 2025-09-01",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-01 -> 2025-09-02",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-02 -> 2025-09-03",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-03 -> 2025-09-04",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-04 -> 2025-09-05",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-05 -> 2025-09-06",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-06 -> 2025-09-07",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-07 -> 2025-09-08",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-08 -> 2025-09-09",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-09 -> 2025-09-10",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-10 -> 2025-09-11",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-11 -> 2025-09-12",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-12 -> 2025-09-13",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-13 -> 2025-09-14",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-14 -> 2025-09-15",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-15 -> 2025-09-16",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-16 -> 2025-09-17",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-17 -> 2025-09-18",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-18 -> 2025-09-19",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-19 -> 2025-09-20",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-20 -> 2025-09-21",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-21 -> 2025-09-22",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-22 -> 2025-09-23",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-22 -> 2025-09-23",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-23 -> 2025-09-24",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-23 -> 2025-09-24",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-24 -> 2025-09-25",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-24 -> 2025-09-25",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-25 -> 2025-09-26",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-25 -> 2025-09-26"
+      ],
+      "long_pnl": 1.318392483108289,
+      "price_pnl": 2.779296030372854,
+      "rebalance_count": 252,
+      "short_pnl": 0.9528585052643324,
+      "spec_hash": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+      "strategy_id": "XS-LOWVOL-V1-Control",
+      "trade_count": 851,
+      "turnover_notional": 169.19999999999467
+    },
+    "COST_2X": {
+      "complete": false,
+      "cost_pnl": -0.2707199999999917,
+      "discovery": {
+        "cagr_pct": 3.735016509027811,
+        "daily_observations": 365,
+        "end": "2026-08-31",
+        "max_drawdown_pct": 4.36657746120539,
+        "pnl": 0.1126051631329994,
+        "profit_factor_weekly": 1.2549011747943457,
+        "start": "2025-09-01",
+        "total_return_pct": 3.7245953456638947,
+        "weekly_observations": 52,
+        "weekly_sharpe": 0.5681757205807288
+      },
+      "external": {
+        "cagr_pct": 21.55228505504734,
+        "daily_observations": 2070,
+        "end": "2025-08-31",
+        "max_drawdown_pct": 29.99080098562773,
+        "pnl": 2.0232858252398485,
+        "profit_factor_weekly": 1.4657089157086127,
+        "start": "2020-01-01",
+        "total_return_pct": 202.32858252398484,
+        "weekly_observations": 295,
+        "weekly_sharpe": 0.9410690122683322
+      },
+      "funding_pnl": -0.372685042000045,
+      "issues": [
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-11 -> 2025-08-12",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-12 -> 2025-08-13",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-13 -> 2025-08-14",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-14 -> 2025-08-15",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-15 -> 2025-08-16",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-16 -> 2025-08-17",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-17 -> 2025-08-18",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-18 -> 2025-08-19",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-19 -> 2025-08-20",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-20 -> 2025-08-21",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-21 -> 2025-08-22",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-22 -> 2025-08-23",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-23 -> 2025-08-24",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-24 -> 2025-08-25",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-25 -> 2025-08-26",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-26 -> 2025-08-27",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-27 -> 2025-08-28",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-28 -> 2025-08-29",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-29 -> 2025-08-30",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-30 -> 2025-08-31",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-31 -> 2025-09-01",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-01 -> 2025-09-02",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-02 -> 2025-09-03",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-03 -> 2025-09-04",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-04 -> 2025-09-05",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-05 -> 2025-09-06",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-06 -> 2025-09-07",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-07 -> 2025-09-08",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-08 -> 2025-09-09",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-09 -> 2025-09-10",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-10 -> 2025-09-11",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-11 -> 2025-09-12",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-12 -> 2025-09-13",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-13 -> 2025-09-14",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-14 -> 2025-09-15",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-15 -> 2025-09-16",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-16 -> 2025-09-17",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-17 -> 2025-09-18",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-18 -> 2025-09-19",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-19 -> 2025-09-20",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-20 -> 2025-09-21",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-21 -> 2025-09-22",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-22 -> 2025-09-23",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-22 -> 2025-09-23",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-23 -> 2025-09-24",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-23 -> 2025-09-24",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-24 -> 2025-09-25",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-24 -> 2025-09-25",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-25 -> 2025-09-26",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-25 -> 2025-09-26"
+      ],
+      "long_pnl": 1.2696724831083508,
+      "price_pnl": 2.779296030372854,
+      "rebalance_count": 252,
+      "short_pnl": 0.8662185052642826,
+      "spec_hash": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+      "strategy_id": "XS-LOWVOL-V1-Control",
+      "trade_count": 851,
+      "turnover_notional": 169.19999999999467
+    },
+    "COST_3X": {
+      "complete": false,
+      "cost_pnl": -0.4060800000000073,
+      "discovery": {
+        "cagr_pct": 3.9100896498027504,
+        "daily_observations": 365,
+        "end": "2026-08-31",
+        "max_drawdown_pct": 4.565815386204997,
+        "pnl": 0.1126051631330034,
+        "profit_factor_weekly": 1.255472933523045,
+        "start": "2025-09-01",
+        "total_return_pct": 3.899170891054693,
+        "weekly_observations": 52,
+        "weekly_sharpe": 0.569357209096587
+      },
+      "external": {
+        "cagr_pct": 20.574008318353787,
+        "daily_observations": 2070,
+        "end": "2025-08-31",
+        "max_drawdown_pct": 30.86364917954271,
+        "pnl": 1.8879258252398503,
+        "profit_factor_weekly": 1.4326221098994243,
+        "start": "2020-01-01",
+        "total_return_pct": 188.79258252398503,
+        "weekly_observations": 295,
+        "weekly_sharpe": 0.8890398430475909
+      },
+      "funding_pnl": -0.372685042000045,
+      "issues": [
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-11 -> 2025-08-12",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-12 -> 2025-08-13",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-13 -> 2025-08-14",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-14 -> 2025-08-15",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-15 -> 2025-08-16",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-16 -> 2025-08-17",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-17 -> 2025-08-18",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-18 -> 2025-08-19",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-19 -> 2025-08-20",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-20 -> 2025-08-21",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-21 -> 2025-08-22",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-22 -> 2025-08-23",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-23 -> 2025-08-24",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-24 -> 2025-08-25",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-25 -> 2025-08-26",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-26 -> 2025-08-27",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-27 -> 2025-08-28",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-28 -> 2025-08-29",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-29 -> 2025-08-30",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-30 -> 2025-08-31",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-31 -> 2025-09-01",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-01 -> 2025-09-02",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-02 -> 2025-09-03",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-03 -> 2025-09-04",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-04 -> 2025-09-05",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-05 -> 2025-09-06",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-06 -> 2025-09-07",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-07 -> 2025-09-08",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-08 -> 2025-09-09",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-09 -> 2025-09-10",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-10 -> 2025-09-11",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-11 -> 2025-09-12",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-12 -> 2025-09-13",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-13 -> 2025-09-14",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-14 -> 2025-09-15",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-15 -> 2025-09-16",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-16 -> 2025-09-17",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-17 -> 2025-09-18",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-18 -> 2025-09-19",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-19 -> 2025-09-20",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-20 -> 2025-09-21",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-21 -> 2025-09-22",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-22 -> 2025-09-23",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-22 -> 2025-09-23",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-23 -> 2025-09-24",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-23 -> 2025-09-24",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-24 -> 2025-09-25",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-24 -> 2025-09-25",
+        "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-25 -> 2025-09-26",
+        "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-25 -> 2025-09-26"
+      ],
+      "long_pnl": 1.2209524831083705,
+      "price_pnl": 2.779296030372854,
+      "rebalance_count": 252,
+      "short_pnl": 0.7795785052642215,
+      "spec_hash": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+      "strategy_id": "XS-LOWVOL-V1-Control",
+      "trade_count": 851,
+      "turnover_notional": 169.19999999999467
+    }
+  },
+  "control_sha256": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+  "control_strategy_id": "XS-LOWVOL-V1-Control",
+  "corrected_from_commit": "c4bb2b90ce1ef9b8e38858c7f4288b8b4d8c156b",
+  "corrected_from_run_status": "INVALIDATED_M1_RUN",
+  "correction_reason": "FIXED_DATE_REBALANCE_SCHEDULER_VIOLATED_FROZEN_M0_RETRY_SEMANTICS",
+  "corrective_validator_commit": "4672160444485fcaf827d7c0330a80f1bfec7456",
+  "data": {
+    "archive_download_errors": [],
+    "catalog_complete": true,
+    "daily_bar_count": 636990,
+    "first_available_date": "2020-01-01",
+    "funding_event_count": 2629011,
+    "last_available_date": "2026-08-31",
+    "listing_page_count": 927,
+    "number_of_ambiguous_symbols": 52,
+    "number_of_delisted_symbols": 31,
+    "number_of_symbols_discovered": 861,
+    "number_of_usable_symbols": 362,
+    "raw_file_count": 41682
+  },
+  "data_integrity_status": "FAIL_CONFIRMED_MISSING_FUNDING_SETTLEMENTS",
+  "dataset_freeze_path": "backtest/m1_cache/normalized/XS_LOWVOL_M1_DATASET.pkl",
+  "dataset_manifest_path": "research/m1/M1_DATASET_MANIFEST.json",
+  "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+  "decision": "M1 FAIL",
+  "failed_gates": [
+    "G0_data_integrity",
+    "G3_weekly_sharpe",
+    "G4_drawdown",
+    "G11_single_year_catastrophe",
+    "G12_bull_survival"
+  ],
+  "first_valid_signal_date": "2020-08-13",
+  "formal_run": true,
+  "g0_disposition": "G0_FAIL_RETAINED",
+  "gates": {
+    "G0_data_integrity": false,
+    "G10_multi_year_breadth": true,
+    "G11_single_year_catastrophe": false,
+    "G12_bull_survival": false,
+    "G1_external_return": true,
+    "G2_cost_2x": true,
+    "G3_weekly_sharpe": false,
+    "G4_drawdown": false,
+    "G5_profit_factor": true,
+    "G6_block_bootstrap": true,
+    "G7_best_5pct_removed": true,
+    "G8_leave_one_out": true,
+    "G9_symbol_concentration": true
+  },
+  "generated_at": "2026-09-15T15:48:18.627174+00:00",
+  "http_methods": [
+    "GET"
+  ],
+  "leave_one_out": {
+    "median_return_pct": 215.8645825239849,
+    "min_return_pct": 1.5501890481518732,
+    "negative_runs": 0,
+    "positive_runs": 362,
+    "runs": [
+      {
+        "removed_symbol": "1000BTTCUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "1000FLOKIUSDT",
+        "total_return_pct": 218.73132299462839
+      },
+      {
+        "removed_symbol": "1000LUNCUSDT",
+        "total_return_pct": 207.6598789895798
+      },
+      {
+        "removed_symbol": "1000PEPEUSDT",
+        "total_return_pct": 203.70776297833376
+      },
+      {
+        "removed_symbol": "1000SHIBUSDT",
+        "total_return_pct": 215.3690047462351
+      },
+      {
+        "removed_symbol": "1000WHYUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "1000XUSDT",
+        "total_return_pct": 210.78577956154066
+      },
+      {
+        "removed_symbol": "1INCHUSDT",
+        "total_return_pct": 196.4280191358421
+      },
+      {
+        "removed_symbol": "2ZUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "42USDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "A2ZUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "AAOIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "AAVEUSDT",
+        "total_return_pct": 144.01911669195607
+      },
+      {
+        "removed_symbol": "ACHUSDT",
+        "total_return_pct": 213.84881078240716
+      },
+      {
+        "removed_symbol": "ADAUSDT",
+        "total_return_pct": 34.321909390189866
+      },
+      {
+        "removed_symbol": "ADBEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "AGIXUSDT",
+        "total_return_pct": 211.15070841615
+      },
+      {
+        "removed_symbol": "AGLDUSDT",
+        "total_return_pct": 221.0098618728826
+      },
+      {
+        "removed_symbol": "AI16ZUSDT",
+        "total_return_pct": 212.96143537792597
+      },
+      {
+        "removed_symbol": "AIUSDT",
+        "total_return_pct": 206.04120579820386
+      },
+      {
+        "removed_symbol": "AKROUSDT",
+        "total_return_pct": 202.07632565525583
+      },
+      {
+        "removed_symbol": "ALABUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ALGOUSDT",
+        "total_return_pct": 217.18786601434977
+      },
+      {
+        "removed_symbol": "ALLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ALPACAUSDT",
+        "total_return_pct": 214.41610698400999
+      },
+      {
+        "removed_symbol": "ALPHAUSDT",
+        "total_return_pct": 206.99800544786675
+      },
+      {
+        "removed_symbol": "AMBUSDT",
+        "total_return_pct": 215.74597113178174
+      },
+      {
+        "removed_symbol": "AMDUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "AMZNUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ANCUSDT",
+        "total_return_pct": 210.89251370010166
+      },
+      {
+        "removed_symbol": "ANTHROPICUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ANTUSDT",
+        "total_return_pct": 217.10739794364767
+      },
+      {
+        "removed_symbol": "APEUSDT",
+        "total_return_pct": 193.27234667473033
+      },
+      {
+        "removed_symbol": "APPUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "APTUSDT",
+        "total_return_pct": 208.259380345125
+      },
+      {
+        "removed_symbol": "ARBUSDT",
+        "total_return_pct": 216.4262337884685
+      },
+      {
+        "removed_symbol": "ARKMUSDT",
+        "total_return_pct": 210.38678050756076
+      },
+      {
+        "removed_symbol": "ARMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ARPAUSDT",
+        "total_return_pct": 208.80984257046632
+      },
+      {
+        "removed_symbol": "ARUSDT",
+        "total_return_pct": 209.22646944487676
+      },
+      {
+        "removed_symbol": "ARXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ASMLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ASTRUSDT",
+        "total_return_pct": 215.57058723121062
+      },
+      {
+        "removed_symbol": "ASTSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ATAUSDT",
+        "total_return_pct": 215.28766714550122
+      },
+      {
+        "removed_symbol": "ATOMUSDT",
+        "total_return_pct": 221.93492002015796
+      },
+      {
+        "removed_symbol": "AUDIOUSDT",
+        "total_return_pct": 216.09664353653426
+      },
+      {
+        "removed_symbol": "AVAXUSDT",
+        "total_return_pct": 220.70446141893365
+      },
+      {
+        "removed_symbol": "AXTIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "B3USDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BADGERUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BAKEUSDT",
+        "total_return_pct": 219.34279611023553
+      },
+      {
+        "removed_symbol": "BALUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BANDUSDT",
+        "total_return_pct": 211.43814257883702
+      },
+      {
+        "removed_symbol": "BATUSDT",
+        "total_return_pct": 213.54887671671818
+      },
+      {
+        "removed_symbol": "BBXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BCHUSDT",
+        "total_return_pct": 48.38410771189559
+      },
+      {
+        "removed_symbol": "BDXNUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BELUSDT",
+        "total_return_pct": 220.59656075075776
+      },
+      {
+        "removed_symbol": "BEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BICOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BIDUSDT",
+        "total_return_pct": 223.43552162068133
+      },
+      {
+        "removed_symbol": "BITOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BLUEBIRDUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BLZUSDT",
+        "total_return_pct": 236.8190173830658
+      },
+      {
+        "removed_symbol": "BMNRUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BNBUSDT",
+        "total_return_pct": 1.5501890481518732
+      },
+      {
+        "removed_symbol": "BNCUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BOBUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BONDUSDT",
+        "total_return_pct": 218.41469024033447
+      },
+      {
+        "removed_symbol": "BOTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BRKBUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BSPUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BSWUSDT",
+        "total_return_pct": 225.60116750051128
+      },
+      {
+        "removed_symbol": "BTCDOMUSDT",
+        "total_return_pct": 214.35016604013316
+      },
+      {
+        "removed_symbol": "BTCUSDT",
+        "total_return_pct": 15.714173958786937
+      },
+      {
+        "removed_symbol": "BTSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "BTTUSDT",
+        "total_return_pct": 214.0223523687606
+      },
+      {
+        "removed_symbol": "BZRXUSDT",
+        "total_return_pct": 208.64927393484817
+      },
+      {
+        "removed_symbol": "C98USDT",
+        "total_return_pct": 220.2004881725491
+      },
+      {
+        "removed_symbol": "CAPUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CBRSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CCUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CELOUSDT",
+        "total_return_pct": 214.28192895840104
+      },
+      {
+        "removed_symbol": "CELRUSDT",
+        "total_return_pct": 220.959428952846
+      },
+      {
+        "removed_symbol": "CFXUSDT",
+        "total_return_pct": 209.41529151009854
+      },
+      {
+        "removed_symbol": "CHESSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CHRUSDT",
+        "total_return_pct": 225.25396405756845
+      },
+      {
+        "removed_symbol": "CHZUSDT",
+        "total_return_pct": 218.607387334238
+      },
+      {
+        "removed_symbol": "CIENUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CKBUSDT",
+        "total_return_pct": 199.6709838542583
+      },
+      {
+        "removed_symbol": "COCOSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "COHRUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "COINUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "COMBOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "COMMONUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "COMPUSDT",
+        "total_return_pct": 223.04362113521285
+      },
+      {
+        "removed_symbol": "COSTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "COTIUSDT",
+        "total_return_pct": 212.48693301327742
+      },
+      {
+        "removed_symbol": "CRCLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CRDOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CRVUSDT",
+        "total_return_pct": 132.94459601143907
+      },
+      {
+        "removed_symbol": "CRWVUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CSOPSAMSUNG2LUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CSOPSKHYNIX2LUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CTSIUSDT",
+        "total_return_pct": 217.3273096965949
+      },
+      {
+        "removed_symbol": "CUDISUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "CXMTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DAMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DARUSDT",
+        "total_return_pct": 210.9962970875988
+      },
+      {
+        "removed_symbol": "DASHUSDT",
+        "total_return_pct": 212.41174289144675
+      },
+      {
+        "removed_symbol": "DATAIPUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DEFIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DEGENUSDT",
+        "total_return_pct": 215.92879229216666
+      },
+      {
+        "removed_symbol": "DEGOUSDT",
+        "total_return_pct": 213.57745462334083
+      },
+      {
+        "removed_symbol": "DENTUSDT",
+        "total_return_pct": 214.60149544114714
+      },
+      {
+        "removed_symbol": "DFUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DGBUSDT",
+        "total_return_pct": 216.4824822637848
+      },
+      {
+        "removed_symbol": "DJTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DKNGUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DMCUSDT",
+        "total_return_pct": 214.54931567597305
+      },
+      {
+        "removed_symbol": "DODOUSDT",
+        "total_return_pct": 219.54120843547642
+      },
+      {
+        "removed_symbol": "DOGEUSDT",
+        "total_return_pct": 202.2978715708922
+      },
+      {
+        "removed_symbol": "DOSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DOTECOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DOTUSDT",
+        "total_return_pct": 26.631240634283525
+      },
+      {
+        "removed_symbol": "DRAMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "DYDXUSDT",
+        "total_return_pct": 207.8872345502468
+      },
+      {
+        "removed_symbol": "EDUUSDT",
+        "total_return_pct": 212.53683123661355
+      },
+      {
+        "removed_symbol": "EGLDUSDT",
+        "total_return_pct": 137.1068003989532
+      },
+      {
+        "removed_symbol": "ENSUSDT",
+        "total_return_pct": 199.49017324133456
+      },
+      {
+        "removed_symbol": "EOSUSDT",
+        "total_return_pct": 30.633599300937654
+      },
+      {
+        "removed_symbol": "EPTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ETCUSDT",
+        "total_return_pct": 196.21010148761115
+      },
+      {
+        "removed_symbol": "ETHUSDT",
+        "total_return_pct": 15.154238829060219
+      },
+      {
+        "removed_symbol": "EWJUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "EWTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "EWYUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "EWZUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FETUSDT",
+        "total_return_pct": 216.56203569379886
+      },
+      {
+        "removed_symbol": "FIOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FISUSDT",
+        "total_return_pct": 212.28224777924427
+      },
+      {
+        "removed_symbol": "FLEXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FLNCUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FLUIDUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FOLKSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FOOTBALLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FORTHUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FRONTUSDT",
+        "total_return_pct": 207.75396042321867
+      },
+      {
+        "removed_symbol": "FUNUSDT",
+        "total_return_pct": 229.03019144189844
+      },
+      {
+        "removed_symbol": "FWDIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "FXSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GALAUSDT",
+        "total_return_pct": 215.3477907698583
+      },
+      {
+        "removed_symbol": "GALUSDT",
+        "total_return_pct": 218.405261478159
+      },
+      {
+        "removed_symbol": "GDXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GEVUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GHSTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GIGADEVUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GIGGLEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GLMRUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GMEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GMXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GRAMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "GRVTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "HANMIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "HFTUSDT",
+        "total_return_pct": 215.01166406790708
+      },
+      {
+        "removed_symbol": "HIFIUSDT",
+        "total_return_pct": 213.43080224966488
+      },
+      {
+        "removed_symbol": "HIGHUSDT",
+        "total_return_pct": 207.6031686533306
+      },
+      {
+        "removed_symbol": "HIMSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "HIPPOUSDT",
+        "total_return_pct": 213.8716157652885
+      },
+      {
+        "removed_symbol": "HK0700USDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "HK1810USDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "HNTUSDT",
+        "total_return_pct": 216.11035863012842
+      },
+      {
+        "removed_symbol": "HOODUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "HOOKUSDT",
+        "total_return_pct": 214.46900110659834
+      },
+      {
+        "removed_symbol": "IDEXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "INJUSDT",
+        "total_return_pct": 218.61132689502654
+      },
+      {
+        "removed_symbol": "INTCUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "INTWUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "IONQUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "IOSTUSDT",
+        "total_return_pct": 215.9993354066765
+      },
+      {
+        "removed_symbol": "IOTXUSDT",
+        "total_return_pct": 214.53974468558275
+      },
+      {
+        "removed_symbol": "IRENUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "IRUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "IRYSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "IWMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "JASMYUSDT",
+        "total_return_pct": 185.50478005733703
+      },
+      {
+        "removed_symbol": "JCTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "JOEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "KDAUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "KEEPUSDT",
+        "total_return_pct": 215.02639911767477
+      },
+      {
+        "removed_symbol": "KEYUSDT",
+        "total_return_pct": 216.07516808396508
+      },
+      {
+        "removed_symbol": "KLAYUSDT",
+        "total_return_pct": 216.3657427999215
+      },
+      {
+        "removed_symbol": "KODEX200USDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "KOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "KSTRUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "KUAISHOUUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "LDOUSDT",
+        "total_return_pct": 216.57146309465332
+      },
+      {
+        "removed_symbol": "LENDUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "LEVERUSDT",
+        "total_return_pct": 212.21368895931482
+      },
+      {
+        "removed_symbol": "LGELECTRONICSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "LINKUSDT",
+        "total_return_pct": 28.45409336596132
+      },
+      {
+        "removed_symbol": "LITEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "LOKAUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "LOOMUSDT",
+        "total_return_pct": 216.04275985119318
+      },
+      {
+        "removed_symbol": "LQTYUSDT",
+        "total_return_pct": 208.21199173323174
+      },
+      {
+        "removed_symbol": "LRCXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "LYTEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MARAUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MATICUSDT",
+        "total_return_pct": 239.55598996840988
+      },
+      {
+        "removed_symbol": "MAVUSDT",
+        "total_return_pct": 214.2560318339439
+      },
+      {
+        "removed_symbol": "MBLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MBOXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MDTUSDT",
+        "total_return_pct": 215.09398140128383
+      },
+      {
+        "removed_symbol": "MEITUANUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MEMEFIUSDT",
+        "total_return_pct": 210.72251722115763
+      },
+      {
+        "removed_symbol": "MILKUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MINAUSDT",
+        "total_return_pct": 214.77428162657404
+      },
+      {
+        "removed_symbol": "MINIMAXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MLNUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MRKUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MRNAUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MSTRUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MTLUSDT",
+        "total_return_pct": 215.35315974055763
+      },
+      {
+        "removed_symbol": "MUUUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MVLLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "MYROUSDT",
+        "total_return_pct": 212.71370934358094
+      },
+      {
+        "removed_symbol": "NAVERUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "NBISUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "NEIROETHUSDT",
+        "total_return_pct": 215.9497607400939
+      },
+      {
+        "removed_symbol": "NEOUSDT",
+        "total_return_pct": 215.95528819782461
+      },
+      {
+        "removed_symbol": "NETUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "NFLXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "NKNUSDT",
+        "total_return_pct": 212.3767971102364
+      },
+      {
+        "removed_symbol": "NOKUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "NOWUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "NTRNUSDT",
+        "total_return_pct": 216.342127878784
+      },
+      {
+        "removed_symbol": "NULSUSDT",
+        "total_return_pct": 216.89774458385648
+      },
+      {
+        "removed_symbol": "NUUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "OBOLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "OLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "OMNIUSDT",
+        "total_return_pct": 215.2932000670902
+      },
+      {
+        "removed_symbol": "OMUSDT",
+        "total_return_pct": 197.81855584736672
+      },
+      {
+        "removed_symbol": "ONDSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ONUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "OPENAIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "OPUSDT",
+        "total_return_pct": 219.9108333567525
+      },
+      {
+        "removed_symbol": "ORBSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "OUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "OXTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PANWUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PAYPUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PDDUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PENDLEUSDT",
+        "total_return_pct": 221.20905753719833
+      },
+      {
+        "removed_symbol": "PENGUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PERPUSDT",
+        "total_return_pct": 209.447368125128
+      },
+      {
+        "removed_symbol": "PHBUSDT",
+        "total_return_pct": 214.48343865625205
+      },
+      {
+        "removed_symbol": "PLTRUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PONKEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "POPMARTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PORT3USDT",
+        "total_return_pct": 216.78929788640224
+      },
+      {
+        "removed_symbol": "PUFFERUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "PYPLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "QNTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "QNTXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "QTUMUSDT",
+        "total_return_pct": 209.94065495999968
+      },
+      {
+        "removed_symbol": "QUICKUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RADUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RAMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RAYUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RDDTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RDNTUSDT",
+        "total_return_pct": 212.7000689046235
+      },
+      {
+        "removed_symbol": "REEFUSDT",
+        "total_return_pct": 221.3326359615817
+      },
+      {
+        "removed_symbol": "REIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RENUSDT",
+        "total_return_pct": 210.51256923697554
+      },
+      {
+        "removed_symbol": "RIVNUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RKLBUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RLSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "RNDRUSDT",
+        "total_return_pct": 215.14021331623195
+      },
+      {
+        "removed_symbol": "RUNEUSDT",
+        "total_return_pct": 224.29700108082793
+      },
+      {
+        "removed_symbol": "RVVUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SAMSUNGEMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SCUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SEIUSDT",
+        "total_return_pct": 219.3129940284931
+      },
+      {
+        "removed_symbol": "SFPUSDT",
+        "total_return_pct": 204.2666471267904
+      },
+      {
+        "removed_symbol": "SHAZUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SHOPUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SKATEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SKDDUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SKHYUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SKUUUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SLERFUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SMCIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SMHUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SNDKUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SNOWUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SNTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SNXUSDT",
+        "total_return_pct": 213.04328315490753
+      },
+      {
+        "removed_symbol": "SNXXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SOFIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SONYUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SOXLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SOXSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SPCXUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SPELLUSDT",
+        "total_return_pct": 201.47514346567368
+      },
+      {
+        "removed_symbol": "SQQQUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SRMUSDT",
+        "total_return_pct": 221.5688239867014
+      },
+      {
+        "removed_symbol": "SSVUSDT",
+        "total_return_pct": 214.1106745352119
+      },
+      {
+        "removed_symbol": "STBLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "STPTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "STRAXUSDT",
+        "total_return_pct": 217.7731418784385
+      },
+      {
+        "removed_symbol": "STXUSDT",
+        "total_return_pct": 212.81766571173998
+      },
+      {
+        "removed_symbol": "SUIUSDT",
+        "total_return_pct": 207.22174690860572
+      },
+      {
+        "removed_symbol": "SWELLUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "SXPUSDT",
+        "total_return_pct": 217.30577778450626
+      },
+      {
+        "removed_symbol": "SYSUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TANSSIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TBTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TEMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TENCENTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TERUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "THETAUSDT",
+        "total_return_pct": 210.0412047119554
+      },
+      {
+        "removed_symbol": "TMFUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TOKENUSDT",
+        "total_return_pct": 209.4627467344145
+      },
+      {
+        "removed_symbol": "TOMOUSDT",
+        "total_return_pct": 230.47650556070997
+      },
+      {
+        "removed_symbol": "TONUSDT",
+        "total_return_pct": 214.61932918162577
+      },
+      {
+        "removed_symbol": "TQQQUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TROYUSDT",
+        "total_return_pct": 213.20105646870203
+      },
+      {
+        "removed_symbol": "TRUUSDT",
+        "total_return_pct": 206.24281390030112
+      },
+      {
+        "removed_symbol": "TSLAUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TTWOUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "TZAUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "UAIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "UBERUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "UNITREEUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "UNIUSDT",
+        "total_return_pct": 164.98882516862275
+      },
+      {
+        "removed_symbol": "URNMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "USARUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "USDCUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "UVXYUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "UXLINKUSDT",
+        "total_return_pct": 210.19829774065357
+      },
+      {
+        "removed_symbol": "VFYUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "VIDTUSDT",
+        "total_return_pct": 217.34106862049097
+      },
+      {
+        "removed_symbol": "VINEUSDT",
+        "total_return_pct": 214.41990595648755
+      },
+      {
+        "removed_symbol": "VOXELUSDT",
+        "total_return_pct": 217.13667927816988
+      },
+      {
+        "removed_symbol": "VRTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "VSTUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "WLDUSDT",
+        "total_return_pct": 193.97382734947692
+      },
+      {
+        "removed_symbol": "WOOUSDT",
+        "total_return_pct": 213.83850743080987
+      },
+      {
+        "removed_symbol": "XANUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "XBIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "XCNUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "XMRUSDT",
+        "total_return_pct": 213.05412268883987
+      },
+      {
+        "removed_symbol": "XVGUSDT",
+        "total_return_pct": 220.360411567997
+      },
+      {
+        "removed_symbol": "XVSUSDT",
+        "total_return_pct": 212.00616317435052
+      },
+      {
+        "removed_symbol": "YALAUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ZHIPUUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ZHONGJIUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ZKJUSDT",
+        "total_return_pct": 211.08653623058666
+      },
+      {
+        "removed_symbol": "ZMUSDT",
+        "total_return_pct": 215.8645825239849
+      },
+      {
+        "removed_symbol": "ZRCUSDT",
+        "total_return_pct": 215.8645825239849
+      }
+    ],
+    "total_runs": 362,
+    "worst_removed_symbol": "BNBUSDT"
+  },
+  "legacy_artifacts_immutable": true,
+  "live_trading": false,
+  "missing_gate_metrics": [],
+  "no_signal_day_count": 257,
+  "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+  "output_dir": "research/m1/runs/XS-LOWVOL-M1-B.1B-CORRECTED-1",
+  "performance_metrics_complete": false,
+  "performance_metrics_status": "DIAGNOSTIC_ONLY_DUE_TO_G0",
+  "primary_decision_strategy": "XS-LOWVOL-V1-Control",
+  "protocol_id": "XS-LOWVOL-M1-PIT-V1",
+  "protocol_sha256": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+  "quality": {
+    "all_normalized": {
+      "affected_symbols": {
+        "0GUSDT": 1,
+        "1000000BOBUSDT": 1,
+        "1000000MOGUSDT": 1,
+        "1000BONKUSDT": 1,
+        "1000CATUSDT": 1,
+        "1000CHEEMSUSDT": 1,
+        "1000RATSUSDT": 1,
+        "1000SATSUSDT": 1,
+        "1000XECUSDT": 1,
+        "1MBABYDOGEUSDT": 1,
+        "4USDT": 1,
+        "AAPLUSDT": 5,
+        "ACEUSDT": 2,
+        "ACTUSDT": 1,
+        "ACUUSDT": 1,
+        "ACXUSDT": 1,
+        "AERGOUSDT": 1,
+        "AEROUSDT": 1,
+        "AEVOUSDT": 1,
+        "AGTUSDT": 1,
+        "AIAUSDT": 3,
+        "AIGENSYNUSDT": 1,
+        "AINUSDT": 1,
+        "AIOTUSDT": 1,
+        "AIOUSDT": 1,
+        "AIXBTUSDT": 1,
+        "AKEUSDT": 1,
+        "AKTUSDT": 1,
+        "ALCHUSDT": 1,
+        "ALICEUSDT": 1,
+        "ALLOUSDT": 1,
+        "ALPINEUSDT": 1,
+        "ALTUSDT": 1,
+        "AMATUSDT": 2,
+        "ANIMEUSDT": 2,
+        "ANKRUSDT": 2,
+        "API3USDT": 2,
+        "APRUSDT": 1,
+        "ARCUSDT": 1,
+        "ARIAUSDT": 2,
+        "ARKUSDT": 2,
+        "ASRUSDT": 1,
+        "ASTERUSDT": 1,
+        "ATHUSDT": 1,
+        "ATUSDT": 1,
+        "AUCTIONUSDT": 2,
+        "AUSDT": 1,
+        "AVAAIUSDT": 1,
+        "AVAUSDT": 1,
+        "AVGOUSDT": 3,
+        "AVNTUSDT": 1,
+        "AWEUSDT": 1,
+        "AXLUSDT": 1,
+        "AXSUSDT": 1,
+        "AZTECUSDT": 2,
+        "B2USDT": 1,
+        "BABAUSDT": 3,
+        "BABYUSDT": 1,
+        "BANANAS31USDT": 1,
+        "BANANAUSDT": 1,
+        "BANKUSDT": 2,
+        "BANUSDT": 1,
+        "BARDUSDT": 1,
+        "BASEDUSDT": 1,
+        "BASUSDT": 1,
+        "BBUSDT": 1,
+        "BEAMXUSDT": 1,
+        "BEATUSDT": 1,
+        "BERAUSDT": 1,
+        "BIGTIMEUSDT": 1,
+        "BILLUSDT": 1,
+        "BIOUSDT": 2,
+        "BIRBUSDT": 1,
+        "BLESSUSDT": 1,
+        "BLUAIUSDT": 1,
+        "BLURUSDT": 2,
+        "BMTUSDT": 1,
+        "BNTUSDT": 1,
+        "BNXUSDT": 27,
+        "BOMEUSDT": 1,
+        "BRETTUSDT": 1,
+        "BREVUSDT": 1,
+        "BROCCOLI714USDT": 1,
+        "BROCCOLIF3BUSDT": 1,
+        "BRUSDT": 1,
+        "BSBUSDT": 1,
+        "BSVUSDT": 1,
+        "BTCSTUSDT": 1,
+        "BTRUSDT": 1,
+        "BTWUSDT": 1,
+        "BULLAUSDT": 3,
+        "BUSDT": 1,
+        "BXUSDT": 2,
+        "BZUSDT": 1,
+        "CAKEUSDT": 1,
+        "CARVUSDT": 1,
+        "CATIUSDT": 1,
+        "CATUSDT": 10,
+        "CETUSUSDT": 1,
+        "CFGUSDT": 1,
+        "CGPTUSDT": 1,
+        "CHILLGUYUSDT": 1,
+        "CHIPUSDT": 1,
+        "CLANKERUSDT": 1,
+        "CLOUSDT": 1,
+        "CLUSDT": 1,
+        "COAIUSDT": 2,
+        "COLLECTUSDT": 1,
+        "COOKIEUSDT": 1,
+        "COPPERUSDT": 1,
+        "COSUSDT": 2,
+        "COWUSDT": 1,
+        "CRMUSDT": 3,
+        "CROSSUSDT": 1,
+        "CRWDUSDT": 1,
+        "CSCOUSDT": 2,
+        "CTKUSDT": 1,
+        "CTRUSDT": 1,
+        "CUSDT": 2,
+        "CVCUSDT": 2,
+        "CVXUSDT": 2,
+        "CYBERUSDT": 1,
+        "CYSUSDT": 1,
+        "DEEPUSDT": 1,
+        "DELLUSDT": 2,
+        "DEXEUSDT": 2,
+        "DIAUSDT": 1,
+        "DISUSDT": 2,
+        "DODOXUSDT": 1,
+        "DOGSUSDT": 1,
+        "DOLOUSDT": 1,
+        "DOODUSDT": 2,
+        "DRIFTUSDT": 1,
+        "DUSKUSDT": 1,
+        "DYMUSDT": 1,
+        "EBAYUSDT": 2,
+        "EDENUSDT": 1,
+        "EDGEUSDT": 1,
+        "EIGENUSDT": 1,
+        "ELSAUSDT": 2,
+        "ENAUSDT": 1,
+        "ENJUSDT": 3,
+        "ENSOUSDT": 1,
+        "EPICUSDT": 2,
+        "ERAUSDT": 1,
+        "ESPORTSUSDT": 1,
+        "ESPUSDT": 2,
+        "ETHFIUSDT": 1,
+        "ETHWUSDT": 1,
+        "EULUSDT": 1,
+        "EVAAUSDT": 1,
+        "FARTCOINUSDT": 1,
+        "FFUSDT": 1,
+        "FHEUSDT": 1,
+        "FIDAUSDT": 2,
+        "FIGHTUSDT": 1,
+        "FILUSDT": 6,
+        "FLMUSDT": 7,
+        "FLOCKUSDT": 1,
+        "FLOWUSDT": 8,
+        "FLUXUSDT": 1,
+        "FOGOUSDT": 1,
+        "FORMUSDT": 1,
+        "FRAXUSDT": 1,
+        "FTMUSDT": 6,
+        "FTTUSDT": 2,
+        "FUSDT": 1,
+        "GASUSDT": 1,
+        "GENIUSUSDT": 1,
+        "GLMUSDT": 1,
+        "GLWUSDT": 3,
+        "GMTUSDT": 4,
+        "GOATUSDT": 1,
+        "GOOGLUSDT": 3,
+        "GPSUSDT": 2,
+        "GRASSUSDT": 1,
+        "GRIFFAINUSDT": 1,
+        "GRTUSDT": 6,
+        "GSUSDT": 1,
+        "GTCUSDT": 6,
+        "GUAUSDT": 2,
+        "GUNUSDT": 1,
+        "GUSDT": 2,
+        "GWEIUSDT": 1,
+        "HAEDALUSDT": 1,
+        "HANAUSDT": 1,
+        "HBARUSDT": 6,
+        "HDUSDT": 3,
+        "HEIUSDT": 2,
+        "HEMIUSDT": 1,
+        "HIVEUSDT": 2,
+        "HMSTRUSDT": 1,
+        "HOLOUSDT": 1,
+        "HOMEUSDT": 1,
+        "HOTUSDT": 6,
+        "HPEUSDT": 3,
+        "HUMAUSDT": 1,
+        "HUSDT": 2,
+        "HYPERUSDT": 1,
+        "HYPEUSDT": 1,
+        "HYUNDAIUSDT": 2,
+        "IBMUSDT": 2,
+        "ICNTUSDT": 1,
+        "ICPUSDT": 27,
+        "ICXUSDT": 1,
+        "IDOLUSDT": 1,
+        "IDUSDT": 1,
+        "ILVUSDT": 1,
+        "IMXUSDT": 7,
+        "INITUSDT": 2,
+        "INUSDT": 2,
+        "INXUSDT": 1,
+        "IOTAUSDT": 6,
+        "IOUSDT": 1,
+        "IPUSDT": 2,
+        "JELLYJELLYUSDT": 2,
+        "JPMUSDT": 2,
+        "JSTUSDT": 1,
+        "JTOUSDT": 1,
+        "JUPUSDT": 1,
+        "KAIAUSDT": 1,
+        "KAITOUSDT": 1,
+        "KASUSDT": 1,
+        "KATUSDT": 1,
+        "KAVAUSDT": 2,
+        "KERNELUSDT": 1,
+        "KGENUSDT": 1,
+        "KITEUSDT": 1,
+        "KLACUSDT": 2,
+        "KMNOUSDT": 1,
+        "KNCUSDT": 6,
+        "KOMAUSDT": 1,
+        "KORUUSDT": 1,
+        "KSMUSDT": 6,
+        "LABUSDT": 2,
+        "LAUSDT": 2,
+        "LAYERUSDT": 2,
+        "LIGHTUSDT": 1,
+        "LINAUSDT": 6,
+        "LINEAUSDT": 1,
+        "LISTAUSDT": 1,
+        "LITUSDT": 8,
+        "LLYUSDT": 2,
+        "LPTUSDT": 1,
+        "LRCUSDT": 6,
+        "LSKUSDT": 1,
+        "LTCUSDT": 6,
+        "LUMIAUSDT": 1,
+        "LUNA2USDT": 1,
+        "LUNAUSDT": 1577,
+        "LYNUSDT": 2,
+        "MAGICUSDT": 1,
+        "MAGMAUSDT": 1,
+        "MANAUSDT": 6,
+        "MANTAUSDT": 1,
+        "MANTRAUSDT": 1,
+        "MASKUSDT": 7,
+        "MAVIAUSDT": 1,
+        "MEGAUSDT": 1,
+        "MELANIAUSDT": 1,
+        "MEMEUSDT": 1,
+        "MERLUSDT": 2,
+        "METAUSDT": 3,
+        "METISUSDT": 1,
+        "METUSDT": 1,
+        "MEUSDT": 3,
+        "MEWUSDT": 1,
+        "MIRAUSDT": 1,
+        "MITOUSDT": 1,
+        "MKRUSDT": 6,
+        "MMTUSDT": 1,
+        "MOCAUSDT": 1,
+        "MONUSDT": 1,
+        "MOODENGUSDT": 1,
+        "MORPHOUSDT": 1,
+        "MOVEUSDT": 1,
+        "MOVRUSDT": 1,
+        "MRVLUSDT": 2,
+        "MSFTUSDT": 5,
+        "MUBARAKUSDT": 1,
+        "MUSDT": 1,
+        "MUUSDT": 2,
+        "MYXUSDT": 1,
+        "NAORISUSDT": 1,
+        "NATGASUSDT": 1,
+        "NEARUSDT": 6,
+        "NEIROUSDT": 1,
+        "NEWTUSDT": 1,
+        "NFPUSDT": 1,
+        "NIGHTUSDT": 1,
+        "NILUSDT": 1,
+        "NMRUSDT": 1,
+        "NOMUSDT": 2,
+        "NOTUSDT": 1,
+        "NVDAUSDT": 3,
+        "NVOUSDT": 2,
+        "NXPCUSDT": 1,
+        "OCEANUSDT": 6,
+        "OGNUSDT": 7,
+        "OGUSDT": 1,
+        "OMGUSDT": 7,
+        "ONDOUSDT": 1,
+        "ONEUSDT": 6,
+        "ONGUSDT": 2,
+        "ONTUSDT": 3,
+        "OPENUSDT": 1,
+        "OPGUSDT": 1,
+        "OPNUSDT": 1,
+        "ORCAUSDT": 1,
+        "ORCLUSDT": 2,
+        "ORDERUSDT": 1,
+        "ORDIUSDT": 1,
+        "PARTIUSDT": 2,
+        "PAXGUSDT": 1,
+        "PENGUUSDT": 1,
+        "PEOPLEUSDT": 6,
+        "PHAROSUSDT": 1,
+        "PHAUSDT": 1,
+        "PIEVERSEUSDT": 1,
+        "PIPPINUSDT": 4,
+        "PIXELUSDT": 1,
+        "PLAYUSDT": 2,
+        "PLUMEUSDT": 2,
+        "PNUTUSDT": 1,
+        "POLUSDT": 1,
+        "POLYXUSDT": 1,
+        "POPCATUSDT": 1,
+        "PORTALUSDT": 1,
+        "POWERUSDT": 1,
+        "POWRUSDT": 1,
+        "PRLUSDT": 2,
+        "PROMPTUSDT": 2,
+        "PROMUSDT": 2,
+        "PROVEUSDT": 1,
+        "PTBUSDT": 2,
+        "PUMPBTCUSDT": 1,
+        "PUMPUSDT": 2,
+        "PUNDIXUSDT": 1,
+        "PYTHUSDT": 1,
+        "QCOMUSDT": 3,
+        "QQQUSDT": 3,
+        "QUSDT": 1,
+        "RAREUSDT": 1,
+        "RAVEUSDT": 1,
+        "RAYSOLUSDT": 1,
+        "RECALLUSDT": 1,
+        "REDUSDT": 1,
+        "RENDERUSDT": 1,
+        "RESOLVUSDT": 1,
+        "REUSDT": 1,
+        "REZUSDT": 1,
+        "RIFUSDT": 1,
+        "RIVERUSDT": 2,
+        "RLCUSDT": 6,
+        "ROBOUSDT": 1,
+        "RONINUSDT": 1,
+        "ROSEUSDT": 6,
+        "RPLUSDT": 2,
+        "RSRUSDT": 6,
+        "RVNUSDT": 7,
+        "SAFEUSDT": 1,
+        "SAGAUSDT": 1,
+        "SAHARAUSDT": 2,
+        "SAMSUNGUSDT": 2,
+        "SANDUSDT": 6,
+        "SANTOSUSDT": 1,
+        "SAPIENUSDT": 1,
+        "SCRTUSDT": 1,
+        "SCRUSDT": 1,
+        "SENTUSDT": 2,
+        "SHELLUSDT": 1,
+        "SIGNUSDT": 2,
+        "SIRENUSDT": 2,
+        "SKHYNIXUSDT": 2,
+        "SKLUSDT": 7,
+        "SKRUSDT": 2,
+        "SKYAIUSDT": 1,
+        "SKYUSDT": 1,
+        "SLPUSDT": 2,
+        "SLXUSDT": 2,
+        "SOLUSDT": 6,
+        "SOLVUSDT": 1,
+        "SOMIUSDT": 1,
+        "SONICUSDT": 1,
+        "SOONUSDT": 2,
+        "SOPHUSDT": 1,
+        "SPACEUSDT": 1,
+        "SPKUSDT": 1,
+        "SPORTFUNUSDT": 1,
+        "SPXUSDT": 1,
+        "SPYUSDT": 3,
+        "SQDUSDT": 2,
+        "STABLEUSDT": 2,
+        "STARUSDT": 1,
+        "STEEMUSDT": 2,
+        "STGUSDT": 2,
+        "STMXUSDT": 1,
+        "STORJUSDT": 7,
+        "STOUSDT": 3,
+        "STRCUSDT": 9,
+        "STRKUSDT": 1,
+        "STXXUSDT": 2,
+        "SUNUSDT": 1,
+        "SUPERUSDT": 1,
+        "SUSDT": 1,
+        "SUSHIUSDT": 6,
+        "SWARMSUSDT": 1,
+        "SXTUSDT": 1,
+        "SYNUSDT": 1,
+        "SYRUPUSDT": 1,
+        "TACUSDT": 1,
+        "TAGUSDT": 1,
+        "TAIKOUSDT": 2,
+        "TAKEUSDT": 1,
+        "TAOUSDT": 1,
+        "TAUSDT": 1,
+        "THEUSDT": 1,
+        "TIAUSDT": 1,
+        "TLMUSDT": 31,
+        "TNSRUSDT": 1,
+        "TOSHIUSDT": 1,
+        "TOWNSUSDT": 1,
+        "TRADOORUSDT": 1,
+        "TRBUSDT": 7,
+        "TREEUSDT": 2,
+        "TRIAUSDT": 1,
+        "TRUMPUSDT": 1,
+        "TRUSTUSDT": 2,
+        "TRUTHUSDT": 1,
+        "TRXUSDT": 6,
+        "TSMUSDT": 3,
+        "TSTUSDT": 1,
+        "TURBOUSDT": 1,
+        "TURTLEUSDT": 2,
+        "TUSDT": 2,
+        "TUTUSDT": 1,
+        "TWTUSDT": 1,
+        "TXNUSDT": 2,
+        "UBUSDT": 1,
+        "UMAUSDT": 1,
+        "UNFIUSDT": 6,
+        "USELESSUSDT": 1,
+        "USTCUSDT": 1,
+        "USUALUSDT": 1,
+        "USUSDT": 1,
+        "VANAUSDT": 1,
+        "VANRYUSDT": 1,
+        "VELODROMEUSDT": 1,
+        "VELVETUSDT": 1,
+        "VETUSDT": 6,
+        "VICUSDT": 1,
+        "VIRTUALUSDT": 1,
+        "VTHOUSDT": 1,
+        "VUSDT": 2,
+        "VVVUSDT": 1,
+        "WALUSDT": 1,
+        "WAVESUSDT": 6,
+        "WAXPUSDT": 1,
+        "WCTUSDT": 1,
+        "WDCUSDT": 3,
+        "WENUSDT": 1,
+        "WETUSDT": 1,
+        "WIFUSDT": 1,
+        "WLFIUSDT": 1,
+        "WMTUSDT": 2,
+        "WUSDT": 1,
+        "XAGUSDT": 1,
+        "XAIUSDT": 1,
+        "XAUTUSDT": 1,
+        "XAUUSDT": 1,
+        "XEMUSDT": 6,
+        "XLEUSDT": 3,
+        "XLMUSDT": 6,
+        "XNYUSDT": 1,
+        "XPDUSDT": 1,
+        "XPINUSDT": 1,
+        "XPLUSDT": 1,
+        "XPTUSDT": 1,
+        "XRPUSDT": 6,
+        "XTZUSDT": 1,
+        "YBUSDT": 1,
+        "YFIIUSDT": 1608,
+        "YFIUSDT": 6,
+        "YGGUSDT": 3,
+        "ZAMAUSDT": 1,
+        "ZBTUSDT": 1,
+        "ZECUSDT": 6,
+        "ZENUSDT": 6,
+        "ZEREBROUSDT": 1,
+        "ZESTUSDT": 1,
+        "ZETAUSDT": 1,
+        "ZILUSDT": 7,
+        "ZKCUSDT": 1,
+        "ZKPUSDT": 4,
+        "ZKUSDT": 1,
+        "ZORAUSDT": 1,
+        "ZROUSDT": 1,
+        "ZRXUSDT": 1
+      },
+      "checked_symbols": 860,
+      "duplicate_symbols": [],
+      "issue_codes": [
+        "FUNDING_COVERAGE_GAP",
+        "MISSING_INTERNAL_DAILY_BAR",
+        "UNEXPLAINED_SYMBOL_GAP"
+      ],
+      "issue_count": 4174,
+      "issue_counts": {
+        "FUNDING_COVERAGE_GAP": 626,
+        "MISSING_INTERNAL_DAILY_BAR": 3496,
+        "UNEXPLAINED_SYMBOL_GAP": 52
+      },
+      "passed": false,
+      "sample_issues": [
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 2h",
+          "symbol": "0GUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1000000BOBUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1000000MOGUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1000BONKUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1000CATUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1000CHEEMSUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1000RATSUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1000SATSUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 3h",
+          "symbol": "1000XECUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "1MBABYDOGEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "4USDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 6h",
+          "symbol": "AAPLUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8.33333e-07h",
+          "symbol": "AAPLUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 3h",
+          "symbol": "AAPLUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 4h",
+          "symbol": "AAPLUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 0.0002775h",
+          "symbol": "AAPLUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ACEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 2h",
+          "symbol": "ACEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ACTUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ACUUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ACXUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AERGOUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AEROUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AEVOUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AGTUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 3h",
+          "symbol": "AIAUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 955h",
+          "symbol": "AIAUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AIAUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AIGENSYNUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AINUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AIOTUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AIOUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AIXBTUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AKEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "AKTUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ALCHUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ALICEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ALLOUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ALPINEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ALTUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 4h",
+          "symbol": "AMATUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 0.000278056h",
+          "symbol": "AMATUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 3h",
+          "symbol": "ANIMEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ANIMEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 2h",
+          "symbol": "ANKRUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ANKRUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 3h",
+          "symbol": "API3USDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "API3USDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "APRUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "funding spacing 8h",
+          "symbol": "ARCUSDT"
+        }
+      ]
+    },
+    "funding_coverage": {
+      "hold_issue_count": 8,
+      "hold_issue_counts": {
+        "FUNDING_COVERAGE_GAP": 8
+      },
+      "holds_passed": false,
+      "passed": false,
+      "sample_issues": [
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "KEEPUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "ANCUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "AKROUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "TONUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "OMNIUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "VINEUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "MEMEFIUSDT"
+        },
+        {
+          "code": "FUNDING_COVERAGE_GAP",
+          "day": null,
+          "detail": "held interval has an unverified funding transition or boundary",
+          "symbol": "DMCUSDT"
+        }
+      ],
+      "structural_issue_count": 0,
+      "structural_issue_counts": {},
+      "structural_passed": true
+    },
+    "usable_dataset": {
+      "affected_symbols": {},
+      "checked_symbols": 362,
+      "duplicate_symbols": [],
+      "issue_codes": [],
+      "issue_count": 0,
+      "issue_counts": {},
+      "passed": true,
+      "sample_issues": []
+    }
+  },
+  "rebalance_count": 252,
+  "run_id": "XS-LOWVOL-M1-B.1B-CORRECTED-1",
+  "run_type": "CORRECTED_RERUN",
+  "runtime_evidence_status": "EVIDENCE_STALE",
+  "scheduled_signal_count": 892,
+  "shadow": {
+    "complete": false,
+    "cost_pnl": -0.10840326143575962,
+    "discovery": {
+      "cagr_pct": 2.7363433976191454,
+      "daily_observations": 365,
+      "end": "2026-08-31",
+      "max_drawdown_pct": 3.220922566234641,
+      "pnl": 0.06472303024879622,
+      "profit_factor_weekly": 1.2516385896062279,
+      "start": "2025-09-01",
+      "total_return_pct": 2.7287452008159407,
+      "weekly_observations": 52,
+      "weekly_sharpe": 0.5614257303416338
+    },
+    "external": {
+      "cagr_pct": 16.4587321999917,
+      "daily_observations": 2070,
+      "end": "2025-08-31",
+      "max_drawdown_pct": 26.683706138528308,
+      "pnl": 1.3718971719837771,
+      "profit_factor_weekly": 1.431604018525272,
+      "start": "2020-01-01",
+      "total_return_pct": 137.1897171983777,
+      "weekly_observations": 295,
+      "weekly_sharpe": 0.9269984317042124
+    },
+    "funding_pnl": -0.307981098085572,
+    "issues": [
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-11 -> 2025-08-12",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-12 -> 2025-08-13",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-13 -> 2025-08-14",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-14 -> 2025-08-15",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-15 -> 2025-08-16",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-16 -> 2025-08-17",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-17 -> 2025-08-18",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-18 -> 2025-08-19",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-19 -> 2025-08-20",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-20 -> 2025-08-21",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-21 -> 2025-08-22",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-22 -> 2025-08-23",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-23 -> 2025-08-24",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-24 -> 2025-08-25",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-25 -> 2025-08-26",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-26 -> 2025-08-27",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-27 -> 2025-08-28",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-28 -> 2025-08-29",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-29 -> 2025-08-30",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-30 -> 2025-08-31",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-31 -> 2025-09-01",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-01 -> 2025-09-02",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-02 -> 2025-09-03",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-03 -> 2025-09-04",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-04 -> 2025-09-05",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-05 -> 2025-09-06",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-06 -> 2025-09-07",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-07 -> 2025-09-08",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-08 -> 2025-09-09",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-09 -> 2025-09-10",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-10 -> 2025-09-11",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-11 -> 2025-09-12",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-12 -> 2025-09-13",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-13 -> 2025-09-14",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-14 -> 2025-09-15",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-15 -> 2025-09-16",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-16 -> 2025-09-17",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-17 -> 2025-09-18",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-18 -> 2025-09-19",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-19 -> 2025-09-20",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-20 -> 2025-09-21",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-21 -> 2025-09-22",
+      "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-22 -> 2025-09-23",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-22 -> 2025-09-23",
+      "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-23 -> 2025-09-24",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-23 -> 2025-09-24",
+      "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-24 -> 2025-09-25",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-24 -> 2025-09-25",
+      "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-25 -> 2025-09-26",
+      "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-25 -> 2025-09-26"
+    ],
+    "price_pnl": 1.8530045617539088,
+    "rebalance_count": 252,
+    "spec_hash": "97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd",
+    "strategy_id": "XS-LOWVOL-V1-VT80-Shadow",
+    "trade_count": 851,
+    "turnover_notional": 135.5040767946999
+  },
+  "shadow_is_secondary": true,
+  "shadow_sha256": "97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd",
+  "shadow_strategy_id": "XS-LOWVOL-V1-VT80-Shadow",
+  "supersedes_run": "XS-LOWVOL-M1-B-c4bb2b90",
+  "symbol_concentration": {
+    "ranked": [
+      [
+        "BNBUSDT",
+        0.31533569133861233
+      ],
+      [
+        "EOSUSDT",
+        0.258874494393828
+      ],
+      [
+        "BTCUSDT",
+        0.1999276879615789
+      ],
+      [
+        "BCHUSDT",
+        0.19349566073714014
+      ],
+      [
+        "SXPUSDT",
+        0.18137885430470904
+      ],
+      [
+        "ETCUSDT",
+        0.1638777101966013
+      ],
+      [
+        "APEUSDT",
+        0.1595883025686039
+      ],
+      [
+        "SFPUSDT",
+        0.14525900362644908
+      ],
+      [
+        "QTUMUSDT",
+        0.12352884768375919
+      ],
+      [
+        "ATAUSDT",
+        0.10847898537429164
+      ],
+      [
+        "HIGHUSDT",
+        0.10426797075398912
+      ],
+      [
+        "FRONTUSDT",
+        0.10139837044626099
+      ],
+      [
+        "DASHUSDT",
+        0.09764029350392624
+      ],
+      [
+        "ALGOUSDT",
+        0.09686647095956517
+      ],
+      [
+        "AI16ZUSDT",
+        0.09327605387191656
+      ],
+      [
+        "XMRUSDT",
+        0.08975319530685034
+      ],
+      [
+        "ARPAUSDT",
+        0.08440455792722325
+      ],
+      [
+        "TOKENUSDT",
+        0.08434752328143276
+      ],
+      [
+        "EGLDUSDT",
+        0.08362053420460204
+      ],
+      [
+        "ACHUSDT",
+        0.07621882995284934
+      ],
+      [
+        "WLDUSDT",
+        0.07595704253475054
+      ],
+      [
+        "SPELLUSDT",
+        0.07577464000713825
+      ],
+      [
+        "BANDUSDT",
+        0.07528463176048002
+      ],
+      [
+        "OMUSDT",
+        0.07499711790972892
+      ],
+      [
+        "1000PEPEUSDT",
+        0.07462006475933501
+      ],
+      [
+        "PERPUSDT",
+        0.07285895701982664
+      ],
+      [
+        "UXLINKUSDT",
+        0.07236515831120201
+      ],
+      [
+        "ETHUSDT",
+        0.06977821745443444
+      ],
+      [
+        "MTLUSDT",
+        0.06906984628325835
+      ],
+      [
+        "1000SHIBUSDT",
+        0.06726588714941627
+      ],
+      [
+        "TROYUSDT",
+        0.06617326362251487
+      ],
+      [
+        "XVGUSDT",
+        0.0635943071915613
+      ],
+      [
+        "AUDIOUSDT",
+        0.06185013666378055
+      ],
+      [
+        "BZRXUSDT",
+        0.056185730950899994
+      ],
+      [
+        "LEVERUSDT",
+        0.051615471661874746
+      ],
+      [
+        "EDUUSDT",
+        0.05096880255784643
+      ],
+      [
+        "VIDTUSDT",
+        0.050759870238206266
+      ],
+      [
+        "ZKJUSDT",
+        0.0506310608355286
+      ],
+      [
+        "ARKMUSDT",
+        0.0488861195566895
+      ],
+      [
+        "1000XUSDT",
+        0.04730318836793476
+      ],
+      [
+        "MYROUSDT",
+        0.044380874760302315
+      ],
+      [
+        "VINEUSDT",
+        0.04165229168342958
+      ],
+      [
+        "HOOKUSDT",
+        0.04087126045758075
+      ],
+      [
+        "JASMYUSDT",
+        0.0391096402487101
+      ],
+      [
+        "C98USDT",
+        0.03884764087782159
+      ],
+      [
+        "CELRUSDT",
+        0.038438198666808907
+      ],
+      [
+        "HIPPOUSDT",
+        0.03755711160475212
+      ],
+      [
+        "BATUSDT",
+        0.03633645551150734
+      ],
+      [
+        "DMCUSDT",
+        0.03621221286709576
+      ],
+      [
+        "THETAUSDT",
+        0.03531846559996411
+      ],
+      [
+        "MEMEFIUSDT",
+        0.03520226065877924
+      ],
+      [
+        "GALUSDT",
+        0.0347769547542467
+      ],
+      [
+        "TRUUSDT",
+        0.03394326778215962
+      ],
+      [
+        "HFTUSDT",
+        0.03260216409730669
+      ],
+      [
+        "SNXUSDT",
+        0.032216306649386975
+      ],
+      [
+        "ANCUSDT",
+        0.03214186972255731
+      ],
+      [
+        "AMBUSDT",
+        0.028719570309382787
+      ],
+      [
+        "AGIXUSDT",
+        0.02704597871663318
+      ],
+      [
+        "NULSUSDT",
+        0.02684373134555702
+      ],
+      [
+        "WOOUSDT",
+        0.02651827377176489
+      ],
+      [
+        "DARUSDT",
+        0.026250501647130244
+      ],
+      [
+        "FETUSDT",
+        0.02312311780192019
+      ],
+      [
+        "ADAUSDT",
+        0.02304945132045754
+      ],
+      [
+        "AIUSDT",
+        0.021733872245891326
+      ],
+      [
+        "OMNIUSDT",
+        0.020938053316929835
+      ],
+      [
+        "CHZUSDT",
+        0.02058783498794652
+      ],
+      [
+        "DYDXUSDT",
+        0.020326662630527497
+      ],
+      [
+        "PHBUSDT",
+        0.018388577224945957
+      ],
+      [
+        "NEOUSDT",
+        0.018271585475666353
+      ],
+      [
+        "KLAYUSDT",
+        0.01653924114929279
+      ],
+      [
+        "SSVUSDT",
+        0.015860339029887094
+      ],
+      [
+        "NTRNUSDT",
+        0.01556227672403123
+      ],
+      [
+        "CFXUSDT",
+        0.014689195050989708
+      ],
+      [
+        "CHRUSDT",
+        0.014506483928075993
+      ],
+      [
+        "ALPACAUSDT",
+        0.01380081641923124
+      ],
+      [
+        "COMPUSDT",
+        0.013755848159774
+      ],
+      [
+        "KEEPUSDT",
+        0.012898451722488833
+      ],
+      [
+        "DGBUSDT",
+        0.009593227896010985
+      ],
+      [
+        "DEGOUSDT",
+        0.008973566052296883
+      ],
+      [
+        "CELOUSDT",
+        0.008328349753611202
+      ],
+      [
+        "ENSUSDT",
+        0.007759533379147528
+      ],
+      [
+        "FISUSDT",
+        0.0074031985686680585
+      ],
+      [
+        "PORT3USDT",
+        0.007150336383275741
+      ],
+      [
+        "UNIUSDT",
+        0.006103816854531224
+      ],
+      [
+        "RDNTUSDT",
+        0.006058516591651545
+      ],
+      [
+        "ASTRUSDT",
+        0.0059915988095701435
+      ],
+      [
+        "MDTUSDT",
+        0.0047661214351453745
+      ],
+      [
+        "CTSIUSDT",
+        0.004456762185570608
+      ],
+      [
+        "AKROUSDT",
+        0.00395880202026134
+      ],
+      [
+        "KEYUSDT",
+        0.0032373765768427733
+      ],
+      [
+        "BTCDOMUSDT",
+        0.003004196613460899
+      ],
+      [
+        "LOOMUSDT",
+        0.0023622407262382777
+      ],
+      [
+        "1000FLOKIUSDT",
+        0.0
+      ],
+      [
+        "1000LUNCUSDT",
+        0.0
+      ],
+      [
+        "1INCHUSDT",
+        0.0
+      ],
+      [
+        "AAVEUSDT",
+        0.0
+      ],
+      [
+        "AGLDUSDT",
+        0.0
+      ],
+      [
+        "ALPHAUSDT",
+        0.0
+      ],
+      [
+        "ANTUSDT",
+        0.0
+      ],
+      [
+        "APTUSDT",
+        0.0
+      ],
+      [
+        "ARBUSDT",
+        0.0
+      ],
+      [
+        "ARUSDT",
+        0.0
+      ],
+      [
+        "ATOMUSDT",
+        0.0
+      ],
+      [
+        "AVAXUSDT",
+        0.0
+      ],
+      [
+        "BAKEUSDT",
+        0.0
+      ],
+      [
+        "BELUSDT",
+        0.0
+      ],
+      [
+        "BIDUSDT",
+        0.0
+      ],
+      [
+        "BLZUSDT",
+        0.0
+      ],
+      [
+        "BONDUSDT",
+        0.0
+      ],
+      [
+        "BSWUSDT",
+        0.0
+      ],
+      [
+        "BTTUSDT",
+        0.0
+      ],
+      [
+        "CKBUSDT",
+        0.0
+      ],
+      [
+        "COTIUSDT",
+        0.0
+      ],
+      [
+        "CRVUSDT",
+        0.0
+      ],
+      [
+        "DEGENUSDT",
+        0.0
+      ],
+      [
+        "DENTUSDT",
+        0.0
+      ],
+      [
+        "DODOUSDT",
+        0.0
+      ],
+      [
+        "DOGEUSDT",
+        0.0
+      ],
+      [
+        "DOTUSDT",
+        0.0
+      ],
+      [
+        "FUNUSDT",
+        0.0
+      ],
+      [
+        "GALAUSDT",
+        0.0
+      ],
+      [
+        "HIFIUSDT",
+        0.0
+      ],
+      [
+        "HNTUSDT",
+        0.0
+      ],
+      [
+        "INJUSDT",
+        0.0
+      ],
+      [
+        "IOSTUSDT",
+        0.0
+      ],
+      [
+        "IOTXUSDT",
+        0.0
+      ],
+      [
+        "LDOUSDT",
+        0.0
+      ],
+      [
+        "LINKUSDT",
+        0.0
+      ],
+      [
+        "LQTYUSDT",
+        0.0
+      ],
+      [
+        "MATICUSDT",
+        0.0
+      ],
+      [
+        "MAVUSDT",
+        0.0
+      ],
+      [
+        "MINAUSDT",
+        0.0
+      ],
+      [
+        "NEIROETHUSDT",
+        0.0
+      ],
+      [
+        "NKNUSDT",
+        0.0
+      ],
+      [
+        "OPUSDT",
+        0.0
+      ],
+      [
+        "PENDLEUSDT",
+        0.0
+      ],
+      [
+        "REEFUSDT",
+        0.0
+      ],
+      [
+        "RENUSDT",
+        0.0
+      ],
+      [
+        "RNDRUSDT",
+        0.0
+      ],
+      [
+        "RUNEUSDT",
+        0.0
+      ],
+      [
+        "SEIUSDT",
+        0.0
+      ],
+      [
+        "SRMUSDT",
+        0.0
+      ],
+      [
+        "STRAXUSDT",
+        0.0
+      ],
+      [
+        "STXUSDT",
+        0.0
+      ],
+      [
+        "SUIUSDT",
+        0.0
+      ],
+      [
+        "TOMOUSDT",
+        0.0
+      ],
+      [
+        "TONUSDT",
+        0.0
+      ],
+      [
+        "VOXELUSDT",
+        0.0
+      ],
+      [
+        "XVSUSDT",
+        0.0
+      ]
+    ],
+    "top2_positive_pnl_share_pct": 11.180881959816276,
+    "top_1_profit_symbol": "BNBUSDT",
+    "top_1_share_of_positive_pnl_pct": 6.140140370510491,
+    "top_5_share_of_positive_pnl_pct": 22.37329153685279
+  },
+  "window_split": {
+    "DISCOVERY_REFERENCE": 52,
+    "EXTERNAL_VALIDATION": 295
+  },
+  "yearly_breakdown": {
+    "positive_full_calendar_years": 3,
+    "positive_years": [
+      2020,
+      2022,
+      2024
+    ],
+    "worst_full_calendar_year_return_pct": -18.93635287596994,
+    "years": {
+      "2020": {
+        "end": "2020-12-31",
+        "full_calendar_year": true,
+        "max_drawdown_pct": 13.013226013643752,
+        "start": "2020-01-01",
+        "total_return_pct": 45.60916458262214
+      },
+      "2021": {
+        "end": "2021-12-31",
+        "full_calendar_year": true,
+        "max_drawdown_pct": 29.139491533929075,
+        "start": "2021-01-01",
+        "total_return_pct": -0.8667487773140969
+      },
+      "2022": {
+        "end": "2022-12-31",
+        "full_calendar_year": true,
+        "max_drawdown_pct": 13.529997488453471,
+        "start": "2022-01-01",
+        "total_return_pct": 30.944119889336875
+      },
+      "2023": {
+        "end": "2023-12-31",
+        "full_calendar_year": true,
+        "max_drawdown_pct": 23.17808825382377,
+        "start": "2023-01-01",
+        "total_return_pct": -18.93635287596994
+      },
+      "2024": {
+        "end": "2024-12-31",
+        "full_calendar_year": true,
+        "max_drawdown_pct": 21.14422513185945,
+        "start": "2024-01-01",
+        "total_return_pct": 37.136232270306955
+      }
+    }
+  }
+}
+```

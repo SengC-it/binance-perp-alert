@@ -1,0 +1,51 @@
+{
+  "artifact_sha256": {
+    "M1_DECISION.json": "4a726692863f01b6c7b3310b973493cbd1103d960d9f02c3593661b6e084579a",
+    "M1_REPORT.md": "12fefaae72ca90b20b306adefd47eb3ec6a75a78552824a4a6ce50e2dc3e807c"
+  },
+  "code_commit": "6b2b55ec03d830aa7ce23204c7c88b07c4c75979",
+  "control_sha256": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+  "corrected_from_commit": "c4bb2b90ce1ef9b8e38858c7f4288b8b4d8c156b",
+  "corrected_from_run_status": "INVALIDATED_M1_RUN",
+  "correction_reason": "FIXED_DATE_REBALANCE_SCHEDULER_VIOLATED_FROZEN_M0_RETRY_SEMANTICS",
+  "corrective_validator_commit": "4672160444485fcaf827d7c0330a80f1bfec7456",
+  "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+  "diagnostic_status": {
+    "data_integrity_status": "FAIL_CONFIRMED_MISSING_FUNDING_SETTLEMENTS",
+    "g0_data_integrity": false,
+    "g0_disposition": "G0_FAIL_RETAINED",
+    "performance_metrics_complete": false,
+    "performance_metrics_status": "DIAGNOSTIC_ONLY_DUE_TO_G0"
+  },
+  "generated_at": "2026-09-15T15:48:18.627174+00:00",
+  "legacy_run": {
+    "commit": "c4bb2b90ce1ef9b8e38858c7f4288b8b4d8c156b",
+    "decision_path": "research/m1/M1_DECISION.json",
+    "preserved": true,
+    "report_path": "research/m1/M1_REPORT.md",
+    "sha256_after": {
+      "research/m1/M1_DECISION.json": "fa3d460cd37d45e6412f12cca96b3dbbf0693dfa80b6e8848e36613b2143ae74",
+      "research/m1/M1_REPORT.md": "bcf6a2879237ecfac57254a4cdf154fcffde4a28ef620ed722f025767e2f6366"
+    },
+    "sha256_before": {
+      "research/m1/M1_DECISION.json": "fa3d460cd37d45e6412f12cca96b3dbbf0693dfa80b6e8848e36613b2143ae74",
+      "research/m1/M1_REPORT.md": "bcf6a2879237ecfac57254a4cdf154fcffde4a28ef620ed722f025767e2f6366"
+    },
+    "status": "INVALIDATED_M1_RUN"
+  },
+  "lineage": {
+    "is_corrected_rerun": true,
+    "legacy_root_artifacts_untouched": true,
+    "not_a_new_strategy_or_protocol": true,
+    "supersedes_legacy_run_for_corrected_scheduler_diagnostics": true
+  },
+  "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+  "output_dir": "research/m1/runs/XS-LOWVOL-M1-B.1B-CORRECTED-1",
+  "protocol_sha256": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+  "run_id": "XS-LOWVOL-M1-B.1B-CORRECTED-1",
+  "run_type": "CORRECTED_RERUN",
+  "schema_version": "M1-B.1A.1-RUN-METADATA.v1",
+  "shadow_sha256": "97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd",
+  "status": "FINALIZED",
+  "supersedes_run": "XS-LOWVOL-M1-B-c4bb2b90"
+}
