@@ -792,44 +792,216 @@ def freeze_dataset(bundle: DatasetBundle) -> None:
 
 
 @dataclass(frozen=True)
+class ScheduleAttempt:
+    """One stateful rebalance attempt, including retries that did not fill."""
+
+    signal_day: date
+    execution_day: date
+    status: str
+    reason: str = ""
+    target_symbols: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
 class SignalCache:
-    """All frozen signal-day snapshots used by the full run and LOO reruns."""
+    """Stateful schedule and PIT snapshots shared by Control and Shadow."""
 
     signal_days: tuple[date, ...]
     universes: Mapping[date, Any]
     signals: Mapping[date, PITSignal]
     first_valid_signal_date: date | None
     no_signal_days: tuple[date, ...]
+    attempts: tuple[ScheduleAttempt, ...]
+    histories: tuple[SymbolHistory, ...]
+    data_start: date
+    data_end: date
 
 
-def build_signal_cache(histories: Iterable[SymbolHistory]) -> SignalCache:
-    """Build signal snapshots on the pre-registered 7-calendar-day schedule."""
+@dataclass
+class _SchedulePosition:
+    direction: int
+    entry_day: date
+    mark_timestamp_ms: int
+
+
+def _build_stateful_signal_cache(
+    histories: Iterable[SymbolHistory],
+    *,
+    data_start: date,
+    data_end: date,
+) -> SignalCache:
+    """Build PIT signals with retry-on-failure rebalance-clock semantics.
+
+    A candidate is considered on every execution day after warm-up while the
+    seven-day clock is available.  Only a complete, executable transition
+    advances ``last_successful_rebalance``.  The resulting successful signal
+    map is intentionally variant-neutral and is shared by Control and Shadow.
+    """
+    if data_end < data_start:
+        raise M1BError("data_end must not precede data_start")
     histories = tuple(sorted(histories, key=lambda history: history.symbol))
     rules = resolve_rules(variant="control")
+    by_symbol = {history.symbol: history for history in histories}
     bar_maps = {history.symbol: history.bars_by_day() for history in histories}
-    first_day = M1_DATA_START + timedelta(days=rules.lookback_days)
-    last_signal_day = M1_DATA_END - timedelta(days=rules.execution_lag_days)
-    signal_days = tuple(
-        first_day + timedelta(days=rules.rebalance_days * index)
-        for index in range(((last_signal_day - first_day).days // rules.rebalance_days) + 1)
-    )
+    funding_maps = {history.symbol: _unique_events(history) for history in histories}
+    funding_times = {
+        symbol: tuple(event.funding_time_ms for event in events)
+        for symbol, events in funding_maps.items()
+    }
+    first_signal_day = data_start + timedelta(days=rules.lookback_days)
+    last_signal_day = data_end - timedelta(days=rules.execution_lag_days)
     universes: dict[date, Any] = {}
     signals: dict[date, PITSignal] = {}
     no_signal_days: list[date] = []
-    for signal_day in signal_days:
-        universe = _build_universe_fast(histories, bar_maps, signal_day, rules)
-        universes[signal_day] = universe
-        signal = _signal_from_universe(universe, rules)
-        if signal is None:
-            no_signal_days.append(signal_day)
-        else:
-            signals[signal_day] = signal
+    attempts: list[ScheduleAttempt] = []
+    positions: dict[str, _SchedulePosition] = {}
+    last_successful_rebalance: date | None = None
+    for execution_day in _date_range(data_start, data_end):
+        mark_ok = True
+        mark_failures: list[str] = []
+        for symbol, position in tuple(positions.items()):
+            bar = bar_maps[symbol].get(execution_day)
+            if bar is None:
+                history = by_symbol[symbol]
+                delisted_at = history.lifecycle.delisted_at
+                if delisted_at is not None and execution_day >= delisted_at and history.lifecycle.status == "OK":
+                    terminal = history.last_bar_on_or_before(delisted_at - timedelta(days=1))
+                    if terminal is None or terminal.close <= 0 or not math.isfinite(terminal.close):
+                        mark_ok = False
+                        mark_failures.append(f"DATA_INVALID: no terminal close {symbol}")
+                    else:
+                        positions.pop(symbol, None)
+                    continue
+                mark_ok = False
+                mark_failures.append(f"DATA_INVALID: missing completed mark {symbol} {execution_day.isoformat()}")
+                continue
+            if execution_day == position.entry_day:
+                continue
+            previous_bar = bar_maps[symbol].get(execution_day - timedelta(days=1))
+            if previous_bar is None:
+                mark_ok = False
+                mark_failures.append(
+                    f"DATA_INVALID: non-consecutive mark {symbol} {execution_day - timedelta(days=1)} -> {execution_day}"
+                )
+                continue
+            times = funding_times[symbol]
+            left = bisect_right(times, position.mark_timestamp_ms)
+            right = bisect_right(times, bar.close_time_ms)
+            if right <= left:
+                mark_ok = False
+                mark_failures.append(
+                    f"DATA_INVALID: missing funding coverage {symbol} {execution_day - timedelta(days=1)} -> {execution_day}"
+                )
+                continue
+            position.mark_timestamp_ms = bar.close_time_ms
+
+        if (
+            last_successful_rebalance is None
+            or (execution_day - last_successful_rebalance).days >= rules.rebalance_days
+        ):
+            signal_day = execution_day - timedelta(days=rules.execution_lag_days)
+            if first_signal_day <= signal_day <= last_signal_day:
+                universe = universes.get(signal_day)
+                if universe is None:
+                    universe = _build_universe_fast(histories, bar_maps, signal_day, rules)
+                    universes[signal_day] = universe
+                signal = _signal_from_universe(universe, rules)
+                if not mark_ok:
+                    attempts.append(
+                        ScheduleAttempt(
+                            signal_day,
+                            execution_day,
+                            "MARK_FAILURE",
+                            "; ".join(mark_failures),
+                            tuple(sorted(signal.targets)) if signal is not None else (),
+                        )
+                    )
+                elif signal is None:
+                    reason = "; ".join(universe.reasons) or "NO_SIGNAL: no eligible PIT universe"
+                    no_signal_days.append(signal_day)
+                    attempts.append(ScheduleAttempt(signal_day, execution_day, "NO_SIGNAL", reason))
+                else:
+                    targets = signal.targets
+                    affected = {
+                        symbol
+                        for symbol in set(positions) | set(targets)
+                        if symbol not in targets
+                        or symbol not in positions
+                        or positions[symbol].direction != targets[symbol]
+                    }
+                    missing_execution = sorted(
+                        symbol for symbol in affected if execution_day not in bar_maps.get(symbol, {})
+                    )
+                    if missing_execution:
+                        attempts.append(
+                            ScheduleAttempt(
+                                signal_day,
+                                execution_day,
+                                "MISSING_EXECUTION_PRICE",
+                                "missing execution prices " + ",".join(missing_execution),
+                                tuple(sorted(targets)),
+                            )
+                        )
+                    else:
+                        for symbol in tuple(positions):
+                            if targets.get(symbol) != positions[symbol].direction:
+                                positions.pop(symbol, None)
+                        for symbol, direction in targets.items():
+                            if symbol not in positions:
+                                bar = bar_maps[symbol][execution_day]
+                                positions[symbol] = _SchedulePosition(
+                                    direction=direction,
+                                    entry_day=execution_day,
+                                    mark_timestamp_ms=bar.close_time_ms,
+                                )
+                        signals[signal_day] = signal
+                        last_successful_rebalance = execution_day
+                        attempts.append(
+                            ScheduleAttempt(
+                                signal_day,
+                                execution_day,
+                                "SUCCESS",
+                                target_symbols=tuple(sorted(targets)),
+                            )
+                        )
     return SignalCache(
-        signal_days=signal_days,
+        signal_days=tuple(attempt.signal_day for attempt in attempts),
         universes=universes,
         signals=signals,
         first_valid_signal_date=min(signals, default=None),
         no_signal_days=tuple(no_signal_days),
+        attempts=tuple(attempts),
+        histories=histories,
+        data_start=data_start,
+        data_end=data_end,
+    )
+
+
+def build_stateful_schedule(
+    histories: Iterable[SymbolHistory],
+    *,
+    data_start: date = M1_DATA_START,
+    data_end: date = M1_DATA_END,
+) -> SignalCache:
+    """Build the stateful PIT schedule used by the formal run and LOO."""
+    return _build_stateful_signal_cache(
+        histories,
+        data_start=data_start,
+        data_end=data_end,
+    )
+
+
+def build_signal_cache(
+    histories: Iterable[SymbolHistory],
+    *,
+    data_start: date = M1_DATA_START,
+    data_end: date = M1_DATA_END,
+) -> SignalCache:
+    """Compatibility entry point for the stateful PIT schedule."""
+    return build_stateful_schedule(
+        histories,
+        data_start=data_start,
+        data_end=data_end,
     )
 
 
@@ -950,16 +1122,18 @@ def _signal_without_symbols(universe: Any, removed: frozenset[str], rules: Any) 
 
 
 def signals_for_removed(cache: SignalCache, removed: frozenset[str]) -> dict[date, PITSignal]:
-    """Rerank every signal date after removing a symbol; never subtract PnL."""
+    """Rebuild PIT ranking and the stateful retry schedule after removal."""
     if not removed:
         return dict(cache.signals)
-    rules = resolve_rules(variant="control")
-    output: dict[date, PITSignal] = {}
-    for day in cache.signal_days:
-        signal = _signal_without_symbols(cache.universes[day], removed, rules)
-        if signal is not None:
-            output[day] = signal
-    return output
+    subset = tuple(
+        history for history in cache.histories if history.symbol not in removed
+    )
+    rebuilt = build_signal_cache(
+        subset,
+        data_start=cache.data_start,
+        data_end=cache.data_end,
+    )
+    return dict(rebuilt.signals)
 
 
 @dataclass(frozen=True)
@@ -1064,8 +1238,12 @@ def simulate_frozen_portfolio(
     variant: str,
     scenario: str,
     capital: float = 1.0,
+    data_start: date = M1_DATA_START,
+    data_end: date = M1_DATA_END,
 ) -> BacktestResult:
     """Run daily close-to-close price/funding accounting under frozen rules."""
+    if data_end < data_start:
+        raise M1BError("data_end must not precede data_start")
     histories = tuple(sorted(histories, key=lambda history: history.symbol))
     rules = resolve_rules(variant="shadow" if variant == "shadow" else "control")
     if scenario not in {"COST_1X", "COST_2X", "COST_3X"}:
@@ -1082,7 +1260,7 @@ def simulate_frozen_portfolio(
     funding_times = {symbol: tuple(event.funding_time_ms for event in events) for symbol, events in funding_maps.items()}
     mark_prices: dict[str, float] = {}
     mark_timestamps: dict[str, int] = {}
-    calendar = _date_range(M1_DATA_START, M1_DATA_END)
+    calendar = _date_range(data_start, data_end)
     slot = capital / (rules.k_long + rules.k_short)
     positions: dict[str, _Position] = {}
     pnl_by_symbol: dict[str, float] = {}
@@ -1119,6 +1297,9 @@ def simulate_frozen_portfolio(
                 HoldingInterval(position.symbol, position.entry_timestamp_ms, exit_timestamp_ms)
             )
 
+    execution_signals = {
+        candidate.execution_day: candidate for candidate in signals.values()
+    }
     for day in calendar:
         day_pnl = 0.0
         day_totals_before = dict(totals)
@@ -1168,6 +1349,17 @@ def simulate_frozen_portfolio(
                 complete = False
                 issues.append(f"DATA_INVALID: invalid mark price {symbol}")
                 continue
+            events = funding_maps[symbol]
+            times = funding_times[symbol]
+            left = bisect_right(times, mark_timestamps[symbol])
+            right = bisect_right(times, bar.close_time_ms)
+            settled = events[left:right]
+            if not settled:
+                complete = False
+                issues.append(
+                    f"DATA_INVALID: missing funding coverage {symbol} {previous_day} -> {day}"
+                )
+                continue
             move = position.direction * position.notional * (bar.close / previous_price - 1.0)
             _add_pnl(
                 direction=position.direction,
@@ -1179,11 +1371,7 @@ def simulate_frozen_portfolio(
             )
             day_pnl += move
             event_funding = 0.0
-            events = funding_maps[symbol]
-            times = funding_times[symbol]
-            left = bisect_right(times, mark_timestamps[symbol])
-            right = bisect_right(times, bar.close_time_ms)
-            for event in events[left:right]:
+            for event in settled:
                 funding = -position.direction * position.notional * event.funding_rate
                 _add_pnl(
                     direction=position.direction,
@@ -1198,11 +1386,7 @@ def simulate_frozen_portfolio(
             mark_prices[symbol] = bar.close
             mark_timestamps[symbol] = bar.close_time_ms
 
-        execution_signal: PITSignal | None = None
-        for signal_day, candidate in signals.items():
-            if candidate.execution_day == day:
-                execution_signal = candidate
-                break
+        execution_signal = execution_signals.get(day)
         if execution_signal is not None:
             targets = execution_signal.targets
             selected_symbols.update(targets)
@@ -1328,9 +1512,9 @@ def simulate_frozen_portfolio(
     # Positions are marked to the final completed close. No artificial end-of-
     # sample liquidation fee is charged, but every held interval is audited.
     for position in positions.values():
-        terminal = bar_maps[position.symbol].get(M1_DATA_END)
+        terminal = bar_maps[position.symbol].get(data_end)
         if terminal is None:
-            terminal = by_symbol[position.symbol].last_bar_on_or_before(M1_DATA_END)
+            terminal = by_symbol[position.symbol].last_bar_on_or_before(data_end)
         if terminal is not None:
             record_holding_interval(position, terminal.close_time_ms)
 
