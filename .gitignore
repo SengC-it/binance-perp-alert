@@ -2,6 +2,8 @@
 config.yaml
 data/
 backtest/cache/
+backtest/m1_cache/raw/
+backtest/m1_cache/normalized/
 .venv/
 __pycache__/
 *.pyc

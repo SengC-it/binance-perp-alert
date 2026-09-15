@@ -1,0 +1,202 @@
+protocol_id: XS-LOWVOL-M1-PIT-V1
+protocol_version: 1
+phase: M1-A
+status: preregistered
+base_commit: 961d2e60ee34d032bed54466d309724d916b731f
+
+control:
+  strategy_id: XS-LOWVOL-V1-Control
+  spec_hash: 5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678
+
+shadow:
+  strategy_id: XS-LOWVOL-V1-VT80-Shadow
+  spec_hash: 97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd
+  reporting_label: SECONDARY PRE-REGISTERED SHADOW
+
+data_start: 2020-01-01
+data_end: 2026-08-31
+
+data_window:
+  start: 2020-01-01
+  end: 2026-08-31
+  timezone: UTC
+  completed_daily_candles_only: true
+
+primary_external_validation:
+  name: EXTERNAL_VALIDATION
+  start: 2020-01-01
+  end: 2025-08-31
+
+discovery_contaminated_reference:
+  name: DISCOVERY_REFERENCE
+  start: 2025-09-01
+  end: 2026-08-31
+  included_in_primary_gate: false
+
+data_source:
+  venue: Binance
+  archive_host: data.binance.vision
+  market: USD-M Futures
+  quote_asset: USDT
+  contract_type: PERPETUAL
+  daily_archive: futures/um/monthly/klines/{symbol}/1d/{symbol}-1d-{yyyy-mm}.zip
+  funding_archive: futures/um/monthly/fundingRate/{symbol}/{symbol}-fundingRate-{yyyy-mm}.zip
+  spot_data_required: false
+  universe_source: official historical USD-M archive manifest, never DEFAULT_UNIVERSE
+  raw_data_is_not_committed: true
+
+point_in_time_universe:
+  membership:
+    listed_on_or_before_signal_day: true
+    not_delisted_on_signal_day: true
+    current_exchange_info_is_not_used_for_history: true
+  liquidity:
+    field: completed signal-day quote_volume
+    minimum_quote_volume_usdt: 50000000
+  history:
+    lookback_returns: 30
+    required_contiguous_daily_closes: 31
+  selection:
+    minimum_symbols: 10
+    long: lowest_realized_volatility
+    short: highest_realized_volatility
+    k_long: 5
+    k_short: 5
+    tie_break: symbol_ascending
+  signal_data_only:
+    allowed: [completed_close, completed_quote_volume]
+    forbidden: [high, low, open, future_close, future_volume, spot_close, future_lifecycle]
+
+lifecycle_policy:
+  listed_from: first_real_perpetual_daily_bar_or_official_lifecycle_record
+  delisted_at: last_valid_trading_day_plus_one_day_only_after_absence_is_confirmed
+  later_delisted_symbols_are_included_before_delisting: true
+  symbol_rename_is_a_new_symbol: true
+  unexplained_internal_gap: DATA_AMBIGUOUS
+  no_forward_fill: true
+  no_backward_fill: true
+  no_interpolation: true
+  no_cross_exchange_substitution: true
+  forced_exit:
+    when: held_symbol_is_confirmed_delisted_before_next_rebalance
+    price: last_actual_completed_trading_close
+    forced_exit: true
+    transaction_cost: frozen_actual_turnover_cost
+    no_reasonable_terminal_price: DATA_INVALID
+
+funding_policy:
+  source: official_settled_funding_events
+  positive_rate: long_pays_short_receives
+  negative_rate: long_receives_short_pays
+  missing_event: fail_closed_unless_no_settlement_is_proven
+  duplicate_event: fail_closed_unless_identical_then_dedupe
+  coverage: complete_for_every_held_symbol_and_hold_interval
+
+cost_scenarios:
+  COST_1X:
+    taker_pct_per_side: 0.05
+    slippage_pct_per_side: 0.03
+    funding: actual_settled_funding
+  COST_2X:
+    taker_pct_per_side: 0.10
+    slippage_pct_per_side: 0.06
+    funding: actual_settled_funding
+  COST_3X:
+    taker_pct_per_side: 0.15
+    slippage_pct_per_side: 0.09
+    funding: actual_settled_funding
+
+execution:
+  rebalance_calendar_days: 7
+  execution_lag_completed_days: 1
+  execution_price: next_completed_daily_close
+  target_diff_semantics: frozen_v1
+  partial_resize: true
+  control_scale: 1.0
+  shadow_target_vol_pct: 80
+  shadow_max_scale: 3.0
+
+regime_attribution:
+  rule: btc_120_day_return
+  bull_if_return_gt_pct: 20
+  bear_if_return_lt_pct: -20
+  otherwise: SIDEWAYS
+  affects_signal_or_gate: false
+
+bootstrap:
+  sequence: weekly_portfolio_returns
+  method: circular_or_overlapping_fixed_block
+  block_length_weeks: 4
+  rounds: 10000
+  confidence: 0.95
+  seed: 20260915
+  primary_gate: true
+  sensitivity_blocks_weeks: [8, 13]
+
+best_week_removal:
+  remove_highest_fraction: 0.05
+  primary_gate: true
+
+leave_one_out:
+  rerun_universe_and_ranking: true
+  subtracting_final_pnl_only: false
+
+windows:
+  discovery_reference_must_not_affect_external_gate: true
+  full_history_descriptive_only: true
+  external_is_inclusive: true
+  discovery_is_inclusive: true
+
+hard_gates:
+  G0_data_integrity:
+    point_in_time_universe: true
+    delisted_included: true
+    no_known_lookahead: true
+    no_unexplained_eligible_gap: true
+    strategy_hash_unchanged: true
+    protocol_hash_unchanged: true
+  G1_external_return:
+    control_cost: COST_1X
+    total_return_pct_gt: 0
+  G2_cost_2x:
+    control_cost: COST_2X
+    total_return_pct_gt: 0
+  G3_weekly_sharpe:
+    weekly_sharpe_gt: 1.0
+  G4_drawdown:
+    max_drawdown_pct_lt: 20
+  G5_profit_factor:
+    weekly_profit_factor_gt: 1.2
+  G6_block_bootstrap:
+    mean_weekly_return_ci95_lower_gt: 0
+    probability_mean_return_gt: 0.95
+  G7_best_5pct_removed:
+    compound_return_pct_gt: 0
+  G8_leave_one_out:
+    positive_runs_equals_total_runs: true
+  G9_symbol_concentration:
+    top2_positive_pnl_share_pct_lte: 40
+  G10_multi_year_breadth:
+    positive_full_calendar_years_gte: 3
+    years: [2020, 2021, 2022, 2023, 2024]
+  G11_single_year_catastrophe:
+    every_full_calendar_year_return_pct_gt: -15
+  G12_bull_survival:
+    window: BULL_2020_2021
+    total_return_pct_gt: -10
+    max_drawdown_pct_lt: 20
+
+reporting:
+  primary_decision_strategy: XS-LOWVOL-V1-Control
+  shadow_is_secondary: true
+  failed_gates_first: true
+  required_windows: [EXTERNAL_VALIDATION, DISCOVERY_REFERENCE]
+  publication_to_runtime_evidence: forbidden
+
+m1_a_controls:
+  formal_historical_download: forbidden
+  formal_m1_backtest: forbidden
+  formal_return_or_sharpe_review: forbidden
+  strategy_optimization: forbidden
+  runtime_evidence_publication: forbidden
+  live_trading: forbidden
