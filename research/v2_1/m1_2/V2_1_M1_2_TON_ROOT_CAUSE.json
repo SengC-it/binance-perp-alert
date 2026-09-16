@@ -1,0 +1,576 @@
+{
+  "actual_funding_events_inside_economic_contract_lifetime": [
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1781913600001,
+      "funding_time_utc": "2026-06-20T00:00:00.001Z",
+      "mark_price": "1.60530000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "-0.00013366",
+      "funding_time_ms": 1781928000000,
+      "funding_time_utc": "2026-06-20T04:00:00Z",
+      "mark_price": "1.58590346",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "-0.00008553",
+      "funding_time_ms": 1781942400000,
+      "funding_time_utc": "2026-06-20T08:00:00Z",
+      "mark_price": "1.59158293",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "-0.00003795",
+      "funding_time_ms": 1781956800001,
+      "funding_time_utc": "2026-06-20T12:00:00.001Z",
+      "mark_price": "1.59340000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00003669",
+      "funding_time_ms": 1781971200001,
+      "funding_time_utc": "2026-06-20T16:00:00.001Z",
+      "mark_price": "1.62830000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1781985600000,
+      "funding_time_utc": "2026-06-20T20:00:00Z",
+      "mark_price": "1.62060000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782000000000,
+      "funding_time_utc": "2026-06-21T00:00:00Z",
+      "mark_price": "1.63037882",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782014400000,
+      "funding_time_utc": "2026-06-21T04:00:00Z",
+      "mark_price": "1.64670000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782028800000,
+      "funding_time_utc": "2026-06-21T08:00:00Z",
+      "mark_price": "1.68716890",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782043200001,
+      "funding_time_utc": "2026-06-21T12:00:00.001Z",
+      "mark_price": "1.68290000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00008860",
+      "funding_time_ms": 1782057600000,
+      "funding_time_utc": "2026-06-21T16:00:00Z",
+      "mark_price": "1.69592805",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00046036",
+      "funding_time_ms": 1782072000004,
+      "funding_time_utc": "2026-06-21T20:00:00.004Z",
+      "mark_price": "1.67892071",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00018653",
+      "funding_time_ms": 1782086400000,
+      "funding_time_utc": "2026-06-22T00:00:00Z",
+      "mark_price": "1.64540000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00035587",
+      "funding_time_ms": 1782100800000,
+      "funding_time_utc": "2026-06-22T04:00:00Z",
+      "mark_price": "1.62800000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00085384",
+      "funding_time_ms": 1782115200000,
+      "funding_time_utc": "2026-06-22T08:00:00Z",
+      "mark_price": "1.67097899",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00098126",
+      "funding_time_ms": 1782129600000,
+      "funding_time_utc": "2026-06-22T12:00:00Z",
+      "mark_price": "1.66560000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00123458",
+      "funding_time_ms": 1782144000002,
+      "funding_time_utc": "2026-06-22T16:00:00.002Z",
+      "mark_price": "1.66621315",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00154673",
+      "funding_time_ms": 1782158400000,
+      "funding_time_utc": "2026-06-22T20:00:00Z",
+      "mark_price": "1.70880000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00196484",
+      "funding_time_ms": 1782172800003,
+      "funding_time_utc": "2026-06-23T00:00:00.003Z",
+      "mark_price": "1.69780000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00129627",
+      "funding_time_ms": 1782187200000,
+      "funding_time_utc": "2026-06-23T04:00:00Z",
+      "mark_price": "1.66340000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00353850",
+      "funding_time_ms": 1782201600005,
+      "funding_time_utc": "2026-06-23T08:00:00.005Z",
+      "mark_price": "1.68183794",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    }
+  ],
+  "anchor_status": "FROZEN_NOT_YET_STARTED",
+  "audit_id": "XS-LOWVOL-V2.1-M1.2-TON-LIFECYCLE-1",
+  "base_commit": "6b55cccf9e926317d5415365b7fc656cd56b4157",
+  "code_commit": "708f4cded3fdc9b58ca856554d56ba5e9786dae1",
+  "current_validator_week": {
+    "clipped_holding_entry_timestamp_ms": 1782086400000,
+    "clipped_holding_entry_timestamp_utc": "2026-06-22T00:00:00Z",
+    "clipped_holding_exit_timestamp_ms": 1782691199999,
+    "clipped_holding_exit_timestamp_utc": "2026-06-28T23:59:59.999Z",
+    "failure_mechanism": "V1 validator uses the frozen holding exit and funding event sequence; frozen history has no lifecycle termination timestamp, so it asks whether the next 4-hour settlement is inside the extended interval",
+    "holding_intersects_required_week": true,
+    "required_week_end": "2026-06-28",
+    "required_week_start": "2026-06-22",
+    "validator_issue_count": 1,
+    "validator_issues": [
+      {
+        "code": "FUNDING_COVERAGE_GAP",
+        "day": null,
+        "detail": "held interval has an unverified funding transition or boundary",
+        "symbol": "TONUSDT"
+      }
+    ],
+    "validator_lifecycle_termination_from_frozen_history": null,
+    "validator_result": "FAIL",
+    "validator_uses_official_contract_termination_timestamp": false
+  },
+  "dataset": {
+    "cache_file_sha256": "767440c16f64d3deb8134371554b3a3579a053301ba4fe04106b5cc7f3a48964",
+    "catalog_complete": true,
+    "daily_bar_count": 636990,
+    "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+    "first_available_date": "2020-01-01",
+    "funding_event_count": 2629011,
+    "last_available_date": "2026-08-31",
+    "listing_page_count": 927,
+    "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+    "number_of_ambiguous_symbols": 52,
+    "number_of_delisted_symbols": 31,
+    "number_of_symbols_discovered": 861,
+    "number_of_usable_symbols": 362,
+    "protocol_hash": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+    "raw_file_count": 41682
+  },
+  "decision": "V2.1-M1.2 ROOT_CAUSE CONFIRMED",
+  "diagnostic_boundary_cases": [
+    {
+      "assessment": {
+        "classification": null,
+        "next_scheduled_funding_ms": 1782216000000,
+        "next_scheduled_funding_observed": false,
+        "next_scheduled_funding_utc": "2026-06-23T12:00:00Z",
+        "reason": "holding ends before or at the next scheduled settlement",
+        "required_funding_missing": false
+      },
+      "case": "case_1_contract_ends_before_next_settlement",
+      "expected": "NO_REQUIRED_FUNDING_MISSING",
+      "observed": "NO_REQUIRED_FUNDING_MISSING",
+      "passed": true
+    },
+    {
+      "assessment": {
+        "classification": "REAL_MISSING_REQUIRED_FUNDING_SETTLEMENT",
+        "next_scheduled_funding_ms": 1782216000000,
+        "next_scheduled_funding_utc": "2026-06-23T12:00:00Z",
+        "reason": "a scheduled settlement falls inside the valid contract lifetime and is absent",
+        "required_funding_missing": true
+      },
+      "case": "case_2_active_contract_missing_required_settlement",
+      "expected": "REAL_MISSING_REQUIRED_FUNDING_SETTLEMENT",
+      "observed": "REAL_MISSING_REQUIRED_FUNDING_SETTLEMENT",
+      "passed": true
+    },
+    {
+      "assessment": {
+        "classification": "ROOT_CAUSE_UNRESOLVED",
+        "next_scheduled_funding_ms": 1782216000000,
+        "next_scheduled_funding_utc": "2026-06-23T12:00:00Z",
+        "reason": "official contract termination is unknown",
+        "required_funding_missing": false
+      },
+      "case": "case_3_unknown_contract_termination",
+      "expected": "ROOT_CAUSE_UNRESOLVED",
+      "observed": "ROOT_CAUSE_UNRESOLVED",
+      "passed": true
+    },
+    {
+      "assessment": {
+        "classification": null,
+        "next_scheduled_funding_ms": 1782216000000,
+        "next_scheduled_funding_observed": false,
+        "next_scheduled_funding_utc": "2026-06-23T12:00:00Z",
+        "reason": "holding ends before or at the next scheduled settlement",
+        "required_funding_missing": false
+      },
+      "case": "case_4_holding_ends_before_next_settlement",
+      "expected": "NO_REQUIRED_FUNDING_MISSING",
+      "observed": "NO_REQUIRED_FUNDING_MISSING",
+      "passed": true
+    }
+  ],
+  "identities": {
+    "v1_control_sha256": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+    "v1_m1_protocol_sha256": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+    "v1_shadow_sha256": "97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd",
+    "v2_1_forward_anchor_sha256": "a4e61eae444e08ef038fc2108b1b29ef39551e90c4d40b6dab5c04df6004f41b",
+    "v2_1_protocol_sha256": "6aa94ad92fa1811774788d11aecc0326a00e256950df61cb7cbe9db8e504fb7d",
+    "v2_1_spec_sha256": "e5b026c106e46d04fb160ee012789c39ff1b9ef3f318a49da871a6a3cd51959c"
+  },
+  "immutability": {
+    "after": {
+      "research\\m1\\M1_DECISION.json": "fa3d460cd37d45e6412f12cca96b3dbbf0693dfa80b6e8848e36613b2143ae74",
+      "research\\m1\\M1_REPORT.md": "bcf6a2879237ecfac57254a4cdf154fcffde4a28ef620ed722f025767e2f6366",
+      "research\\v2_1\\XS_LOWVOL_V2_1_FORWARD_ANCHOR.sha256": "2f777ffe5872474f36c2e507b6efaf6aa52e3308c7e78f6185e397fe11359eee",
+      "research\\v2_1\\XS_LOWVOL_V2_1_FORWARD_ANCHOR.yaml": "bb1d22961d1c874d8dc2d9254f1b9ef15b9d3123d6b0f33cfd75e4f26d314f43",
+      "research\\v2_1\\XS_LOWVOL_V2_1_PROTOCOL.sha256": "5790f0c2e30f42369d4a0f42428228716902bbfc6893dbd7bc05290da38d04c9",
+      "research\\v2_1\\XS_LOWVOL_V2_1_PROTOCOL.yaml": "92702942f1005d9df6bf5f58e78b6f06267492fe183acf98459c9010fbfbbd37",
+      "research\\v2_1\\XS_LOWVOL_V2_1_SPEC.sha256": "cd136b755945233e80adb5fa50b30944cb9ea4a838a62cab55103e196b390819",
+      "research\\v2_1\\XS_LOWVOL_V2_1_SPEC.yaml": "f3be11a96b224d3782512c848ed61e92c0b5d741bf81486eb4f77c3f5a75c2dd",
+      "research\\v2_1\\m1\\V2_1_M1_ENGINEERING_REPORT.json": "924c78e84b0406d4cf8481f5c332a3ad39222b4d6526fa4d95badaab637eda22",
+      "research\\v2_1\\m1\\V2_1_M1_ENGINEERING_REPORT.md": "1f92b228028497d39cd06e1e2d8584d048c7459e72e93f208a09cc9bb410f21d",
+      "research\\v2_1\\m1\\V2_1_M1_TRACE_MANIFEST.json": "69e0688fa987144ac4c3d2929fa61ffe5a224ec91faeb23828e3708026a43ec9",
+      "research\\v2_1\\m1_1\\PRESTART_EXTENSION_MANIFEST.json": "1affb9256fa21093ce93bb28bb34f59e038b06adb4a57a8d24662ca729a5b26a",
+      "research\\v2_1\\m1_1\\V2_1_M1_1_WARM_START_AUDIT.json": "04de2e4770b13423d1be01f145e4419862b57301495bcf6c0bd3957f0048a4e4",
+      "research\\v2_1\\m1_1\\V2_1_M1_1_WARM_START_AUDIT.md": "4ee4d0e923164ce144ae73e1d599edbe341ab2dd068a606099752799a9e90ab0"
+    },
+    "before": {
+      "research\\m1\\M1_DECISION.json": "fa3d460cd37d45e6412f12cca96b3dbbf0693dfa80b6e8848e36613b2143ae74",
+      "research\\m1\\M1_REPORT.md": "bcf6a2879237ecfac57254a4cdf154fcffde4a28ef620ed722f025767e2f6366",
+      "research\\v2_1\\XS_LOWVOL_V2_1_FORWARD_ANCHOR.sha256": "2f777ffe5872474f36c2e507b6efaf6aa52e3308c7e78f6185e397fe11359eee",
+      "research\\v2_1\\XS_LOWVOL_V2_1_FORWARD_ANCHOR.yaml": "bb1d22961d1c874d8dc2d9254f1b9ef15b9d3123d6b0f33cfd75e4f26d314f43",
+      "research\\v2_1\\XS_LOWVOL_V2_1_PROTOCOL.sha256": "5790f0c2e30f42369d4a0f42428228716902bbfc6893dbd7bc05290da38d04c9",
+      "research\\v2_1\\XS_LOWVOL_V2_1_PROTOCOL.yaml": "92702942f1005d9df6bf5f58e78b6f06267492fe183acf98459c9010fbfbbd37",
+      "research\\v2_1\\XS_LOWVOL_V2_1_SPEC.sha256": "cd136b755945233e80adb5fa50b30944cb9ea4a838a62cab55103e196b390819",
+      "research\\v2_1\\XS_LOWVOL_V2_1_SPEC.yaml": "f3be11a96b224d3782512c848ed61e92c0b5d741bf81486eb4f77c3f5a75c2dd",
+      "research\\v2_1\\m1\\V2_1_M1_ENGINEERING_REPORT.json": "924c78e84b0406d4cf8481f5c332a3ad39222b4d6526fa4d95badaab637eda22",
+      "research\\v2_1\\m1\\V2_1_M1_ENGINEERING_REPORT.md": "1f92b228028497d39cd06e1e2d8584d048c7459e72e93f208a09cc9bb410f21d",
+      "research\\v2_1\\m1\\V2_1_M1_TRACE_MANIFEST.json": "69e0688fa987144ac4c3d2929fa61ffe5a224ec91faeb23828e3708026a43ec9",
+      "research\\v2_1\\m1_1\\PRESTART_EXTENSION_MANIFEST.json": "1affb9256fa21093ce93bb28bb34f59e038b06adb4a57a8d24662ca729a5b26a",
+      "research\\v2_1\\m1_1\\V2_1_M1_1_WARM_START_AUDIT.json": "04de2e4770b13423d1be01f145e4419862b57301495bcf6c0bd3957f0048a4e4",
+      "research\\v2_1\\m1_1\\V2_1_M1_1_WARM_START_AUDIT.md": "4ee4d0e923164ce144ae73e1d599edbe341ab2dd068a606099752799a9e90ab0"
+    },
+    "unchanged": true
+  },
+  "last_official_funding": {
+    "funding_rate": "0.00353850",
+    "funding_time_ms": 1782201600005,
+    "funding_time_utc": "2026-06-23T08:00:00.005Z",
+    "mark_price": "1.68183794",
+    "rate_type": "Regular",
+    "symbol": "TONUSDT"
+  },
+  "legacy_m1_1_status_unchanged": {
+    "completeness": {
+      "required_week_count": 13,
+      "weekly_return_complete_count": 12,
+      "weekly_return_complete_total": 13
+    },
+    "failed_gates": [
+      "W4_funding_component_integrity",
+      "W6_weekly_return_completeness"
+    ],
+    "final_decision": "V2.1-M1.1 WARM_START NOT_READY",
+    "gates": {
+      "W0_identity": "PASS",
+      "W1_incremental_data_provenance": "PASS",
+      "W2_latest_13_week_selection": "PASS",
+      "W3_price_component_integrity": "PASS",
+      "W4_funding_component_integrity": "FAIL",
+      "W5_cost_component_integrity": "PASS",
+      "W6_weekly_return_completeness": "FAIL",
+      "W7_risk_input_fail_closed": "PASS",
+      "W8_anchor_still_not_started": "PASS"
+    },
+    "required_window_intersection_symbols": [
+      "TONUSDT"
+    ]
+  },
+  "market_lifecycle_evidence": {
+    "boundary_kline_has_real_trades": true,
+    "daily_row_count": 3,
+    "daily_rows": [
+      {
+        "close": "1.6978000",
+        "close_time_ms": 1782172799999,
+        "close_time_utc": "2026-06-22T23:59:59.999Z",
+        "high": "1.7261000",
+        "low": "1.6238000",
+        "open": "1.6454000",
+        "open_time_ms": 1782086400000,
+        "open_time_utc": "2026-06-22T00:00:00Z",
+        "quote_volume": "31983935.50490000",
+        "trade_count": 238405,
+        "volume": "19104808.9"
+      },
+      {
+        "close": "1.5901000",
+        "close_time_ms": 1782259199999,
+        "close_time_utc": "2026-06-23T23:59:59.999Z",
+        "high": "1.8250000",
+        "low": "1.5228000",
+        "open": "1.6982000",
+        "open_time_ms": 1782172800000,
+        "open_time_utc": "2026-06-23T00:00:00Z",
+        "quote_volume": "51160069.28256000",
+        "trade_count": 325275,
+        "volume": "30145147.7"
+      },
+      {
+        "close": "1.5901000",
+        "close_time_ms": 1782345599999,
+        "close_time_utc": "2026-06-24T23:59:59.999Z",
+        "high": "1.5901000",
+        "low": "1.5901000",
+        "open": "1.5901000",
+        "open_time_ms": 1782259200000,
+        "open_time_utc": "2026-06-24T00:00:00Z",
+        "quote_volume": "0",
+        "trade_count": 0,
+        "volume": "0"
+      }
+    ],
+    "flat_zero_volume_interpretation": "ARCHIVAL_ONLY_NOT_EVIDENCE_OF_TRADABILITY; official contract removal and absence of later real-trade kline buckets control lifecycle",
+    "frozen_history_first_post_settlement_flat_zero_volume_day": "2026-06-24",
+    "frozen_history_last_daily_bar_utc": "2026-08-31",
+    "frozen_history_lifecycle": {
+      "currently_active": true,
+      "delisted_at": null,
+      "first_available_day": "2024-03-01",
+      "last_available_day": "2026-08-31",
+      "lifecycle_confidence": "inferred",
+      "lifecycle_source": "official_archive_first_bar",
+      "listed_from": "2024-03-01",
+      "status": "OK",
+      "symbol": "TONUSDT"
+    },
+    "frozen_history_post_settlement_flat_zero_volume_day_count": 69,
+    "last_actual_trade_kline_open_time_utc": "2026-06-23T09:00:00Z",
+    "last_actual_trade_kline_row": {
+      "close": "1.5901000",
+      "close_time_ms": 1782205259999,
+      "close_time_utc": "2026-06-23T09:00:59.999Z",
+      "high": "1.5920000",
+      "low": "1.5901000",
+      "open": "1.5902000",
+      "open_time_ms": 1782205200000,
+      "open_time_utc": "2026-06-23T09:00:00Z",
+      "quote_volume": "820.61384000",
+      "trade_count": 7,
+      "volume": "516.0"
+    },
+    "mark_price_1m_row_count": 181,
+    "real_trade_kline_rows_starting_strictly_after_settlement": 0,
+    "real_trade_status_after_settlement": "NO_KLINE_BUCKET_STARTING_STRICTLY_AFTER_SETTLEMENT; THE_09_00_BOUNDARY_BUCKET_HAS_REAL_TRADES",
+    "regular_1m_row_count": 181,
+    "settlement_boundary_kline": {
+      "close": "1.5901000",
+      "close_time_ms": 1782205259999,
+      "close_time_utc": "2026-06-23T09:00:59.999Z",
+      "high": "1.5920000",
+      "low": "1.5901000",
+      "open": "1.5902000",
+      "open_time_ms": 1782205200000,
+      "open_time_utc": "2026-06-23T09:00:00Z",
+      "quote_volume": "820.61384000",
+      "trade_count": 7,
+      "volume": "516.0"
+    },
+    "subminute_trade_ordering": "NOT_EXPOSED_BY_1M_KLINE_API; 09:00 BUCKET STARTS AT THE OFFICIAL SETTLEMENT INSTANT"
+  },
+  "official_provenance": {
+    "announcement": {
+      "announcement_code": "fe307fba935b44698fde4db01e84a7eb",
+      "automatic_settlement_timestamp_ms": 1782205200000,
+      "automatic_settlement_utc": "2026-06-23T09:00:00Z",
+      "body_text_sha256": "0c40278741d8139e4fa8e03717ecc5a5735123daecd0386ec0a385a09fb0a758",
+      "cms_numeric_id": 276856,
+      "contract_text": "TONUSDT USDⓈ-M Perpetual Contracts",
+      "order_restriction_source_excerpt": "Users are not allowed to open new orders for the aforementioned contract(s) starting from 2026-06-23 08:30 (UTC) .",
+      "order_restriction_timestamp_ms": 1782203400000,
+      "order_restriction_utc": "2026-06-23T08:30:00Z",
+      "published_at_utc": "2026-06-12T06:00:16.955Z",
+      "settlement_source_excerpt": "Binance Futures will close all positions and conduct an automatic settlement on the TONUSDT USDⓈ-M Perpetual Contracts at 2026-06-23 09:00 (UTC) .",
+      "source_api_url": "https://www.binance.com/bapi/composite/v1/public/cms/article/detail/query",
+      "source_page_url": "https://www.binance.com/en/support/announcement/detail/fe307fba935b44698fde4db01e84a7eb",
+      "title": "Binance Will Support the Toncoin (TON) Rebranding to Gram (GRAM)"
+    },
+    "manifest": "research\\v2_1\\m1_2\\TON_OFFICIAL_PROVENANCE_MANIFEST.json",
+    "request_names": [
+      "announcement_cms",
+      "ton_daily_klines",
+      "ton_funding_history",
+      "ton_mark_price_1m_klines",
+      "ton_regular_1m_klines"
+    ]
+  },
+  "root_cause_assessment": {
+    "classification": "LIFECYCLE_BOUNDARY_FALSE_POSITIVE_CONFIRMED",
+    "next_scheduled_funding_ms": 1782216000005,
+    "next_scheduled_funding_observed": false,
+    "next_scheduled_funding_utc": "2026-06-23T12:00:00.005Z",
+    "reason": "next scheduled settlement is after contract termination while V1 holding remains open",
+    "required_funding_missing": false
+  },
+  "root_cause_classification": "LIFECYCLE_BOUNDARY_FALSE_POSITIVE_CONFIRMED",
+  "safety": {
+    "http_method": "GET-only",
+    "live_trading": false,
+    "official_request_count": 5,
+    "paper_only": true
+  },
+  "schema": "XS-LOWVOL-V2.1-M1.2-TON-ROOT-CAUSE-V1",
+  "scope": {
+    "first_forward_signal_created": false,
+    "forward_evidence_created": false,
+    "funding_validator_modified": false,
+    "funding_zero_fill_used": false,
+    "historical_result_artifact_created": false,
+    "live_trading": false,
+    "parameter_optimization_performed": false,
+    "strategy_modified": false,
+    "synthetic_settlement_used": false,
+    "v1_accounting_modified": false,
+    "v2_1_anchor_modified": false,
+    "v2_1_m2_started": false,
+    "v2_1_protocol_modified": false,
+    "v2_1_spec_modified": false
+  },
+  "time_points": {
+    "T_contract_auto_settlement": {
+      "timestamp_ms": 1782205200000,
+      "utc": "2026-06-23T09:00:00Z"
+    },
+    "T_last_funding": {
+      "timestamp_ms": 1782201600005,
+      "utc": "2026-06-23T08:00:00.005Z"
+    },
+    "T_v1_holding_exit": {
+      "timestamp_ms": 1788220799999,
+      "utc": "2026-08-31T23:59:59.999Z"
+    },
+    "next_scheduled_funding_if_active": {
+      "timestamp_ms": 1782216000005,
+      "utc": "2026-06-23T12:00:00.005Z"
+    },
+    "relationship": {
+      "funding_interval_hours_from_frozen_v1_event": 4.0,
+      "last_funding_before_contract_termination": true,
+      "next_scheduled_funding_after_contract_termination": true,
+      "v1_holding_exit_after_contract_termination": true
+    }
+  },
+  "v1_accounting_metadata": {
+    "accounting_complete": false,
+    "accounting_data_window_end": "2026-08-31",
+    "accounting_issue_count": 1144,
+    "schedule_attempt": {
+      "execution_day": "2025-07-10",
+      "reason": "",
+      "signal_day": "2025-07-09",
+      "status": "SUCCESS",
+      "target_symbols": [
+        "1000SHIBUSDT",
+        "AI16ZUSDT",
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETCUSDT",
+        "FISUSDT",
+        "FUNUSDT",
+        "SEIUSDT",
+        "TONUSDT",
+        "UNIUSDT"
+      ]
+    }
+  },
+  "v1_control_holding": {
+    "direction": 1,
+    "direction_text": "LONG",
+    "entry_timestamp_ms": 1752191999999,
+    "entry_timestamp_utc": "2025-07-10T23:59:59.999Z",
+    "execution_day": "2025-07-10",
+    "exit_timestamp_ms": 1788220799999,
+    "exit_timestamp_utc": "2026-08-31T23:59:59.999Z",
+    "forced_lifecycle_exit": false,
+    "frozen_history_lifecycle": {
+      "currently_active": true,
+      "delisted_at": null,
+      "first_available_day": "2024-03-01",
+      "last_available_day": "2026-08-31",
+      "lifecycle_confidence": "inferred",
+      "lifecycle_source": "official_archive_first_bar",
+      "listed_from": "2024-03-01",
+      "status": "OK",
+      "symbol": "TONUSDT"
+    },
+    "interval_semantics": "(entry_timestamp, exit_timestamp]",
+    "lifecycle_exit_reason": "NO_FORCED_LIFECYCLE_EXIT; DATA_WINDOW_TERMINAL_MARK",
+    "signal_day": "2025-07-09",
+    "symbol": "TONUSDT"
+  },
+  "validator_extended_beyond_contract_lifetime": true,
+  "warm_start": {
+    "required_week_result_remains": "12_OF_13; W4_FAIL; W6_FAIL",
+    "status": "NOT_READY_UNCHANGED"
+  }
+}

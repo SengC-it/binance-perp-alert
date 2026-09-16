@@ -1,0 +1,363 @@
+{
+  "announcement": {
+    "announcement_code": "fe307fba935b44698fde4db01e84a7eb",
+    "automatic_settlement_timestamp_ms": 1782205200000,
+    "automatic_settlement_utc": "2026-06-23T09:00:00Z",
+    "body_text_sha256": "0c40278741d8139e4fa8e03717ecc5a5735123daecd0386ec0a385a09fb0a758",
+    "cms_numeric_id": 276856,
+    "contract_text": "TONUSDT USDⓈ-M Perpetual Contracts",
+    "order_restriction_source_excerpt": "Users are not allowed to open new orders for the aforementioned contract(s) starting from 2026-06-23 08:30 (UTC) .",
+    "order_restriction_timestamp_ms": 1782203400000,
+    "order_restriction_utc": "2026-06-23T08:30:00Z",
+    "published_at_utc": "2026-06-12T06:00:16.955Z",
+    "settlement_source_excerpt": "Binance Futures will close all positions and conduct an automatic settlement on the TONUSDT USDⓈ-M Perpetual Contracts at 2026-06-23 09:00 (UTC) .",
+    "source_api_url": "https://www.binance.com/bapi/composite/v1/public/cms/article/detail/query",
+    "source_page_url": "https://www.binance.com/en/support/announcement/detail/fe307fba935b44698fde4db01e84a7eb",
+    "title": "Binance Will Support the Toncoin (TON) Rebranding to Gram (GRAM)"
+  },
+  "audit_id": "XS-LOWVOL-V2.1-M1.2-TON-LIFECYCLE-1",
+  "frozen_dataset_reference": {
+    "cache_file_sha256": "767440c16f64d3deb8134371554b3a3579a053301ba4fe04106b5cc7f3a48964",
+    "catalog_complete": true,
+    "daily_bar_count": 636990,
+    "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+    "first_available_date": "2020-01-01",
+    "funding_event_count": 2629011,
+    "last_available_date": "2026-08-31",
+    "listing_page_count": 927,
+    "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+    "number_of_ambiguous_symbols": 52,
+    "number_of_delisted_symbols": 31,
+    "number_of_symbols_discovered": 861,
+    "number_of_usable_symbols": 362,
+    "protocol_hash": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+    "raw_file_count": 41682
+  },
+  "funding_history": [
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1781913600001,
+      "funding_time_utc": "2026-06-20T00:00:00.001Z",
+      "mark_price": "1.60530000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "-0.00013366",
+      "funding_time_ms": 1781928000000,
+      "funding_time_utc": "2026-06-20T04:00:00Z",
+      "mark_price": "1.58590346",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "-0.00008553",
+      "funding_time_ms": 1781942400000,
+      "funding_time_utc": "2026-06-20T08:00:00Z",
+      "mark_price": "1.59158293",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "-0.00003795",
+      "funding_time_ms": 1781956800001,
+      "funding_time_utc": "2026-06-20T12:00:00.001Z",
+      "mark_price": "1.59340000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00003669",
+      "funding_time_ms": 1781971200001,
+      "funding_time_utc": "2026-06-20T16:00:00.001Z",
+      "mark_price": "1.62830000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1781985600000,
+      "funding_time_utc": "2026-06-20T20:00:00Z",
+      "mark_price": "1.62060000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782000000000,
+      "funding_time_utc": "2026-06-21T00:00:00Z",
+      "mark_price": "1.63037882",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782014400000,
+      "funding_time_utc": "2026-06-21T04:00:00Z",
+      "mark_price": "1.64670000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782028800000,
+      "funding_time_utc": "2026-06-21T08:00:00Z",
+      "mark_price": "1.68716890",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00005000",
+      "funding_time_ms": 1782043200001,
+      "funding_time_utc": "2026-06-21T12:00:00.001Z",
+      "mark_price": "1.68290000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00008860",
+      "funding_time_ms": 1782057600000,
+      "funding_time_utc": "2026-06-21T16:00:00Z",
+      "mark_price": "1.69592805",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00046036",
+      "funding_time_ms": 1782072000004,
+      "funding_time_utc": "2026-06-21T20:00:00.004Z",
+      "mark_price": "1.67892071",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00018653",
+      "funding_time_ms": 1782086400000,
+      "funding_time_utc": "2026-06-22T00:00:00Z",
+      "mark_price": "1.64540000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00035587",
+      "funding_time_ms": 1782100800000,
+      "funding_time_utc": "2026-06-22T04:00:00Z",
+      "mark_price": "1.62800000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00085384",
+      "funding_time_ms": 1782115200000,
+      "funding_time_utc": "2026-06-22T08:00:00Z",
+      "mark_price": "1.67097899",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00098126",
+      "funding_time_ms": 1782129600000,
+      "funding_time_utc": "2026-06-22T12:00:00Z",
+      "mark_price": "1.66560000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00123458",
+      "funding_time_ms": 1782144000002,
+      "funding_time_utc": "2026-06-22T16:00:00.002Z",
+      "mark_price": "1.66621315",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00154673",
+      "funding_time_ms": 1782158400000,
+      "funding_time_utc": "2026-06-22T20:00:00Z",
+      "mark_price": "1.70880000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00196484",
+      "funding_time_ms": 1782172800003,
+      "funding_time_utc": "2026-06-23T00:00:00.003Z",
+      "mark_price": "1.69780000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00129627",
+      "funding_time_ms": 1782187200000,
+      "funding_time_utc": "2026-06-23T04:00:00Z",
+      "mark_price": "1.66340000",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    },
+    {
+      "funding_rate": "0.00353850",
+      "funding_time_ms": 1782201600005,
+      "funding_time_utc": "2026-06-23T08:00:00.005Z",
+      "mark_price": "1.68183794",
+      "rate_type": "Regular",
+      "symbol": "TONUSDT"
+    }
+  ],
+  "funding_request_window": {
+    "end_utc": "2026-06-24T00:00:00Z",
+    "row_count": 21,
+    "start_utc": "2026-06-20T00:00:00Z"
+  },
+  "market_evidence_window": {
+    "daily_end_utc": "2026-06-24T00:00:00Z",
+    "daily_start_utc": "2026-06-22T00:00:00Z",
+    "end_utc": "2026-06-23T10:00:00Z",
+    "start_utc": "2026-06-23T07:00:00Z"
+  },
+  "market_summary": {
+    "boundary_kline_has_real_trades": true,
+    "daily_row_count": 3,
+    "daily_rows": [
+      {
+        "close": "1.6978000",
+        "close_time_ms": 1782172799999,
+        "close_time_utc": "2026-06-22T23:59:59.999Z",
+        "high": "1.7261000",
+        "low": "1.6238000",
+        "open": "1.6454000",
+        "open_time_ms": 1782086400000,
+        "open_time_utc": "2026-06-22T00:00:00Z",
+        "quote_volume": "31983935.50490000",
+        "trade_count": 238405,
+        "volume": "19104808.9"
+      },
+      {
+        "close": "1.5901000",
+        "close_time_ms": 1782259199999,
+        "close_time_utc": "2026-06-23T23:59:59.999Z",
+        "high": "1.8250000",
+        "low": "1.5228000",
+        "open": "1.6982000",
+        "open_time_ms": 1782172800000,
+        "open_time_utc": "2026-06-23T00:00:00Z",
+        "quote_volume": "51160069.28256000",
+        "trade_count": 325275,
+        "volume": "30145147.7"
+      },
+      {
+        "close": "1.5901000",
+        "close_time_ms": 1782345599999,
+        "close_time_utc": "2026-06-24T23:59:59.999Z",
+        "high": "1.5901000",
+        "low": "1.5901000",
+        "open": "1.5901000",
+        "open_time_ms": 1782259200000,
+        "open_time_utc": "2026-06-24T00:00:00Z",
+        "quote_volume": "0",
+        "trade_count": 0,
+        "volume": "0"
+      }
+    ],
+    "flat_zero_volume_interpretation": "ARCHIVAL_ONLY_NOT_EVIDENCE_OF_TRADABILITY; official contract removal and absence of later real-trade kline buckets control lifecycle",
+    "frozen_history_first_post_settlement_flat_zero_volume_day": "2026-06-24",
+    "frozen_history_last_daily_bar_utc": "2026-08-31",
+    "frozen_history_lifecycle": {
+      "currently_active": true,
+      "delisted_at": null,
+      "first_available_day": "2024-03-01",
+      "last_available_day": "2026-08-31",
+      "lifecycle_confidence": "inferred",
+      "lifecycle_source": "official_archive_first_bar",
+      "listed_from": "2024-03-01",
+      "status": "OK",
+      "symbol": "TONUSDT"
+    },
+    "frozen_history_post_settlement_flat_zero_volume_day_count": 69,
+    "last_actual_trade_kline_open_time_utc": "2026-06-23T09:00:00Z",
+    "last_actual_trade_kline_row": {
+      "close": "1.5901000",
+      "close_time_ms": 1782205259999,
+      "close_time_utc": "2026-06-23T09:00:59.999Z",
+      "high": "1.5920000",
+      "low": "1.5901000",
+      "open": "1.5902000",
+      "open_time_ms": 1782205200000,
+      "open_time_utc": "2026-06-23T09:00:00Z",
+      "quote_volume": "820.61384000",
+      "trade_count": 7,
+      "volume": "516.0"
+    },
+    "mark_price_1m_row_count": 181,
+    "real_trade_kline_rows_starting_strictly_after_settlement": 0,
+    "real_trade_status_after_settlement": "NO_KLINE_BUCKET_STARTING_STRICTLY_AFTER_SETTLEMENT; THE_09_00_BOUNDARY_BUCKET_HAS_REAL_TRADES",
+    "regular_1m_row_count": 181,
+    "settlement_boundary_kline": {
+      "close": "1.5901000",
+      "close_time_ms": 1782205259999,
+      "close_time_utc": "2026-06-23T09:00:59.999Z",
+      "high": "1.5920000",
+      "low": "1.5901000",
+      "open": "1.5902000",
+      "open_time_ms": 1782205200000,
+      "open_time_utc": "2026-06-23T09:00:00Z",
+      "quote_volume": "820.61384000",
+      "trade_count": 7,
+      "volume": "516.0"
+    },
+    "subminute_trade_ordering": "NOT_EXPOSED_BY_1M_KLINE_API; 09:00 BUCKET STARTS AT THE OFFICIAL SETTLEMENT INSTANT"
+  },
+  "requests": {
+    "announcement_cms": {
+      "byte_count": 147307,
+      "content_sha256": "6b382862f0d373ab45567a3861f18c66a3ea81dd677c5dc6431619aacc89d132",
+      "endpoint": "https://www.binance.com/bapi/composite/v1/public/cms/article/detail/query",
+      "fetched_at_utc": "2026-09-16T10:06:06.162480Z",
+      "local_path": "data\\v2_1_m1_2_ton_root_cause\\announcement_cms.json",
+      "name": "announcement_cms",
+      "requested_url": "https://www.binance.com/bapi/composite/v1/public/cms/article/detail/query?articleCode=fe307fba935b44698fde4db01e84a7eb",
+      "status_code": 200
+    },
+    "ton_daily_klines": {
+      "byte_count": 410,
+      "content_sha256": "4cf91af39e4d88439cc65c7e93dda4d6adc4bd1aa006a25fde561138051055af",
+      "endpoint": "https://fapi.binance.com/fapi/v1/klines",
+      "fetched_at_utc": "2026-09-16T10:06:19.006338Z",
+      "local_path": "data\\v2_1_m1_2_ton_root_cause\\TONUSDT_daily_2026-06-22_2026-06-24.json",
+      "name": "ton_daily_klines",
+      "requested_url": "https://fapi.binance.com/fapi/v1/klines?endTime=1782259200000&interval=1d&limit=1000&startTime=1782086400000&symbol=TONUSDT",
+      "status_code": 200
+    },
+    "ton_funding_history": {
+      "byte_count": 2566,
+      "content_sha256": "db149793cc081e1a6b29d19a77e07bdc187eb8a012221241e9af12568cd9de82",
+      "endpoint": "https://fapi.binance.com/fapi/v1/fundingRate",
+      "fetched_at_utc": "2026-09-16T10:06:08.452464Z",
+      "local_path": "data\\v2_1_m1_2_ton_root_cause\\TONUSDT_funding_2026-06-20_2026-06-24.json",
+      "name": "ton_funding_history",
+      "requested_url": "https://fapi.binance.com/fapi/v1/fundingRate?endTime=1782259200000&limit=1000&startTime=1781913600000&symbol=TONUSDT",
+      "status_code": 200
+    },
+    "ton_mark_price_1m_klines": {
+      "byte_count": 19006,
+      "content_sha256": "e13bb59a98f683142d2ff2f4833ec9c9ae5d637a8b7d371db2419b0bcf0adff4",
+      "endpoint": "https://fapi.binance.com/fapi/v1/markPriceKlines",
+      "fetched_at_utc": "2026-09-16T10:06:17.058309Z",
+      "local_path": "data\\v2_1_m1_2_ton_root_cause\\TONUSDT_mark_price_1m_2026-06-23T07-10Z.json",
+      "name": "ton_mark_price_1m_klines",
+      "requested_url": "https://fapi.binance.com/fapi/v1/markPriceKlines?endTime=1782208800000&interval=1m&limit=1000&startTime=1782198000000&symbol=TONUSDT",
+      "status_code": 200
+    },
+    "ton_regular_1m_klines": {
+      "byte_count": 23072,
+      "content_sha256": "7441b97393bcdb22fa657e689ee7b689c5ba549ffc3cdb838dbcc5534efd2269",
+      "endpoint": "https://fapi.binance.com/fapi/v1/klines",
+      "fetched_at_utc": "2026-09-16T10:06:10.938641Z",
+      "local_path": "data\\v2_1_m1_2_ton_root_cause\\TONUSDT_regular_1m_2026-06-23T07-10Z.json",
+      "name": "ton_regular_1m_klines",
+      "requested_url": "https://fapi.binance.com/fapi/v1/klines?endTime=1782208800000&interval=1m&limit=1000&startTime=1782198000000&symbol=TONUSDT",
+      "status_code": 200
+    }
+  },
+  "retrieval_scope": "OFFICIAL_BINANCE_READ_ONLY_GETS",
+  "schema": "XS-LOWVOL-V2.1-M1.2-TON-OFFICIAL-PROVENANCE-V1"
+}
