@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "markdown": {
+      "path": "research/v2/m1/V2_M1_ENGINEERING_REPORT.md",
+      "sha256": "9620210e772a80a7c71d672b31ad55ad4e21dff94623536315243b2e2892c29f"
+    },
+    "report": {
+      "path": "research/v2/m1/V2_M1_ENGINEERING_REPORT.json",
+      "sha256": "3f0322fef2ce020f166255b85c40514f7e390901996f36fe3ee3a52b2f4f466b"
+    }
+  },
+  "base_commit": "bacf6e351832fc9b8f2a1f619eaa04818995973d",
+  "classification": [
+    "CONTAMINATED_DEVELOPMENT_DATA",
+    "NOT_PERFORMANCE_EVIDENCE",
+    "NOT_OOS",
+    "NOT_FORWARD"
+  ],
+  "code_commit": "c7a114d0434b107a9a4487b0bacd7a97add04dc2",
+  "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+  "forward_anchor_status": "FROZEN_NOT_YET_STARTED",
+  "forward_evidence_created": false,
+  "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+  "run_type": "CONTAMINATED_ENGINEERING_REPLAY",
+  "schema_version": "V2-M1-ENGINEERING-TRACE-MANIFEST.v1",
+  "trace_files": {
+    "execution_trace": {
+      "count": 892,
+      "sha256": "0d4e10d40d0cdbbf95901edfd7218540632a02e58e081747ba85d9ab0d255d03",
+      "storage": "embedded_in_V2_M1_ENGINEERING_REPORT.json"
+    },
+    "risk_scale_trace": {
+      "count": 252,
+      "sha256": "5add78d2cbdc6b565b891f65dddbc60aa25f63e19b779f3fa777238c93540776",
+      "storage": "embedded_in_V2_M1_ENGINEERING_REPORT.json"
+    },
+    "transition_trace": {
+      "count": 251,
+      "sha256": "1d8c13acd610bf34c1c6701244cb6daf93c67c744b088bca5c96f8c04fa58061",
+      "storage": "embedded_in_V2_M1_ENGINEERING_REPORT.json"
+    }
+  }
+}
