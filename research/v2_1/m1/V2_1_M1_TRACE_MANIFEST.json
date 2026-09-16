@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "markdown": {
+      "path": "research/v2_1/m1/V2_1_M1_ENGINEERING_REPORT.md",
+      "sha256": "1f92b228028497d39cd06e1e2d8584d048c7459e72e93f208a09cc9bb410f21d"
+    },
+    "report": {
+      "path": "research/v2_1/m1/V2_1_M1_ENGINEERING_REPORT.json",
+      "sha256": "924c78e84b0406d4cf8481f5c332a3ad39222b4d6526fa4d95badaab637eda22"
+    }
+  },
+  "base_commit": "abf7338ff4af25e5fd0a12c1eade8a12a02667db",
+  "classification": [
+    "CONTAMINATED_DEVELOPMENT_DATA",
+    "NOT_PERFORMANCE_EVIDENCE",
+    "NOT_OOS",
+    "NOT_FORWARD"
+  ],
+  "code_commit": "7f6f48221bf30611865126ff41d935d5a5eb5cc1",
+  "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+  "forward_anchor_status": "FROZEN_NOT_YET_STARTED",
+  "forward_evidence_created": false,
+  "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+  "run_id": "XS-LOWVOL-V2.1-M1-ENGINEERING-1",
+  "run_type": "CONTAMINATED_ENGINEERING_REPLAY",
+  "schema_version": "V2.1-M1-ENGINEERING-TRACE-MANIFEST.v1",
+  "trace_files": {
+    "execution_trace": {
+      "count": 892,
+      "sha256": "fd521621abd99461eedf6a64c00d0e1aefe566fac8ad0ac8dba3da6fc176952f",
+      "storage": "embedded_in_V2_1_M1_ENGINEERING_REPORT.json"
+    },
+    "risk_scale_trace": {
+      "count": 252,
+      "sha256": "bf2c76971defad276f4ba1eb9cadb8ee18772bc3138d1aa4c0f2f8ff81f6c1bd",
+      "storage": "embedded_in_V2_1_M1_ENGINEERING_REPORT.json"
+    },
+    "transition_trace": {
+      "count": 252,
+      "sha256": "53fb58a8a6a980702ed7e4c25699301120dbad0860204de482ba7277eb66ce9f",
+      "storage": "embedded_in_V2_1_M1_ENGINEERING_REPORT.json"
+    }
+  }
+}
