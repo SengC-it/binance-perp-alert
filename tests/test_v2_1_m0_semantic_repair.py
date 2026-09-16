@@ -19,7 +19,6 @@ from backtest.v2_1_forward import (
 from backtest.v2_1_protocol import (
     V21_PROTOCOL_SHA256,
     V21_STRATEGY_ID,
-    V2_1_PROTOCOL_PATH,
     frozen_v2_1_forward_gate_policy,
     load_v2_1_protocol,
     protocol_sha256,
@@ -46,6 +45,10 @@ from src.xs_lowvol_v2_1_spec import (
 )
 from src.xs_lowvol_v2_risk import V2RiskScaleInvalid, calculate_position_scale as old_calculate_position_scale
 from src.xs_lowvol_v2_anchor import validate_v2_forward_anchor, verify_v2_forward_anchor_hash
+from src.xs_lowvol_v2_1_anchor import (
+    V2_1_FORWARD_ANCHOR_PATH,
+    validate_v2_1_forward_anchor,
+)
 
 
 UTC = timezone.utc
@@ -107,8 +110,8 @@ def test_v2_1_keeps_the_old_v2_gate_values_and_anchor_immutable():
     assert load_v2_1_protocol()["hard_gates"] == load_v2_protocol()["hard_gates"]
     validate_v2_forward_anchor()
     assert verify_v2_forward_anchor_hash()
-    v21_anchor_candidates = list(V2_1_PROTOCOL_PATH.parent.glob("*ANCHOR*"))
-    assert v21_anchor_candidates == []
+    assert V2_1_FORWARD_ANCHOR_PATH.exists()
+    validate_v2_1_forward_anchor()
 
 
 def test_exact_zero_reference_volatility_is_valid_scale_one():

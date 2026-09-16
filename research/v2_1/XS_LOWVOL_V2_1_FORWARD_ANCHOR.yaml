@@ -1,0 +1,65 @@
+anchor_id: XS-LOWVOL-V2.1-FORWARD-ANCHOR-V1
+status: FROZEN_NOT_YET_STARTED
+approved_v2_1_m0_commit: 31fa706bf86d2177fcc251453c37d09abe8afed2
+approved_v2_1_m0_commit_timestamp_utc: '2026-09-16T06:08:22Z'
+v1_control_sha256: 5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678
+v2_1_spec_sha256: e5b026c106e46d04fb160ee012789c39ff1b9ef3f318a49da871a6a3cd51959c
+v2_1_protocol_sha256: 6aa94ad92fa1811774788d11aecc0326a00e256950df61cb7cbe9db8e504fb7d
+strategy_id: XS-LOWVOL-V2.1-RISK15
+time_basis: UTC
+market_day_basis: UTC_CALENDAR_DAY
+market_schedule: 7x24
+execution_lag_days: 1
+execution_day_rule: signal_day_plus_1_utc_calendar_day
+logical_signal_time_rule: execution_day_00:00:00Z
+forward_start_rule:
+  minimum_logical_signal_time: strictly_after_approved_v2_1_m0_commit_timestamp_utc
+  first_signal_day: NOT_SELECTED_IN_M0_2
+  first_eligible_signal_selection: forbidden_until_v2_1_m1_engineering_pass_and_v2_1_m2_forward_start
+  once_selected_cannot_be_moved_later: true
+historical_backfill_into_forward: FORBIDDEN
+forward_evidence_before_start: FORBIDDEN
+warm_start:
+  freeze_visible_completed_control_weekly_returns: allowed_for_risk_state_initialization_only
+  included_in_forward_pnl: false
+  included_in_forward_return: false
+  included_in_forward_sharpe: false
+  included_in_forward_drawdown: false
+  included_in_forward_profit_factor: false
+  included_in_forward_bootstrap: false
+  included_in_52_week_sample_count: false
+paired_experiment:
+  required: true
+  control_strategy_id: XS-LOWVOL-V1-Control
+  v2_1_strategy_id: XS-LOWVOL-V2.1-RISK15
+  scheduler_authority: V1_CONTROL_PARENT_ONLY
+  independent_clock: FORBIDDEN
+  independent_retry: FORBIDDEN
+  independent_execution_decision: FORBIDDEN
+  risk_data_integrity_halt: V2_DATA_INTEGRITY_HALT
+  halt_semantics: HALT_ENTIRE_PAIRED_EXPERIMENT
+  collect_after_halt: FORBIDDEN
+temporal_validation:
+  execution_day_same_as_signal_day: FORBIDDEN
+  execution_day_plus_2: FORBIDDEN
+  business_day_adjustment: FORBIDDEN
+  weekend_adjustment: FORBIDDEN
+  local_timezone_adjustment: FORBIDDEN
+  runtime_current_time: FORBIDDEN
+  caller_arbitrary_logical_signal_time: FORBIDDEN
+provenance:
+  development_data_start: '2020-01-01'
+  development_data_end: '2026-08-31'
+  development_data_label: CONTAMINATED_DEVELOPMENT_DATA
+  historical_replay: FORBIDDEN
+  forward_backfill: FORBIDDEN
+  pre_start_evidence: FORBIDDEN
+superseded_v2_anchor:
+  strategy_id: XS-LOWVOL-V2-RISK15
+  acceptance: NOT_ACCEPTED_FOR_V2_1
+  reuse: FORBIDDEN
+safety:
+  live_trading: false
+  paper_only: true
+  http_methods:
+    - GET
