@@ -404,11 +404,11 @@ def parse_announcement(content: bytes) -> dict[str, Any]:
     text = _normalized_text(_rich_text(body_tree))
     settlement_re = re.compile(
         r"Binance Futures will close all positions and conduct an automatic settlement on the "
-        r"(TONUSDT USDⓈ-M Perpetual Contracts) at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}) \(UTC\)\."
+        r"(TONUSDT USDⓈ-M Perpetual Contracts) at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}) \(UTC\)\s*\."
     )
     order_re = re.compile(
         r"Users are not allowed to open new orders for the aforementioned contract\(s\) "
-        r"starting from (\d{4}-\d{2}-\d{2} \d{2}:\d{2}) \(UTC\)\."
+        r"starting from (\d{4}-\d{2}-\d{2} \d{2}:\d{2}) \(UTC\)\s*\."
     )
     settlement_match = settlement_re.search(text)
     order_match = order_re.search(text)
