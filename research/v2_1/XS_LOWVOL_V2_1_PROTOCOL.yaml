@@ -1,0 +1,183 @@
+protocol_id: XS-LOWVOL-V2.1-FORWARD-V1
+status: frozen-m0-semantic-repair
+base_commit: 2a88849f19897e76a229ceb0bb7840abccd80dd4
+v1_control_strategy_id: XS-LOWVOL-V1-Control
+v1_control_sha256: 5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678
+v2_1_strategy_id: XS-LOWVOL-V2.1-RISK15
+v2_1_spec_sha256: e5b026c106e46d04fb160ee012789c39ff1b9ef3f318a49da871a6a3cd51959c
+
+lineage:
+  parent_strategy_id: XS-LOWVOL-V2-RISK15
+  parent_spec_sha256: 0337c9d026c5544d31f53d6812e59b985809a46b8329b37ec2f7864aa8ea71bc
+  parent_protocol_id: XS-LOWVOL-V2-FORWARD-V1
+  parent_protocol_sha256: 2460cd4db23b81ec769307c95b1dd74b15301a3995f0326aa194714208487fd4
+  superseded_engineering_run_commit: 2a88849f19897e76a229ceb0bb7840abccd80dd4
+  superseded_code_commit: c7a114d0434b107a9a4487b0bacd7a97add04dc2
+  superseded_failure_gates:
+    - E2_risk_formula
+    - E6_retry_and_paired_schedule
+  first_observed_divergence: 2020-08-14
+  lineage_status: SUPERSEDED_AFTER_ENGINEERING_FAIL
+
+semantic_repair:
+  zero_reference_volatility: exact_zero_is_valid_scale_one
+  positive_reference_volatility: min_1_0_target_0_15_div_reference_volatility
+  negative_or_nonfinite_reference_volatility: V2_DATA_INTEGRITY_HALT
+  invalid_input_result: V2_DATA_INTEGRITY_HALT
+  invalid_input_action: halt_entire_paired_experiment
+  scheduler_authority: V1_CONTROL_PARENT_ONLY
+  independent_success_clock: FORBIDDEN
+  v2_specific_retry: FORBIDDEN
+  parent_failure: inherit_parent_status_and_retry
+  parent_success_with_valid_risk: paired_success_same_dates_targets
+  parent_success_with_data_integrity_failure: paired_experiment_halt
+
+forward_anchor:
+  status: NOT_CREATED_IN_V2_1_M0
+  creation: forbidden_until_v2_1_m0_independent_acceptance
+  historical_backfill_into_forward: forbidden
+
+contaminated_development_data:
+  start: 2020-01-01
+  end: 2026-08-31
+  label: CONTAMINATED_DEVELOPMENT_DATA
+  historical_replay_status: forbidden_as_forward_evidence
+  allowed_uses: engineering_replay_bug_detection_descriptive_diagnostics
+  prohibited_claims:
+    - OOS
+    - external_validation
+    - independent_validation
+    - unseen_historical_data
+
+inherited_v1_control:
+  completed_daily_returns_lookback: 30
+  candle_interval: 1d
+  completed_candles_only: true
+  long_slots: 5
+  short_slots: 5
+  signal_day_quote_volume_min_usdt: 50000000
+  point_in_time_universe: true
+  delisted_symbol_semantics: inherited_unchanged
+  lifecycle_ambiguity: fail_closed
+  ranking: inherited_unchanged
+  tie_break: symbol_ascending
+  execution_lag_days: 1
+  execution_price: next_completed_candle_close
+  scheduler: V1_CONTROL_PARENT_ONLY
+  retry_semantics: inherit_parent_retry_without_v2_specific_retry
+  funding_semantics: actual_settled_events_only
+  transaction_cost_semantics: inherited_taker_plus_slippage
+  target_symbols: exactly_parent_control_targets
+
+v2_1_risk_layer:
+  target_annualized_vol: 0.15
+  vol_lookback_weeks: 13
+  annualization_factor: sqrt(52)
+  vol_estimator: population_std
+  min_scale: 0.0
+  max_scale: 1.0
+  leverage_allowed: false
+  source: completed_v1_control_weekly_net_returns
+  return_components:
+    - price_pnl
+    - funding_pnl
+    - transaction_cost
+  signal_time_cutoff: strict_before_signal_time
+  zero_reference_volatility: exact_zero_to_scale_one
+  positive_reference_volatility: min_1_0_target_0_15_div_reference_volatility
+  negative_or_nonfinite_reference_volatility: V2_DATA_INTEGRITY_HALT
+  invalid_result: V2_DATA_INTEGRITY_HALT
+  invalid_policy: halt_entire_paired_experiment
+  future_observations: exclude_from_required_window
+  scale_above_one: forbidden
+  scale_all_legs_equally: true
+  v1_target_notional: unchanged
+
+paired_forward:
+  control_strategy_id: XS-LOWVOL-V1-Control
+  v2_1_strategy_id: XS-LOWVOL-V2.1-RISK15
+  same_market_data: true
+  same_point_in_time_universe: true
+  same_targets_and_directions: true
+  same_funding_settlements: true
+  same_execution_price: true
+  same_transaction_cost_model: true
+  parent_failure_inherits_status: true
+  parent_retry_is_authoritative: true
+  independent_v2_1_success_clock: false
+  v2_1_specific_retry: false
+  v1_is_benchmark_only: true
+  v1_repass_qualification: false
+
+forward_sample:
+  minimum_completed_forward_weeks: 52
+  minimum_successful_rebalance_cycles: 40
+  twenty_six_week_review: CONTINUE_OR_EARLY_FAIL_ONLY
+  twenty_six_week_pass: forbidden
+
+hard_gates:
+  F0_data_integrity:
+    no_unresolved_held_funding_gap: true
+    no_execution_price_gap: true
+    no_lookahead: true
+    no_lifecycle_ambiguity_affecting_holdings: true
+    no_synthetic_funding: true
+    no_synthetic_price: true
+  F1_forward_sample:
+    completed_forward_weeks_gte: 52
+    successful_rebalance_cycles_gte: 40
+  F2_net_return:
+    forward_52_week_net_return_pct_gt: 8.0
+  F3_cost_robustness:
+    cost_scenario: COST_2X
+    forward_52_week_net_return_pct_gt: 0.0
+  F4_sharpe:
+    weekly_sharpe_gt: 1.0
+  F5_max_drawdown:
+    max_drawdown_pct_lt: 20.0
+  F6_profit_factor:
+    weekly_profit_factor_gt: 1.2
+  F7_block_bootstrap:
+    block_length_weeks: 4
+    rounds: 10000
+    confidence: 0.95
+    seed: 20260916
+    mean_weekly_return_ci95_lower_gt: 0.0
+    probability_mean_weekly_return_gt_zero: 0.95
+  F8_best_week_robustness:
+    remove_highest_fraction: 0.05
+    compound_return_pct_gt: 0.0
+  F9_paired_risk_improvement:
+    v2_max_drawdown_relative_to_v1_lte: 0.8
+  F10_paired_sharpe:
+    v2_weekly_sharpe_gte_v1: true
+  decision: all_F0_through_F10_must_pass
+  manual_override: forbidden
+
+early_failure:
+  trigger: v2_max_drawdown_gte_20_percent
+  result: EARLY_FAIL_F5
+  retain_forward_evidence: true
+
+funding_integrity:
+  required_from_first_forward_day: true
+  missing_settlement_result: F0_FAIL
+  zero_fill: forbidden
+  interpolation: forbidden
+  inferred_event: forbidden
+  neighboring_event_substitution: forbidden
+
+m0_controls:
+  v2_1_historical_replay: forbidden
+  v2_1_performance_output: forbidden
+  v2_1_forward_anchor: forbidden
+  v2_m2: forbidden
+  v2_1_m1: forbidden
+  parameter_selection_from_contaminated_data: forbidden
+  v1_modification: forbidden
+
+safety:
+  live_trading: false
+  paper_only: true
+  http_methods: [GET]
+  forward_mode: paper_only

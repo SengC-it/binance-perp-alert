@@ -1,0 +1,93 @@
+strategy_id: XS-LOWVOL-V2.1-RISK15
+status: frozen-m0-semantic-repair
+parent_strategy: XS-LOWVOL-V2-RISK15
+supersedes_strategy: XS-LOWVOL-V2-RISK15
+correction_reason: ZERO_REFERENCE_VOL_AND_V2_SPECIFIC_RETRY_CREATED_PARENT_SCHEDULE_DIVERGENCE
+supersedes_engineering_run_commit: 2a88849f19897e76a229ceb0bb7840abccd80dd4
+superseded_code_commit: c7a114d0434b107a9a4487b0bacd7a97add04dc2
+superseded_failure_gates:
+  - E2_risk_formula
+  - E6_retry_and_paired_schedule
+first_observed_divergence: 2020-08-14
+
+parent_v1_control:
+  strategy_id: XS-LOWVOL-V1-Control
+  sha256: 5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678
+
+inherited_v1_semantics:
+  completed_daily_returns_lookback: 30
+  candle_interval: 1d
+  completed_candles_only: true
+  signal_day_quote_volume_min_usdt: 50000000
+  point_in_time_universe: true
+  delisted_symbol_semantics: inherited_unchanged
+  lifecycle_ambiguity: fail_closed
+  long_slots: 5
+  short_slots: 5
+  ranking: inherited_unchanged
+  tie_break: symbol_ascending
+  execution_lag_days: 1
+  execution_price: next_completed_candle_close
+  scheduler: V1_CONTROL_PARENT_ONLY
+  retry_semantics: inherit_parent_retry_without_v2_specific_retry
+  funding: actual_settled_events_only
+  transaction_cost: inherited_taker_plus_slippage
+  target_symbols: exactly_parent_control_targets
+
+risk_layer:
+  target_annualized_vol: 0.15
+  vol_lookback_weeks: 13
+  vol_estimator: population_std
+  annualization: sqrt(52)
+  annualization_factor: sqrt(52)
+  min_scale: 0.0
+  max_scale: 1.0
+  leverage_allowed: false
+  input_strategy: XS-LOWVOL-V1-Control
+  input_return_frequency: weekly
+  input_return_definition: completed_control_weekly_net_return
+  completed_at_rule: strict_before_logical_signal_time
+  zero_reference_vol_semantics: SCALE_ONE
+  positive_reference_vol_semantics: min(1.0, 0.15 / reference_vol)
+  negative_or_nonfinite_reference_vol_semantics: V2_DATA_INTEGRITY_HALT
+  invalid_input_semantics: V2_DATA_INTEGRITY_HALT
+  invalid_input_policy: halt_entire_paired_experiment
+  future_observation_semantics: exclude_from_required_window
+  all_legs_use_same_scale: true
+  scale_above_one: forbidden
+
+scheduler_authority: V1_CONTROL_PARENT_ONLY
+v2_specific_retry: FORBIDDEN
+independent_success_clock: FORBIDDEN
+data_integrity_failure_semantics: HALT_PAIRED_EXPERIMENT
+
+paired_semantics:
+  parent_failure: INHERIT_PARENT_STATUS_AND_RETRY
+  parent_success_with_valid_risk: PAIRED_SUCCESS_SAME_TARGETS_AND_DATES
+  parent_success_with_data_integrity_failure: HALT_ENTIRE_PAIRED_EXPERIMENT
+  v1_benchmark_and_v21_must_remain_paired: true
+  v21_changes_only_notional_scale: true
+
+position_sizing:
+  v1_target_notional: unchanged
+  v21_target_notional: v1_target_notional_times_position_scale
+  same_side_resize: trade_absolute_notional_delta_only
+  direction_flip: close_old_direction_then_open_new_direction
+  zero_scale: allowed_without_leverage
+
+forward_anchor:
+  status: NOT_CREATED_IN_V2_1_M0
+  creation: forbidden_until_v2_1_m0_independent_acceptance
+  historical_backfill_into_forward: forbidden
+
+provenance:
+  development_data_label: CONTAMINATED_DEVELOPMENT_DATA
+  historical_replay_in_m0: forbidden
+  performance_output_in_m0: forbidden
+  forward_evidence_in_m0: forbidden
+
+safety:
+  live_trading: false
+  paper_only: true
+  http_methods:
+    - GET
