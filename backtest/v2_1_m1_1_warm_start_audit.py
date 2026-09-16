@@ -90,6 +90,7 @@ V2_1_M1_1_MARKDOWN_PATH = V21_M1_1_MARKDOWN_PATH
 V2_1_M1_1_PRESTART_MANIFEST_PATH = V21_M1_1_PRESTART_MANIFEST_PATH
 V21_M1_1_RAW_DIR = PROJECT_ROOT / "data" / "v2_1_m1_1_prestart_extension"
 V21_M1_1_CUTOFF_MS = int(V21_M1_1_CUTOFF_UTC.timestamp() * 1000)
+V21_M1_1_LAST_ELIGIBLE_MS = V21_M1_1_CUTOFF_MS - 1
 V21_M1_1_FROZEN_DATA_END = M1_DATA_END
 BINANCE_FAPI_BASE = "https://fapi.binance.com"
 EXCHANGE_INFO_ENDPOINT = f"{BINANCE_FAPI_BASE}/fapi/v1/exchangeInfo"
@@ -524,6 +525,8 @@ def _parse_funding_payload(
         if not isinstance(item, Mapping):
             raise WarmStartAuditError(f"{symbol} funding response row is malformed")
         event_time_ms = _parse_int(item.get("fundingTime"), "fundingTime")
+        if event_time_ms >= V21_M1_1_CUTOFF_MS:
+            raise WarmStartAuditError(f"{symbol} funding response contains cutoff-or-later data")
         if not V21_M1_1_EXTENSION_START <= datetime.fromtimestamp(
             event_time_ms / 1000, tz=UTC
         ).date() <= V21_M1_1_EXTENSION_END:
@@ -571,7 +574,7 @@ def _fetch_one_symbol(
         "symbol": symbol,
         "interval": "1d",
         "startTime": str(start_ms),
-        "endTime": str(V21_M1_1_CUTOFF_MS),
+        "endTime": str(V21_M1_1_LAST_ELIGIBLE_MS),
         "limit": "1000",
     }
     daily_payload, daily_record = _fetch_response(
@@ -591,7 +594,7 @@ def _fetch_one_symbol(
     funding_params = {
         "symbol": symbol,
         "startTime": str(start_ms),
-        "endTime": str(V21_M1_1_CUTOFF_MS),
+        "endTime": str(V21_M1_1_LAST_ELIGIBLE_MS),
         "limit": "1000",
     }
     funding_payload, funding_record = _fetch_response(
@@ -1599,6 +1602,7 @@ __all__ = [
     "V21_M1_1_CUTOFF_UTC",
     "V21_M1_1_EXTENSION_END",
     "V21_M1_1_EXTENSION_START",
+    "V21_M1_1_LAST_ELIGIBLE_MS",
     "V21_M1_1_MARKDOWN_PATH",
     "V21_M1_1_OUTPUT_DIR",
     "V21_M1_1_PRESTART_MANIFEST_PATH",

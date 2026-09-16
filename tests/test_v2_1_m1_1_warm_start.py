@@ -18,6 +18,7 @@ from backtest.v2_1_m1_1_warm_start_audit import (
     V21_M1_1_PRESTART_MANIFEST_PATH,
     V21_M1_1_REPORT_PATH,
     V21_M1_1_FROZEN_DATA_END,
+    V21_M1_1_LAST_ELIGIBLE_MS,
     V21_M1_1_MARKDOWN_PATH,
     V2_DATA_INTEGRITY_HALT,
     _accounting_issue_days,
@@ -214,6 +215,11 @@ def test_latest_thirteen_selection_includes_post_august_weeks_and_excludes_cutof
     assert date(2026, 9, 20) not in endings
     assert all(row["completed_at"] < V21_M1_1_CUTOFF_UTC for row in selected)
     assert any(item > V21_M1_1_FROZEN_DATA_END for item in endings)
+
+
+def test_extension_request_upper_bound_is_strictly_before_audit_cutoff():
+    assert V21_M1_1_LAST_ELIGIBLE_MS < int(V21_M1_1_CUTOFF_UTC.timestamp() * 1000)
+    assert V21_M1_1_LAST_ELIGIBLE_MS + 1 == int(V21_M1_1_CUTOFF_UTC.timestamp() * 1000)
 
 
 def test_duplicate_week_is_rejected_even_before_risk_layer():
