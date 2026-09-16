@@ -103,6 +103,20 @@ def _as_completion_time(value: Any, *, field_name: str) -> date | datetime | Non
             raise V2RiskScaleInvalid(f"{field_name} is not a valid completion time") from exc
 
 
+def _require_forward_aware_completion_time(value: Any, *, field_name: str) -> datetime:
+    """Require explicit timezone-aware completion provenance for formal Forward."""
+    parsed = _as_completion_time(value, field_name=field_name)
+    if not isinstance(parsed, datetime):
+        raise V2RiskScaleInvalid(
+            f"{field_name} must be a timezone-aware datetime, not a date-only value"
+        )
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise V2RiskScaleInvalid(
+            f"{field_name} must be a timezone-aware datetime"
+        )
+    return parsed.astimezone(UTC)
+
+
 def _coerce_weekly_return(value: Any, index: int) -> ControlWeeklyReturn:
     if isinstance(value, ControlWeeklyReturn):
         record = value
@@ -189,7 +203,19 @@ def validate_forward_weekly_returns(
             raise V2RiskScaleInvalid(
                 "Forward weekly returns must use dated ControlWeeklyReturn or mapping records"
             )
-        records.append(_coerce_weekly_return(value, index))
+        coerced = _coerce_weekly_return(value, index)
+        completed_at = _require_forward_aware_completion_time(
+            coerced.completed_at,
+            field_name="completed_at",
+        )
+        records.append(
+            ControlWeeklyReturn(
+                week_ending=_as_date(coerced.week_ending, field_name="week_ending"),
+                net_return=float(coerced.net_return),
+                completed_at=completed_at,
+                complete=coerced.complete,
+            )
+        )
     return tuple(records)
 
 

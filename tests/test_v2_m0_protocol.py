@@ -84,10 +84,18 @@ def test_protocol_gate_tampering_is_rejected():
 
 
 def test_forward_epoch_excludes_pre_freeze_observations():
-    epoch = ForwardEpoch("2066f0856575146e917e9dc7c30e17a225f8927d", date(2026, 9, 17))
+    epoch = ForwardEpoch("5b5c81529c92256846a16f98f1227a7af782370a", date(2026, 9, 17))
     ledger = ForwardEvidenceLedger(epoch)
-    assert ledger.record(date(2026, 9, 16), {"net_return": 99.0}) is False
-    assert ledger.record(date(2026, 9, 17), {"net_return": 0.01}) is True
+    assert ledger.record(
+        date(2026, 9, 16),
+        {"net_return": 99.0},
+        logical_signal_time=datetime(2026, 9, 16, 3, tzinfo=UTC),
+    ) is False
+    assert ledger.record(
+        date(2026, 9, 17),
+        {"net_return": 0.01},
+        logical_signal_time=datetime(2026, 9, 17, tzinfo=UTC),
+    ) is True
     assert len(ledger.pre_epoch_observations) == 1
     assert len(ledger.forward_observations) == 1
     assert ledger.forward_observations[0].payload["net_return"] == 0.01
@@ -111,7 +119,7 @@ def _returns() -> list[ControlWeeklyReturn]:
 
 
 def _signal_time(day: date) -> datetime:
-    return datetime.combine(day, time(12), tzinfo=UTC)
+    return datetime.combine(day + timedelta(days=1), time.min, tzinfo=UTC)
 
 
 def _engine() -> V2ForwardEngine:

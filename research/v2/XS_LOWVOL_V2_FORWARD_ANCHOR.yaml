@@ -1,0 +1,11 @@
+anchor_id: XS-LOWVOL-V2-FORWARD-ANCHOR-V1
+status: FROZEN_NOT_YET_STARTED
+approved_v2_m0_commit: 5b5c81529c92256846a16f98f1227a7af782370a
+approved_v2_m0_commit_timestamp_utc: '2026-09-16T02:06:55Z'
+v1_control_sha256: 5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678
+v2_spec_sha256: 0337c9d026c5544d31f53d6812e59b985809a46b8329b37ec2f7864aa8ea71bc
+v2_protocol_sha256: 2460cd4db23b81ec769307c95b1dd74b15301a3995f0326aa194714208487fd4
+time_basis: UTC
+market_day_basis: UTC_CALENDAR_DAY
+forward_evidence_before_anchor_acceptance: FORBIDDEN
+historical_backfill_into_forward: FORBIDDEN

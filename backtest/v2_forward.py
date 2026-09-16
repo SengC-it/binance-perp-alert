@@ -10,8 +10,19 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from datetime import date, datetime
+from datetime import date, datetime, time, timedelta, timezone
 from typing import Any, Mapping, Sequence
+
+from src.xs_lowvol_v2_anchor import (
+    APPROVED_V1_CONTROL_SHA256,
+    APPROVED_V2_FORWARD_ANCHOR_SHA256,
+    APPROVED_V2_M0_COMMIT,
+    APPROVED_V2_M0_COMMIT_TIMESTAMP_UTC,
+    APPROVED_V2_PROTOCOL_SHA256,
+    APPROVED_V2_SPEC_SHA256,
+    V2ForwardAnchorError,
+    validate_v2_forward_anchor,
+)
 
 from src.xs_lowvol_v2_risk import (
     ControlWeeklyReturn,
@@ -43,6 +54,8 @@ MISSING_EXECUTION_PRICE = "MISSING_EXECUTION_PRICE"
 RISK_SCALE_INVALID = "V2_RISK_SCALE_INVALID"
 TRANSITION_FAILURE = "TRANSITION_FAILURE"
 NOT_DUE = "NOT_DUE"
+FORWARD_EPOCH_INVALID = "FORWARD_EPOCH_INVALID"
+FORWARD_TEMPORAL_INVALID = "FORWARD_TEMPORAL_INVALID"
 _NON_SUCCESS = frozenset({NO_SIGNAL, INSUFFICIENT_UNIVERSE, MISSING_EXECUTION_PRICE, RISK_SCALE_INVALID, TRANSITION_FAILURE})
 _COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
@@ -69,6 +82,22 @@ class ForwardInputError(ValueError):
 class ForwardEpochError(ValueError):
     """A Forward observation is not anchored to the accepted M0 epoch."""
 
+    code = FORWARD_EPOCH_INVALID
+
+    def __init__(self, reason: str):
+        super().__init__(f"{self.code}: {reason}")
+        self.reason = reason
+
+
+class ForwardTemporalError(ValueError):
+    """A Forward signal/execution timestamp violates the frozen UTC rule."""
+
+    code = FORWARD_TEMPORAL_INVALID
+
+    def __init__(self, reason: str):
+        super().__init__(f"{self.code}: {reason}")
+        self.reason = reason
+
 
 @dataclass(frozen=True)
 class ForwardEpoch:
@@ -76,16 +105,66 @@ class ForwardEpoch:
 
     freeze_commit: str
     first_eligible_signal_day: date
+    v1_control_sha256: str = APPROVED_V1_CONTROL_SHA256
+    v2_spec_sha256: str = APPROVED_V2_SPEC_SHA256
+    v2_protocol_sha256: str = APPROVED_V2_PROTOCOL_SHA256
+    forward_anchor_sha256: str = APPROVED_V2_FORWARD_ANCHOR_SHA256
+    approved_m0_commit_timestamp_utc: datetime = APPROVED_V2_M0_COMMIT_TIMESTAMP_UTC
 
     def __post_init__(self) -> None:
-        if not _COMMIT_RE.fullmatch(self.freeze_commit):
-            raise ForwardEpochError("freeze_commit must be a 40-character commit SHA")
+        if (
+            not isinstance(self.freeze_commit, str)
+            or not _COMMIT_RE.fullmatch(self.freeze_commit)
+            or self.freeze_commit != APPROVED_V2_M0_COMMIT
+        ):
+            raise ForwardEpochError(
+                "freeze_commit must equal the approved V2-M0 commit"
+            )
+        try:
+            validate_v2_forward_anchor()
+        except V2ForwardAnchorError as exc:
+            raise ForwardEpochError(str(exc)) from exc
+        expected_hashes = {
+            "v1_control_sha256": APPROVED_V1_CONTROL_SHA256,
+            "v2_spec_sha256": APPROVED_V2_SPEC_SHA256,
+            "v2_protocol_sha256": APPROVED_V2_PROTOCOL_SHA256,
+            "forward_anchor_sha256": APPROVED_V2_FORWARD_ANCHOR_SHA256,
+        }
+        for field_name, expected in expected_hashes.items():
+            if getattr(self, field_name) != expected:
+                raise ForwardEpochError(
+                    f"{field_name} is not bound to the approved Forward identity"
+                )
+        timestamp = self.approved_m0_commit_timestamp_utc
+        if (
+            not isinstance(timestamp, datetime)
+            or timestamp.tzinfo is None
+            or timestamp.utcoffset() is None
+            or timestamp.astimezone(timezone.utc)
+            != APPROVED_V2_M0_COMMIT_TIMESTAMP_UTC
+        ):
+            raise ForwardEpochError(
+                "approved_m0_commit_timestamp_utc is not bound to the approved freeze"
+            )
 
     def includes(self, signal_day: date) -> bool:
         return signal_day >= self.first_eligible_signal_day
 
     def rejects(self, signal_day: date) -> bool:
         return not self.includes(signal_day)
+
+    def validate_logical_signal_time(self, logical_signal_time: datetime) -> datetime:
+        """Require an aware Forward timestamp strictly after the M0 freeze."""
+        if not isinstance(logical_signal_time, datetime):
+            raise ForwardEpochError("logical signal time must be a datetime")
+        if logical_signal_time.tzinfo is None or logical_signal_time.utcoffset() is None:
+            raise ForwardEpochError("logical signal time must be timezone-aware")
+        normalized = logical_signal_time.astimezone(timezone.utc)
+        if normalized <= APPROVED_V2_M0_COMMIT_TIMESTAMP_UTC:
+            raise ForwardEpochError(
+                "logical signal time must be strictly after the approved M0 freeze"
+            )
+        return normalized
 
 
 @dataclass(frozen=True)
@@ -94,6 +173,7 @@ class ForwardObservation:
 
     observed_day: date
     payload: Mapping[str, Any]
+    logical_signal_time: datetime
 
 
 class ForwardEvidenceLedger:
@@ -104,8 +184,21 @@ class ForwardEvidenceLedger:
         self._pre_epoch: list[ForwardObservation] = []
         self._forward: list[ForwardObservation] = []
 
-    def record(self, observed_day: date, payload: Mapping[str, Any]) -> bool:
-        observation = ForwardObservation(observed_day, dict(payload))
+    def record(
+        self,
+        observed_day: date,
+        payload: Mapping[str, Any],
+        *,
+        logical_signal_time: datetime | None = None,
+    ) -> bool:
+        if logical_signal_time is None:
+            logical_signal_time = payload.get("logical_signal_time")
+        if logical_signal_time is None:
+            raise ForwardInputError(
+                "logical_signal_time is required for every Forward observation"
+            )
+        normalized_time = self.epoch.validate_logical_signal_time(logical_signal_time)
+        observation = ForwardObservation(observed_day, dict(payload), normalized_time)
         if self.epoch.rejects(observed_day):
             self._pre_epoch.append(observation)
             return False
@@ -177,7 +270,27 @@ def _require_aware_signal_time(signal_time: datetime | None) -> datetime:
         raise ForwardInputError("signal_time must be a timezone-aware datetime")
     if signal_time.tzinfo is None or signal_time.utcoffset() is None:
         raise ForwardInputError("signal_time must be a timezone-aware datetime")
-    return signal_time
+    return signal_time.astimezone(timezone.utc)
+
+
+def validate_forward_temporal_inputs(
+    *,
+    signal_day: date,
+    execution_day: date,
+    signal_time: datetime | None,
+) -> datetime:
+    """Validate the frozen +1 UTC-calendar-day and logical-signal-time rules."""
+    if execution_day != signal_day + timedelta(days=1):
+        raise ForwardTemporalError(
+            "execution_day must equal signal_day plus exactly one UTC calendar day"
+        )
+    signal_timestamp = _require_aware_signal_time(signal_time)
+    expected = datetime.combine(execution_day, time.min, tzinfo=timezone.utc)
+    if signal_timestamp != expected:
+        raise ForwardTemporalError(
+            "signal_time must equal execution_day 00:00:00 UTC"
+        )
+    return signal_timestamp
 
 
 class V2ForwardEngine:
@@ -185,6 +298,7 @@ class V2ForwardEngine:
 
     def __init__(self, *, base_notional: float = 1.0):
         validate_v2_protocol()
+        validate_v2_forward_anchor()
         self.base_notional = float(base_notional)
         if self.base_notional < 0:
             raise ValueError("base_notional must be non-negative")
@@ -211,7 +325,11 @@ class V2ForwardEngine:
                 execution_day,
                 self.clock.last_successful_execution_day,
             )
-        signal_timestamp = _require_aware_signal_time(signal_time)
+        signal_timestamp = validate_forward_temporal_inputs(
+            signal_day=signal_day,
+            execution_day=execution_day,
+            signal_time=signal_time,
+        )
         targets = dict(control_targets or {})
         target_directions = _direction_tuple(targets)
         status = signal_status
@@ -307,8 +425,11 @@ __all__ = [
     "ForwardEpoch",
     "ForwardEpochError",
     "ForwardInputError",
+    "ForwardTemporalError",
     "ForwardEvidenceLedger",
     "ForwardObservation",
+    "FORWARD_EPOCH_INVALID",
+    "FORWARD_TEMPORAL_INVALID",
     "MISSING_EXECUTION_PRICE",
     "NO_SIGNAL",
     "INSUFFICIENT_UNIVERSE",
@@ -325,6 +446,7 @@ __all__ = [
     "build_forward_epoch",
     "frozen_v2_forward_gate_policy",
     "require_funding_coverage",
+    "validate_forward_temporal_inputs",
     "validate_forward_weekly_returns",
     "validate_v2_protocol",
 ]

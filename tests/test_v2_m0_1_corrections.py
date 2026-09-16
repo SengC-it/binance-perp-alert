@@ -25,11 +25,11 @@ from src.xs_lowvol_v2_risk import (
 UTC = timezone.utc
 TARGETS = {"BTCUSDT": 1, "ETHUSDT": -1}
 SIGNAL_DAY = date(2026, 9, 1)
-SIGNAL_TIME = datetime(2026, 9, 1, 12, tzinfo=UTC)
+SIGNAL_TIME = datetime(2026, 9, 2, 0, tzinfo=UTC)
 
 
 def _signal_time(day: date) -> datetime:
-    return datetime.combine(day, time(12), tzinfo=UTC)
+    return datetime.combine(day + timedelta(days=1), time.min, tzinfo=UTC)
 
 
 def _returns(
