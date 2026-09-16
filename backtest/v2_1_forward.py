@@ -42,7 +42,6 @@ PARENT_FAILURE_STATUSES = frozenset(
         INSUFFICIENT_UNIVERSE,
         MISSING_EXECUTION_PRICE,
         TRANSITION_FAILURE,
-        V2_DATA_INTEGRITY_HALT,
     }
 )
 _KNOWN_PARENT_STATUSES = PARENT_FAILURE_STATUSES | {SUCCESS}
@@ -62,6 +61,10 @@ class V21PairedInputError(ValueError):
     """A parent Control attempt is not a valid paired input."""
 
     code = "V2_1_PAIRED_INPUT_INVALID"
+
+    def __init__(self, reason: str):
+        self.reason = reason
+        super().__init__(f"{self.code}: {reason}")
 
 
 def _require_aware_signal_time(signal_time: datetime | None) -> datetime:
@@ -183,6 +186,14 @@ class V21PairedEngine:
         if parent_status not in _KNOWN_PARENT_STATUSES:
             raise V21PairedInputError(f"unknown parent status: {parent_status}")
 
+        if parent_status == SUCCESS and (
+            execution_available is not True or transition_ok is not True
+        ):
+            raise V21PairedInputError(
+                "parent SUCCESS must not be overridden by an independent "
+                "execution or transition decision"
+            )
+
         try:
             target_directions = _direction_tuple(dict(control_targets or {}))
         except V21PairedInputError:
@@ -190,6 +201,11 @@ class V21PairedEngine:
                 target_directions = ()
             else:
                 raise
+
+        if parent_status == SUCCESS and not target_directions:
+            raise V21PairedInputError(
+                "parent SUCCESS must carry non-empty Control targets"
+            )
 
         if self.halted:
             return self._record_halt(
@@ -215,15 +231,6 @@ class V21PairedEngine:
                 "execution_day must equal signal_day plus exactly one UTC calendar day"
             )
 
-        if parent_status == V2_DATA_INTEGRITY_HALT:
-            return self._record_halt(
-                signal_day=signal_day,
-                execution_day=execution_day,
-                parent_status=parent_status,
-                target_directions=target_directions,
-                reason="parent Control supplied a data-integrity halt",
-            )
-
         if parent_status != SUCCESS:
             attempt = V21PairedAttempt(
                 signal_day=signal_day,
@@ -233,44 +240,6 @@ class V21PairedEngine:
                 target_directions=target_directions,
                 reason="inherited from V1 Control parent; V2.1 adds no retry or clock",
                 paired=True,
-            )
-            self.attempts.append(attempt)
-            return attempt
-
-        if not target_directions:
-            attempt = V21PairedAttempt(
-                signal_day=signal_day,
-                execution_day=execution_day,
-                parent_status=parent_status,
-                status=NO_SIGNAL,
-                reason="parent Control success carried no target set",
-                paired=False,
-            )
-            self.attempts.append(attempt)
-            return attempt
-
-        if not execution_available:
-            attempt = V21PairedAttempt(
-                signal_day=signal_day,
-                execution_day=execution_day,
-                parent_status=parent_status,
-                status=MISSING_EXECUTION_PRICE,
-                target_directions=target_directions,
-                reason="required execution close is unavailable",
-                paired=False,
-            )
-            self.attempts.append(attempt)
-            return attempt
-
-        if not transition_ok:
-            attempt = V21PairedAttempt(
-                signal_day=signal_day,
-                execution_day=execution_day,
-                parent_status=parent_status,
-                status=TRANSITION_FAILURE,
-                target_directions=target_directions,
-                reason="paired transition was not complete",
-                paired=False,
             )
             self.attempts.append(attempt)
             return attempt

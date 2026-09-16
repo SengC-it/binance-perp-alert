@@ -9,8 +9,10 @@ import pytest
 
 from backtest.v2_1_forward import (
     NO_SIGNAL,
+    PARENT_FAILURE_STATUSES,
     SUCCESS,
     V21PairedEngine,
+    V21PairedInputError,
     V2_DATA_INTEGRITY_HALT,
     validate_v2_1_temporal_inputs,
 )
@@ -182,6 +184,124 @@ def test_future_observation_is_excluded_from_the_required_window():
     assert completed_control_weekly_returns(
         _zero_records() + [future], signal_time=SIGNAL_TIME
     ) == tuple(_zero_records())
+
+
+@pytest.mark.parametrize(
+    ("flag", "value"),
+    [("execution_available", False), ("transition_ok", False)],
+)
+def test_parent_success_cannot_be_overridden_by_v21_execution_or_transition(
+    flag: str, value: bool
+):
+    engine = V21PairedEngine(base_notional=100.0)
+    with pytest.raises(V21PairedInputError, match="V2_1_PAIRED_INPUT_INVALID"):
+        engine.process_parent_attempt(
+            signal_day=SIGNAL_DAY,
+            execution_day=EXECUTION_DAY,
+            control_targets=TARGETS,
+            control_weekly_returns=_zero_records(),
+            parent_status=SUCCESS,
+            signal_time=SIGNAL_TIME,
+            **{flag: value},
+        )
+    assert engine.attempts == []
+    assert engine.positions == {}
+
+
+def test_parent_success_with_empty_targets_is_a_paired_input_error():
+    engine = V21PairedEngine(base_notional=100.0)
+    with pytest.raises(V21PairedInputError, match="V2_1_PAIRED_INPUT_INVALID"):
+        engine.process_parent_attempt(
+            signal_day=SIGNAL_DAY,
+            execution_day=EXECUTION_DAY,
+            control_targets={},
+            control_weekly_returns=_zero_records(),
+            parent_status=SUCCESS,
+            signal_time=SIGNAL_TIME,
+        )
+    assert engine.attempts == []
+
+
+def test_v2_data_integrity_halt_is_not_a_v1_parent_status():
+    assert V2_DATA_INTEGRITY_HALT not in PARENT_FAILURE_STATUSES
+    engine = V21PairedEngine(base_notional=100.0)
+    with pytest.raises(V21PairedInputError, match="V2_1_PAIRED_INPUT_INVALID"):
+        engine.process_parent_attempt(
+            signal_day=SIGNAL_DAY,
+            execution_day=EXECUTION_DAY,
+            control_targets=TARGETS,
+            control_weekly_returns=_zero_records(),
+            parent_status=V2_DATA_INTEGRITY_HALT,
+            signal_time=SIGNAL_TIME,
+        )
+    assert engine.attempts == []
+
+
+@pytest.mark.parametrize(
+    ("complete", "net_return"),
+    [
+        (False, 0.90),
+        (True, math.nan),
+        (True, math.inf),
+        (True, 0.90),
+        (True, -0.90),
+    ],
+)
+def test_future_row_content_cannot_change_current_risk_state(
+    complete: bool, net_return: float
+):
+    recent = _records([0.01, -0.01] * 6 + [0.0])
+    baseline = evaluate_risk_scale(recent, signal_time=SIGNAL_TIME)
+    future = ControlWeeklyReturn(
+        week_ending=SIGNAL_DAY + timedelta(days=7),
+        net_return=net_return,
+        completed_at=SIGNAL_TIME + timedelta(days=1),
+        complete=complete,
+    )
+    result = evaluate_risk_scale(recent + [future], signal_time=SIGNAL_TIME)
+    assert result.status == baseline.status == "VALID"
+    assert result.reference_vol == pytest.approx(baseline.reference_vol)
+    assert result.position_scale == pytest.approx(baseline.position_scale)
+
+
+@pytest.mark.parametrize(
+    ("complete", "net_return"),
+    [(False, 0.50), (True, math.nan), (True, math.inf)],
+)
+def test_old_non_required_row_content_cannot_change_current_risk_state(
+    complete: bool, net_return: float
+):
+    recent = _records([0.01, -0.01] * 6 + [0.0])
+    baseline = evaluate_risk_scale(recent, signal_time=SIGNAL_TIME)
+    old = ControlWeeklyReturn(
+        week_ending=date(2019, 1, 1),
+        net_return=net_return,
+        completed_at=datetime(2019, 1, 2, 12, tzinfo=UTC),
+        complete=complete,
+    )
+    result = evaluate_risk_scale([old, *recent], signal_time=SIGNAL_TIME)
+    assert result.status == baseline.status == "VALID"
+    assert result.reference_vol == pytest.approx(baseline.reference_vol)
+    assert result.position_scale == pytest.approx(baseline.position_scale)
+
+
+@pytest.mark.parametrize(
+    ("complete", "net_return"),
+    [(False, 0.01), (True, math.nan), (True, math.inf)],
+)
+def test_required_window_invalid_content_halts_v21(
+    complete: bool, net_return: float
+):
+    records = _records([0.01, -0.01] * 6 + [0.0])
+    last = records[-1]
+    records[-1] = ControlWeeklyReturn(
+        week_ending=last.week_ending,
+        net_return=net_return,
+        completed_at=last.completed_at,
+        complete=complete,
+    )
+    result = evaluate_risk_scale(records, signal_time=SIGNAL_TIME)
+    assert result.status == V2_DATA_INTEGRITY_HALT
 
 
 def test_parent_success_zero_vol_is_paired_on_the_historical_semantic_fixture():

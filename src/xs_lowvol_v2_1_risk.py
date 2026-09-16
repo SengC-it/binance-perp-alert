@@ -24,10 +24,8 @@ from src.xs_lowvol_v2_risk import (
     PositionChange,
     PositionState,
     TargetPosition,
-    V2RiskScaleInvalid,
     plan_position_changes,
     scaled_target_positions,
-    validate_forward_weekly_returns as _validate_legacy_forward_weekly_returns,
 )
 
 from .xs_lowvol_v2_1_spec import (
@@ -79,6 +77,120 @@ def _halt(reason: str) -> V21DataIntegrityHalt:
     return V21DataIntegrityHalt(reason)
 
 
+_MISSING = object()
+
+
+@dataclass(frozen=True)
+class _TemporalObservation:
+    """The fields needed to classify one row before content validation."""
+
+    week_ending: date
+    completed_at: datetime
+    net_return: Any
+    complete: Any
+
+
+def _parse_week_ending(value: Any) -> date:
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    if isinstance(value, str):
+        text = value.replace("Z", "+00:00")
+        try:
+            return datetime.fromisoformat(text).date()
+        except ValueError:
+            try:
+                return date.fromisoformat(text[:10])
+            except ValueError:
+                pass
+    raise _halt("week_ending is not a valid date")
+
+
+def _parse_completed_at(value: Any) -> datetime:
+    if isinstance(value, datetime):
+        parsed = value
+    elif isinstance(value, str):
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError as exc:
+            raise _halt("completed_at is not a valid datetime") from exc
+    else:
+        raise _halt("completed_at must be an explicit timezone-aware datetime")
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise _halt("completed_at must be a timezone-aware datetime")
+    return parsed.astimezone(UTC)
+
+
+def _coerce_temporal_observation(value: Any) -> _TemporalObservation:
+    """Read only temporal provenance; do not inspect future-row contents yet."""
+    if isinstance(value, ControlWeeklyReturn):
+        week_value = value.week_ending
+        completed_value = value.completed_at
+        net_return = value.net_return
+        complete = value.complete
+    elif isinstance(value, Mapping):
+        if "week_ending" not in value:
+            raise _halt("weekly return is missing week_ending")
+        if "completed_at" not in value:
+            raise _halt("weekly return is missing completed_at")
+        week_value = value["week_ending"]
+        completed_value = value["completed_at"]
+        net_return = value.get("net_return", _MISSING)
+        complete = value.get("complete", _MISSING)
+    else:
+        raise _halt("weekly return has an unsupported shape")
+    if completed_value is None:
+        raise _halt("completed_at must be explicit")
+    return _TemporalObservation(
+        week_ending=_parse_week_ending(week_value),
+        completed_at=_parse_completed_at(completed_value),
+        net_return=net_return,
+        complete=complete,
+    )
+
+
+def _temporal_observations(
+    weekly_returns: Sequence[ControlWeeklyReturn | Mapping[str, Any]] | None,
+) -> tuple[_TemporalObservation, ...]:
+    if weekly_returns is None:
+        raise _halt("Control weekly returns are missing")
+    try:
+        values = tuple(weekly_returns)
+    except TypeError as exc:
+        raise _halt("Control weekly returns must be a sequence") from exc
+    if not values:
+        raise _halt("Control weekly returns are empty")
+    return tuple(_coerce_temporal_observation(value) for value in values)
+
+
+def _validate_required_window(
+    selected: Sequence[_TemporalObservation],
+) -> tuple[ControlWeeklyReturn, ...]:
+    """Validate content only after the required 13-row window is selected."""
+    output: list[ControlWeeklyReturn] = []
+    for observation in selected:
+        if observation.complete is not True:
+            raise _halt("a required Control weekly return is incomplete")
+        if observation.net_return is _MISSING or isinstance(observation.net_return, bool):
+            raise _halt("a required Control weekly return has a non-numeric net return")
+        try:
+            value = float(observation.net_return)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise _halt("a required Control weekly return has a non-numeric net return") from exc
+        if not math.isfinite(value):
+            raise _halt("a required Control weekly return has a non-finite net return")
+        output.append(
+            ControlWeeklyReturn(
+                week_ending=observation.week_ending,
+                net_return=value,
+                completed_at=observation.completed_at,
+                complete=True,
+            )
+        )
+    return tuple(output)
+
+
 def _signal_cutoff(signal_time: date | datetime | None) -> datetime | None:
     if signal_time is None:
         return None
@@ -91,42 +203,6 @@ def _signal_cutoff(signal_time: date | datetime | None) -> datetime | None:
     raise _halt("logical signal time has an unsupported shape")
 
 
-def _validate_input_records(
-    weekly_returns: Sequence[ControlWeeklyReturn | Mapping[str, Any]],
-) -> tuple[ControlWeeklyReturn, ...]:
-    """Apply the strict Forward provenance checks under the V2.1 halt code."""
-    if weekly_returns is None:
-        raise _halt("Control weekly returns are missing")
-    try:
-        values = tuple(weekly_returns)
-    except TypeError as exc:
-        raise _halt("Control weekly returns must be a sequence") from exc
-    if not values:
-        raise _halt("Control weekly returns are empty")
-
-    try:
-        normalized = _validate_legacy_forward_weekly_returns(values)
-    except V2RiskScaleInvalid as exc:
-        raise _halt(str(exc)) from exc
-
-    for record in normalized:
-        if not record.complete:
-            raise _halt("a Control weekly return is incomplete")
-        try:
-            if not math.isfinite(float(record.net_return)):
-                raise _halt("weekly net return is not finite")
-        except (TypeError, ValueError, OverflowError) as exc:
-            raise _halt("weekly net return is not numeric") from exc
-    return normalized
-
-
-def validate_v2_1_weekly_returns(
-    weekly_returns: Sequence[ControlWeeklyReturn | Mapping[str, Any]],
-) -> tuple[ControlWeeklyReturn, ...]:
-    """Validate explicit, timezone-aware, completed Control observations."""
-    return _validate_input_records(weekly_returns)
-
-
 def completed_control_weekly_returns(
     weekly_returns: Sequence[ControlWeeklyReturn | Mapping[str, Any]],
     *,
@@ -136,27 +212,33 @@ def completed_control_weekly_returns(
     """Select the latest 13 completed observations known before the signal.
 
     Observations at or after the signal cutoff are excluded before the
-    required-window count.  A future row therefore cannot change a scale, but
-    an otherwise malformed row still fails the data-integrity contract.
+    required-window count.  A future row therefore cannot change a scale; only
+    its temporal provenance is examined before it is excluded.
     """
     if lookback_weeks != VOL_LOOKBACK_WEEKS:
         raise _halt("lookback_weeks is not the frozen value")
     cutoff = _signal_cutoff(signal_time)
-    records = _validate_input_records(weekly_returns)
+    observations = _temporal_observations(weekly_returns)
     candidates = [
-        record
-        for record in records
-        if cutoff is None or record.completion_time < cutoff
+        observation
+        for observation in observations
+        if cutoff is None or observation.completed_at < cutoff
     ]
-    candidates.sort(key=lambda record: (record.completion_time, record.week_ending))
+    candidates.sort(key=lambda observation: (observation.completed_at, observation.week_ending))
     if len(candidates) < lookback_weeks:
         raise _halt(
             f"fewer than {lookback_weeks} complete Control weeks before signal time"
         )
-    selected = tuple(candidates[-lookback_weeks:])
-    if any(not record.complete for record in selected):
-        raise _halt("a required Control weekly return is incomplete")
-    return selected
+    return _validate_required_window(candidates[-lookback_weeks:])
+
+
+def validate_v2_1_weekly_returns(
+    weekly_returns: Sequence[ControlWeeklyReturn | Mapping[str, Any]],
+    *,
+    signal_time: date | datetime | None = None,
+) -> tuple[ControlWeeklyReturn, ...]:
+    """Return the validated latest pre-signal V2.1 risk window."""
+    return completed_control_weekly_returns(weekly_returns, signal_time=signal_time)
 
 
 def reference_annualized_volatility(
@@ -176,7 +258,10 @@ def reference_annualized_volatility(
     annualization_factor = math.sqrt(52.0)
     if ANNUALIZATION_FACTOR != "sqrt(52)":
         raise _halt("annualization rule is not frozen as sqrt(52)")
-    reference_vol = statistics.pstdev(values) * annualization_factor
+    try:
+        reference_vol = statistics.pstdev(values) * annualization_factor
+    except (OverflowError, statistics.StatisticsError) as exc:
+        raise _halt("reference volatility could not be computed") from exc
     if not math.isfinite(reference_vol) or reference_vol < 0.0:
         raise _halt("reference volatility is negative or non-finite")
     return 0.0 if reference_vol == 0.0 else float(reference_vol)
