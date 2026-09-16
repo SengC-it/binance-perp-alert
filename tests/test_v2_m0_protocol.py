@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from datetime import date, timedelta
+from datetime import date, datetime, time, timedelta, timezone
 
 import pytest
 
@@ -34,6 +34,10 @@ from backtest.v2_protocol import (
     verify_v2_protocol_hash,
 )
 from src.xs_lowvol_v2_spec import V2_SPEC_SHA256
+from src.xs_lowvol_v2_risk import ControlWeeklyReturn
+
+
+UTC = timezone.utc
 
 
 def test_protocol_and_sidecar_are_frozen_without_data_access():
@@ -91,8 +95,23 @@ def test_forward_epoch_excludes_pre_freeze_observations():
         ForwardEpoch("not-a-commit", date(2026, 9, 17))
 
 
-def _returns() -> list[float]:
-    return [-0.01, 0.01] * 6 + [0.0]
+def _returns() -> list[ControlWeeklyReturn]:
+    return [
+        ControlWeeklyReturn(
+            week_ending=date(2026, 6, 1) + timedelta(days=7 * index),
+            net_return=value,
+            completed_at=datetime.combine(
+                date(2026, 6, 1) + timedelta(days=7 * index),
+                time(12),
+                tzinfo=UTC,
+            ),
+        )
+        for index, value in enumerate([-0.01, 0.01] * 6 + [0.0])
+    ]
+
+
+def _signal_time(day: date) -> datetime:
+    return datetime.combine(day, time(12), tzinfo=UTC)
 
 
 def _engine() -> V2ForwardEngine:
@@ -107,45 +126,50 @@ def test_only_complete_success_advances_the_stateful_clock():
         execution_day=date(2026, 9, 2),
         control_targets=targets,
         control_weekly_returns=_returns(),
+        signal_time=_signal_time(date(2026, 9, 1)),
     )
     assert first.status == SUCCESS
     assert engine.clock.last_successful_execution_day == date(2026, 9, 2)
 
     no_signal = engine.attempt(
-        signal_day=date(2026, 9, 3),
-        execution_day=date(2026, 9, 4),
+        signal_day=date(2026, 9, 8),
+        execution_day=date(2026, 9, 9),
         control_targets=None,
         control_weekly_returns=None,
         signal_status=NO_SIGNAL,
+        signal_time=_signal_time(date(2026, 9, 8)),
     )
     assert no_signal.status == NO_SIGNAL
     assert engine.clock.last_successful_execution_day == date(2026, 9, 2)
 
     insufficient = engine.attempt(
-        signal_day=date(2026, 9, 5),
-        execution_day=date(2026, 9, 6),
+        signal_day=date(2026, 9, 9),
+        execution_day=date(2026, 9, 10),
         control_targets=targets,
         control_weekly_returns=_returns(),
         signal_status=INSUFFICIENT_UNIVERSE,
+        signal_time=_signal_time(date(2026, 9, 9)),
     )
     assert insufficient.status == INSUFFICIENT_UNIVERSE
     assert engine.clock.last_successful_execution_day == date(2026, 9, 2)
 
     missing_price = engine.attempt(
-        signal_day=date(2026, 9, 8),
-        execution_day=date(2026, 9, 9),
+        signal_day=date(2026, 9, 10),
+        execution_day=date(2026, 9, 11),
         control_targets=targets,
         control_weekly_returns=_returns(),
         execution_available=False,
+        signal_time=_signal_time(date(2026, 9, 10)),
     )
     assert missing_price.status == MISSING_EXECUTION_PRICE
     assert engine.clock.last_successful_execution_day == date(2026, 9, 2)
 
     invalid_risk = engine.attempt(
-        signal_day=date(2026, 9, 10),
-        execution_day=date(2026, 9, 11),
+        signal_day=date(2026, 9, 11),
+        execution_day=date(2026, 9, 12),
         control_targets=targets,
         control_weekly_returns=[0.01] * 13,
+        signal_time=_signal_time(date(2026, 9, 11)),
     )
     assert invalid_risk.status == RISK_SCALE_INVALID
     assert engine.clock.last_successful_execution_day == date(2026, 9, 2)
@@ -156,6 +180,7 @@ def test_only_complete_success_advances_the_stateful_clock():
         control_targets=targets,
         control_weekly_returns=_returns(),
         transition_ok=False,
+        signal_time=_signal_time(date(2026, 9, 12)),
     )
     assert transition.status == TRANSITION_FAILURE
     assert engine.clock.last_successful_execution_day == date(2026, 9, 2)

@@ -112,9 +112,13 @@ def _coerce_weekly_return(value: Any, index: int) -> ControlWeeklyReturn:
             raise V2RiskScaleInvalid("weekly return is missing week_ending")
         if "net_return" not in value:
             raise V2RiskScaleInvalid("weekly return is missing net_return")
+        try:
+            net_return = float(value["net_return"])
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise V2RiskScaleInvalid("weekly net return is not numeric") from exc
         record = ControlWeeklyReturn(
             week_ending=_as_date(week_value, field_name="week_ending"),
-            net_return=float(value["net_return"]),
+            net_return=net_return,
             completed_at=_as_completion_time(value.get("completed_at"), field_name="completed_at"),
             complete=value.get("complete", True) is True,
         )
@@ -138,6 +142,55 @@ def _coerce_weekly_return(value: Any, index: int) -> ControlWeeklyReturn:
     if not isinstance(record.complete, bool):
         raise V2RiskScaleInvalid("weekly return completeness flag is invalid")
     return record
+
+
+def validate_forward_weekly_returns(
+    weekly_returns: Sequence[ControlWeeklyReturn | Mapping[str, Any]],
+) -> tuple[ControlWeeklyReturn, ...]:
+    """Validate the provenance required by the formal Forward engine.
+
+    The lower-level unit-test helper intentionally supports ordered numeric
+    values and an omitted completion timestamp.  The Forward path does not:
+    every observation must carry explicit time and completeness provenance.
+    """
+    if weekly_returns is None:
+        raise V2RiskScaleInvalid("Forward weekly returns are missing")
+    try:
+        values = tuple(weekly_returns)
+    except TypeError as exc:
+        raise V2RiskScaleInvalid("Forward weekly returns must be a sequence") from exc
+    if not values:
+        raise V2RiskScaleInvalid("Forward weekly returns are empty")
+
+    records: list[ControlWeeklyReturn] = []
+    required_mapping_fields = {"week_ending", "net_return", "completed_at", "complete"}
+    for index, value in enumerate(values):
+        if isinstance(value, ControlWeeklyReturn):
+            if value.completed_at is None:
+                raise V2RiskScaleInvalid(
+                    "Forward weekly return completed_at must be explicit"
+                )
+        elif isinstance(value, Mapping):
+            missing = required_mapping_fields.difference(value)
+            if missing:
+                missing_fields = ", ".join(sorted(missing))
+                raise V2RiskScaleInvalid(
+                    f"Forward weekly return is missing provenance: {missing_fields}"
+                )
+            if value["completed_at"] is None:
+                raise V2RiskScaleInvalid(
+                    "Forward weekly return completed_at must be explicit"
+                )
+            if not isinstance(value["complete"], bool):
+                raise V2RiskScaleInvalid(
+                    "Forward weekly return completeness flag is invalid"
+                )
+        else:
+            raise V2RiskScaleInvalid(
+                "Forward weekly returns must use dated ControlWeeklyReturn or mapping records"
+            )
+        records.append(_coerce_weekly_return(value, index))
+    return tuple(records)
 
 
 def completed_control_weekly_returns(
@@ -165,13 +218,14 @@ def completed_control_weekly_returns(
         if cutoff is not None and record.completion_time >= cutoff:
             # Future or same-time observations are not inputs to this signal.
             continue
-        if not record.complete:
-            raise V2RiskScaleInvalid("a required Control weekly return is incomplete")
         candidates.append(record)
     candidates.sort(key=lambda record: (record.completion_time, record.week_ending))
     if len(candidates) < lookback_weeks:
-        raise V2RiskScaleInvalid("fewer than 13 complete Control weeks before signal time")
-    return tuple(candidates[-lookback_weeks:])
+        raise V2RiskScaleInvalid("fewer than 13 Control weeks before signal time")
+    selected = tuple(candidates[-lookback_weeks:])
+    if any(not record.complete for record in selected):
+        raise V2RiskScaleInvalid("a required Control weekly return is incomplete")
+    return selected
 
 
 def reference_annualized_volatility(

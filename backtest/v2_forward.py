@@ -24,6 +24,7 @@ from src.xs_lowvol_v2_risk import (
     plan_position_changes,
     require_funding_coverage,
     scaled_target_positions,
+    validate_forward_weekly_returns,
 )
 
 from .v2_protocol import (
@@ -41,8 +42,28 @@ INSUFFICIENT_UNIVERSE = "INSUFFICIENT_UNIVERSE"
 MISSING_EXECUTION_PRICE = "MISSING_EXECUTION_PRICE"
 RISK_SCALE_INVALID = "V2_RISK_SCALE_INVALID"
 TRANSITION_FAILURE = "TRANSITION_FAILURE"
+NOT_DUE = "NOT_DUE"
 _NON_SUCCESS = frozenset({NO_SIGNAL, INSUFFICIENT_UNIVERSE, MISSING_EXECUTION_PRICE, RISK_SCALE_INVALID, TRANSITION_FAILURE})
 _COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
+
+
+class RebalanceNotDueError(ValueError):
+    """The seven-calendar-day clock does not permit an attempt yet."""
+
+    code = NOT_DUE
+    status = NOT_DUE
+
+    def __init__(self, execution_day: date, last_successful_execution_day: date):
+        super().__init__(
+            f"{self.code}: execution day {execution_day} is before the next "
+            f"seven-day rebalance after {last_successful_execution_day}"
+        )
+
+
+class ForwardInputError(ValueError):
+    """A formal Forward input is missing required point-in-time provenance."""
+
+    code = "FORWARD_INPUT_INVALID"
 
 
 class ForwardEpochError(ValueError):
@@ -147,6 +168,18 @@ def _direction_tuple(targets: Mapping[str, int]) -> tuple[tuple[str, int], ...]:
     return tuple(output)
 
 
+def _require_aware_signal_time(signal_time: datetime | None) -> datetime:
+    if signal_time is None:
+        raise ForwardInputError(
+            "signal_time is required and must be a timezone-aware datetime"
+        )
+    if not isinstance(signal_time, datetime):
+        raise ForwardInputError("signal_time must be a timezone-aware datetime")
+    if signal_time.tzinfo is None or signal_time.utcoffset() is None:
+        raise ForwardInputError("signal_time must be a timezone-aware datetime")
+    return signal_time
+
+
 class V2ForwardEngine:
     """Stateful forward paper transition engine for one V2 paired stream."""
 
@@ -169,9 +202,16 @@ class V2ForwardEngine:
         signal_status: str = SUCCESS,
         execution_available: bool = True,
         transition_ok: bool = True,
-        signal_time: date | datetime | None = None,
+        signal_time: datetime | None = None,
     ) -> RebalanceAttempt:
         """Process one attempted rebalance and preserve failed-day retries."""
+        if not self.clock.is_due(execution_day):
+            assert self.clock.last_successful_execution_day is not None
+            raise RebalanceNotDueError(
+                execution_day,
+                self.clock.last_successful_execution_day,
+            )
+        signal_timestamp = _require_aware_signal_time(signal_time)
         targets = dict(control_targets or {})
         target_directions = _direction_tuple(targets)
         status = signal_status
@@ -190,7 +230,8 @@ class V2ForwardEngine:
             reason = "missing completed Control weekly returns"
         elif status == SUCCESS:
             try:
-                scale = calculate_position_scale(control_weekly_returns, signal_time=signal_time)
+                formal_returns = validate_forward_weekly_returns(control_weekly_returns)
+                scale = calculate_position_scale(formal_returns, signal_time=signal_timestamp)
             except V2RiskScaleInvalid as exc:
                 status = RISK_SCALE_INVALID
                 reason = str(exc)
@@ -265,11 +306,14 @@ def build_forward_epoch(*, freeze_commit: str, first_eligible_signal_day: date) 
 __all__ = [
     "ForwardEpoch",
     "ForwardEpochError",
+    "ForwardInputError",
     "ForwardEvidenceLedger",
     "ForwardObservation",
     "MISSING_EXECUTION_PRICE",
     "NO_SIGNAL",
     "INSUFFICIENT_UNIVERSE",
+    "NOT_DUE",
+    "RebalanceNotDueError",
     "RISK_SCALE_INVALID",
     "RebalanceAttempt",
     "SuccessfulRebalanceClock",
@@ -281,5 +325,6 @@ __all__ = [
     "build_forward_epoch",
     "frozen_v2_forward_gate_policy",
     "require_funding_coverage",
+    "validate_forward_weekly_returns",
     "validate_v2_protocol",
 ]
