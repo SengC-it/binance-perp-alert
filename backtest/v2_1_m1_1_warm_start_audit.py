@@ -24,9 +24,9 @@ from dataclasses import asdict, dataclass, replace
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
-
-import requests
+from urllib.request import Request as UrlRequest, urlopen
 
 from src.xs_lowvol_v2_1_anchor import (
     APPROVED_V1_CONTROL_SHA256,
@@ -321,9 +321,22 @@ def _fetch_response(
     request_url = _request_url(endpoint, params)
     fetched_at = datetime.now(UTC).isoformat()
     target = _safe_raw_path(raw_name)
+    content = b""
+    status_code: int | None = None
+    error: str | None = None
     try:
-        response = requests.get(request_url, timeout=60)
-    except requests.RequestException as exc:
+        request = UrlRequest(request_url, method="GET")
+        with urlopen(request, timeout=60) as response:
+            status_code = int(response.getcode())
+            content = bytes(response.read() or b"")
+    except HTTPError as exc:
+        status_code = int(exc.code)
+        try:
+            content = bytes(exc.read() or b"")
+        except OSError:
+            content = b""
+        error = f"HTTP {status_code}"
+    except (OSError, URLError, TimeoutError) as exc:
         return None, RequestRecord(
             name=name,
             method="GET",
@@ -336,14 +349,12 @@ def _fetch_response(
             local_path=None,
             error=f"{type(exc).__name__}: {exc}",
         )
-    content = bytes(response.content or b"")
     content_hash = hashlib.sha256(content).hexdigest() if content else None
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_bytes(content)
-    error: str | None = None
     payload: Any | None = None
-    if response.status_code >= 400:
-        error = f"HTTP {response.status_code}"
+    if status_code is None or status_code >= 400:
+        error = error or f"HTTP {status_code}"
     elif parse_json:
         try:
             payload = json.loads(content.decode("utf-8"))
@@ -354,7 +365,7 @@ def _fetch_response(
         method="GET",
         endpoint=endpoint,
         request_url=request_url,
-        status_code=response.status_code,
+        status_code=status_code,
         fetched_at=fetched_at,
         content_sha256=content_hash,
         byte_count=len(content),
