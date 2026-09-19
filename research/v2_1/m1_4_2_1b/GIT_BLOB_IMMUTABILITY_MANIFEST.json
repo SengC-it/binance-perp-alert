@@ -1,0 +1,83 @@
+{
+  "bindings": {
+    "m1_4_2": {
+      "bound_blob_count": 10,
+      "bound_blob_manifest": {
+        "research/v2_1/m1_4_2/CONTRACT_TYPE_ELIGIBILITY_OVERLAY.json": "387f5dc8b1141e87aa1c3bf969450aa4e7fd375b",
+        "research/v2_1/m1_4_2/CORRECTED_CURRENT_PARENT_STATE.json": "ff1a858b8f0463c4ee2f2cd6c91a0ff72ea36ee3",
+        "research/v2_1/m1_4_2/CORRECTED_FUNDING_PROVENANCE.json": "cb02eb8e044f49d64fc219c226098ed98a259754",
+        "research/v2_1/m1_4_2/CORRECTED_LATEST_13_RISK_INPUT.json": "1aa4afd85530aabb321e43c8c1bc9ae7100f4e21",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_HOLDINGS.json": "70e097fff5795411765bedcb4976b304c89ff539",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_SCHEDULE.json": "fd358c7ff757e4fdb8789a26779effc3628a3d9d",
+        "research/v2_1/m1_4_2/CORRECTED_PRESTART_EXTENSION_MANIFEST.json": "69827380bb1ec6edc19046b144cb03ba3168cc8a",
+        "research/v2_1/m1_4_2/PRE_CONTAMINATION_CHECKPOINT.json": "68f4d4560474af1ec35543c3db46a57dde140bd9",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.json": "d182b184fbf8f8529f722619d4c5caca62414e20",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.md": "9774e0d20abf323ed004089083e29a741eee0f4a"
+      },
+      "bound_result_commit": "b01086dcc8417f404f369099305a74cf2afaebb1",
+      "changed_paths": [],
+      "current_blob_count": 10,
+      "current_head_blob_manifest": {
+        "research/v2_1/m1_4_2/CONTRACT_TYPE_ELIGIBILITY_OVERLAY.json": "387f5dc8b1141e87aa1c3bf969450aa4e7fd375b",
+        "research/v2_1/m1_4_2/CORRECTED_CURRENT_PARENT_STATE.json": "ff1a858b8f0463c4ee2f2cd6c91a0ff72ea36ee3",
+        "research/v2_1/m1_4_2/CORRECTED_FUNDING_PROVENANCE.json": "cb02eb8e044f49d64fc219c226098ed98a259754",
+        "research/v2_1/m1_4_2/CORRECTED_LATEST_13_RISK_INPUT.json": "1aa4afd85530aabb321e43c8c1bc9ae7100f4e21",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_HOLDINGS.json": "70e097fff5795411765bedcb4976b304c89ff539",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_SCHEDULE.json": "fd358c7ff757e4fdb8789a26779effc3628a3d9d",
+        "research/v2_1/m1_4_2/CORRECTED_PRESTART_EXTENSION_MANIFEST.json": "69827380bb1ec6edc19046b144cb03ba3168cc8a",
+        "research/v2_1/m1_4_2/PRE_CONTAMINATION_CHECKPOINT.json": "68f4d4560474af1ec35543c3db46a57dde140bd9",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.json": "d182b184fbf8f8529f722619d4c5caca62414e20",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.md": "9774e0d20abf323ed004089083e29a741eee0f4a"
+      },
+      "immutable": true,
+      "prefix": "research/v2_1/m1_4_2"
+    },
+    "m1_4_2_1": {
+      "bound_blob_count": 4,
+      "bound_blob_manifest": {
+        "research/v2_1/m1_4_2_1/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V2.json": "f07bc171e65a95df413ab3c2fece9c1dedd24892",
+        "research/v2_1/m1_4_2_1/HISTORICAL_PRODUCT_TYPE_REGISTRY.json": "318ad95c5d03535f2e4cef617fea606489cc7b42",
+        "research/v2_1/m1_4_2_1/V2_1_M1_4_2_1_PRODUCT_PROVENANCE.json": "d6005753ea85d19a958ecc233574b885e4297be6",
+        "research/v2_1/m1_4_2_1/V2_1_M1_4_2_1_PRODUCT_PROVENANCE.md": "1ff5d75e6bf301ed7195913365c0eaae9d5f224f"
+      },
+      "bound_result_commit": "738c874d578c160c72f84feb92d5fadfb6b9b1b2",
+      "changed_paths": [],
+      "current_blob_count": 4,
+      "current_head_blob_manifest": {
+        "research/v2_1/m1_4_2_1/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V2.json": "f07bc171e65a95df413ab3c2fece9c1dedd24892",
+        "research/v2_1/m1_4_2_1/HISTORICAL_PRODUCT_TYPE_REGISTRY.json": "318ad95c5d03535f2e4cef617fea606489cc7b42",
+        "research/v2_1/m1_4_2_1/V2_1_M1_4_2_1_PRODUCT_PROVENANCE.json": "d6005753ea85d19a958ecc233574b885e4297be6",
+        "research/v2_1/m1_4_2_1/V2_1_M1_4_2_1_PRODUCT_PROVENANCE.md": "1ff5d75e6bf301ed7195913365c0eaae9d5f224f"
+      },
+      "immutable": true,
+      "prefix": "research/v2_1/m1_4_2_1"
+    },
+    "m1_4_2_1a": {
+      "bound_blob_count": 4,
+      "bound_blob_manifest": {
+        "research/v2_1/m1_4_2_1a/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V3.json": "23398a5f415e260c91d5924a44b6f8aa0df950b7",
+        "research/v2_1/m1_4_2_1a/HISTORICAL_PRODUCT_TYPE_REGISTRY_CORRECTED.json": "b746b8af62b7ab80f9a10595851e35ef0f3d324e",
+        "research/v2_1/m1_4_2_1a/V2_1_M1_4_2_1A_PRODUCT_PROVENANCE.json": "54d561e2c6d54dc60280f92b915749eb974af2b2",
+        "research/v2_1/m1_4_2_1a/V2_1_M1_4_2_1A_PRODUCT_PROVENANCE.md": "b82a9b66a6c3d10b7928132a0f6ab00cc4b8b15e"
+      },
+      "bound_result_commit": "dc7a37becedca1ef00254497d1b2580385933677",
+      "changed_paths": [],
+      "current_blob_count": 4,
+      "current_head_blob_manifest": {
+        "research/v2_1/m1_4_2_1a/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V3.json": "23398a5f415e260c91d5924a44b6f8aa0df950b7",
+        "research/v2_1/m1_4_2_1a/HISTORICAL_PRODUCT_TYPE_REGISTRY_CORRECTED.json": "b746b8af62b7ab80f9a10595851e35ef0f3d324e",
+        "research/v2_1/m1_4_2_1a/V2_1_M1_4_2_1A_PRODUCT_PROVENANCE.json": "54d561e2c6d54dc60280f92b915749eb974af2b2",
+        "research/v2_1/m1_4_2_1a/V2_1_M1_4_2_1A_PRODUCT_PROVENANCE.md": "b82a9b66a6c3d10b7928132a0f6ab00cc4b8b15e"
+      },
+      "immutable": true,
+      "prefix": "research/v2_1/m1_4_2_1a"
+    }
+  },
+  "classification": [
+    "CROSS_PLATFORM_IMMUTABILITY_IDENTITY",
+    "NOT_FORWARD"
+  ],
+  "current_head_commit": "1daef982ee523bf57be2ac9741b4f95732aedd02",
+  "identity_mechanism": "GIT_BLOB_OID_FROM_COMMIT_TREE",
+  "schema_version": "GIT_BLOB_IMMUTABILITY_MANIFEST.v1"
+}
