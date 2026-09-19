@@ -73,6 +73,11 @@ _TIMESTAMP_RE = re.compile(
 )
 _DATE_RE = re.compile(r"(?P<date>20\d{2}-\d{2}-\d{2})(?![ T]\d{2}:\d{2})")
 _SYMBOL_TOKEN_TEMPLATE = r"(?<![A-Z0-9]){symbol}(?![A-Z0-9])"
+_TABLE_SYMBOL_RE = re.compile(r"^(?P<symbol>[A-Z0-9]{2,}USDT)$")
+_TABLE_TIMESTAMP_RE = re.compile(
+    r"(?P<date>20\d{2}-\d{2}-\d{2})\s+"
+    r"(?P<hour>\d{2}):(?P<minute>\d{2})(?::(?P<second>\d{2}))?"
+)
 _PRODUCT_MARKERS = (
     "tradfi perpetual",
     "equity perpetual",
@@ -83,6 +88,15 @@ _PRODUCT_MARKERS = (
     "etf",
     "equity/index",
     "pre-ipo",
+)
+_TABLE_EQUITY_MARKERS = (
+    "underlying equity",
+    "underlying index",
+    "common stock",
+    "stock",
+    "equity",
+    "etf",
+    "tradfi",
 )
 
 
@@ -194,6 +208,310 @@ def _text_from_body(body: Any) -> str:
     return re.sub(r"\s+", " ", " ".join(pieces)).replace("\u00a0", " ").strip()
 
 
+def _decoded_body(body: Any) -> Any:
+    if isinstance(body, str):
+        try:
+            return json.loads(body)
+        except json.JSONDecodeError:
+            return body
+    return body
+
+
+def _element_nodes(node: Any, tag: str | None = None) -> Iterable[dict[str, Any]]:
+    if isinstance(node, dict):
+        if node.get("node") == "element" and (tag is None or node.get("tag") == tag):
+            yield node
+        for child in node.get("child", []) or []:
+            yield from _element_nodes(child, tag)
+    elif isinstance(node, list):
+        for child in node:
+            yield from _element_nodes(child, tag)
+
+
+def _table_rows(table: dict[str, Any]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+
+    def visit(node: Any) -> None:
+        if not isinstance(node, dict):
+            return
+        if node.get("node") == "element" and node.get("tag") == "table" and node is not table:
+            return
+        if node.get("node") == "element" and node.get("tag") == "tr":
+            rows.append(node)
+            return
+        for child in node.get("child", []) or []:
+            visit(child)
+
+    visit(table)
+    return rows
+
+
+def _table_cells(row: dict[str, Any]) -> list[dict[str, Any]]:
+    cells: list[dict[str, Any]] = []
+
+    def visit(node: Any) -> None:
+        if not isinstance(node, dict):
+            return
+        if node.get("node") == "element" and node.get("tag") in {"td", "th"}:
+            cells.append(node)
+            return
+        for child in node.get("child", []) or []:
+            visit(child)
+
+    for child in row.get("child", []) or []:
+        visit(child)
+    return cells
+
+
+def _normalize_table_text(value: str) -> str:
+    return re.sub(r"\s+", " ", value.replace("\u00a0", " ")).strip()
+
+
+def _table_matrix(table: dict[str, Any]) -> list[list[str]]:
+    return [
+        [_normalize_table_text(_text_from_body(cell)) for cell in _table_cells(row)]
+        for row in _table_rows(table)
+        if _table_cells(row)
+    ]
+
+
+def _exact_table_symbol(value: str) -> str | None:
+    match = _TABLE_SYMBOL_RE.fullmatch(_normalize_table_text(value).upper())
+    return match.group("symbol") if match else None
+
+
+def _table_timestamp(value: str) -> str | None:
+    match = _TABLE_TIMESTAMP_RE.search(_normalize_table_text(value))
+    if not match:
+        return None
+    dt = datetime(
+        int(match.group("date")[:4]),
+        int(match.group("date")[5:7]),
+        int(match.group("date")[8:10]),
+        int(match.group("hour")),
+        int(match.group("minute")),
+        int(match.group("second") or "0"),
+        tzinfo=timezone.utc,
+    )
+    return dt.isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+def _table_label(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", value.lower()).strip()
+
+
+def _table_row_for_label(
+    rows: list[list[str]], labels: tuple[str, ...]
+) -> list[str] | None:
+    for row in rows:
+        if not row:
+            continue
+        label = _table_label(row[0])
+        if any(marker in label for marker in labels):
+            return row
+    return None
+
+
+def _table_underlying_is_equity(value: str) -> bool:
+    lower = _normalize_table_text(value).lower()
+    return any(marker in lower for marker in _TABLE_EQUITY_MARKERS)
+
+
+def _table_column_evidence(
+    table_index: int,
+    column_index: int,
+    symbol: str,
+    contract_type: str,
+    launch_time: str,
+    underlying: str,
+    settlement_asset: str,
+    parser_mode: str,
+) -> dict[str, Any]:
+    canonical = {
+        "column_index": column_index,
+        "contract_type": contract_type,
+        "launch_time": launch_time,
+        "parser_mode": parser_mode,
+        "settlement_asset": settlement_asset,
+        "symbol": symbol,
+        "table_index": table_index,
+        "underlying": underlying,
+    }
+    evidence_hash = _sha256_json(canonical)
+    return {
+        "symbol": symbol,
+        "historical_contract_type": "TRADIFI_PERPETUAL",
+        "historical_quote_asset": "USDT",
+        "historical_product_category": "TRADFI",
+        "listing_effective_timestamp": launch_time,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "timestamp_parse_method": "STRUCTURED_TABLE_TIMESTAMP",
+        "evidence_status": "PROVEN_HISTORICAL_PRODUCT_TYPE",
+        "explicit_product_class": True,
+        "parser_mode": parser_mode,
+        "table_index": table_index,
+        "table_column_index": column_index,
+        "contract_type_cell": contract_type,
+        "launch_time_cell": launch_time,
+        "underlying_evidence_cell": underlying,
+        "settlement_asset_cell": settlement_asset,
+        "table_column_evidence_sha256": evidence_hash,
+        "table_evidence_hash": evidence_hash,
+    }
+
+
+def _parse_column_oriented_table(
+    table_index: int, rows: list[list[str]]
+) -> dict[str, dict[str, Any]]:
+    symbol_row_index: int | None = None
+    symbol_columns: dict[int, str] = {}
+    for row_index, row in enumerate(rows):
+        candidates = {
+            index: symbol
+            for index, value in enumerate(row[1:], start=1)
+            if (symbol := _exact_table_symbol(value)) is not None
+        }
+        if candidates:
+            symbol_row_index = row_index
+            symbol_columns = candidates
+            break
+    if symbol_row_index is None:
+        return {}
+
+    symbol_row = rows[symbol_row_index]
+    expected_width = len(symbol_row)
+    if expected_width <= max(symbol_columns):
+        return {}
+    launch_row = _table_row_for_label(rows, ("launch time", "listing time"))
+    underlying_row = _table_row_for_label(rows, ("underlying equity index", "underlying"))
+    settlement_row = _table_row_for_label(rows, ("settlement asset", "settlement"))
+    contract_row = next(
+        (
+            row
+            for row in rows
+            if "perpetual" in " ".join(row).lower()
+            and any(index < len(row) for index in symbol_columns)
+        ),
+        None,
+    )
+    required_rows = (contract_row, launch_row, underlying_row, settlement_row)
+    if any(row is None or len(row) != expected_width for row in required_rows):
+        return {}
+
+    results: dict[str, dict[str, Any]] = {}
+    for column_index, symbol in symbol_columns.items():
+        contract_type = _normalize_table_text(contract_row[column_index])
+        if "perpetual" not in contract_type.lower() and "perpetual" in contract_row[0].lower():
+            contract_type = _normalize_table_text(contract_row[0])
+        launch_time = _table_timestamp(launch_row[column_index])
+        underlying = _normalize_table_text(underlying_row[column_index])
+        settlement_asset = _normalize_table_text(settlement_row[column_index])
+        if (
+            "perpetual" not in contract_type.lower()
+            or launch_time is None
+            or not _table_underlying_is_equity(underlying)
+            or "usdt" not in settlement_asset.lower()
+        ):
+            continue
+        results[symbol] = _table_column_evidence(
+            table_index,
+            column_index,
+            symbol,
+            contract_type,
+            launch_time,
+            underlying,
+            settlement_asset,
+            "COLUMN_ORIENTED",
+        )
+    return results
+
+
+def _parse_row_oriented_table(
+    table_index: int, rows: list[list[str]]
+) -> dict[str, dict[str, Any]]:
+    header_index: int | None = None
+    fields: dict[str, int] = {}
+    for index, row in enumerate(rows):
+        found: dict[str, int] = {}
+        for column, value in enumerate(row):
+            label = _table_label(value)
+            if "symbol" in label or "contract" in label and "type" not in label:
+                found.setdefault("symbol", column)
+            if "launch time" in label or "listing time" in label:
+                found.setdefault("launch", column)
+            if "contract type" in label:
+                found.setdefault("contract", column)
+            if "underlying equity index" in label or label == "underlying":
+                found.setdefault("underlying", column)
+            if "settlement asset" in label or label == "settlement":
+                found.setdefault("settlement", column)
+        if {"symbol", "launch", "contract", "underlying", "settlement"} <= set(found):
+            header_index = index
+            fields = found
+            break
+    if header_index is None:
+        return {}
+
+    results: dict[str, dict[str, Any]] = {}
+    for row in rows[header_index + 1 :]:
+        if len(row) != len(rows[header_index]):
+            continue
+        symbol = _exact_table_symbol(row[fields["symbol"]])
+        if symbol is None:
+            continue
+        contract_type = _normalize_table_text(row[fields["contract"]])
+        launch_time = _table_timestamp(row[fields["launch"]])
+        underlying = _normalize_table_text(row[fields["underlying"]])
+        settlement_asset = _normalize_table_text(row[fields["settlement"]])
+        if (
+            "perpetual" not in contract_type.lower()
+            or launch_time is None
+            or not _table_underlying_is_equity(underlying)
+            or "usdt" not in settlement_asset.lower()
+        ):
+            continue
+        results[symbol] = _table_column_evidence(
+            table_index,
+            fields["symbol"],
+            symbol,
+            contract_type,
+            launch_time,
+            underlying,
+            settlement_asset,
+            "ROW_ORIENTED",
+        )
+    return results
+
+
+def parse_structured_listing_table(article: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Parse symbol-bound product evidence from Binance CMS table structures."""
+    body = _decoded_body((article.get("data") or {}).get("body", article.get("body")))
+    results: dict[str, dict[str, Any]] = {}
+    for table_index, table in enumerate(_element_nodes(body, "table")):
+        rows = _table_matrix(table)
+        if not rows:
+            continue
+        parsed = _parse_column_oriented_table(table_index, rows)
+        if not parsed:
+            parsed = _parse_row_oriented_table(table_index, rows)
+        for symbol, evidence in parsed.items():
+            results.setdefault(symbol, evidence)
+    return results
+
+
+def _symbols_in_structured_tables(article: dict[str, Any]) -> set[str]:
+    body = _decoded_body((article.get("data") or {}).get("body", article.get("body")))
+    symbols: set[str] = set()
+    for table in _element_nodes(body, "table"):
+        for row in _table_matrix(table):
+            symbols.update(
+                symbol
+                for value in row
+                if (symbol := _exact_table_symbol(value)) is not None
+            )
+    return symbols
+
+
 def _product_class_is_explicit(text: str, context: str) -> bool:
     # Only the symbol-local context is evidence.  A generic category statement
     # elsewhere on a page cannot classify an arbitrary symbol.
@@ -246,6 +564,39 @@ def parse_symbol_evidence(
     Current exchangeInfo and the generic category boundary are never inputs.
     """
     data = article.get("data") or {}
+    structured = parse_structured_listing_table(article)
+    structured_evidence = structured.get(symbol)
+    if structured_evidence is not None:
+        if _parse_iso(structured_evidence["listing_effective_timestamp"]) > _parse_iso(onboard_timestamp):
+            return None
+        detail_code = str(data.get("code") or article.get("code") or "")
+        publication = article.get("releaseDate") or data.get("releaseDate")
+        publication_iso = (
+            None if publication is None else _iso_timestamp(int(publication))
+        )
+        body = data.get("body")
+        raw_body = (
+            body.encode("utf-8")
+            if isinstance(body, str)
+            else json.dumps(body, sort_keys=True).encode("utf-8")
+        )
+        result = dict(structured_evidence)
+        result.update(
+            {
+                "official_source_url": PUBLIC_ANNOUNCEMENT.format(code=detail_code),
+                "detail_api_url": f"{DETAIL_ENDPOINT}?{urlencode({'articleCode': detail_code})}",
+                "source_title": str(data.get("title") or article.get("title") or ""),
+                "source_publication_timestamp": publication_iso,
+                "source_content_sha256": _sha256_bytes(raw_body),
+                "onboard_timestamp": onboard_timestamp,
+                "evidence_found": True,
+            }
+        )
+        return result
+    if symbol in _symbols_in_structured_tables(article):
+        # A symbol explicitly present in a structured table but lacking a
+        # complete same-column contract/product record must fail closed.
+        return None
     body = data.get("body")
     text = _text_from_body(body)
     token = re.compile(_SYMBOL_TOKEN_TEMPLATE.format(symbol=re.escape(symbol)))
