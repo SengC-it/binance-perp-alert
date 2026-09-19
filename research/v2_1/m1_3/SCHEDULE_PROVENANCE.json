@@ -1,0 +1,3076 @@
+{
+  "corrected_attempt_count": 565,
+  "corrected_successful_signal_count": 307,
+  "divergence_rows": [
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-08-14",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-13 -> 2025-08-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-15",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-14 -> 2025-08-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-16",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-15 -> 2025-08-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-17",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-16 -> 2025-08-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-18",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-17 -> 2025-08-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-19",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-18 -> 2025-08-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-20",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-19 -> 2025-08-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-19"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-08-21",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-20 -> 2025-08-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-22",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-21 -> 2025-08-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-23",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-22 -> 2025-08-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-24",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-23 -> 2025-08-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-25",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-24 -> 2025-08-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-26",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-25 -> 2025-08-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-27",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-26 -> 2025-08-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-26"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-08-28",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-27 -> 2025-08-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-29",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-28 -> 2025-08-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-30",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-29 -> 2025-08-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-08-31",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-30 -> 2025-08-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-01",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-08-31 -> 2025-09-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-08-31"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-02",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-01 -> 2025-09-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-03",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-02 -> 2025-09-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-02"
+    },
+    {
+      "corrected_reason": "missing execution prices LEVERUSDT",
+      "corrected_status": "MISSING_EXECUTION_PRICE",
+      "execution_day": "2025-09-04",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-03 -> 2025-09-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-03"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-09-05",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-04 -> 2025-09-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-06",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-05 -> 2025-09-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-07",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-06 -> 2025-09-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-08",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-07 -> 2025-09-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-09",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-08 -> 2025-09-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-10",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-09 -> 2025-09-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-11",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-10 -> 2025-09-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-10"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-09-12",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-11 -> 2025-09-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-13",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-12 -> 2025-09-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-14",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-13 -> 2025-09-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-15",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-14 -> 2025-09-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-16",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-15 -> 2025-09-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-17",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-16 -> 2025-09-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-18",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-17 -> 2025-09-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-17"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-09-19",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-18 -> 2025-09-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-20",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-19 -> 2025-09-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-21",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-20 -> 2025-09-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-22",
+      "old_reason": "DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-21 -> 2025-09-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-22 -> 2025-09-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-22 -> 2025-09-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-23 -> 2025-09-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-23 -> 2025-09-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-24 -> 2025-09-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-24 -> 2025-09-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-24"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-09-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-25 -> 2025-09-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-25 -> 2025-09-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-26 -> 2025-09-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-26 -> 2025-09-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-27 -> 2025-09-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-27 -> 2025-09-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-28 -> 2025-09-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-28 -> 2025-09-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-09-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-29 -> 2025-09-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-29 -> 2025-09-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-09-30 -> 2025-10-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-09-30 -> 2025-10-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-09-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-01 -> 2025-10-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-01 -> 2025-10-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-01"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-10-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-02 -> 2025-10-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-02 -> 2025-10-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-03 -> 2025-10-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-03 -> 2025-10-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-04 -> 2025-10-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-04 -> 2025-10-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-05 -> 2025-10-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-05 -> 2025-10-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-06 -> 2025-10-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-06 -> 2025-10-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-07 -> 2025-10-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-07 -> 2025-10-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-08 -> 2025-10-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-08 -> 2025-10-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-08"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-10-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-09 -> 2025-10-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-09 -> 2025-10-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-10 -> 2025-10-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-10 -> 2025-10-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-11 -> 2025-10-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-11 -> 2025-10-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-12 -> 2025-10-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-12 -> 2025-10-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-13 -> 2025-10-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-13 -> 2025-10-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-14 -> 2025-10-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-14 -> 2025-10-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-15 -> 2025-10-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-15 -> 2025-10-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-15"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-10-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-16 -> 2025-10-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-16 -> 2025-10-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-17 -> 2025-10-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-17 -> 2025-10-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-18 -> 2025-10-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-18 -> 2025-10-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-19 -> 2025-10-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-19 -> 2025-10-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-20 -> 2025-10-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-20 -> 2025-10-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-21 -> 2025-10-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-21 -> 2025-10-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-22 -> 2025-10-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-22 -> 2025-10-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-22"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-10-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-23 -> 2025-10-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-23 -> 2025-10-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-24 -> 2025-10-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-24 -> 2025-10-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-25 -> 2025-10-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-25 -> 2025-10-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-26 -> 2025-10-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-26 -> 2025-10-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-27 -> 2025-10-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-27 -> 2025-10-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-28 -> 2025-10-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-28 -> 2025-10-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-10-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-29 -> 2025-10-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-29 -> 2025-10-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-29"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-10-31",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-30 -> 2025-10-31; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-30 -> 2025-10-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-10-31 -> 2025-11-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-10-31 -> 2025-11-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-10-31"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-01 -> 2025-11-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-01 -> 2025-11-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-02 -> 2025-11-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-02 -> 2025-11-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-03 -> 2025-11-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-03 -> 2025-11-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-04 -> 2025-11-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-04 -> 2025-11-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-05 -> 2025-11-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-05 -> 2025-11-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-05"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-11-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-06 -> 2025-11-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-06 -> 2025-11-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-07 -> 2025-11-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-07 -> 2025-11-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-08 -> 2025-11-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-08 -> 2025-11-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-09 -> 2025-11-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-09 -> 2025-11-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-10 -> 2025-11-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-10 -> 2025-11-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-11 -> 2025-11-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-11 -> 2025-11-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-12 -> 2025-11-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-12 -> 2025-11-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-12"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-11-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-13 -> 2025-11-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-13 -> 2025-11-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-14 -> 2025-11-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-14 -> 2025-11-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-15 -> 2025-11-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-15 -> 2025-11-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-16 -> 2025-11-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-16 -> 2025-11-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-17 -> 2025-11-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-17 -> 2025-11-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-18 -> 2025-11-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-18 -> 2025-11-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-19 -> 2025-11-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-19 -> 2025-11-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-19"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-11-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-20 -> 2025-11-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-20 -> 2025-11-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-21 -> 2025-11-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-21 -> 2025-11-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-22 -> 2025-11-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-22 -> 2025-11-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-23 -> 2025-11-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-23 -> 2025-11-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-24 -> 2025-11-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-24 -> 2025-11-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-25 -> 2025-11-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-25 -> 2025-11-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-26 -> 2025-11-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-26 -> 2025-11-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-26"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-11-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-27 -> 2025-11-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-27 -> 2025-11-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-28 -> 2025-11-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-28 -> 2025-11-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-11-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-29 -> 2025-11-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-29 -> 2025-11-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-11-30 -> 2025-12-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-11-30 -> 2025-12-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-11-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-01 -> 2025-12-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-01 -> 2025-12-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-02 -> 2025-12-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-02 -> 2025-12-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-03 -> 2025-12-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-03 -> 2025-12-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-03"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-12-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-04 -> 2025-12-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-04 -> 2025-12-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-05 -> 2025-12-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-05 -> 2025-12-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-06 -> 2025-12-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-06 -> 2025-12-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-07 -> 2025-12-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-07 -> 2025-12-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-08 -> 2025-12-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-08 -> 2025-12-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-09 -> 2025-12-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-09 -> 2025-12-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-10 -> 2025-12-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-10 -> 2025-12-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-10"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-12-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-11 -> 2025-12-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-11 -> 2025-12-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-12 -> 2025-12-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-12 -> 2025-12-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-13 -> 2025-12-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-13 -> 2025-12-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-14 -> 2025-12-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-14 -> 2025-12-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-15 -> 2025-12-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-15 -> 2025-12-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-16 -> 2025-12-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-16 -> 2025-12-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-17 -> 2025-12-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-17 -> 2025-12-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-17"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-12-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-18 -> 2025-12-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-18 -> 2025-12-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-19 -> 2025-12-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-19 -> 2025-12-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-20 -> 2025-12-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-20 -> 2025-12-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-21 -> 2025-12-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-21 -> 2025-12-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-22 -> 2025-12-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-22 -> 2025-12-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-23 -> 2025-12-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-23 -> 2025-12-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-24 -> 2025-12-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-24 -> 2025-12-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-24"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2025-12-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-25 -> 2025-12-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-25 -> 2025-12-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-26 -> 2025-12-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-26 -> 2025-12-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-27 -> 2025-12-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-27 -> 2025-12-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-28 -> 2025-12-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-28 -> 2025-12-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-29 -> 2025-12-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-29 -> 2025-12-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2025-12-31",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-30 -> 2025-12-31; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-30 -> 2025-12-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2025-12-31 -> 2026-01-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2025-12-31 -> 2026-01-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2025-12-31"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-01-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-01 -> 2026-01-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-01 -> 2026-01-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-02 -> 2026-01-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-02 -> 2026-01-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-03 -> 2026-01-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-03 -> 2026-01-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-04 -> 2026-01-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-04 -> 2026-01-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-05 -> 2026-01-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-05 -> 2026-01-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-06 -> 2026-01-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-06 -> 2026-01-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-07 -> 2026-01-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-07 -> 2026-01-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-07"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-01-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-08 -> 2026-01-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-08 -> 2026-01-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-09 -> 2026-01-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-09 -> 2026-01-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-10 -> 2026-01-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-10 -> 2026-01-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-11 -> 2026-01-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-11 -> 2026-01-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-12 -> 2026-01-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-12 -> 2026-01-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-13 -> 2026-01-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-13 -> 2026-01-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-14 -> 2026-01-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-14 -> 2026-01-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-14"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-01-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-15 -> 2026-01-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-15 -> 2026-01-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-16 -> 2026-01-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-16 -> 2026-01-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-17 -> 2026-01-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-17 -> 2026-01-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-18 -> 2026-01-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-18 -> 2026-01-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-19 -> 2026-01-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-19 -> 2026-01-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-20 -> 2026-01-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-20 -> 2026-01-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-21 -> 2026-01-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-21 -> 2026-01-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-21 -> 2026-01-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-21"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-01-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-22 -> 2026-01-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-22 -> 2026-01-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-22 -> 2026-01-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-23 -> 2026-01-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-23 -> 2026-01-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-23 -> 2026-01-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-24 -> 2026-01-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-24 -> 2026-01-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-24 -> 2026-01-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-25 -> 2026-01-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-25 -> 2026-01-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-25 -> 2026-01-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-26 -> 2026-01-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-26 -> 2026-01-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-26 -> 2026-01-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-27 -> 2026-01-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-27 -> 2026-01-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-27 -> 2026-01-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-28 -> 2026-01-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-28 -> 2026-01-29; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-28 -> 2026-01-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-28"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-01-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-29 -> 2026-01-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-29 -> 2026-01-30; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-29 -> 2026-01-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-01-31",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-30 -> 2026-01-31; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-30 -> 2026-01-31; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-30 -> 2026-01-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-01-31 -> 2026-02-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-01-31 -> 2026-02-01; DATA_INVALID: missing funding coverage DMCUSDT 2026-01-31 -> 2026-02-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-01-31"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-01 -> 2026-02-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-01 -> 2026-02-02; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-01 -> 2026-02-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-02 -> 2026-02-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-02 -> 2026-02-03; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-02 -> 2026-02-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-03 -> 2026-02-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-03 -> 2026-02-04; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-03 -> 2026-02-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-04 -> 2026-02-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-04 -> 2026-02-05; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-04 -> 2026-02-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-04"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-02-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-05 -> 2026-02-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-05 -> 2026-02-06; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-05 -> 2026-02-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-06 -> 2026-02-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-06 -> 2026-02-07; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-06 -> 2026-02-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-07 -> 2026-02-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-07 -> 2026-02-08; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-07 -> 2026-02-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-08 -> 2026-02-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-08 -> 2026-02-09; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-08 -> 2026-02-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-09 -> 2026-02-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-09 -> 2026-02-10; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-09 -> 2026-02-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-10 -> 2026-02-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-10 -> 2026-02-11; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-10 -> 2026-02-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-11 -> 2026-02-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-11 -> 2026-02-12; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-11 -> 2026-02-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-11"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-02-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-12 -> 2026-02-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-12 -> 2026-02-13; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-12 -> 2026-02-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-13 -> 2026-02-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-13 -> 2026-02-14; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-13 -> 2026-02-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-14 -> 2026-02-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-14 -> 2026-02-15; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-14 -> 2026-02-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-15 -> 2026-02-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-15 -> 2026-02-16; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-15 -> 2026-02-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-16 -> 2026-02-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-16 -> 2026-02-17; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-16 -> 2026-02-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-17 -> 2026-02-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-17 -> 2026-02-18; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-17 -> 2026-02-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-18 -> 2026-02-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-18 -> 2026-02-19; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-18 -> 2026-02-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-18"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-02-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-19 -> 2026-02-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-19 -> 2026-02-20; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-19 -> 2026-02-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-20 -> 2026-02-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-20 -> 2026-02-21; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-20 -> 2026-02-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-21 -> 2026-02-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-21 -> 2026-02-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-21 -> 2026-02-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-22 -> 2026-02-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-22 -> 2026-02-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-22 -> 2026-02-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-23 -> 2026-02-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-23 -> 2026-02-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-23 -> 2026-02-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-24 -> 2026-02-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-24 -> 2026-02-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-24 -> 2026-02-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-25 -> 2026-02-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-25 -> 2026-02-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-25 -> 2026-02-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-25"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-02-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-26 -> 2026-02-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-26 -> 2026-02-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-26 -> 2026-02-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-02-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-27 -> 2026-02-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-27 -> 2026-02-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-27 -> 2026-02-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-02-28 -> 2026-03-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-02-28 -> 2026-03-01; DATA_INVALID: missing funding coverage DMCUSDT 2026-02-28 -> 2026-03-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-02-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-01 -> 2026-03-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-01 -> 2026-03-02; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-01 -> 2026-03-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-02 -> 2026-03-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-02 -> 2026-03-03; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-02 -> 2026-03-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-03 -> 2026-03-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-03 -> 2026-03-04; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-03 -> 2026-03-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-04 -> 2026-03-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-04 -> 2026-03-05; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-04 -> 2026-03-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-04"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-03-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-05 -> 2026-03-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-05 -> 2026-03-06; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-05 -> 2026-03-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-06 -> 2026-03-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-06 -> 2026-03-07; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-06 -> 2026-03-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-07 -> 2026-03-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-07 -> 2026-03-08; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-07 -> 2026-03-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-08 -> 2026-03-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-08 -> 2026-03-09; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-08 -> 2026-03-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-09 -> 2026-03-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-09 -> 2026-03-10; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-09 -> 2026-03-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-10 -> 2026-03-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-10 -> 2026-03-11; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-10 -> 2026-03-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-11 -> 2026-03-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-11 -> 2026-03-12; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-11 -> 2026-03-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-11"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-03-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-12 -> 2026-03-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-12 -> 2026-03-13; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-12 -> 2026-03-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-13 -> 2026-03-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-13 -> 2026-03-14; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-13 -> 2026-03-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-14 -> 2026-03-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-14 -> 2026-03-15; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-14 -> 2026-03-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-15 -> 2026-03-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-15 -> 2026-03-16; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-15 -> 2026-03-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-16 -> 2026-03-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-16 -> 2026-03-17; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-16 -> 2026-03-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-17 -> 2026-03-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-17 -> 2026-03-18; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-17 -> 2026-03-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-18 -> 2026-03-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-18 -> 2026-03-19; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-18 -> 2026-03-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-18"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-03-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-19 -> 2026-03-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-19 -> 2026-03-20; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-19 -> 2026-03-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-20 -> 2026-03-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-20 -> 2026-03-21; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-20 -> 2026-03-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-21 -> 2026-03-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-21 -> 2026-03-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-21 -> 2026-03-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-22 -> 2026-03-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-22 -> 2026-03-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-22 -> 2026-03-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-23 -> 2026-03-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-23 -> 2026-03-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-23 -> 2026-03-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-24 -> 2026-03-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-24 -> 2026-03-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-24 -> 2026-03-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-25 -> 2026-03-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-25 -> 2026-03-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-25 -> 2026-03-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-25"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-03-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-26 -> 2026-03-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-26 -> 2026-03-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-26 -> 2026-03-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-27 -> 2026-03-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-27 -> 2026-03-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-27 -> 2026-03-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-28 -> 2026-03-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-28 -> 2026-03-29; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-28 -> 2026-03-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-29 -> 2026-03-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-29 -> 2026-03-30; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-29 -> 2026-03-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-03-31",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-30 -> 2026-03-31; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-30 -> 2026-03-31; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-30 -> 2026-03-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-03-31 -> 2026-04-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-03-31 -> 2026-04-01; DATA_INVALID: missing funding coverage DMCUSDT 2026-03-31 -> 2026-04-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-03-31"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-01 -> 2026-04-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-01 -> 2026-04-02; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-01 -> 2026-04-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-01"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-04-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-02 -> 2026-04-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-02 -> 2026-04-03; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-02 -> 2026-04-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-03 -> 2026-04-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-03 -> 2026-04-04; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-03 -> 2026-04-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-04 -> 2026-04-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-04 -> 2026-04-05; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-04 -> 2026-04-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-05 -> 2026-04-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-05 -> 2026-04-06; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-05 -> 2026-04-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-06 -> 2026-04-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-06 -> 2026-04-07; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-06 -> 2026-04-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-07 -> 2026-04-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-07 -> 2026-04-08; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-07 -> 2026-04-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-08 -> 2026-04-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-08 -> 2026-04-09; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-08 -> 2026-04-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-08"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-04-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-09 -> 2026-04-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-09 -> 2026-04-10; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-09 -> 2026-04-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-10 -> 2026-04-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-10 -> 2026-04-11; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-10 -> 2026-04-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-11 -> 2026-04-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-11 -> 2026-04-12; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-11 -> 2026-04-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-12 -> 2026-04-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-12 -> 2026-04-13; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-12 -> 2026-04-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-13 -> 2026-04-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-13 -> 2026-04-14; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-13 -> 2026-04-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-14 -> 2026-04-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-14 -> 2026-04-15; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-14 -> 2026-04-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-15 -> 2026-04-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-15 -> 2026-04-16; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-15 -> 2026-04-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-15"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-04-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-16 -> 2026-04-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-16 -> 2026-04-17; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-16 -> 2026-04-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-17 -> 2026-04-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-17 -> 2026-04-18; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-17 -> 2026-04-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-18 -> 2026-04-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-18 -> 2026-04-19; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-18 -> 2026-04-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-19 -> 2026-04-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-19 -> 2026-04-20; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-19 -> 2026-04-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-20 -> 2026-04-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-20 -> 2026-04-21; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-20 -> 2026-04-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-21 -> 2026-04-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-21 -> 2026-04-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-21 -> 2026-04-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-22 -> 2026-04-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-22 -> 2026-04-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-22 -> 2026-04-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-22"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-04-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-23 -> 2026-04-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-23 -> 2026-04-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-23 -> 2026-04-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-24 -> 2026-04-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-24 -> 2026-04-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-24 -> 2026-04-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-25 -> 2026-04-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-25 -> 2026-04-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-25 -> 2026-04-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-26 -> 2026-04-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-26 -> 2026-04-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-26 -> 2026-04-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-27 -> 2026-04-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-27 -> 2026-04-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-27 -> 2026-04-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-28 -> 2026-04-29; DATA_INVALID: missing funding coverage VINEUSDT 2026-04-28 -> 2026-04-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-28 -> 2026-04-29; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-28 -> 2026-04-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-04-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-29 -> 2026-04-30; DATA_INVALID: missing funding coverage VINEUSDT 2026-04-29 -> 2026-04-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-29 -> 2026-04-30; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-29 -> 2026-04-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-29"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-05-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-04-30 -> 2026-05-01; DATA_INVALID: missing funding coverage VINEUSDT 2026-04-30 -> 2026-05-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-04-30 -> 2026-05-01; DATA_INVALID: missing funding coverage DMCUSDT 2026-04-30 -> 2026-05-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-04-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-01 -> 2026-05-02; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-01 -> 2026-05-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-01 -> 2026-05-02; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-01 -> 2026-05-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-02 -> 2026-05-03; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-02 -> 2026-05-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-02 -> 2026-05-03; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-02 -> 2026-05-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-03 -> 2026-05-04; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-03 -> 2026-05-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-03 -> 2026-05-04; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-03 -> 2026-05-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-04 -> 2026-05-05; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-04 -> 2026-05-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-04 -> 2026-05-05; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-04 -> 2026-05-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-05 -> 2026-05-06; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-05 -> 2026-05-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-05 -> 2026-05-06; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-05 -> 2026-05-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-06 -> 2026-05-07; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-06 -> 2026-05-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-06 -> 2026-05-07; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-06 -> 2026-05-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-06"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-05-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-07 -> 2026-05-08; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-07 -> 2026-05-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-07 -> 2026-05-08; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-07 -> 2026-05-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-08 -> 2026-05-09; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-08 -> 2026-05-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-08 -> 2026-05-09; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-08 -> 2026-05-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-09 -> 2026-05-10; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-09 -> 2026-05-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-09 -> 2026-05-10; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-09 -> 2026-05-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-10 -> 2026-05-11; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-10 -> 2026-05-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-10 -> 2026-05-11; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-10 -> 2026-05-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-11 -> 2026-05-12; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-11 -> 2026-05-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-11 -> 2026-05-12; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-11 -> 2026-05-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-12 -> 2026-05-13; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-12 -> 2026-05-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-12 -> 2026-05-13; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-12 -> 2026-05-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-13 -> 2026-05-14; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-13 -> 2026-05-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-13 -> 2026-05-14; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-13 -> 2026-05-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-13"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-05-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-14 -> 2026-05-15; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-14 -> 2026-05-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-14 -> 2026-05-15; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-14 -> 2026-05-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-15 -> 2026-05-16; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-15 -> 2026-05-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-15 -> 2026-05-16; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-15 -> 2026-05-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-16 -> 2026-05-17; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-16 -> 2026-05-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-16 -> 2026-05-17; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-16 -> 2026-05-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-17 -> 2026-05-18; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-17 -> 2026-05-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-17 -> 2026-05-18; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-17 -> 2026-05-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-18 -> 2026-05-19; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-18 -> 2026-05-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-18 -> 2026-05-19; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-18 -> 2026-05-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-19 -> 2026-05-20; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-19 -> 2026-05-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-19 -> 2026-05-20; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-19 -> 2026-05-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-20 -> 2026-05-21; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-20 -> 2026-05-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-20 -> 2026-05-21; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-20 -> 2026-05-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-20"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-05-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-21 -> 2026-05-22; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-21 -> 2026-05-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-21 -> 2026-05-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-21 -> 2026-05-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-22 -> 2026-05-23; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-22 -> 2026-05-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-22 -> 2026-05-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-22 -> 2026-05-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-24",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-23 -> 2026-05-24; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-23 -> 2026-05-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-23 -> 2026-05-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-23 -> 2026-05-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-25",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-24 -> 2026-05-25; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-24 -> 2026-05-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-24 -> 2026-05-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-24 -> 2026-05-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-26",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-25 -> 2026-05-26; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-25 -> 2026-05-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-25 -> 2026-05-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-25 -> 2026-05-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-27",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-26 -> 2026-05-27; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-26 -> 2026-05-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-26 -> 2026-05-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-26 -> 2026-05-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-28",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-27 -> 2026-05-28; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-27 -> 2026-05-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-27 -> 2026-05-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-27 -> 2026-05-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-27"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-05-29",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-28 -> 2026-05-29; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-28 -> 2026-05-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-28 -> 2026-05-29; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-28 -> 2026-05-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-30",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-29 -> 2026-05-30; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-29 -> 2026-05-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-29 -> 2026-05-30; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-29 -> 2026-05-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-05-31",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-30 -> 2026-05-31; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-30 -> 2026-05-31; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-30 -> 2026-05-31; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-30 -> 2026-05-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-01",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-05-31 -> 2026-06-01; DATA_INVALID: missing funding coverage VINEUSDT 2026-05-31 -> 2026-06-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-05-31 -> 2026-06-01; DATA_INVALID: missing funding coverage DMCUSDT 2026-05-31 -> 2026-06-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-05-31"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-02",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-01 -> 2026-06-02; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-01 -> 2026-06-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-01 -> 2026-06-02; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-01 -> 2026-06-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-03",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-02 -> 2026-06-03; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-02 -> 2026-06-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-02 -> 2026-06-03; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-02 -> 2026-06-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-04",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-03 -> 2026-06-04; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-03 -> 2026-06-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-03 -> 2026-06-04; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-03 -> 2026-06-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-03"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-06-05",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-04 -> 2026-06-05; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-04 -> 2026-06-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-04 -> 2026-06-05; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-04 -> 2026-06-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-06",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-05 -> 2026-06-06; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-05 -> 2026-06-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-05 -> 2026-06-06; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-05 -> 2026-06-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-07",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-06 -> 2026-06-07; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-06 -> 2026-06-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-06 -> 2026-06-07; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-06 -> 2026-06-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-08",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-07 -> 2026-06-08; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-07 -> 2026-06-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-07 -> 2026-06-08; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-07 -> 2026-06-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-09",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-08 -> 2026-06-09; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-08 -> 2026-06-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-08 -> 2026-06-09; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-08 -> 2026-06-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-10",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-09 -> 2026-06-10; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-09 -> 2026-06-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-09 -> 2026-06-10; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-09 -> 2026-06-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-11",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-10 -> 2026-06-11; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-10 -> 2026-06-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-10 -> 2026-06-11; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-10 -> 2026-06-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-10"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-06-12",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-11 -> 2026-06-12; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-11 -> 2026-06-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-11 -> 2026-06-12; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-11 -> 2026-06-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-13",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-12 -> 2026-06-13; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-12 -> 2026-06-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-12 -> 2026-06-13; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-12 -> 2026-06-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-14",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-13 -> 2026-06-14; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-13 -> 2026-06-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-13 -> 2026-06-14; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-13 -> 2026-06-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-15",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-14 -> 2026-06-15; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-14 -> 2026-06-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-14 -> 2026-06-15; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-14 -> 2026-06-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-16",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-15 -> 2026-06-16; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-15 -> 2026-06-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-15 -> 2026-06-16; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-15 -> 2026-06-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-17",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-16 -> 2026-06-17; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-16 -> 2026-06-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-16 -> 2026-06-17; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-16 -> 2026-06-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-18",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-17 -> 2026-06-18; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-17 -> 2026-06-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-17 -> 2026-06-18; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-17 -> 2026-06-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-17"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-06-19",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-18 -> 2026-06-19; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-18 -> 2026-06-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-18 -> 2026-06-19; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-18 -> 2026-06-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-20",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-19 -> 2026-06-20; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-19 -> 2026-06-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-19 -> 2026-06-20; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-19 -> 2026-06-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-21",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-20 -> 2026-06-21; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-20 -> 2026-06-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-20 -> 2026-06-21; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-20 -> 2026-06-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-22",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-21 -> 2026-06-22; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-21 -> 2026-06-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-21 -> 2026-06-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-21 -> 2026-06-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-23",
+      "old_reason": "DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-22 -> 2026-06-23; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-22 -> 2026-06-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-22 -> 2026-06-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-22 -> 2026-06-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-24",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-23 -> 2026-06-24; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-23 -> 2026-06-24; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-23 -> 2026-06-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-23 -> 2026-06-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-23 -> 2026-06-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-25",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-24 -> 2026-06-25; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-24 -> 2026-06-25; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-24 -> 2026-06-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-24 -> 2026-06-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-24 -> 2026-06-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-24"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-06-26",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-25 -> 2026-06-26; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-25 -> 2026-06-26; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-25 -> 2026-06-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-25 -> 2026-06-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-25 -> 2026-06-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-27",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-26 -> 2026-06-27; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-26 -> 2026-06-27; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-26 -> 2026-06-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-26 -> 2026-06-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-26 -> 2026-06-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-28",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-27 -> 2026-06-28; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-27 -> 2026-06-28; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-27 -> 2026-06-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-27 -> 2026-06-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-27 -> 2026-06-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-29",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-28 -> 2026-06-29; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-28 -> 2026-06-29; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-28 -> 2026-06-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-28 -> 2026-06-29; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-28 -> 2026-06-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-06-30",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-29 -> 2026-06-30; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-29 -> 2026-06-30; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-29 -> 2026-06-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-29 -> 2026-06-30; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-29 -> 2026-06-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-01",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-06-30 -> 2026-07-01; DATA_INVALID: missing funding coverage OMNIUSDT 2026-06-30 -> 2026-07-01; DATA_INVALID: missing funding coverage VINEUSDT 2026-06-30 -> 2026-07-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-06-30 -> 2026-07-01; DATA_INVALID: missing funding coverage DMCUSDT 2026-06-30 -> 2026-07-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-06-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-02",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-01 -> 2026-07-02; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-01 -> 2026-07-02; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-01 -> 2026-07-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-01 -> 2026-07-02; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-01 -> 2026-07-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-01"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-07-03",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-02 -> 2026-07-03; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-02 -> 2026-07-03; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-02 -> 2026-07-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-02 -> 2026-07-03; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-02 -> 2026-07-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-04",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-03 -> 2026-07-04; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-03 -> 2026-07-04; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-03 -> 2026-07-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-03 -> 2026-07-04; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-03 -> 2026-07-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-05",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-04 -> 2026-07-05; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-04 -> 2026-07-05; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-04 -> 2026-07-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-04 -> 2026-07-05; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-04 -> 2026-07-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-06",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-05 -> 2026-07-06; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-05 -> 2026-07-06; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-05 -> 2026-07-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-05 -> 2026-07-06; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-05 -> 2026-07-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-05"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-07",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-06 -> 2026-07-07; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-06 -> 2026-07-07; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-06 -> 2026-07-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-06 -> 2026-07-07; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-06 -> 2026-07-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-08",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-07 -> 2026-07-08; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-07 -> 2026-07-08; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-07 -> 2026-07-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-07 -> 2026-07-08; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-07 -> 2026-07-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-09",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-08 -> 2026-07-09; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-08 -> 2026-07-09; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-08 -> 2026-07-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-08 -> 2026-07-09; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-08 -> 2026-07-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-08"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-07-10",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-09 -> 2026-07-10; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-09 -> 2026-07-10; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-09 -> 2026-07-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-09 -> 2026-07-10; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-09 -> 2026-07-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-11",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-10 -> 2026-07-11; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-10 -> 2026-07-11; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-10 -> 2026-07-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-10 -> 2026-07-11; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-10 -> 2026-07-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-12",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-11 -> 2026-07-12; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-11 -> 2026-07-12; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-11 -> 2026-07-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-11 -> 2026-07-12; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-11 -> 2026-07-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-13",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-12 -> 2026-07-13; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-12 -> 2026-07-13; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-12 -> 2026-07-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-12 -> 2026-07-13; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-12 -> 2026-07-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-12"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-14",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-13 -> 2026-07-14; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-13 -> 2026-07-14; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-13 -> 2026-07-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-13 -> 2026-07-14; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-13 -> 2026-07-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-15",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-14 -> 2026-07-15; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-14 -> 2026-07-15; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-14 -> 2026-07-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-14 -> 2026-07-15; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-14 -> 2026-07-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-16",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-15 -> 2026-07-16; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-15 -> 2026-07-16; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-15 -> 2026-07-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-15 -> 2026-07-16; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-15 -> 2026-07-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-15"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-07-17",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-16 -> 2026-07-17; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-16 -> 2026-07-17; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-16 -> 2026-07-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-16 -> 2026-07-17; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-16 -> 2026-07-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-18",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-17 -> 2026-07-18; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-17 -> 2026-07-18; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-17 -> 2026-07-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-17 -> 2026-07-18; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-17 -> 2026-07-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-19",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-18 -> 2026-07-19; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-18 -> 2026-07-19; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-18 -> 2026-07-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-18 -> 2026-07-19; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-18 -> 2026-07-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-20",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-19 -> 2026-07-20; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-19 -> 2026-07-20; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-19 -> 2026-07-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-19 -> 2026-07-20; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-19 -> 2026-07-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-19"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-21",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-20 -> 2026-07-21; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-20 -> 2026-07-21; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-20 -> 2026-07-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-20 -> 2026-07-21; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-20 -> 2026-07-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-22",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-21 -> 2026-07-22; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-21 -> 2026-07-22; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-21 -> 2026-07-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-21 -> 2026-07-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-21 -> 2026-07-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-23",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-22 -> 2026-07-23; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-22 -> 2026-07-23; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-22 -> 2026-07-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-22 -> 2026-07-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-22 -> 2026-07-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-22"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-07-24",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-23 -> 2026-07-24; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-23 -> 2026-07-24; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-23 -> 2026-07-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-23 -> 2026-07-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-23 -> 2026-07-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-25",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-24 -> 2026-07-25; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-24 -> 2026-07-25; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-24 -> 2026-07-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-24 -> 2026-07-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-24 -> 2026-07-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-26",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-25 -> 2026-07-26; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-25 -> 2026-07-26; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-25 -> 2026-07-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-25 -> 2026-07-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-25 -> 2026-07-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-27",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-26 -> 2026-07-27; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-26 -> 2026-07-27; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-26 -> 2026-07-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-26 -> 2026-07-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-26 -> 2026-07-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-26"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-28",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-27 -> 2026-07-28; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-27 -> 2026-07-28; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-27 -> 2026-07-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-27 -> 2026-07-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-27 -> 2026-07-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-29",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-28 -> 2026-07-29; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-28 -> 2026-07-29; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-28 -> 2026-07-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-28 -> 2026-07-29; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-28 -> 2026-07-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-07-30",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-29 -> 2026-07-30; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-29 -> 2026-07-30; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-29 -> 2026-07-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-29 -> 2026-07-30; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-29 -> 2026-07-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-29"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-07-31",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-30 -> 2026-07-31; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-30 -> 2026-07-31; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-30 -> 2026-07-31; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-30 -> 2026-07-31; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-30 -> 2026-07-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-30"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-01",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-07-31 -> 2026-08-01; DATA_INVALID: missing funding coverage OMNIUSDT 2026-07-31 -> 2026-08-01; DATA_INVALID: missing funding coverage VINEUSDT 2026-07-31 -> 2026-08-01; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-07-31 -> 2026-08-01; DATA_INVALID: missing funding coverage DMCUSDT 2026-07-31 -> 2026-08-01",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-07-31"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-02",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-01 -> 2026-08-02; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-01 -> 2026-08-02; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-01 -> 2026-08-02; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-01 -> 2026-08-02; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-01 -> 2026-08-02",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-01"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-03",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-02 -> 2026-08-03; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-02 -> 2026-08-03; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-02 -> 2026-08-03; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-02 -> 2026-08-03; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-02 -> 2026-08-03",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-02"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-04",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-03 -> 2026-08-04; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-03 -> 2026-08-04; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-03 -> 2026-08-04; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-03 -> 2026-08-04; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-03 -> 2026-08-04",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-03"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-05",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-04 -> 2026-08-05; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-04 -> 2026-08-05; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-04 -> 2026-08-05; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-04 -> 2026-08-05; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-04 -> 2026-08-05",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-04"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-06",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-05 -> 2026-08-06; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-05 -> 2026-08-06; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-05 -> 2026-08-06; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-05 -> 2026-08-06; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-05 -> 2026-08-06",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-05"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-08-07",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-06 -> 2026-08-07; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-06 -> 2026-08-07; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-06 -> 2026-08-07; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-06 -> 2026-08-07; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-06 -> 2026-08-07",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-06"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-08",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-07 -> 2026-08-08; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-07 -> 2026-08-08; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-07 -> 2026-08-08; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-07 -> 2026-08-08; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-07 -> 2026-08-08",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-07"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-09",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-08 -> 2026-08-09; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-08 -> 2026-08-09; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-08 -> 2026-08-09; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-08 -> 2026-08-09; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-08 -> 2026-08-09",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-08"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-10",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-09 -> 2026-08-10; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-09 -> 2026-08-10; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-09 -> 2026-08-10; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-09 -> 2026-08-10; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-09 -> 2026-08-10",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-09"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-11",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-10 -> 2026-08-11; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-10 -> 2026-08-11; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-10 -> 2026-08-11; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-10 -> 2026-08-11; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-10 -> 2026-08-11",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-10"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-12",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-11 -> 2026-08-12; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-11 -> 2026-08-12; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-11 -> 2026-08-12; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-11 -> 2026-08-12; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-11 -> 2026-08-12",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-11"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-13",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-12 -> 2026-08-13; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-12 -> 2026-08-13; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-12 -> 2026-08-13; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-12 -> 2026-08-13; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-12 -> 2026-08-13",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-12"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-08-14",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-13 -> 2026-08-14; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-13 -> 2026-08-14; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-13 -> 2026-08-14; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-13 -> 2026-08-14; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-13 -> 2026-08-14",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-13"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-15",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-14 -> 2026-08-15; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-14 -> 2026-08-15; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-14 -> 2026-08-15; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-14 -> 2026-08-15; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-14 -> 2026-08-15",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-14"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-16",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-15 -> 2026-08-16; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-15 -> 2026-08-16; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-15 -> 2026-08-16; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-15 -> 2026-08-16; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-15 -> 2026-08-16",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-15"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-17",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-16 -> 2026-08-17; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-16 -> 2026-08-17; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-16 -> 2026-08-17; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-16 -> 2026-08-17; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-16 -> 2026-08-17",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-16"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-18",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-17 -> 2026-08-18; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-17 -> 2026-08-18; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-17 -> 2026-08-18; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-17 -> 2026-08-18; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-17 -> 2026-08-18",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-17"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-19",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-18 -> 2026-08-19; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-18 -> 2026-08-19; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-18 -> 2026-08-19; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-18 -> 2026-08-19; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-18 -> 2026-08-19",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-18"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-20",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-19 -> 2026-08-20; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-19 -> 2026-08-20; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-19 -> 2026-08-20; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-19 -> 2026-08-20; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-19 -> 2026-08-20",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-19"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-08-21",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-20 -> 2026-08-21; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-20 -> 2026-08-21; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-20 -> 2026-08-21; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-20 -> 2026-08-21; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-20 -> 2026-08-21",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-20"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-22",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-21 -> 2026-08-22; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-21 -> 2026-08-22; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-21 -> 2026-08-22; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-21 -> 2026-08-22; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-21 -> 2026-08-22",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-21"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-23",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-22 -> 2026-08-23; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-22 -> 2026-08-23; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-22 -> 2026-08-23; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-22 -> 2026-08-23; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-22 -> 2026-08-23",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-22"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-24",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-23 -> 2026-08-24; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-23 -> 2026-08-24; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-23 -> 2026-08-24; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-23 -> 2026-08-24; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-23 -> 2026-08-24",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-23"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-25",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-24 -> 2026-08-25; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-24 -> 2026-08-25; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-24 -> 2026-08-25; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-24 -> 2026-08-25; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-24 -> 2026-08-25",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-24"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-26",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-25 -> 2026-08-26; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-25 -> 2026-08-26; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-25 -> 2026-08-26; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-25 -> 2026-08-26; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-25 -> 2026-08-26",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-25"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-27",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-26 -> 2026-08-27; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-26 -> 2026-08-27; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-26 -> 2026-08-27; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-26 -> 2026-08-27; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-26 -> 2026-08-27",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-26"
+    },
+    {
+      "corrected_reason": "",
+      "corrected_status": "SUCCESS",
+      "execution_day": "2026-08-28",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-27 -> 2026-08-28; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-27 -> 2026-08-28; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-27 -> 2026-08-28; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-27 -> 2026-08-28; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-27 -> 2026-08-28",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-27"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-29",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-28 -> 2026-08-29; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-28 -> 2026-08-29; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-28 -> 2026-08-29; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-28 -> 2026-08-29; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-28 -> 2026-08-29",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-28"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-30",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-29 -> 2026-08-30; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-29 -> 2026-08-30; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-29 -> 2026-08-30; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-29 -> 2026-08-30; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-29 -> 2026-08-30",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-29"
+    },
+    {
+      "corrected_reason": null,
+      "corrected_status": null,
+      "execution_day": "2026-08-31",
+      "old_reason": "DATA_INVALID: missing funding coverage TONUSDT 2026-08-30 -> 2026-08-31; DATA_INVALID: missing funding coverage OMNIUSDT 2026-08-30 -> 2026-08-31; DATA_INVALID: missing funding coverage VINEUSDT 2026-08-30 -> 2026-08-31; DATA_INVALID: missing funding coverage MEMEFIUSDT 2026-08-30 -> 2026-08-31; DATA_INVALID: missing funding coverage DMCUSDT 2026-08-30 -> 2026-08-31",
+      "old_status": "MARK_FAILURE",
+      "signal_day": "2026-08-30"
+    }
+  ],
+  "first_lifecycle_correction_day": "2025-08-12",
+  "old_attempt_count": 892,
+  "old_successful_signal_count": 252,
+  "post_correction_expected_divergence_count": 383,
+  "post_correction_unexplained_divergence_count": 0,
+  "pre_correction_schedule_mismatch_count": 0
+}
