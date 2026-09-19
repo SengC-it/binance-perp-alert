@@ -16,6 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # M1.4.2.1B immutability checks bind historical artifacts to Git
+          # result commits, so the CI clone must retain those commit trees.
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:

@@ -175,6 +175,19 @@ def _git_parent(commit: str) -> str | None:
         return None
 
 
+def _is_base_ancestor(base_commit: str, current_commit: str) -> bool:
+    try:
+        subprocess.check_call(
+            ["git", "merge-base", "--is-ancestor", base_commit, current_commit],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return False
+    return True
+
+
 def _git_status() -> str:
     return _git_output("status", "--short").decode().strip()
 
@@ -384,9 +397,9 @@ def build_formal_artifacts() -> dict[str, Any]:
         raise ProvenanceMergeError("formal merge requires a clean working tree")
     current_head = _git_head()
     current_parent = _git_parent(current_head)
-    if current_head != BASE_COMMIT and current_parent != BASE_COMMIT:
+    if not _is_base_ancestor(BASE_COMMIT, current_head):
         raise ProvenanceMergeError(
-            f"formal code identity must be based on {BASE_COMMIT}; HEAD={current_head}, parent={current_parent}"
+            f"formal code identity must descend from {BASE_COMMIT}; HEAD={current_head}, parent={current_parent}"
         )
     if NEW_ROOT.exists():
         raise ProvenanceMergeError(f"formal one-shot output already exists: {NEW_ROOT}")
@@ -434,7 +447,7 @@ def build_formal_artifacts() -> dict[str, Any]:
     )
 
     gate_values = {
-        "K0_identity": current_head == BASE_COMMIT or current_parent == BASE_COMMIT,
+        "K0_identity": _is_base_ancestor(BASE_COMMIT, current_head),
         "K1_old_m142_git_blob_immutable": manifest["bindings"]["m1_4_2"]["immutable"],
         "K2_old_m1421_git_blob_immutable": manifest["bindings"]["m1_4_2_1"]["immutable"],
         "K3_old_m1421a_git_blob_immutable": manifest["bindings"]["m1_4_2_1a"]["immutable"],
