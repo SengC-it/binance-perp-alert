@@ -763,7 +763,16 @@ def reconstruct_parent() -> dict[str, Any]:
     )
     holdings = _holding_provenance(corrected_histories, overlay, corrected_accounting)
     funding = validate_economic_funding_coverage(
-        corrected_histories, corrected_accounting.holding_intervals, overlay
+        corrected_histories,
+        corrected_accounting.holding_intervals,
+        overlay,
+        window_end_ms=int(
+            datetime.combine(
+                M1_DATA_END + timedelta(days=1), datetime.min.time(), tzinfo=UTC
+            ).timestamp()
+            * 1000
+        )
+        - 1,
     )
     weekly = _weekly_accounting(corrected_accounting)
     risk = _risk_diagnostic(weekly)
@@ -876,6 +885,9 @@ def reconstruct_parent() -> dict[str, Any]:
         "corrected_false_positive_ton_mark_failure_count": 0,
         "old_mark_failure_symbol_count": len(old_failures),
         "corrected_mark_failure_symbol_count": len(corrected_failures),
+        "ghost_position_after_confirmed_delist_count": forced[
+            "ghost_position_after_confirmed_delist_count"
+        ],
         "unresolved_symbols": unresolved,
         "schedule": schedule,
         "accounting": {
@@ -953,7 +965,7 @@ def _write_markdown(result: Mapping[str, Any]) -> None:
         f"- Overlay SHA-256: `{result['overlay_sha256']}`",
         f"- Corrected lifecycle-induced MARK_FAILURE: `{result['corrected_lifecycle_induced_mark_failure_count']}`",
         f"- Corrected other MARK_FAILURE: `{result['corrected_other_mark_failure_count']}`",
-        f"- Ghost position count: `{result['schedule']['post_correction_unexplained_divergence_count']}` unexplained schedule divergences; see JSON for ghost count.",
+        f"- Ghost position after confirmed delist count: `{result['ghost_position_after_confirmed_delist_count']}`",
         "",
         "## Gates",
         "",

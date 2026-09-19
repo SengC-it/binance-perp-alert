@@ -152,6 +152,40 @@ def test_funding_after_term_is_not_required():
     assert result.exposure_records[0].economic_exposure_end_timestamp_ms == base + 9 * 3_600_000
 
 
+def test_funding_at_exact_termination_boundary_is_not_required():
+    symbol = "TESTUSDT"
+    base = _timestamp(date(2026, 1, 1))
+    events = tuple(
+        FundingEvent(symbol, base + hours * 3_600_000, 0.0, 4.0)
+        for hours in (0, 4)
+    )
+    history = _history(symbol, funding_events=events)
+    record = _record(symbol, terminated="2026-01-01T08:00:00Z")
+    holding = HoldingInterval(symbol, base + 3_600_000, base + 24 * 3_600_000)
+    result = validate_economic_funding_coverage((history,), (holding,), _overlay(record))
+    assert result.passed
+
+
+def test_funding_after_frozen_window_is_not_required():
+    symbol = "TESTUSDT"
+    base = _timestamp(date(2026, 1, 1))
+    events = tuple(
+        FundingEvent(symbol, base + hours * 3_600_000, 0.0, 4.0)
+        for hours in (0, 4)
+    )
+    history = _history(symbol, funding_events=events)
+    record = _record(symbol, terminated="2026-01-03T09:00:00Z")
+    holding = HoldingInterval(symbol, base + 3_600_000, base + 24 * 3_600_000)
+    result = validate_economic_funding_coverage(
+        (history,),
+        (holding,),
+        _overlay(record),
+        window_end_ms=base + 7 * 3_600_000,
+    )
+    assert result.passed
+    assert result.coverage_window_end_timestamp_ms == base + 7 * 3_600_000
+
+
 def test_funding_missing_before_term_fails_closed():
     symbol = "TESTUSDT"
     base = _timestamp(date(2026, 1, 1))

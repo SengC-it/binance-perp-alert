@@ -373,6 +373,7 @@ class FundingExposureRecord:
 class FundingCoverageResult:
     issues: tuple[FundingCoverageIssue, ...]
     exposure_records: tuple[FundingExposureRecord, ...]
+    coverage_window_end_timestamp_ms: int | None = None
 
     @property
     def passed(self) -> bool:
@@ -383,6 +384,11 @@ class FundingCoverageResult:
             "status": "PASS" if self.passed else "FAIL",
             "checked_interval_count": len(self.exposure_records),
             "issue_count": len(self.issues),
+            "coverage_window_end_timestamp_utc": (
+                utc_iso(self.coverage_window_end_timestamp_ms)
+                if self.coverage_window_end_timestamp_ms is not None
+                else None
+            ),
             "issues": [issue.as_dict() for issue in self.issues],
             "exposure_records": [record.as_dict() for record in self.exposure_records],
         }
@@ -421,14 +427,29 @@ def validate_economic_funding_coverage(
     histories: Iterable[SymbolHistory],
     holdings: Iterable[HoldingInterval],
     overlay: LifecycleOverlay,
+    *,
+    window_end_ms: int | None = None,
 ) -> FundingCoverageResult:
-    """Check only real settlements within each holding's economic lifetime."""
+    """Check real settlements within the economic lifetime and frozen window.
+
+    A settlement after the frozen data window is outside the observable sample
+    and is therefore not a missing settlement.  Likewise, a settlement exactly
+    at an official termination boundary is not required unless a real event is
+    present; the exposure ends at that boundary.
+    """
+    if window_end_ms is not None and window_end_ms <= 0:
+        raise ValueError("window_end_ms must be positive")
     by_symbol = {history.symbol.upper(): history for history in histories}
     issues: list[FundingCoverageIssue] = []
     exposures: list[FundingExposureRecord] = []
     for holding in holdings:
         symbol = holding.symbol.upper()
         effective_end = funding_exposure_end_ms(holding, overlay)
+        coverage_end = (
+            min(effective_end, window_end_ms)
+            if window_end_ms is not None
+            else effective_end
+        )
         exposures.append(
             FundingExposureRecord(
                 symbol=symbol,
@@ -438,7 +459,7 @@ def validate_economic_funding_coverage(
                 official_termination_applied=overlay.record_for(symbol) is not None,
             )
         )
-        if effective_end <= holding.entry_timestamp_ms:
+        if coverage_end <= holding.entry_timestamp_ms:
             continue
         history = by_symbol.get(symbol)
         if history is None:
@@ -471,7 +492,7 @@ def validate_economic_funding_coverage(
             anchor_index = 0
         previous = events[anchor_index]
         for current in events[anchor_index + 1 :]:
-            if current.funding_time_ms > effective_end + FUNDING_TIME_TOLERANCE_MS:
+            if current.funding_time_ms > coverage_end + FUNDING_TIME_TOLERANCE_MS:
                 break
             expected = _transition_expected_ms(previous, current)
             if expected is None:
@@ -512,13 +533,13 @@ def validate_economic_funding_coverage(
             )
         else:
             next_expected = previous.funding_time_ms + interval_ms
-            if next_expected <= effective_end + FUNDING_TIME_TOLERANCE_MS:
+            if next_expected < coverage_end - FUNDING_TIME_TOLERANCE_MS:
                 observed = next(
                     (
                         event
                         for event in events
                         if event.funding_time_ms > previous.funding_time_ms
-                        and event.funding_time_ms <= effective_end + FUNDING_TIME_TOLERANCE_MS
+                        and event.funding_time_ms <= coverage_end + FUNDING_TIME_TOLERANCE_MS
                     ),
                     None,
                 )
@@ -531,5 +552,4 @@ def validate_economic_funding_coverage(
                             next_expected,
                         )
                     )
-    return FundingCoverageResult(tuple(issues), tuple(exposures))
-
+    return FundingCoverageResult(tuple(issues), tuple(exposures), window_end_ms)
