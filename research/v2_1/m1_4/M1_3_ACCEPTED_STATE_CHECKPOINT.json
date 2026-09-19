@@ -1,0 +1,139 @@
+{
+  "accounting_state_continuity_hash": "6868d43ffae04f77e1b11089def5cb1d1ebc4e60e8cde9a49e43a4840acfbc80",
+  "as_of_utc": "2026-08-31T23:59:59.999Z",
+  "classification": [
+    "PRESTART_STATE_INITIALIZATION_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE"
+  ],
+  "current_control_positions": [
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "last_mark_price": 0.02347,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "BICOUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-07-03T23:59:59.999Z",
+      "last_mark_price": 691.67,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "BNBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2024-03-07T23:59:59.999Z",
+      "last_mark_price": 78549.6,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "BTCUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "last_mark_price": 30.64,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "MUUUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "last_mark_price": 23.94,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "MVLLUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "last_mark_price": 0.4796,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "RUNEUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "last_mark_price": 13.97,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "SNXXUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "last_mark_price": 113.05,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "SOXLUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "last_mark_price": 367.58,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "TSLAUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "last_mark_price": 522.13,
+      "last_mark_timestamp_utc": "2026-08-31T23:59:59.999Z",
+      "symbol": "XMRUSDT",
+      "target_notional": 0.1
+    }
+  ],
+  "current_control_target_symbols": [
+    "BICOUSDT",
+    "BNBUSDT",
+    "BTCUSDT",
+    "MUUUSDT",
+    "MVLLUSDT",
+    "RUNEUSDT",
+    "SNXXUSDT",
+    "SOXLUSDT",
+    "TSLAUSDT",
+    "XMRUSDT"
+  ],
+  "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+  "evidence_status": "NOT_VALIDATION_EVIDENCE",
+  "historical_equity_state": {
+    "classification": "STATE_CARRY_ONLY",
+    "numeric_value_exposed": false,
+    "opaque_sha256": "699f9aef8057535041e5f47997282ee727b5f0678fcf33cf109251c7cd3e1d76"
+  },
+  "historical_full_replay_invoked": false,
+  "historical_result_output": "QUARANTINED_NOT_EMITTED",
+  "last_successful_rebalance_execution_day": "2026-08-28",
+  "last_successful_signal_day": "2026-08-27",
+  "m1_3_code_commit": "aebdda0169cddcdf013d24917515d4acfd1d5e74",
+  "m1_3_overlay_sha256": "7a6f183262580933c4802acb9454b0617c7c095b458b79f1e56fadb1c9ec64c1",
+  "m1_3_result_commit": "355dbfcb1dcf2d0e5f0fc1b84e478e788ec1b24a",
+  "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+  "scheduler_clock_state": {
+    "last_successful_rebalance_execution_day": "2026-08-28",
+    "last_successful_signal_day": "2026-08-27",
+    "next_rebalance_due_day": "2026-09-04",
+    "pending_retry": false,
+    "rebalance_interval_days": 7,
+    "retry_rule": "FAILED_DUE_DAY_RETRIES_ON_NEXT_CALENDAR_DAY",
+    "scheduler_initialized_from_checkpoint": true
+  },
+  "schema_version": "M1_3_ACCEPTED_STATE_CHECKPOINT.v1",
+  "scope": "STATE_CARRY_ONLY"
+}

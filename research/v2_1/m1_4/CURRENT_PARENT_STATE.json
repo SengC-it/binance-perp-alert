@@ -1,0 +1,112 @@
+{
+  "classification": [
+    "PRESTART_STATE_INITIALIZATION_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE"
+  ],
+  "current_control_positions": [
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 0.0038207,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "1000PEPEUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 558.16,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "AMDUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "last_mark_price": 0.22117,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "ARBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-07-03T23:59:59.999Z",
+      "last_mark_price": 761.92,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "BNBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 0.02127,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "COTIUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "last_mark_price": 63.55,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "DASHUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "last_mark_price": 181.08,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "EWYUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "last_mark_price": 18.05,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "SNXXUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 152.66,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "SPCXUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "last_mark_price": 364.34,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "TSLAUSDT",
+      "target_notional": 0.1
+    }
+  ],
+  "current_position_count": 10,
+  "cutoff_utc": "2026-09-19T00:00:00Z",
+  "evidence_status": "NOT_VALIDATION_EVIDENCE",
+  "ghost_position_count": 0,
+  "last_successful_execution_day": "2026-09-18",
+  "last_successful_signal_day": "2026-09-17",
+  "next_rebalance_due_day": "2026-09-25",
+  "no_forward_signal_selected": true,
+  "parent_state_complete": true,
+  "pending_retry": false,
+  "schema_version": "CURRENT_PARENT_STATE.v1",
+  "scope": "STATE_METADATA",
+  "unresolved_state_issue_count": 0
+}

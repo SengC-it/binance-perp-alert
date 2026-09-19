@@ -1,0 +1,2771 @@
+{
+  "ambiguous_candidates": [
+    {
+      "onboard_day": "2025-09-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "0GUSDT"
+    },
+    {
+      "onboard_day": "2025-06-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000000BOBUSDT"
+    },
+    {
+      "onboard_day": "2024-11-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000000MOGUSDT"
+    },
+    {
+      "onboard_day": "2023-11-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000BONKUSDT"
+    },
+    {
+      "onboard_day": "2024-10-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000CATUSDT"
+    },
+    {
+      "onboard_day": "2024-11-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000CHEEMSUSDT"
+    },
+    {
+      "onboard_day": "2023-12-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000RATSUSDT"
+    },
+    {
+      "onboard_day": "2023-12-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000SATSUSDT"
+    },
+    {
+      "onboard_day": "2021-09-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1000XECUSDT"
+    },
+    {
+      "onboard_day": "2024-09-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "1MBABYDOGEUSDT"
+    },
+    {
+      "onboard_day": "2025-10-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "4USDT"
+    },
+    {
+      "onboard_day": "2026-04-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AAPLUSDT"
+    },
+    {
+      "onboard_day": "2023-12-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ACEUSDT"
+    },
+    {
+      "onboard_day": "2024-11-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ACTUSDT"
+    },
+    {
+      "onboard_day": "2026-01-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ACUUSDT"
+    },
+    {
+      "onboard_day": "2024-12-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ACXUSDT"
+    },
+    {
+      "onboard_day": "2024-12-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AEROUSDT"
+    },
+    {
+      "onboard_day": "2024-03-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AEVOUSDT"
+    },
+    {
+      "onboard_day": "2025-05-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AGTUSDT"
+    },
+    {
+      "onboard_day": "2026-01-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AIAUSDT"
+    },
+    {
+      "onboard_day": "2026-04-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AIGENSYNUSDT"
+    },
+    {
+      "onboard_day": "2025-07-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AINUSDT"
+    },
+    {
+      "onboard_day": "2025-04-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AIOTUSDT"
+    },
+    {
+      "onboard_day": "2025-08-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AIOUSDT"
+    },
+    {
+      "onboard_day": "2024-12-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AIXBTUSDT"
+    },
+    {
+      "onboard_day": "2025-09-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AKEUSDT"
+    },
+    {
+      "onboard_day": "2024-11-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AKTUSDT"
+    },
+    {
+      "onboard_day": "2025-01-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ALCHUSDT"
+    },
+    {
+      "onboard_day": "2021-03-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ALICEUSDT"
+    },
+    {
+      "onboard_day": "2025-11-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ALLOUSDT"
+    },
+    {
+      "onboard_day": "2025-05-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ALPINEUSDT"
+    },
+    {
+      "onboard_day": "2024-01-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ALTUSDT"
+    },
+    {
+      "onboard_day": "2026-06-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AMATUSDT"
+    },
+    {
+      "onboard_day": "2025-01-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ANIMEUSDT"
+    },
+    {
+      "onboard_day": "2021-01-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ANKRUSDT"
+    },
+    {
+      "onboard_day": "2022-02-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "API3USDT"
+    },
+    {
+      "onboard_day": "2025-10-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "APRUSDT"
+    },
+    {
+      "onboard_day": "2025-01-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ARCUSDT"
+    },
+    {
+      "onboard_day": "2025-09-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ARIAUSDT"
+    },
+    {
+      "onboard_day": "2023-09-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ARKUSDT"
+    },
+    {
+      "onboard_day": "2025-05-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ASRUSDT"
+    },
+    {
+      "onboard_day": "2025-09-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ASTERUSDT"
+    },
+    {
+      "onboard_day": "2025-04-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ATHUSDT"
+    },
+    {
+      "onboard_day": "2025-10-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ATUSDT"
+    },
+    {
+      "onboard_day": "2023-12-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AUCTIONUSDT"
+    },
+    {
+      "onboard_day": "2025-05-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AUSDT"
+    },
+    {
+      "onboard_day": "2025-01-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AVAAIUSDT"
+    },
+    {
+      "onboard_day": "2024-12-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AVAUSDT"
+    },
+    {
+      "onboard_day": "2026-04-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AVGOUSDT"
+    },
+    {
+      "onboard_day": "2025-09-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AVNTUSDT"
+    },
+    {
+      "onboard_day": "2025-05-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AWEUSDT"
+    },
+    {
+      "onboard_day": "2024-03-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AXLUSDT"
+    },
+    {
+      "onboard_day": "2020-11-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AXSUSDT"
+    },
+    {
+      "onboard_day": "2026-02-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "AZTECUSDT"
+    },
+    {
+      "onboard_day": "2025-05-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "B2USDT"
+    },
+    {
+      "onboard_day": "2026-04-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BABAUSDT"
+    },
+    {
+      "onboard_day": "2025-04-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BABYUSDT"
+    },
+    {
+      "onboard_day": "2025-03-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BANANAS31USDT"
+    },
+    {
+      "onboard_day": "2024-08-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BANANAUSDT"
+    },
+    {
+      "onboard_day": "2025-04-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BANKUSDT"
+    },
+    {
+      "onboard_day": "2024-11-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BANUSDT"
+    },
+    {
+      "onboard_day": "2025-09-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BARDUSDT"
+    },
+    {
+      "onboard_day": "2026-03-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BASEDUSDT"
+    },
+    {
+      "onboard_day": "2025-08-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BASUSDT"
+    },
+    {
+      "onboard_day": "2024-05-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BBUSDT"
+    },
+    {
+      "onboard_day": "2023-11-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BEAMXUSDT"
+    },
+    {
+      "onboard_day": "2025-11-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BEATUSDT"
+    },
+    {
+      "onboard_day": "2025-02-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BERAUSDT"
+    },
+    {
+      "onboard_day": "2023-10-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BIGTIMEUSDT"
+    },
+    {
+      "onboard_day": "2026-05-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BILLUSDT"
+    },
+    {
+      "onboard_day": "2025-01-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BIOUSDT"
+    },
+    {
+      "onboard_day": "2026-01-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BIRBUSDT"
+    },
+    {
+      "onboard_day": "2025-09-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BLESSUSDT"
+    },
+    {
+      "onboard_day": "2025-10-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BLUAIUSDT"
+    },
+    {
+      "onboard_day": "2023-04-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BLURUSDT"
+    },
+    {
+      "onboard_day": "2025-03-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BMTUSDT"
+    },
+    {
+      "onboard_day": "2023-08-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BNTUSDT"
+    },
+    {
+      "onboard_day": "2023-02-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BNXUSDT"
+    },
+    {
+      "onboard_day": "2024-03-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BOMEUSDT"
+    },
+    {
+      "onboard_day": "2024-08-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BRETTUSDT"
+    },
+    {
+      "onboard_day": "2025-12-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BREVUSDT"
+    },
+    {
+      "onboard_day": "2025-03-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BROCCOLI714USDT"
+    },
+    {
+      "onboard_day": "2025-03-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BROCCOLIF3BUSDT"
+    },
+    {
+      "onboard_day": "2025-03-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BRUSDT"
+    },
+    {
+      "onboard_day": "2026-03-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BSBUSDT"
+    },
+    {
+      "onboard_day": "2023-10-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BSVUSDT"
+    },
+    {
+      "onboard_day": "2025-08-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BTRUSDT"
+    },
+    {
+      "onboard_day": "2026-06-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BTWUSDT"
+    },
+    {
+      "onboard_day": "2025-07-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BULLAUSDT"
+    },
+    {
+      "onboard_day": "2025-05-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BUSDT"
+    },
+    {
+      "onboard_day": "2026-06-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BXUSDT"
+    },
+    {
+      "onboard_day": "2026-04-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "BZUSDT"
+    },
+    {
+      "onboard_day": "2023-11-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CAKEUSDT"
+    },
+    {
+      "onboard_day": "2025-08-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CARVUSDT"
+    },
+    {
+      "onboard_day": "2024-09-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CATIUSDT"
+    },
+    {
+      "onboard_day": "2026-07-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CATUSDT"
+    },
+    {
+      "onboard_day": "2024-11-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CETUSUSDT"
+    },
+    {
+      "onboard_day": "2026-03-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CFGUSDT"
+    },
+    {
+      "onboard_day": "2024-12-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CGPTUSDT"
+    },
+    {
+      "onboard_day": "2024-11-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CHILLGUYUSDT"
+    },
+    {
+      "onboard_day": "2026-04-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CHIPUSDT"
+    },
+    {
+      "onboard_day": "2025-11-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CLANKERUSDT"
+    },
+    {
+      "onboard_day": "2025-10-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CLOUSDT"
+    },
+    {
+      "onboard_day": "2026-04-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CLUSDT"
+    },
+    {
+      "onboard_day": "2025-09-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "COAIUSDT"
+    },
+    {
+      "onboard_day": "2025-12-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "COLLECTUSDT"
+    },
+    {
+      "onboard_day": "2025-01-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "COOKIEUSDT"
+    },
+    {
+      "onboard_day": "2026-03-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "COPPERUSDT"
+    },
+    {
+      "onboard_day": "2024-09-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "COSUSDT"
+    },
+    {
+      "onboard_day": "2024-11-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "COWUSDT"
+    },
+    {
+      "onboard_day": "2026-06-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CRMUSDT"
+    },
+    {
+      "onboard_day": "2025-07-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CROSSUSDT"
+    },
+    {
+      "onboard_day": "2026-06-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CRWDUSDT"
+    },
+    {
+      "onboard_day": "2026-05-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CSCOUSDT"
+    },
+    {
+      "onboard_day": "2025-04-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CTKUSDT"
+    },
+    {
+      "onboard_day": "2026-05-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CTRUSDT"
+    },
+    {
+      "onboard_day": "2025-07-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CUSDT"
+    },
+    {
+      "onboard_day": "2025-05-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CVCUSDT"
+    },
+    {
+      "onboard_day": "2025-07-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CVXUSDT"
+    },
+    {
+      "onboard_day": "2023-08-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CYBERUSDT"
+    },
+    {
+      "onboard_day": "2025-12-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "CYSUSDT"
+    },
+    {
+      "onboard_day": "2025-04-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DEEPUSDT"
+    },
+    {
+      "onboard_day": "2026-06-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DELLUSDT"
+    },
+    {
+      "onboard_day": "2024-12-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DEXEUSDT"
+    },
+    {
+      "onboard_day": "2024-10-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DIAUSDT"
+    },
+    {
+      "onboard_day": "2026-05-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DISUSDT"
+    },
+    {
+      "onboard_day": "2023-08-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DODOXUSDT"
+    },
+    {
+      "onboard_day": "2024-08-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DOGSUSDT"
+    },
+    {
+      "onboard_day": "2025-05-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DOLOUSDT"
+    },
+    {
+      "onboard_day": "2025-05-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DOODUSDT"
+    },
+    {
+      "onboard_day": "2024-11-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DRIFTUSDT"
+    },
+    {
+      "onboard_day": "2022-01-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DUSKUSDT"
+    },
+    {
+      "onboard_day": "2024-02-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "DYMUSDT"
+    },
+    {
+      "onboard_day": "2026-06-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "EBAYUSDT"
+    },
+    {
+      "onboard_day": "2025-09-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "EDENUSDT"
+    },
+    {
+      "onboard_day": "2026-03-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "EDGEUSDT"
+    },
+    {
+      "onboard_day": "2024-10-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "EIGENUSDT"
+    },
+    {
+      "onboard_day": "2026-01-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ELSAUSDT"
+    },
+    {
+      "onboard_day": "2024-04-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ENAUSDT"
+    },
+    {
+      "onboard_day": "2020-09-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ENJUSDT"
+    },
+    {
+      "onboard_day": "2025-10-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ENSOUSDT"
+    },
+    {
+      "onboard_day": "2025-03-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "EPICUSDT"
+    },
+    {
+      "onboard_day": "2025-07-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ERAUSDT"
+    },
+    {
+      "onboard_day": "2025-07-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ESPORTSUSDT"
+    },
+    {
+      "onboard_day": "2026-02-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ESPUSDT"
+    },
+    {
+      "onboard_day": "2024-03-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ETHFIUSDT"
+    },
+    {
+      "onboard_day": "2023-11-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ETHWUSDT"
+    },
+    {
+      "onboard_day": "2025-10-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "EULUSDT"
+    },
+    {
+      "onboard_day": "2025-10-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "EVAAUSDT"
+    },
+    {
+      "onboard_day": "2024-12-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FARTCOINUSDT"
+    },
+    {
+      "onboard_day": "2025-09-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FFUSDT"
+    },
+    {
+      "onboard_day": "2025-04-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FHEUSDT"
+    },
+    {
+      "onboard_day": "2024-09-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FIDAUSDT"
+    },
+    {
+      "onboard_day": "2026-01-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FIGHTUSDT"
+    },
+    {
+      "onboard_day": "2020-10-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FILUSDT"
+    },
+    {
+      "onboard_day": "2020-09-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FLMUSDT"
+    },
+    {
+      "onboard_day": "2025-09-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FLOCKUSDT"
+    },
+    {
+      "onboard_day": "2022-02-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FLOWUSDT"
+    },
+    {
+      "onboard_day": "2024-09-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FLUXUSDT"
+    },
+    {
+      "onboard_day": "2026-01-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FOGOUSDT"
+    },
+    {
+      "onboard_day": "2025-03-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FORMUSDT"
+    },
+    {
+      "onboard_day": "2026-01-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FRAXUSDT"
+    },
+    {
+      "onboard_day": "2020-09-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FTMUSDT"
+    },
+    {
+      "onboard_day": "2022-04-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FTTUSDT"
+    },
+    {
+      "onboard_day": "2025-06-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "FUSDT"
+    },
+    {
+      "onboard_day": "2025-11-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GAIBUSDT"
+    },
+    {
+      "onboard_day": "2023-10-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GASUSDT"
+    },
+    {
+      "onboard_day": "2026-04-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GENIUSUSDT"
+    },
+    {
+      "onboard_day": "2024-02-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GLMUSDT"
+    },
+    {
+      "onboard_day": "2026-06-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GLWUSDT"
+    },
+    {
+      "onboard_day": "2022-03-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GMTUSDT"
+    },
+    {
+      "onboard_day": "2024-10-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GOATUSDT"
+    },
+    {
+      "onboard_day": "2026-03-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GOOGLUSDT"
+    },
+    {
+      "onboard_day": "2025-02-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GPSUSDT"
+    },
+    {
+      "onboard_day": "2024-11-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GRASSUSDT"
+    },
+    {
+      "onboard_day": "2025-01-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GRIFFAINUSDT"
+    },
+    {
+      "onboard_day": "2020-12-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GRTUSDT"
+    },
+    {
+      "onboard_day": "2026-07-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GSUSDT"
+    },
+    {
+      "onboard_day": "2021-03-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GTCUSDT"
+    },
+    {
+      "onboard_day": "2025-12-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GUAUSDT"
+    },
+    {
+      "onboard_day": "2025-03-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GUNUSDT"
+    },
+    {
+      "onboard_day": "2024-08-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GUSDT"
+    },
+    {
+      "onboard_day": "2026-01-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "GWEIUSDT"
+    },
+    {
+      "onboard_day": "2025-05-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HAEDALUSDT"
+    },
+    {
+      "onboard_day": "2025-09-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HANAUSDT"
+    },
+    {
+      "onboard_day": "2021-03-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HBARUSDT"
+    },
+    {
+      "onboard_day": "2026-05-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HDUSDT"
+    },
+    {
+      "onboard_day": "2025-02-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HEIUSDT"
+    },
+    {
+      "onboard_day": "2025-08-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HEMIUSDT"
+    },
+    {
+      "onboard_day": "2024-12-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HIVEUSDT"
+    },
+    {
+      "onboard_day": "2024-09-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HMSTRUSDT"
+    },
+    {
+      "onboard_day": "2025-09-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HOLOUSDT"
+    },
+    {
+      "onboard_day": "2025-06-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HOMEUSDT"
+    },
+    {
+      "onboard_day": "2021-03-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HOTUSDT"
+    },
+    {
+      "onboard_day": "2026-06-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HPEUSDT"
+    },
+    {
+      "onboard_day": "2025-05-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HUMAUSDT"
+    },
+    {
+      "onboard_day": "2025-06-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HUSDT"
+    },
+    {
+      "onboard_day": "2025-04-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HYPERUSDT"
+    },
+    {
+      "onboard_day": "2025-05-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HYPEUSDT"
+    },
+    {
+      "onboard_day": "2026-06-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "HYUNDAIUSDT"
+    },
+    {
+      "onboard_day": "2026-06-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "IBMUSDT"
+    },
+    {
+      "onboard_day": "2025-07-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ICNTUSDT"
+    },
+    {
+      "onboard_day": "2021-07-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ICPUSDT"
+    },
+    {
+      "onboard_day": "2020-09-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ICXUSDT"
+    },
+    {
+      "onboard_day": "2025-07-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "IDOLUSDT"
+    },
+    {
+      "onboard_day": "2023-03-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "IDUSDT"
+    },
+    {
+      "onboard_day": "2023-11-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ILVUSDT"
+    },
+    {
+      "onboard_day": "2022-02-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "IMXUSDT"
+    },
+    {
+      "onboard_day": "2025-04-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "INITUSDT"
+    },
+    {
+      "onboard_day": "2025-08-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "INUSDT"
+    },
+    {
+      "onboard_day": "2026-01-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "INXUSDT"
+    },
+    {
+      "onboard_day": "2020-02-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "IOTAUSDT"
+    },
+    {
+      "onboard_day": "2024-06-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "IOUSDT"
+    },
+    {
+      "onboard_day": "2025-02-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "IPUSDT"
+    },
+    {
+      "onboard_day": "2025-03-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "JELLYJELLYUSDT"
+    },
+    {
+      "onboard_day": "2026-05-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "JPMUSDT"
+    },
+    {
+      "onboard_day": "2025-04-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "JSTUSDT"
+    },
+    {
+      "onboard_day": "2023-12-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "JTOUSDT"
+    },
+    {
+      "onboard_day": "2024-01-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "JUPUSDT"
+    },
+    {
+      "onboard_day": "2024-12-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KAIAUSDT"
+    },
+    {
+      "onboard_day": "2025-02-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KAITOUSDT"
+    },
+    {
+      "onboard_day": "2023-11-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KASUSDT"
+    },
+    {
+      "onboard_day": "2026-03-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KATUSDT"
+    },
+    {
+      "onboard_day": "2020-07-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KAVAUSDT"
+    },
+    {
+      "onboard_day": "2025-04-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KERNELUSDT"
+    },
+    {
+      "onboard_day": "2025-10-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KGENUSDT"
+    },
+    {
+      "onboard_day": "2025-10-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KITEUSDT"
+    },
+    {
+      "onboard_day": "2026-06-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KLACUSDT"
+    },
+    {
+      "onboard_day": "2024-12-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KMNOUSDT"
+    },
+    {
+      "onboard_day": "2020-06-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KNCUSDT"
+    },
+    {
+      "onboard_day": "2024-12-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KOMAUSDT"
+    },
+    {
+      "onboard_day": "2026-06-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KORUUSDT"
+    },
+    {
+      "onboard_day": "2020-10-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "KSMUSDT"
+    },
+    {
+      "onboard_day": "2025-10-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LABUSDT"
+    },
+    {
+      "onboard_day": "2025-06-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LAUSDT"
+    },
+    {
+      "onboard_day": "2025-02-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LAYERUSDT"
+    },
+    {
+      "onboard_day": "2025-09-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LIGHTUSDT"
+    },
+    {
+      "onboard_day": "2021-03-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LINAUSDT"
+    },
+    {
+      "onboard_day": "2025-09-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LINEAUSDT"
+    },
+    {
+      "onboard_day": "2024-06-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LISTAUSDT"
+    },
+    {
+      "onboard_day": "2025-12-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LITUSDT"
+    },
+    {
+      "onboard_day": "2026-06-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LLYUSDT"
+    },
+    {
+      "onboard_day": "2021-11-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LPTUSDT"
+    },
+    {
+      "onboard_day": "2020-10-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LRCUSDT"
+    },
+    {
+      "onboard_day": "2024-01-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LSKUSDT"
+    },
+    {
+      "onboard_day": "2020-01-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LTCUSDT"
+    },
+    {
+      "onboard_day": "2024-12-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LUMIAUSDT"
+    },
+    {
+      "onboard_day": "2022-09-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LUNA2USDT"
+    },
+    {
+      "onboard_day": "2025-10-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "LYNUSDT"
+    },
+    {
+      "onboard_day": "2023-01-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MAGICUSDT"
+    },
+    {
+      "onboard_day": "2025-12-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MAGMAUSDT"
+    },
+    {
+      "onboard_day": "2021-03-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MANAUSDT"
+    },
+    {
+      "onboard_day": "2024-01-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MANTAUSDT"
+    },
+    {
+      "onboard_day": "2026-03-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MANTRAUSDT"
+    },
+    {
+      "onboard_day": "2021-07-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MASKUSDT"
+    },
+    {
+      "onboard_day": "2025-03-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MAVIAUSDT"
+    },
+    {
+      "onboard_day": "2026-01-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MEGAUSDT"
+    },
+    {
+      "onboard_day": "2025-01-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MELANIAUSDT"
+    },
+    {
+      "onboard_day": "2023-11-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MEMEUSDT"
+    },
+    {
+      "onboard_day": "2025-05-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MERLUSDT"
+    },
+    {
+      "onboard_day": "2026-03-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "METAUSDT"
+    },
+    {
+      "onboard_day": "2024-03-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "METISUSDT"
+    },
+    {
+      "onboard_day": "2025-10-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "METUSDT"
+    },
+    {
+      "onboard_day": "2024-12-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MEUSDT"
+    },
+    {
+      "onboard_day": "2024-06-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MEWUSDT"
+    },
+    {
+      "onboard_day": "2025-09-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MIRAUSDT"
+    },
+    {
+      "onboard_day": "2025-08-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MITOUSDT"
+    },
+    {
+      "onboard_day": "2020-08-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MKRUSDT"
+    },
+    {
+      "onboard_day": "2025-11-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MMTUSDT"
+    },
+    {
+      "onboard_day": "2024-12-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MOCAUSDT"
+    },
+    {
+      "onboard_day": "2025-10-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MONUSDT"
+    },
+    {
+      "onboard_day": "2024-10-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MOODENGUSDT"
+    },
+    {
+      "onboard_day": "2024-11-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MORPHOUSDT"
+    },
+    {
+      "onboard_day": "2024-12-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MOVEUSDT"
+    },
+    {
+      "onboard_day": "2023-12-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MOVRUSDT"
+    },
+    {
+      "onboard_day": "2026-05-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MRVLUSDT"
+    },
+    {
+      "onboard_day": "2026-04-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MSFTUSDT"
+    },
+    {
+      "onboard_day": "2025-03-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MUBARAKUSDT"
+    },
+    {
+      "onboard_day": "2025-07-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MUSDT"
+    },
+    {
+      "onboard_day": "2026-04-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MUUSDT"
+    },
+    {
+      "onboard_day": "2025-06-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "MYXUSDT"
+    },
+    {
+      "onboard_day": "2025-07-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NAORISUSDT"
+    },
+    {
+      "onboard_day": "2026-04-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NATGASUSDT"
+    },
+    {
+      "onboard_day": "2020-10-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NEARUSDT"
+    },
+    {
+      "onboard_day": "2024-09-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NEIROUSDT"
+    },
+    {
+      "onboard_day": "2025-06-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NEWTUSDT"
+    },
+    {
+      "onboard_day": "2023-12-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NFPUSDT"
+    },
+    {
+      "onboard_day": "2025-12-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NIGHTUSDT"
+    },
+    {
+      "onboard_day": "2025-03-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NILUSDT"
+    },
+    {
+      "onboard_day": "2023-06-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NMRUSDT"
+    },
+    {
+      "onboard_day": "2025-10-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NOMUSDT"
+    },
+    {
+      "onboard_day": "2024-05-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NOTUSDT"
+    },
+    {
+      "onboard_day": "2026-03-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NVDAUSDT"
+    },
+    {
+      "onboard_day": "2026-06-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NVOUSDT"
+    },
+    {
+      "onboard_day": "2025-05-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "NXPCUSDT"
+    },
+    {
+      "onboard_day": "2020-11-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "OCEANUSDT"
+    },
+    {
+      "onboard_day": "2021-03-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "OGNUSDT"
+    },
+    {
+      "onboard_day": "2025-05-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "OGUSDT"
+    },
+    {
+      "onboard_day": "2020-07-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "OMGUSDT"
+    },
+    {
+      "onboard_day": "2024-01-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ONDOUSDT"
+    },
+    {
+      "onboard_day": "2021-03-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ONEUSDT"
+    },
+    {
+      "onboard_day": "2023-11-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ONGUSDT"
+    },
+    {
+      "onboard_day": "2020-02-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ONTUSDT"
+    },
+    {
+      "onboard_day": "2025-09-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "OPENUSDT"
+    },
+    {
+      "onboard_day": "2026-04-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "OPGUSDT"
+    },
+    {
+      "onboard_day": "2026-02-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "OPNUSDT"
+    },
+    {
+      "onboard_day": "2024-12-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ORCAUSDT"
+    },
+    {
+      "onboard_day": "2026-05-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ORCLUSDT"
+    },
+    {
+      "onboard_day": "2025-09-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ORDERUSDT"
+    },
+    {
+      "onboard_day": "2023-11-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ORDIUSDT"
+    },
+    {
+      "onboard_day": "2025-03-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PARTIUSDT"
+    },
+    {
+      "onboard_day": "2025-03-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PAXGUSDT"
+    },
+    {
+      "onboard_day": "2024-12-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PENGUUSDT"
+    },
+    {
+      "onboard_day": "2021-12-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PEOPLEUSDT"
+    },
+    {
+      "onboard_day": "2026-05-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PHAROSUSDT"
+    },
+    {
+      "onboard_day": "2024-12-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PHAUSDT"
+    },
+    {
+      "onboard_day": "2025-11-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PIEVERSEUSDT"
+    },
+    {
+      "onboard_day": "2025-01-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PIPPINUSDT"
+    },
+    {
+      "onboard_day": "2024-02-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PIXELUSDT"
+    },
+    {
+      "onboard_day": "2025-07-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PLAYUSDT"
+    },
+    {
+      "onboard_day": "2025-03-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PLUMEUSDT"
+    },
+    {
+      "onboard_day": "2024-11-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PNUTUSDT"
+    },
+    {
+      "onboard_day": "2024-09-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "POLUSDT"
+    },
+    {
+      "onboard_day": "2023-10-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "POLYXUSDT"
+    },
+    {
+      "onboard_day": "2024-08-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "POPCATUSDT"
+    },
+    {
+      "onboard_day": "2024-02-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PORTALUSDT"
+    },
+    {
+      "onboard_day": "2025-12-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "POWERUSDT"
+    },
+    {
+      "onboard_day": "2023-10-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "POWRUSDT"
+    },
+    {
+      "onboard_day": "2026-04-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PRLUSDT"
+    },
+    {
+      "onboard_day": "2025-04-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PROMPTUSDT"
+    },
+    {
+      "onboard_day": "2025-01-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PROMUSDT"
+    },
+    {
+      "onboard_day": "2025-08-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PROVEUSDT"
+    },
+    {
+      "onboard_day": "2025-09-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PTBUSDT"
+    },
+    {
+      "onboard_day": "2025-06-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PUMPBTCUSDT"
+    },
+    {
+      "onboard_day": "2025-07-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PUMPUSDT"
+    },
+    {
+      "onboard_day": "2025-04-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PUNDIXUSDT"
+    },
+    {
+      "onboard_day": "2023-11-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "PYTHUSDT"
+    },
+    {
+      "onboard_day": "2026-05-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "QCOMUSDT"
+    },
+    {
+      "onboard_day": "2026-04-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "QQQUSDT"
+    },
+    {
+      "onboard_day": "2025-09-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "QUSDT"
+    },
+    {
+      "onboard_day": "2024-08-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RAREUSDT"
+    },
+    {
+      "onboard_day": "2025-12-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RAVEUSDT"
+    },
+    {
+      "onboard_day": "2024-12-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RAYSOLUSDT"
+    },
+    {
+      "onboard_day": "2025-10-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RECALLUSDT"
+    },
+    {
+      "onboard_day": "2025-03-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "REDUSDT"
+    },
+    {
+      "onboard_day": "2024-07-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RENDERUSDT"
+    },
+    {
+      "onboard_day": "2025-06-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RESOLVUSDT"
+    },
+    {
+      "onboard_day": "2026-06-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "REUSDT"
+    },
+    {
+      "onboard_day": "2024-04-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "REZUSDT"
+    },
+    {
+      "onboard_day": "2023-10-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RIFUSDT"
+    },
+    {
+      "onboard_day": "2025-10-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RIVERUSDT"
+    },
+    {
+      "onboard_day": "2020-07-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RLCUSDT"
+    },
+    {
+      "onboard_day": "2026-02-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ROBOUSDT"
+    },
+    {
+      "onboard_day": "2024-02-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RONINUSDT"
+    },
+    {
+      "onboard_day": "2021-12-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ROSEUSDT"
+    },
+    {
+      "onboard_day": "2024-09-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RPLUSDT"
+    },
+    {
+      "onboard_day": "2020-10-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RSRUSDT"
+    },
+    {
+      "onboard_day": "2021-02-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "RVNUSDT"
+    },
+    {
+      "onboard_day": "2024-10-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SAFEUSDT"
+    },
+    {
+      "onboard_day": "2024-04-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SAGAUSDT"
+    },
+    {
+      "onboard_day": "2025-06-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SAHARAUSDT"
+    },
+    {
+      "onboard_day": "2026-06-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SAMSUNGUSDT"
+    },
+    {
+      "onboard_day": "2021-01-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SANDUSDT"
+    },
+    {
+      "onboard_day": "2024-10-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SANTOSUSDT"
+    },
+    {
+      "onboard_day": "2025-08-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SAPIENUSDT"
+    },
+    {
+      "onboard_day": "2024-11-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SCRTUSDT"
+    },
+    {
+      "onboard_day": "2024-10-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SCRUSDT"
+    },
+    {
+      "onboard_day": "2025-11-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SENTUSDT"
+    },
+    {
+      "onboard_day": "2025-02-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SHELLUSDT"
+    },
+    {
+      "onboard_day": "2025-04-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SIGNUSDT"
+    },
+    {
+      "onboard_day": "2025-03-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SIRENUSDT"
+    },
+    {
+      "onboard_day": "2026-06-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SKHYNIXUSDT"
+    },
+    {
+      "onboard_day": "2020-08-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SKLUSDT"
+    },
+    {
+      "onboard_day": "2026-01-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SKRUSDT"
+    },
+    {
+      "onboard_day": "2025-05-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SKYAIUSDT"
+    },
+    {
+      "onboard_day": "2025-09-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SKYUSDT"
+    },
+    {
+      "onboard_day": "2025-07-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SLPUSDT"
+    },
+    {
+      "onboard_day": "2026-06-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SLXUSDT"
+    },
+    {
+      "onboard_day": "2020-09-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "onboard_day": "2025-01-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SOLVUSDT"
+    },
+    {
+      "onboard_day": "2025-08-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SOMIUSDT"
+    },
+    {
+      "onboard_day": "2025-01-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SONICUSDT"
+    },
+    {
+      "onboard_day": "2025-05-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SOONUSDT"
+    },
+    {
+      "onboard_day": "2025-05-28",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SOPHUSDT"
+    },
+    {
+      "onboard_day": "2026-01-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SPACEUSDT"
+    },
+    {
+      "onboard_day": "2025-06-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SPKUSDT"
+    },
+    {
+      "onboard_day": "2026-01-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SPORTFUNUSDT"
+    },
+    {
+      "onboard_day": "2024-12-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SPXUSDT"
+    },
+    {
+      "onboard_day": "2026-04-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SPYUSDT"
+    },
+    {
+      "onboard_day": "2025-06-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SQDUSDT"
+    },
+    {
+      "onboard_day": "2025-11-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STABLEUSDT"
+    },
+    {
+      "onboard_day": "2026-05-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STARUSDT"
+    },
+    {
+      "onboard_day": "2023-11-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STEEMUSDT"
+    },
+    {
+      "onboard_day": "2022-08-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STGUSDT"
+    },
+    {
+      "onboard_day": "2021-03-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STMXUSDT"
+    },
+    {
+      "onboard_day": "2020-09-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STORJUSDT"
+    },
+    {
+      "onboard_day": "2025-04-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STOUSDT"
+    },
+    {
+      "onboard_day": "2026-07-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STRCUSDT"
+    },
+    {
+      "onboard_day": "2024-02-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STRKUSDT"
+    },
+    {
+      "onboard_day": "2026-06-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "STXXUSDT"
+    },
+    {
+      "onboard_day": "2024-08-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SUNUSDT"
+    },
+    {
+      "onboard_day": "2023-11-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SUPERUSDT"
+    },
+    {
+      "onboard_day": "2025-01-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SUSDT"
+    },
+    {
+      "onboard_day": "2020-09-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SUSHIUSDT"
+    },
+    {
+      "onboard_day": "2025-01-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SWARMSUSDT"
+    },
+    {
+      "onboard_day": "2025-05-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SXTUSDT"
+    },
+    {
+      "onboard_day": "2024-08-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SYNUSDT"
+    },
+    {
+      "onboard_day": "2025-05-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "SYRUPUSDT"
+    },
+    {
+      "onboard_day": "2025-07-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TACUSDT"
+    },
+    {
+      "onboard_day": "2025-07-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TAGUSDT"
+    },
+    {
+      "onboard_day": "2025-06-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TAIKOUSDT"
+    },
+    {
+      "onboard_day": "2025-09-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TAKEUSDT"
+    },
+    {
+      "onboard_day": "2024-04-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TAOUSDT"
+    },
+    {
+      "onboard_day": "2025-07-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TAUSDT"
+    },
+    {
+      "onboard_day": "2024-11-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "THEUSDT"
+    },
+    {
+      "onboard_day": "2023-10-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TIAUSDT"
+    },
+    {
+      "onboard_day": "2023-03-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TLMUSDT"
+    },
+    {
+      "onboard_day": "2024-04-08",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TNSRUSDT"
+    },
+    {
+      "onboard_day": "2025-09-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TOSHIUSDT"
+    },
+    {
+      "onboard_day": "2025-08-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TOWNSUSDT"
+    },
+    {
+      "onboard_day": "2025-09-19",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TRADOORUSDT"
+    },
+    {
+      "onboard_day": "2020-09-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TRBUSDT"
+    },
+    {
+      "onboard_day": "2025-07-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TREEUSDT"
+    },
+    {
+      "onboard_day": "2026-02-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TRIAUSDT"
+    },
+    {
+      "onboard_day": "2025-01-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TRUMPUSDT"
+    },
+    {
+      "onboard_day": "2025-11-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TRUSTUSDT"
+    },
+    {
+      "onboard_day": "2025-10-01",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TRUTHUSDT"
+    },
+    {
+      "onboard_day": "2020-01-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TRXUSDT"
+    },
+    {
+      "onboard_day": "2026-04-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TSMUSDT"
+    },
+    {
+      "onboard_day": "2025-02-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TSTUSDT"
+    },
+    {
+      "onboard_day": "2024-05-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TURBOUSDT"
+    },
+    {
+      "onboard_day": "2025-10-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TURTLEUSDT"
+    },
+    {
+      "onboard_day": "2023-01-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TUSDT"
+    },
+    {
+      "onboard_day": "2025-03-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TUTUSDT"
+    },
+    {
+      "onboard_day": "2023-11-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TWTUSDT"
+    },
+    {
+      "onboard_day": "2026-07-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "TXNUSDT"
+    },
+    {
+      "onboard_day": "2025-09-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "UBUSDT"
+    },
+    {
+      "onboard_day": "2023-05-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "UMAUSDT"
+    },
+    {
+      "onboard_day": "2021-02-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "UNFIUSDT"
+    },
+    {
+      "onboard_day": "2025-08-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "USELESSUSDT"
+    },
+    {
+      "onboard_day": "2023-11-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "USTCUSDT"
+    },
+    {
+      "onboard_day": "2024-12-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "USUALUSDT"
+    },
+    {
+      "onboard_day": "2025-12-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "USUSDT"
+    },
+    {
+      "onboard_day": "2024-12-16",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VANAUSDT"
+    },
+    {
+      "onboard_day": "2024-03-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VANRYUSDT"
+    },
+    {
+      "onboard_day": "2024-12-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VELODROMEUSDT"
+    },
+    {
+      "onboard_day": "2025-07-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VELVETUSDT"
+    },
+    {
+      "onboard_day": "2020-02-14",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VETUSDT"
+    },
+    {
+      "onboard_day": "2025-03-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VICUSDT"
+    },
+    {
+      "onboard_day": "2024-12-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VIRTUALUSDT"
+    },
+    {
+      "onboard_day": "2025-01-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VTHOUSDT"
+    },
+    {
+      "onboard_day": "2026-05-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VUSDT"
+    },
+    {
+      "onboard_day": "2025-01-29",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "VVVUSDT"
+    },
+    {
+      "onboard_day": "2025-03-27",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WALUSDT"
+    },
+    {
+      "onboard_day": "2020-08-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WAVESUSDT"
+    },
+    {
+      "onboard_day": "2023-10-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WAXPUSDT"
+    },
+    {
+      "onboard_day": "2025-04-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WCTUSDT"
+    },
+    {
+      "onboard_day": "2026-05-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WDCUSDT"
+    },
+    {
+      "onboard_day": "2026-07-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WENUSDT"
+    },
+    {
+      "onboard_day": "2025-12-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WETUSDT"
+    },
+    {
+      "onboard_day": "2024-01-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WIFUSDT"
+    },
+    {
+      "onboard_day": "2025-08-23",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WLFIUSDT"
+    },
+    {
+      "onboard_day": "2026-05-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WMTUSDT"
+    },
+    {
+      "onboard_day": "2024-04-03",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "WUSDT"
+    },
+    {
+      "onboard_day": "2026-01-07",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XAGUSDT"
+    },
+    {
+      "onboard_day": "2024-01-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XAIUSDT"
+    },
+    {
+      "onboard_day": "2026-03-26",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XAUTUSDT"
+    },
+    {
+      "onboard_day": "2025-12-11",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XAUUSDT"
+    },
+    {
+      "onboard_day": "2021-03-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XEMUSDT"
+    },
+    {
+      "onboard_day": "2026-06-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XLEUSDT"
+    },
+    {
+      "onboard_day": "2020-01-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XLMUSDT"
+    },
+    {
+      "onboard_day": "2025-08-13",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XNYUSDT"
+    },
+    {
+      "onboard_day": "2026-01-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XPDUSDT"
+    },
+    {
+      "onboard_day": "2025-09-12",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XPINUSDT"
+    },
+    {
+      "onboard_day": "2025-08-22",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XPLUSDT"
+    },
+    {
+      "onboard_day": "2026-01-30",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XPTUSDT"
+    },
+    {
+      "onboard_day": "2020-01-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XRPUSDT"
+    },
+    {
+      "onboard_day": "2020-02-06",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "XTZUSDT"
+    },
+    {
+      "onboard_day": "2025-10-10",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "YBUSDT"
+    },
+    {
+      "onboard_day": "2020-08-31",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "YFIUSDT"
+    },
+    {
+      "onboard_day": "2023-08-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "YGGUSDT"
+    },
+    {
+      "onboard_day": "2026-01-09",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZAMAUSDT"
+    },
+    {
+      "onboard_day": "2025-10-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZBTUSDT"
+    },
+    {
+      "onboard_day": "2020-02-05",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZECUSDT"
+    },
+    {
+      "onboard_day": "2020-11-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZENUSDT"
+    },
+    {
+      "onboard_day": "2025-01-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZEREBROUSDT"
+    },
+    {
+      "onboard_day": "2026-06-04",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZESTUSDT"
+    },
+    {
+      "onboard_day": "2024-02-02",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZETAUSDT"
+    },
+    {
+      "onboard_day": "2020-06-18",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZILUSDT"
+    },
+    {
+      "onboard_day": "2025-09-15",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZKCUSDT"
+    },
+    {
+      "onboard_day": "2025-12-21",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZKPUSDT"
+    },
+    {
+      "onboard_day": "2024-06-17",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZKUSDT"
+    },
+    {
+      "onboard_day": "2025-07-25",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZORAUSDT"
+    },
+    {
+      "onboard_day": "2024-06-20",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZROUSDT"
+    },
+    {
+      "onboard_day": "2020-06-24",
+      "reason": "CURRENT_EXCHANGE_INFO_ONLY_CANNOT_PROVE_PAST_PIT_MEMBERSHIP",
+      "symbol": "ZRXUSDT"
+    }
+  ],
+  "classification": [
+    "PRESTART_STATE_INITIALIZATION_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE"
+  ],
+  "extension_end_utc": "2026-09-19T00:00:00Z",
+  "extension_start_utc": "2026-09-01T00:00:00Z",
+  "no_fabricated_lifecycle": true,
+  "records": [
+    {
+      "announcement_publication_timestamp_utc": "2026-09-18T09:30:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-18T09:30:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-18T09:30:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-18T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-18"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "bfe0469e14f14ca23518e90de30354dc457337618459656937b11a851a02168b",
+      "symbol": "AGPUUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-18T09:05:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-18T09:05:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-18T09:05:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-18T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-18"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "de26aa13d51f86e474a3486d307833ff4ab7b147784dfebd4ad44f8d6f1d5276",
+      "symbol": "AMCUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-18T09:15:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-18T09:15:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-18T09:15:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-18T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-18"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "d597e4dd67fa6142a257833d171b88240d11e5555a6ef8db6beaf46cbb53db3a",
+      "symbol": "ANETUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-18T09:25:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-18T09:25:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-18T09:25:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-18T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-18"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "7f3c319baadb790315542bc2c0a77a2f29c9f513323e0d635601bba1377b4e7a",
+      "symbol": "APLDUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-07T02:00:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-07T02:00:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-07T02:00:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-07T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-07"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "e1adaf6bb5a0f23d85fd907521ea465781730375ba84a8ed3a8ec0cb81191b83",
+      "symbol": "BYDUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-18T09:10:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-18T09:10:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-18T09:10:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-18T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-18"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "bf2f80c6b8cb495fd8c2c0d140a49a43dc5e833c8c9cc74d2f8344efff3e43f7",
+      "symbol": "CYPHUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-02T10:10:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-02T10:10:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-02T10:10:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-02T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-02"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "33bfba14489ad4635d19b592004bdade27fc74aed4869eaf4ed162e7dcb736b5",
+      "symbol": "DDOGUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-03T13:45:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-03T13:45:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-03T13:45:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-03T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-03"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "8c29d6edd2c8bc0b33b65c1704fca5b3101f75efa914dc460df876ef4bace69e",
+      "symbol": "GPROUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-02T10:30:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-02T10:30:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-02T10:30:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-02T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-02"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "7d991b428a59370da9fc5cb93623f9b8a1a61d5fef9f592d43bc237f7fb1ecbb",
+      "symbol": "GTLBUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-01T02:45:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-01T02:45:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-01T02:45:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-01T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-01"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "5c2358e2b1ddd744c21249d339dac0f2c377639fad5797471a5c73e2fda79e33",
+      "symbol": "HK0625USDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-07T02:05:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-07T02:05:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-07T02:05:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-07T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-07"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "3b2eb0fb90c28bf344c6987466d5feaa6c777c9d1c6aaa1cafda9122ae41d69b",
+      "symbol": "HK0992USDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-18T09:20:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-18T09:20:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-18T09:20:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-18T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-18"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "85d106585a1a2942af1072279f56afd78eef71e9a4a4a5caccc7f6c1d6375e48",
+      "symbol": "HUTUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-01T09:45:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-01T09:45:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-01T09:45:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-01T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-01"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "38e7b410bce5c6330de0e0e43e46c20c6a159be659d0eeb4c78236fe41b6faef",
+      "symbol": "MARSCOINUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-02T10:20:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-02T10:20:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-02T10:20:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-02T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-02"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "3fd744d5a16a5a4f0c0b2a0baa0b4fa46be6db61e72f1693a6b4c68011a37d13",
+      "symbol": "MDBUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-02T10:00:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-02T10:00:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-02T10:00:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-02T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-02"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "2c465a6be0e430632eb9a7e32ee76ec5eeb3ddd67190967cf8fcaa3eca57ef3f",
+      "symbol": "NVDLUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-18T09:00:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-18T09:00:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-18T09:00:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-18T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-18"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "f41002aadac9aade38c0798dd9e9bf382f531659f22bbf4751ba87711df23240",
+      "symbol": "PATHUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-06T06:45:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-06T06:45:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-06T06:45:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-06T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-06"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "89781892adb8d60c4e95ddb6e146f42dff3b9bd11238fde75cfbe0acfcd0cc17",
+      "symbol": "PONSUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-02T10:15:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-02T10:15:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-02T10:15:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-02T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-02"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "808819d15fbac896168a92af414b8f53fed765a24e946e7c4f4e7207a6cba31a",
+      "symbol": "TEAMUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-02T10:05:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-02T10:05:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-02T10:05:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-02T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-02"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "ffa63779c74039673c4c871e4224a9e85208b3336ad5be6945831c0e55b0c281",
+      "symbol": "TSLLUSDT"
+    },
+    {
+      "announcement_publication_timestamp_utc": "2026-09-02T10:25:00.000Z",
+      "classification": "NEW_LISTING_PIT_CONFIRMED_BY_ONBOARD_AND_COMPLETED_BAR",
+      "effective_timestamp_utc": "2026-09-02T10:25:00.000Z",
+      "pit_evidence": {
+        "current_exchange_info_alone_not_used_as_pit_proof": true,
+        "exchange_info_onboard_timestamp_utc": "2026-09-02T10:25:00.000Z",
+        "first_completed_daily_bar_close_timestamp_utc": "2026-09-02T23:59:59.999Z",
+        "first_completed_daily_bar_day": "2026-09-02"
+      },
+      "source": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "source_hash": "f1d179ea75b41604cd47e81fe5cd30567a0308d8477b26c0a54c41fd1ee66d8a",
+      "symbol": "ZSUSDT"
+    }
+  ],
+  "schema_version": "PRESTART_LIFECYCLE_EXTENSION.v1",
+  "scope": "PRESTART_STATE_INITIALIZATION_ONLY"
+}
