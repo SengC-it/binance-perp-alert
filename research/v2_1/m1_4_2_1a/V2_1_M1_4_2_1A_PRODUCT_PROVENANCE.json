@@ -1,0 +1,1329 @@
+{
+  "added_symbols": [],
+  "audit_id": "XS-LOWVOL-V2.1-M1.4.2.1A-PARSER-CORRECTIVE-1",
+  "base_commit": "738c874d578c160c72f84feb92d5fadfb6b9b1b2",
+  "classification": [
+    "PRODUCT_PROVENANCE_ONLY",
+    "NOT_FORWARD",
+    "NOT_M2_START_EVIDENCE"
+  ],
+  "code_commit_used_by_run": "ff608049f4023ec14b99b66212316fdaac04bb4e",
+  "current_positions_recomputed": false,
+  "decision": "V2.1-M1.4.2.1A PRODUCT_PROVENANCE NOT_READY",
+  "effective_timestamp_differences": [
+    {
+      "actual": "",
+      "expected": "2024-11-25T11:30:00.000Z",
+      "symbol": "1000WHYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-11-13T12:30:00.000Z",
+      "symbol": "1000XUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-10-27T10:30:00.000Z",
+      "symbol": "42USDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-07-30T08:00:00.000Z",
+      "symbol": "A2ZUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-06T13:50:00.000Z",
+      "symbol": "AAPLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-12-06T15:00:00.000Z",
+      "symbol": "ACXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-02-15T07:00:00.000Z",
+      "symbol": "AGIXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-01-02T13:45:00.000Z",
+      "symbol": "AI16ZUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-01-08T12:30:00.000Z",
+      "symbol": "AIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-08-22T10:30:00.000Z",
+      "symbol": "ALPACAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-11-23T07:00:00.000Z",
+      "symbol": "ALPHAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-08T09:10:00.000Z",
+      "symbol": "AMATUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-03-29T00:00:00.000Z",
+      "symbol": "AMBUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-02T04:30:00.000Z",
+      "symbol": "ANTHROPICUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-26T13:40:00.000Z",
+      "symbol": "ARMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-11T09:40:00.000Z",
+      "symbol": "ASMLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-08-30T07:00:00.000Z",
+      "symbol": "ATAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-20T13:40:00.000Z",
+      "symbol": "AVGOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-02-13T11:30:00.000Z",
+      "symbol": "B3USDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-20T13:50:00.000Z",
+      "symbol": "BABAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-11-09T12:30:00.000Z",
+      "symbol": "BADGERUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-05-18T07:00:00.000Z",
+      "symbol": "BAKEUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-09-01T07:00:00.000Z",
+      "symbol": "BALUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-03-20T09:30:00.000Z",
+      "symbol": "BIDUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-09-17T07:00:00.000Z",
+      "symbol": "BLZUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-09T14:25:00.000Z",
+      "symbol": "BNCUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-02-22T07:00:00.000Z",
+      "symbol": "BNXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-11-21T10:45:00.000Z",
+      "symbol": "BOBUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-10-15T14:30:00.000Z",
+      "symbol": "BONDUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-05T06:00:00.000Z",
+      "symbol": "BSWUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-08T09:00:00.000Z",
+      "symbol": "BXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-09-07T02:00:00.000Z",
+      "symbol": "BYDUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-01T09:10:00.000Z",
+      "symbol": "BZUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-02T09:20:00.000Z",
+      "symbol": "CATUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-08-29T07:30:00.000Z",
+      "symbol": "CHESSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-01T09:00:00.000Z",
+      "symbol": "CLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-06-02T12:00:00.000Z",
+      "symbol": "COMBOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-10-27T12:30:00.000Z",
+      "symbol": "COMMONUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-03-06T09:00:00.000Z",
+      "symbol": "COPPERUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-30T13:00:00.000Z",
+      "symbol": "COSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-08T09:20:00.000Z",
+      "symbol": "CRDOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-03T09:15:00.000Z",
+      "symbol": "CRMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-08T09:15:00.000Z",
+      "symbol": "CRWDUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-15T13:50:00.000Z",
+      "symbol": "CSCOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-11T02:15:00.000Z",
+      "symbol": "CSOPSAMSUNG2LUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-11T02:10:00.000Z",
+      "symbol": "CSOPSKHYNIX2LUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-08-20T11:15:00.000Z",
+      "symbol": "CUDISUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-08-18T12:30:00.000Z",
+      "symbol": "DAMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2022-04-28T07:00:00.000Z",
+      "symbol": "DARUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-08-28T07:00:00.000Z",
+      "symbol": "DEFIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-11-15T11:30:00.000Z",
+      "symbol": "DEGENUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-12-13T13:15:00.000Z",
+      "symbol": "DEGOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-03T09:00:00.000Z",
+      "symbol": "DELLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-03-23T07:00:00.000Z",
+      "symbol": "DENTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-12-30T11:45:00.000Z",
+      "symbol": "DFUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-04-19T07:00:00.000Z",
+      "symbol": "DGBUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-15T13:40:00.000Z",
+      "symbol": "DISUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-06-24T13:00:00.000Z",
+      "symbol": "DMCUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-01-09T10:00:00.000Z",
+      "symbol": "DUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-09T09:20:00.000Z",
+      "symbol": "EBAYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-04-21T13:00:00.000Z",
+      "symbol": "EPTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-20T11:30:00.000Z",
+      "symbol": "FIOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-04-25T07:30:00.000Z",
+      "symbol": "FISUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-02T09:30:00.000Z",
+      "symbol": "FLEXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-09-29T07:00:00.000Z",
+      "symbol": "FLMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-04-08T08:30:00.000Z",
+      "symbol": "FORTHUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-09-24T07:00:00.000Z",
+      "symbol": "FTMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2022-04-14T07:00:00.000Z",
+      "symbol": "FTTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-03-31T08:30:00.000Z",
+      "symbol": "FUNUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-01-19T07:00:00.000Z",
+      "symbol": "FXSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-11-20T09:00:00.000Z",
+      "symbol": "GAIBUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-23T13:00:00.000Z",
+      "symbol": "GHSTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-03T05:30:00.000Z",
+      "symbol": "GIGADEVUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-09-26T01:30:00.000Z",
+      "symbol": "GLMRUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-11T09:30:00.000Z",
+      "symbol": "GLWUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-03-26T14:50:00.000Z",
+      "symbol": "GOOGLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-29T09:05:00.000Z",
+      "symbol": "GSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-14T02:10:00.000Z",
+      "symbol": "HANMIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-15T13:55:00.000Z",
+      "symbol": "HDUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-04-05T00:00:00.000Z",
+      "symbol": "HFTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-09-16T14:30:00.000Z",
+      "symbol": "HIFIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-02-03T07:00:00.000Z",
+      "symbol": "HIGHUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-11-13T12:30:00.000Z",
+      "symbol": "HIPPOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-09-01T02:45:00.000Z",
+      "symbol": "HK0625USDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-22T03:00:00.000Z",
+      "symbol": "HK0700USDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-09-07T02:05:00.000Z",
+      "symbol": "HK0992USDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-22T03:05:00.000Z",
+      "symbol": "HK1810USDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-01-19T07:00:00.000Z",
+      "symbol": "HOOKUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-08T09:05:00.000Z",
+      "symbol": "HPEUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-02T03:20:00.000Z",
+      "symbol": "HYUNDAIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-03T09:05:00.000Z",
+      "symbol": "IBMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-09-15T07:00:00.000Z",
+      "symbol": "ICXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-05-02T00:00:00.000Z",
+      "symbol": "IDEXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-02-13T17:00:00.000Z",
+      "symbol": "IPUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-03T09:20:00.000Z",
+      "symbol": "IRENUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-12-21T10:30:00.000Z",
+      "symbol": "IRUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-08T09:30:00.000Z",
+      "symbol": "IWMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-18T13:40:00.000Z",
+      "symbol": "JPMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-18T13:30:00.000Z",
+      "symbol": "KDAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-05-23T00:00:00.000Z",
+      "symbol": "KEYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-22T13:35:00.000Z",
+      "symbol": "KLACUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-10-11T07:00:00.000Z",
+      "symbol": "KLAYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-22T13:55:00.000Z",
+      "symbol": "KORUUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-11T02:00:00.000Z",
+      "symbol": "KUAISHOUUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-03-29T00:00:00.000Z",
+      "symbol": "LEVERUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-14T02:15:00.000Z",
+      "symbol": "LGELECTRONICSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-03-17T07:00:00.000Z",
+      "symbol": "LINAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-01T13:30:00.000Z",
+      "symbol": "LLYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-24T11:30:00.000Z",
+      "symbol": "LOKAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-10-11T14:30:00.000Z",
+      "symbol": "LOOMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-10-19T07:05:00.000Z",
+      "symbol": "LRCUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-08-28T09:30:00.000Z",
+      "symbol": "MBOXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-06-30T12:00:00.000Z",
+      "symbol": "MDTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-11T02:05:00.000Z",
+      "symbol": "MEITUANUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-04-25T07:15:00.000Z",
+      "symbol": "MEMEFIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-03-26T14:30:00.000Z",
+      "symbol": "METAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-05-06T13:45:00.000Z",
+      "symbol": "MILKUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-17T03:00:00.000Z",
+      "symbol": "MINIMAXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-08-13T07:00:00.000Z",
+      "symbol": "MKRUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-03-31T08:45:00.000Z",
+      "symbol": "MLNUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-15T14:05:00.000Z",
+      "symbol": "MRVLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-20T13:30:00.000Z",
+      "symbol": "MSFTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-07T13:30:00.000Z",
+      "symbol": "MUUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-03-05T08:30:00.000Z",
+      "symbol": "MYROUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-01T09:20:00.000Z",
+      "symbol": "NATGASUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-14T02:20:00.000Z",
+      "symbol": "NAVERUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-26T13:30:00.000Z",
+      "symbol": "NBISUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-06T14:00:00.000Z",
+      "symbol": "NEIROETHUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-12-27T12:30:00.000Z",
+      "symbol": "NFPUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-04-08T07:00:00.000Z",
+      "symbol": "NKNUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-01T13:45:00.000Z",
+      "symbol": "NOKUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-11-14T12:00:00.000Z",
+      "symbol": "NTRNUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-08-26T08:30:00.000Z",
+      "symbol": "NULSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-03-26T14:40:00.000Z",
+      "symbol": "NVDAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-01T13:35:00.000Z",
+      "symbol": "NVOUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-05-07T10:30:00.000Z",
+      "symbol": "OBOLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-11-03T07:00:00.000Z",
+      "symbol": "OCEANUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-06-25T11:30:00.000Z",
+      "symbol": "OLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-07-02T09:00:00.000Z",
+      "symbol": "OMGUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-04-17T14:00:00.000Z",
+      "symbol": "OMNIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-02-13T14:00:00.000Z",
+      "symbol": "OMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-26T08:30:00.000Z",
+      "symbol": "OPENAIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-10-17T06:00:00.000Z",
+      "symbol": "ORBSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-15T13:35:00.000Z",
+      "symbol": "ORCLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-08-11T12:00:00.000Z",
+      "symbol": "OXTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-28T09:20:00.000Z",
+      "symbol": "PDDUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-03-05T07:00:00.000Z",
+      "symbol": "PERPUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-02-15T07:00:00.000Z",
+      "symbol": "PHBUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-11-04T12:30:00.000Z",
+      "symbol": "PONKEUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-23T02:30:00.000Z",
+      "symbol": "POPMARTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-06-04T08:45:00.000Z",
+      "symbol": "PORT3USDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-06-04T08:30:00.000Z",
+      "symbol": "PUFFERUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-06T13:35:00.000Z",
+      "symbol": "QCOMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-29T08:15:00.000Z",
+      "symbol": "QNTXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-06T13:30:00.000Z",
+      "symbol": "QQQUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-06T05:00:00.000Z",
+      "symbol": "QUICKUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-05-09T00:00:00.000Z",
+      "symbol": "RADUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-08-18T07:00:00.000Z",
+      "symbol": "RAYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-04-04T00:00:00.000Z",
+      "symbol": "RDNTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-01-25T07:00:00.000Z",
+      "symbol": "REEFUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-27T11:00:00.000Z",
+      "symbol": "REIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-10-13T07:00:00.000Z",
+      "symbol": "RENUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-12-02T10:00:00.000Z",
+      "symbol": "RLSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-10-18T13:30:00.000Z",
+      "symbol": "RVVUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-14T02:05:00.000Z",
+      "symbol": "SAMSUNGEMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-02T03:10:00.000Z",
+      "symbol": "SAMSUNGUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-11-21T11:30:00.000Z",
+      "symbol": "SCRTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-04-12T07:00:00.000Z",
+      "symbol": "SCUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-17T13:45:00.000Z",
+      "symbol": "SHOPUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-06-09T10:30:00.000Z",
+      "symbol": "SKATEUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-02T03:00:00.000Z",
+      "symbol": "SKHYNIXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-10T15:50:00.000Z",
+      "symbol": "SKHYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-11-21T11:30:00.000Z",
+      "symbol": "SLERFUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-11-02T12:30:00.000Z",
+      "symbol": "SNTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-22T14:00:00.000Z",
+      "symbol": "SONYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-16T09:05:00.000Z",
+      "symbol": "SOXSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-21T04:45:00.000Z",
+      "symbol": "SPCXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-06T13:40:00.000Z",
+      "symbol": "SPYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-29T13:45:00.000Z",
+      "symbol": "SQQQUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-03-17T07:00:00.000Z",
+      "symbol": "STMXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-09-16T07:00:00.000Z",
+      "symbol": "STORJUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-10-18T14:30:00.000Z",
+      "symbol": "STPTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-10-11T02:30:00.000Z",
+      "symbol": "STRAXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-02T09:15:00.000Z",
+      "symbol": "STRCUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-11T09:35:00.000Z",
+      "symbol": "STXXUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-11-08T16:00:00.000Z",
+      "symbol": "SWELLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-08-19T12:30:00.000Z",
+      "symbol": "SYSUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-07-09T11:30:00.000Z",
+      "symbol": "TANSSIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-27T13:35:00.000Z",
+      "symbol": "TBTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-22T03:10:00.000Z",
+      "symbol": "TENCENTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-11-03T15:00:00.000Z",
+      "symbol": "TOKENUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-03-01T12:30:00.000Z",
+      "symbol": "TONUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-29T13:40:00.000Z",
+      "symbol": "TQQQUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-10-31T13:00:00.000Z",
+      "symbol": "TROYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2023-03-06T07:00:00.000Z",
+      "symbol": "TRUUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-04-06T14:00:00.000Z",
+      "symbol": "TSMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-02T09:25:00.000Z",
+      "symbol": "TXNUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-16T09:10:00.000Z",
+      "symbol": "TZAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-02-09T07:00:00.000Z",
+      "symbol": "UNFIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-09-21T14:00:00.000Z",
+      "symbol": "USDBRLUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-09-15T15:00:00.000Z",
+      "symbol": "UXLINKUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-03-13T17:30:00.000Z",
+      "symbol": "VANRYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-09-30T12:00:00.000Z",
+      "symbol": "VFYUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-03-12T17:00:00.000Z",
+      "symbol": "VICUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-08-23T09:30:00.000Z",
+      "symbol": "VIDTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-01-24T10:00:00.000Z",
+      "symbol": "VINEUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2024-08-20T10:30:00.000Z",
+      "symbol": "VOXELUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-18T13:45:00.000Z",
+      "symbol": "VUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2020-08-12T07:00:00.000Z",
+      "symbol": "WAVESUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-26T13:35:00.000Z",
+      "symbol": "WDCUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-09T14:05:00.000Z",
+      "symbol": "WENUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-05-18T13:35:00.000Z",
+      "symbol": "WMTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-01-07T10:00:00.000Z",
+      "symbol": "XAGUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-12-11T08:05:00.000Z",
+      "symbol": "XAUUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-04-11T15:30:00.000Z",
+      "symbol": "XCNUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2021-03-02T07:00:00.000Z",
+      "symbol": "XEMUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-06-10T09:20:00.000Z",
+      "symbol": "XLEUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-01-30T10:15:00.000Z",
+      "symbol": "XPDUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-01-30T10:00:00.000Z",
+      "symbol": "XPTUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-08-07T16:30:00.000Z",
+      "symbol": "YALAUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-07-17T03:05:00.000Z",
+      "symbol": "ZHIPUUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2026-08-14T02:00:00.000Z",
+      "symbol": "ZHONGJIUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-05-13T09:30:00.000Z",
+      "symbol": "ZKJUSDT"
+    },
+    {
+      "actual": "",
+      "expected": "2025-07-29T09:45:00.000Z",
+      "symbol": "ZRCUSDT"
+    }
+  ],
+  "failed_gates": [
+    "J5_all_145_historical_provenance",
+    "J6_membership_set_exact_match",
+    "J7_effective_timestamps_exact",
+    "J8_previous_139_stable"
+  ],
+  "first_forward_signal_selected": false,
+  "formal_process_exit_code": 0,
+  "forward_evidence_created": false,
+  "gates": {
+    "J0_identity": "PASS",
+    "J10_post_jan08_unknowns_zero": "PASS",
+    "J11_ci_phase_safe": "PASS",
+    "J12_anchor_frozen": "PASS",
+    "J13_no_parent_reconstruction": "PASS",
+    "J14_no_forward_evidence": "PASS",
+    "J1_old_m142_immutable": "PASS",
+    "J2_old_m1421_immutable": "PASS",
+    "J3_structured_table_parser": "PASS",
+    "J4_six_unresolved_resolved": "PASS",
+    "J5_all_145_historical_provenance": "FAIL",
+    "J6_membership_set_exact_match": "FAIL",
+    "J7_effective_timestamps_exact": "FAIL",
+    "J8_previous_139_stable": "FAIL",
+    "J9_tsla_still_proven": "PASS"
+  },
+  "http_method_policy": "GET_ONLY",
+  "identity": {
+    "forward_anchor_sha256": "a4e61eae444e08ef038fc2108b1b29ef39551e90c4d40b6dab5c04df6004f41b",
+    "forward_anchor_status": "FROZEN_NOT_YET_STARTED",
+    "m1_3_overlay_sha256": "7a6f183262580933c4802acb9454b0617c7c095b458b79f1e56fadb1c9ec64c1",
+    "v1_control_sha256": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+    "v1_protocol_sha256": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+    "v1_shadow_sha256": "97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd",
+    "v2_1_protocol_sha256": "6aa94ad92fa1811774788d11aecc0326a00e256950df61cb7cbe9db8e504fb7d",
+    "v2_1_spec_sha256": "e5b026c106e46d04fb160ee012789c39ff1b9ef3f318a49da871a6a3cd51959c"
+  },
+  "latest_13_recomputed": false,
+  "live_trading": false,
+  "m2_started": false,
+  "membership_unchanged": false,
+  "official_announcement_count": 48,
+  "old_m1_4_2_1_artifact_manifest_sha256": "1887f133198191f7e9645fe7e4dab2833f91f8b7fab641035aa321a8107af911",
+  "old_m1_4_2_1_artifacts_unchanged": true,
+  "old_m1_4_2_1_registry_sha256": "fd7836812415542081e568bf467a2014d039df7df459e1487ba8e3d5065f65fa",
+  "old_m1_4_2_artifact_manifest_sha256": "f07b20497135ef7c2082471ef75e26d405ce429018eaae6f59c07b8358f433be",
+  "old_m1_4_2_artifacts_unchanged": true,
+  "old_m1_4_2_overlay_sha256": "64826ae0844073241d6180d4270cb6851401d98951bf65191e757eddb469ed4e",
+  "optimization": false,
+  "original_excluded_count": 145,
+  "overlay_v3_sha256": "01c4e74c13c49c9b1292c66c60217a05127767071532cb2d4800f41902b63eb2",
+  "paper_only": true,
+  "parent_reconstruction_executed": false,
+  "position_scale_recomputed": false,
+  "post_jan_08_unknown_count": 0,
+  "previously_proven_changed_count": 41,
+  "protocol_changed": false,
+  "proven_count": 104,
+  "reference_vol_recomputed": false,
+  "registry_sha256": "3fd290ea89d1556dd4b756ecca0eef8c07bfd9de0aafe95b896031c97f94aa50",
+  "regression_announcement": {
+    "article_code": "3c2b63c9c3e44d40b8cec99961166fe8",
+    "covered_symbols": [
+      "PATHUSDT",
+      "AMCUSDT",
+      "CYPHUSDT",
+      "ANETUSDT",
+      "HUTUSDT",
+      "APLDUSDT",
+      "AGPUUSDT"
+    ],
+    "official_source_url": "https://www.binance.com/en/support/announcement/detail/3c2b63c9c3e44d40b8cec99961166fe8",
+    "parsed": {
+      "AGPUUSDT": {
+        "evidence_found": true,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "listing_effective_timestamp": "2026-09-18T09:30:00Z",
+        "table_evidence_hash": "788a0cd8cda29f979426045ea96c453c10c74ce6eb484823141e945d209680d5"
+      },
+      "AMCUSDT": {
+        "evidence_found": true,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "listing_effective_timestamp": "2026-09-18T09:05:00Z",
+        "table_evidence_hash": "21940cb953df142699efd5e2302da08ba1dbfd70f1b4f82aa0e26163839dc46d"
+      },
+      "ANETUSDT": {
+        "evidence_found": true,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "listing_effective_timestamp": "2026-09-18T09:15:00Z",
+        "table_evidence_hash": "113a07ebd5ff8a0d4588989831f2258839be425ccff12f0ccadfaf5d3ad16b6e"
+      },
+      "APLDUSDT": {
+        "evidence_found": true,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "listing_effective_timestamp": "2026-09-18T09:25:00Z",
+        "table_evidence_hash": "d0c8f621fd99296bfdc859afc18ae1c1ca3d96f11dfb19cb0da8079ae40c25fc"
+      },
+      "CYPHUSDT": {
+        "evidence_found": true,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "listing_effective_timestamp": "2026-09-18T09:10:00Z",
+        "table_evidence_hash": "2487614feab5eef039e1ad44c3ad57f050bed389a1c32ca93482bbbaada66897"
+      },
+      "HUTUSDT": {
+        "evidence_found": true,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "listing_effective_timestamp": "2026-09-18T09:20:00Z",
+        "table_evidence_hash": "d816da474ccf52cf9ed8d9dab4faf85abca4c484ed64f49dbf8ef0e95ed4a45b"
+      },
+      "PATHUSDT": {
+        "evidence_found": true,
+        "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+        "listing_effective_timestamp": "2026-09-18T09:00:00Z",
+        "table_evidence_hash": "2a2614df81dafc505fe179f6e52fd7842892bdbb7241c2b287ba306838b633c3"
+      }
+    }
+  },
+  "removed_symbols": [
+    "ANTHROPICUSDT",
+    "ARMUSDT",
+    "ASMLUSDT",
+    "BNCUSDT",
+    "BYDUSDT",
+    "CRDOUSDT",
+    "CSOPSAMSUNG2LUSDT",
+    "CSOPSKHYNIX2LUSDT",
+    "FLEXUSDT",
+    "GIGADEVUSDT",
+    "HANMIUSDT",
+    "HK0625USDT",
+    "HK0700USDT",
+    "HK0992USDT",
+    "HK1810USDT",
+    "IRENUSDT",
+    "IWMUSDT",
+    "KUAISHOUUSDT",
+    "LGELECTRONICSUSDT",
+    "MEITUANUSDT",
+    "MINIMAXUSDT",
+    "NAVERUSDT",
+    "NBISUSDT",
+    "NOKUSDT",
+    "OPENAIUSDT",
+    "PDDUSDT",
+    "POPMARTUSDT",
+    "QNTXUSDT",
+    "SAMSUNGEMUSDT",
+    "SHOPUSDT",
+    "SKHYUSDT",
+    "SONYUSDT",
+    "SOXSUSDT",
+    "SPCXUSDT",
+    "SQQQUSDT",
+    "TBTUSDT",
+    "TENCENTUSDT",
+    "TQQQUSDT",
+    "TZAUSDT",
+    "ZHIPUUSDT",
+    "ZHONGJIUSDT"
+  ],
+  "report_sha256": "c4f13843252adeccfebbf9f19460b7cec8ca18f8eca88da45af38bbc89cc3418",
+  "run_id": "XS-LOWVOL-V2.1-M1.4.2.1A-PARSER-CORRECTIVE-1",
+  "run_type": "HISTORICAL_PRODUCT_PROVENANCE_PARSER_CORRECTIVE",
+  "schema_version": "V2_1_M1_4_2_1A_PRODUCT_PROVENANCE.v1",
+  "strategy_changed": false,
+  "structured_table_announcement_count": 37,
+  "tsla_provenance": {
+    "contract_type_cell": "USDⓈ-M Perpetual Contract",
+    "evidence_found": true,
+    "evidence_method": "STRUCTURED_MULTI_SYMBOL_OFFICIAL_LISTING_TABLE",
+    "evidence_status": "PROVEN_HISTORICAL_PRODUCT_TYPE",
+    "historical_contract_type": "TRADIFI_PERPETUAL",
+    "historical_product_category": "TRADFI",
+    "historical_quote_asset": "USDT",
+    "launch_time_cell": "2026-01-28T14:30:00Z",
+    "listing_effective_timestamp": "2026-01-28T14:30:00Z",
+    "official_source_url": "https://www.binance.com/en/support/announcement/detail/40c76b4deaa247f09774e5d1ee747cb8",
+    "onboard_timestamp": "2026-01-28T14:30:00.000Z",
+    "parser_mode": "COLUMN_ORIENTED",
+    "settlement_asset_cell": "USDT",
+    "source_content_sha256": "03be78cedbdb09296abcfcad4ca38280be358d02e587d9bba7b3f6892dfb7dc3",
+    "source_content_sha256_unchanged": true,
+    "source_id": "40c76b4deaa247f09774e5d1ee747cb8",
+    "source_publication_timestamp": "2026-01-26T11:29:35.659Z",
+    "source_title": "Binance Futures Will Launch USDⓈ-Margined TSLAUSDT Equity Perpetual Contract (2026-01-28)",
+    "symbol": "TSLAUSDT",
+    "table_column_evidence_sha256": "91c1ed9d4484a98ca917a80d0b4db300659b6af4721af76d18f372ed692b25e9",
+    "table_column_index": 1,
+    "table_evidence_hash": "91c1ed9d4484a98ca917a80d0b4db300659b6af4721af76d18f372ed692b25e9",
+    "table_index": 0,
+    "timestamp_parse_method": "STRUCTURED_TABLE_TIMESTAMP",
+    "underlying_evidence_cell": "Tesla Inc. Common Stock (Nasdaq: TSLA)"
+  },
+  "unresolved_count": 41
+}
