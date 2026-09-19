@@ -1,15 +1,17 @@
 import json
-import hashlib
 from pathlib import Path
 
 from backtest.m1_4_2_1 import (
     FORWARD_ANCHOR_STATUS,
     OLD_M142_BASE_COMMIT,
     _effective_timestamp,
-    _old_artifact_manifest,
     load_immutable_scope,
     parse_structured_listing_table,
     parse_symbol_evidence,
+)
+from backtest.m1_4_2_1b import (
+    IMMUTABLE_STAGE_COMMITS,
+    git_blob_manifest,
 )
 
 
@@ -101,24 +103,6 @@ def _row_fixture():
             ],
         ]
     )
-
-
-def _manifest_sha(manifest):
-    return hashlib.sha256(
-        json.dumps(
-            manifest, ensure_ascii=False, sort_keys=True, separators=(",", ":")
-        ).encode("utf-8")
-    ).hexdigest()
-
-
-def _file_manifest(root):
-    return {
-        str(path.relative_to(root)).replace("\\", "/"): hashlib.sha256(
-            path.read_bytes()
-        ).hexdigest()
-        for path in sorted(root.rglob("*"))
-        if path.is_file()
-    }
 
 
 def test_scope_uses_full_frozen_catalog_and_145_exclusions():
@@ -286,8 +270,8 @@ def test_old_m142_artifact_manifest_is_readable_and_not_reconstructed():
     scope = load_immutable_scope()
     assert scope["old_result"]["base_commit"] == OLD_M142_BASE_COMMIT
     assert scope["old_result"]["forward_anchor_status"] == FORWARD_ANCHOR_STATUS
-    manifest = _old_artifact_manifest()
-    assert "V2_1_M1_4_2_PARENT_RECONSTRUCTION.json" in manifest
+    for _, (bound_commit, prefix) in IMMUTABLE_STAGE_COMMITS.items():
+        assert git_blob_manifest(bound_commit, prefix) == git_blob_manifest("HEAD", prefix)
     corrective_root = Path("research/v2_1/m1_4_2_1a")
     if corrective_root.exists():
         result = json.loads(
@@ -296,12 +280,12 @@ def test_old_m142_artifact_manifest_is_readable_and_not_reconstructed():
                 "V2_1_M1_4_2_1A_PRODUCT_PROVENANCE.json"
             ).read_text(encoding="utf-8")
         )
-        assert result["old_m1_4_2_artifact_manifest_sha256"] == _manifest_sha(manifest)
         assert result["old_m1_4_2_artifacts_unchanged"] is True
         assert result["old_m1_4_2_1_artifacts_unchanged"] is True
-        assert result["old_m1_4_2_1_artifact_manifest_sha256"] == _manifest_sha(
-            _file_manifest(Path("research/v2_1/m1_4_2_1"))
-        )
+        assert git_blob_manifest(
+            IMMUTABLE_STAGE_COMMITS["m1_4_2_1a"][0],
+            IMMUTABLE_STAGE_COMMITS["m1_4_2_1a"][1],
+        ) == git_blob_manifest("HEAD", "research/v2_1/m1_4_2_1a")
 
 
 def test_tsla_is_in_the_affected_fifteen_set():
