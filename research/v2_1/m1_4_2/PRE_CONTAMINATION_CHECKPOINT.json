@@ -1,0 +1,149 @@
+{
+  "accounting_state": {
+    "classification": "STATE_CARRY_ONLY",
+    "numeric_value_exposed": false,
+    "opaque_state_sha256": "5b90d3e2b949979f0f0906df48a7137004d447df5679c1f115ea95e00394144e"
+  },
+  "as_of_utc": "2026-02-27T23:59:59.999Z",
+  "classification": [
+    "PRESTART_STATE_INITIALIZATION_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE"
+  ],
+  "continuity_hash": "ad26a27c75fdae8d603a60a051f0e7e7381d89f59de3ac57aadff176b75abf65",
+  "dataset_sha256": "f6b7f03897366ad66d9f1af10201091dbf3f406728ad22121a313ecd0321f755",
+  "directions": {
+    "1000PEPEUSDT": "SHORT",
+    "1000SHIBUSDT": "LONG",
+    "ATOMUSDT": "LONG",
+    "BNBUSDT": "LONG",
+    "BTCUSDT": "LONG",
+    "DENTUSDT": "SHORT",
+    "DOTUSDT": "SHORT",
+    "LINKUSDT": "LONG",
+    "UAIUSDT": "SHORT",
+    "WLDUSDT": "SHORT"
+  },
+  "evidence_status": "NOT_VALIDATION_EVIDENCE",
+  "formal_correction_start": "2026-02-28",
+  "historical_full_formal_rerun": false,
+  "m1_3_code_commit": "aebdda0169cddcdf013d24917515d4acfd1d5e74",
+  "m1_3_overlay_sha256": "7a6f183262580933c4802acb9454b0617c7c095b458b79f1e56fadb1c9ec64c1",
+  "m1_3_result_commit": "355dbfcb1dcf2d0e5f0fc1b84e478e788ec1b24a",
+  "normalized_dataset_sha256": "6adf9f06cba3a9de377ed59f69f422320b1524f635512271ebee60516896c387",
+  "positions": [
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-02-13T23:59:59.999Z",
+      "last_mark_price": 0.0036802,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "1000PEPEUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "last_mark_price": 0.005787,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "1000SHIBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "last_mark_price": 1.847,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "ATOMUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2025-10-24T23:59:59.999Z",
+      "last_mark_price": 614.03,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "BNBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2024-03-07T23:59:59.999Z",
+      "last_mark_price": 65836.0,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "BTCUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "last_mark_price": 0.000268,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "DENTUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "last_mark_price": 1.598,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "DOTUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-02-20T23:59:59.999Z",
+      "last_mark_price": 8.705,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "LINKUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "last_mark_price": 0.1855,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "UAIUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "last_mark_price": 0.3893,
+      "last_mark_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "symbol": "WLDUSDT",
+      "target_notional": 0.1
+    }
+  ],
+  "pre_correction_parity": {
+    "corrected_attempt_count": 539,
+    "corrected_signal_count": 281,
+    "old_attempt_count": 539,
+    "old_signal_count": 281,
+    "state_difference_count": 0,
+    "status": "PASS"
+  },
+  "scheduler": {
+    "last_successful_execution_day": "2026-02-27",
+    "last_successful_signal_day": "2026-02-26",
+    "next_rebalance_due_day": "2026-03-06",
+    "rebalance_interval_days": 7,
+    "retry_rule": "FAILED_DUE_DAY_RETRIES_ON_NEXT_CALENDAR_DAY",
+    "scheduler_initialized_from_checkpoint": true
+  },
+  "schema_version": "PRE_CONTAMINATION_CHECKPOINT.v1",
+  "scope": "STATE_EXTRACTION_ONLY",
+  "source_window": {
+    "aggregate_result_output": false,
+    "end_utc": "2026-02-27T23:59:59.999Z",
+    "start_utc": "2020-01-01T00:00:00Z"
+  }
+}

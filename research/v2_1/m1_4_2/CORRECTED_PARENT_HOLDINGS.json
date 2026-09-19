@@ -1,0 +1,937 @@
+{
+  "classification": [
+    "PRESTART_STATE_INITIALIZATION_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE"
+  ],
+  "current_positions": [
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 0.0038207,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "1000PEPEUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "last_mark_price": 0.22117,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "ARBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "last_mark_price": 8.203,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "AVAXUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 255.33,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "BCHUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-06-26T23:59:59.999Z",
+      "last_mark_price": 761.92,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "BNBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2024-03-07T23:59:59.999Z",
+      "last_mark_price": 80863.0,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "BTCUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 0.02127,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "COTIUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "last_mark_price": 63.55,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "DASHUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "last_mark_price": 0.08745,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "DOGEUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "last_mark_price": 2611.15,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "ETHUSDT",
+      "target_notional": 0.1
+    }
+  ],
+  "evidence_status": "NOT_VALIDATION_EVIDENCE",
+  "holding_intervals": [
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ATOMUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DENTUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UAIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "WLDUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "APTUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AVAXUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "SUIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-06T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UNIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-02-13T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-20T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000PEPEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-20T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000SHIBUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-20T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DOGEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DEGOUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ETHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-13T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UAIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-20T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "XANUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-02-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DOTUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000PEPEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AAVEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ADAUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-02-20T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "LINKUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AVAXUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "CTSIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-03T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ONUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000PEPEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AAVEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DASHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UNIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-20T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "FETUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000SHIBUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "APTUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "GIGGLEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-17T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "LDOUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-03-20T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-01T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "BCHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-01T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "CRVUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-01T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DOTUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-03-27T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "WLDUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000PEPEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AAVEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-04-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "LINKUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-05-01T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000SHIBUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-01T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "APEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-04-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DOGEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-01T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000LUNCUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "BCHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DASHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DYDXUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "exit_reason": "FORCED_DELISTING_EXIT",
+      "exit_timestamp_utc": "2026-05-19T23:59:59.999Z",
+      "official_lifecycle_applied": true,
+      "symbol": "MLNUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-22T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AAVEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-22T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "LINKUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-22T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-05-29T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DASHUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2025-10-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-05T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "BNBUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-05T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "SUIUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-05-22T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-05T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ADAUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AVAXUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-29T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "FETUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-06-05T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000SHIBUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-05T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DASHUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ETHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-08T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "TONUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-22T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "INJUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "CHZUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "XMRUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-26T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000PEPEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-26T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ADAUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-06-26T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "FOLKSUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-26T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-03T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "INJUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DOTUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "BCHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-03T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-10T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DYDXUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-17T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ARBUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-19T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-24T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UNIUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-07-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-24T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ETHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-06-26T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-31T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AAVEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-10T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-31T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ADAUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-17T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-31T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000PEPEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-07-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-07-31T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "SUIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-05-15T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-07T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "WLDUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-06-12T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-07T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "LINKUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-31T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-07T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UAIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-07T23:59:59.999Z",
+      "exit_reason": "FORCED_DELISTING_EXIT",
+      "exit_timestamp_utc": "2026-08-07T23:59:59.999Z",
+      "official_lifecycle_applied": true,
+      "symbol": "HFTUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-24T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ONUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-31T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "CAPUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-07T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "BICOUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-07-31T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "COTIUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-08-07T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "SUIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ADAUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-06-05T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "DOGEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "WLDUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000SHIBUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "ETHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UNIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "AAVEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "BCHUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "BICOUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "RUNEUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-08-14T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "1000PEPEUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-08-21T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "XMRUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "CAPUSDT"
+    },
+    {
+      "direction": "LONG",
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "LINKUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "EGLDUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "UAIUSDT"
+    },
+    {
+      "direction": "SHORT",
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "exit_reason": "REBALANCE",
+      "exit_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "official_lifecycle_applied": false,
+      "symbol": "IOSTUSDT"
+    }
+  ],
+  "protocol_ineligible_position_count": 0,
+  "schema_version": "CORRECTED_PARENT_HOLDINGS.v1",
+  "scope": "PRESTART_STATE_INITIALIZATION_ONLY"
+}

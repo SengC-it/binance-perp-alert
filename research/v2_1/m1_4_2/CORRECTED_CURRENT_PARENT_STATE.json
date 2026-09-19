@@ -1,0 +1,114 @@
+{
+  "classification": [
+    "PRESTART_STATE_INITIALIZATION_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE"
+  ],
+  "current_control_positions": [
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 0.0038207,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "1000PEPEUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-04T23:59:59.999Z",
+      "last_mark_price": 0.22117,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "ARBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-08-28T23:59:59.999Z",
+      "last_mark_price": 8.203,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "AVAXUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 255.33,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "BCHUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-06-26T23:59:59.999Z",
+      "last_mark_price": 761.92,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "BNBUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2024-03-07T23:59:59.999Z",
+      "last_mark_price": 80863.0,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "BTCUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "last_mark_price": 0.02127,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "COTIUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "SHORT",
+      "direction_code": -1,
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "last_mark_price": 63.55,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "DASHUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "last_mark_price": 0.08745,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "DOGEUSDT",
+      "target_notional": 0.1
+    },
+    {
+      "direction": "LONG",
+      "direction_code": 1,
+      "entry_timestamp_utc": "2026-09-11T23:59:59.999Z",
+      "last_mark_price": 2611.15,
+      "last_mark_timestamp_utc": "2026-09-18T23:59:59.999Z",
+      "symbol": "ETHUSDT",
+      "target_notional": 0.1
+    }
+  ],
+  "current_position_count": 10,
+  "cutoff_utc": "2026-09-19T00:00:00Z",
+  "evidence_status": "NOT_VALIDATION_EVIDENCE",
+  "funding_issue_count": 0,
+  "last_successful_execution_day": "2026-09-18",
+  "last_successful_signal_day": "2026-09-17",
+  "next_rebalance_due_day": "2026-09-25",
+  "no_forward_signal_selected": true,
+  "parent_state_complete": true,
+  "pending_retry": false,
+  "protocol_ineligible_position_count": 0,
+  "scheduler_initialized_from_checkpoint": true,
+  "schema_version": "CORRECTED_CURRENT_PARENT_STATE.v1",
+  "scope": "PRESTART_STATE_INITIALIZATION_ONLY",
+  "unresolved_state_issue_count": 0
+}
