@@ -1,0 +1,140 @@
+{
+  "accepted_stage_commits": {
+    "m1_4_2_1b_code_commit": "1daef982ee523bf57be2ac9741b4f95732aedd02",
+    "m1_4_2_1b_result_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+    "m1_4_2_code_commit": "82fffabada8da6bd41d919136f22eb4a3405bfb3",
+    "m1_4_2_result_commit": "b01086dcc8417f404f369099305a74cf2afaebb1"
+  },
+  "bindings": {
+    "m1_4_2": {
+      "bound_blob_manifest": {
+        "research/v2_1/m1_4_2/CONTRACT_TYPE_ELIGIBILITY_OVERLAY.json": "387f5dc8b1141e87aa1c3bf969450aa4e7fd375b",
+        "research/v2_1/m1_4_2/CORRECTED_CURRENT_PARENT_STATE.json": "ff1a858b8f0463c4ee2f2cd6c91a0ff72ea36ee3",
+        "research/v2_1/m1_4_2/CORRECTED_FUNDING_PROVENANCE.json": "cb02eb8e044f49d64fc219c226098ed98a259754",
+        "research/v2_1/m1_4_2/CORRECTED_LATEST_13_RISK_INPUT.json": "1aa4afd85530aabb321e43c8c1bc9ae7100f4e21",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_HOLDINGS.json": "70e097fff5795411765bedcb4976b304c89ff539",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_SCHEDULE.json": "fd358c7ff757e4fdb8789a26779effc3628a3d9d",
+        "research/v2_1/m1_4_2/CORRECTED_PRESTART_EXTENSION_MANIFEST.json": "69827380bb1ec6edc19046b144cb03ba3168cc8a",
+        "research/v2_1/m1_4_2/PRE_CONTAMINATION_CHECKPOINT.json": "68f4d4560474af1ec35543c3db46a57dde140bd9",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.json": "d182b184fbf8f8529f722619d4c5caca62414e20",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.md": "9774e0d20abf323ed004089083e29a741eee0f4a"
+      },
+      "bound_result_commit": "b01086dcc8417f404f369099305a74cf2afaebb1",
+      "changed_paths": [],
+      "current_head_blob_manifest": {
+        "research/v2_1/m1_4_2/CONTRACT_TYPE_ELIGIBILITY_OVERLAY.json": "387f5dc8b1141e87aa1c3bf969450aa4e7fd375b",
+        "research/v2_1/m1_4_2/CORRECTED_CURRENT_PARENT_STATE.json": "ff1a858b8f0463c4ee2f2cd6c91a0ff72ea36ee3",
+        "research/v2_1/m1_4_2/CORRECTED_FUNDING_PROVENANCE.json": "cb02eb8e044f49d64fc219c226098ed98a259754",
+        "research/v2_1/m1_4_2/CORRECTED_LATEST_13_RISK_INPUT.json": "1aa4afd85530aabb321e43c8c1bc9ae7100f4e21",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_HOLDINGS.json": "70e097fff5795411765bedcb4976b304c89ff539",
+        "research/v2_1/m1_4_2/CORRECTED_PARENT_SCHEDULE.json": "fd358c7ff757e4fdb8789a26779effc3628a3d9d",
+        "research/v2_1/m1_4_2/CORRECTED_PRESTART_EXTENSION_MANIFEST.json": "69827380bb1ec6edc19046b144cb03ba3168cc8a",
+        "research/v2_1/m1_4_2/PRE_CONTAMINATION_CHECKPOINT.json": "68f4d4560474af1ec35543c3db46a57dde140bd9",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.json": "d182b184fbf8f8529f722619d4c5caca62414e20",
+        "research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.md": "9774e0d20abf323ed004089083e29a741eee0f4a"
+      },
+      "immutable": true,
+      "prefix": "research/v2_1/m1_4_2"
+    },
+    "m1_4_2_1b": {
+      "bound_blob_manifest": {
+        "research/v2_1/m1_4_2_1b/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V4.json": "c57920c556525348c966f8fffa0ec05cc7cc9179",
+        "research/v2_1/m1_4_2_1b/GIT_BLOB_IMMUTABILITY_MANIFEST.json": "54b09fac7810f02c9e78bf59a03a690c3cbb5678",
+        "research/v2_1/m1_4_2_1b/MERGED_HISTORICAL_PRODUCT_TYPE_REGISTRY.json": "6287de6d739a4c9a6786a03ecd992483da8f7ce4",
+        "research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.json": "de8b4c598ec45237a1e8db74de7c75b227c264a4",
+        "research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.md": "cf2d2e21328ae608d2df07f8e48f975b5f1b8f4a"
+      },
+      "bound_result_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "changed_paths": [],
+      "current_head_blob_manifest": {
+        "research/v2_1/m1_4_2_1b/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V4.json": "c57920c556525348c966f8fffa0ec05cc7cc9179",
+        "research/v2_1/m1_4_2_1b/GIT_BLOB_IMMUTABILITY_MANIFEST.json": "54b09fac7810f02c9e78bf59a03a690c3cbb5678",
+        "research/v2_1/m1_4_2_1b/MERGED_HISTORICAL_PRODUCT_TYPE_REGISTRY.json": "6287de6d739a4c9a6786a03ecd992483da8f7ce4",
+        "research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.json": "de8b4c598ec45237a1e8db74de7c75b227c264a4",
+        "research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.md": "cf2d2e21328ae608d2df07f8e48f975b5f1b8f4a"
+      },
+      "immutable": true,
+      "prefix": "research/v2_1/m1_4_2_1b"
+    }
+  },
+  "classification": [
+    "START_IDENTITY_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE"
+  ],
+  "current_head_commit": "4f23aecdafd876fc25ea25e2a29474cab0c9d13c",
+  "identity_mechanism": "GIT_BLOB_OID_FROM_COMMIT_TREE",
+  "key_files": {
+    "forward_anchor": {
+      "bound_blob_oid": "3a607dae8bb6a10fc0b870e844c836743dfa28d5",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "3a607dae8bb6a10fc0b870e844c836743dfa28d5",
+      "immutable": true,
+      "path": "research/v2_1/XS_LOWVOL_V2_1_FORWARD_ANCHOR.yaml"
+    },
+    "forward_anchor_hash": {
+      "bound_blob_oid": "ac03f7a09f032b5067b2877a33d027cf4a31bf28",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "ac03f7a09f032b5067b2877a33d027cf4a31bf28",
+      "immutable": true,
+      "path": "research/v2_1/XS_LOWVOL_V2_1_FORWARD_ANCHOR.sha256"
+    },
+    "m13_lifecycle_overlay": {
+      "bound_blob_oid": "be0416db1eac03fb552d6f665f24c5865c7ea567",
+      "bound_commit": "355dbfcb1dcf2d0e5f0fc1b84e478e788ec1b24a",
+      "current_head_blob_oid": "be0416db1eac03fb552d6f665f24c5865c7ea567",
+      "immutable": true,
+      "path": "research/v2_1/m1_3/LIFECYCLE_OVERRIDE_MANIFEST.json"
+    },
+    "v1_protocol": {
+      "bound_blob_oid": "c7545249d7723a5a819e5c27f35a5ed0cdcca46c",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "c7545249d7723a5a819e5c27f35a5ed0cdcca46c",
+      "immutable": true,
+      "path": "research/m1/XS_LOWVOL_M1_PROTOCOL.yaml"
+    },
+    "v1_protocol_hash": {
+      "bound_blob_oid": "ecdf4105a53ec7d9b8cb6b03dd06a4fef9e45e75",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "ecdf4105a53ec7d9b8cb6b03dd06a4fef9e45e75",
+      "immutable": true,
+      "path": "research/m1/XS_LOWVOL_M1_PROTOCOL.sha256"
+    },
+    "v1_strategy_spec": {
+      "bound_blob_oid": "fb08a03af9637b8abe6321c30bafa4f984bf35fa",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "fb08a03af9637b8abe6321c30bafa4f984bf35fa",
+      "immutable": true,
+      "path": "research/xs_lowvol_v1.yaml"
+    },
+    "v2_1_protocol": {
+      "bound_blob_oid": "c46052eda0ff189fe99255577817001ebae7a15f",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "c46052eda0ff189fe99255577817001ebae7a15f",
+      "immutable": true,
+      "path": "research/v2_1/XS_LOWVOL_V2_1_PROTOCOL.yaml"
+    },
+    "v2_1_protocol_hash": {
+      "bound_blob_oid": "a9fcc4be99548337fc6fef012b65a57c68693deb",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "a9fcc4be99548337fc6fef012b65a57c68693deb",
+      "immutable": true,
+      "path": "research/v2_1/XS_LOWVOL_V2_1_PROTOCOL.sha256"
+    },
+    "v2_1_spec": {
+      "bound_blob_oid": "5dcf9a919fd9960a4acea76ffef8031bca1a46d6",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "5dcf9a919fd9960a4acea76ffef8031bca1a46d6",
+      "immutable": true,
+      "path": "research/v2_1/XS_LOWVOL_V2_1_SPEC.yaml"
+    },
+    "v2_1_spec_hash": {
+      "bound_blob_oid": "7ab38124fd3a29f0152da650d696f16810978fe8",
+      "bound_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+      "current_head_blob_oid": "7ab38124fd3a29f0152da650d696f16810978fe8",
+      "immutable": true,
+      "path": "research/v2_1/XS_LOWVOL_V2_1_SPEC.sha256"
+    }
+  },
+  "schema_version": "START_BINDING_GIT_BLOB_MANIFEST.v1"
+}

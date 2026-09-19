@@ -1,0 +1,258 @@
+schema_version: XS_LOWVOL_V2_1_FORWARD_START_MANIFEST.v1
+run_id: XS-LOWVOL-V2.1-M2-START-V1
+strategy_id: XS-LOWVOL-V2.1-RISK15
+status: FROZEN_WAITING_FOR_FIRST_FORWARD_ATTEMPT
+freeze_created_at_utc: '2026-09-19T17:17:01.994963Z'
+code_commit_used_by_run: 4f23aecdafd876fc25ea25e2a29474cab0c9d13c
+frozen_identities:
+  v1_protocol_sha256: 607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d
+  v1_control_sha256: 5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678
+  v2_1_spec_sha256: e5b026c106e46d04fb160ee012789c39ff1b9ef3f318a49da871a6a3cd51959c
+  v2_1_protocol_sha256: 6aa94ad92fa1811774788d11aecc0326a00e256950df61cb7cbe9db8e504fb7d
+  forward_anchor_sha256: a4e61eae444e08ef038fc2108b1b29ef39551e90c4d40b6dab5c04df6004f41b
+  forward_anchor_status: FROZEN_NOT_YET_STARTED
+  m1_3_overlay_sha256: 7a6f183262580933c4802acb9454b0617c7c095b458b79f1e56fadb1c9ec64c1
+  strategy_id: XS-LOWVOL-V2.1-RISK15
+  forward_gate_policy_sha256: 975213055e69d37c0308695cf5feee3955e2f5ef9faacf9cbbbf11eb48d22e2a
+accepted_m1_4_2:
+  result_commit: b01086dcc8417f404f369099305a74cf2afaebb1
+  code_commit: 82fffabada8da6bd41d919136f22eb4a3405bfb3
+  checkpoint_sha256: ba4e936f796e024747cd4d75f2b70183a1ea58cd9b77ce6e838881472a0becf1
+  contract_type_overlay_sha256: 64826ae0844073241d6180d4270cb6851401d98951bf65191e757eddb469ed4e
+  current_parent_state_sha256: 30231392de21231095238dabd25dc279b98e528613b1bcfa01325ecb7c39f278
+  corrected_extension_sha256: 74e30d6c5f56e2e172614fbb784655115cf958c3da9cd12589e7ca6a90fafb05
+  current_risk_state_sha256: c5f39310c5d51fde0a8270bc888933d73532c6bcd75e4c584330255c5a612c7b
+accepted_m1_4_2_1b:
+  result_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+  code_commit: 1daef982ee523bf57be2ac9741b4f95732aedd02
+  git_blob_manifest_sha256: 785fb58dde6146a3b583c3ad12c0f65958461f4c941fae5e6bd4eba2e6a80a18
+  old_139_carried_count: 139
+  six_added_count: 6
+  proven_count: 145
+  unresolved_count: 0
+  membership_set_unchanged: true
+  effective_timestamp_differences: 0
+  registry_path: research/v2_1/m1_4_2_1b/MERGED_HISTORICAL_PRODUCT_TYPE_REGISTRY.json
+  overlay_path: research/v2_1/m1_4_2_1b/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V4.json
+accepted_git_blob_bindings:
+  m1_4_2:
+    bound_result_commit: b01086dcc8417f404f369099305a74cf2afaebb1
+    prefix: research/v2_1/m1_4_2
+    bound_blob_manifest:
+      research/v2_1/m1_4_2/CONTRACT_TYPE_ELIGIBILITY_OVERLAY.json: 387f5dc8b1141e87aa1c3bf969450aa4e7fd375b
+      research/v2_1/m1_4_2/CORRECTED_CURRENT_PARENT_STATE.json: ff1a858b8f0463c4ee2f2cd6c91a0ff72ea36ee3
+      research/v2_1/m1_4_2/CORRECTED_FUNDING_PROVENANCE.json: cb02eb8e044f49d64fc219c226098ed98a259754
+      research/v2_1/m1_4_2/CORRECTED_LATEST_13_RISK_INPUT.json: 1aa4afd85530aabb321e43c8c1bc9ae7100f4e21
+      research/v2_1/m1_4_2/CORRECTED_PARENT_HOLDINGS.json: 70e097fff5795411765bedcb4976b304c89ff539
+      research/v2_1/m1_4_2/CORRECTED_PARENT_SCHEDULE.json: fd358c7ff757e4fdb8789a26779effc3628a3d9d
+      research/v2_1/m1_4_2/CORRECTED_PRESTART_EXTENSION_MANIFEST.json: 69827380bb1ec6edc19046b144cb03ba3168cc8a
+      research/v2_1/m1_4_2/PRE_CONTAMINATION_CHECKPOINT.json: 68f4d4560474af1ec35543c3db46a57dde140bd9
+      research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.json: d182b184fbf8f8529f722619d4c5caca62414e20
+      research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.md: 9774e0d20abf323ed004089083e29a741eee0f4a
+    current_head_blob_manifest:
+      research/v2_1/m1_4_2/CONTRACT_TYPE_ELIGIBILITY_OVERLAY.json: 387f5dc8b1141e87aa1c3bf969450aa4e7fd375b
+      research/v2_1/m1_4_2/CORRECTED_CURRENT_PARENT_STATE.json: ff1a858b8f0463c4ee2f2cd6c91a0ff72ea36ee3
+      research/v2_1/m1_4_2/CORRECTED_FUNDING_PROVENANCE.json: cb02eb8e044f49d64fc219c226098ed98a259754
+      research/v2_1/m1_4_2/CORRECTED_LATEST_13_RISK_INPUT.json: 1aa4afd85530aabb321e43c8c1bc9ae7100f4e21
+      research/v2_1/m1_4_2/CORRECTED_PARENT_HOLDINGS.json: 70e097fff5795411765bedcb4976b304c89ff539
+      research/v2_1/m1_4_2/CORRECTED_PARENT_SCHEDULE.json: fd358c7ff757e4fdb8789a26779effc3628a3d9d
+      research/v2_1/m1_4_2/CORRECTED_PRESTART_EXTENSION_MANIFEST.json: 69827380bb1ec6edc19046b144cb03ba3168cc8a
+      research/v2_1/m1_4_2/PRE_CONTAMINATION_CHECKPOINT.json: 68f4d4560474af1ec35543c3db46a57dde140bd9
+      research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.json: d182b184fbf8f8529f722619d4c5caca62414e20
+      research/v2_1/m1_4_2/V2_1_M1_4_2_PARENT_RECONSTRUCTION.md: 9774e0d20abf323ed004089083e29a741eee0f4a
+    changed_paths: []
+    immutable: true
+  m1_4_2_1b:
+    bound_result_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+    prefix: research/v2_1/m1_4_2_1b
+    bound_blob_manifest:
+      research/v2_1/m1_4_2_1b/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V4.json: c57920c556525348c966f8fffa0ec05cc7cc9179
+      research/v2_1/m1_4_2_1b/GIT_BLOB_IMMUTABILITY_MANIFEST.json: 54b09fac7810f02c9e78bf59a03a690c3cbb5678
+      research/v2_1/m1_4_2_1b/MERGED_HISTORICAL_PRODUCT_TYPE_REGISTRY.json: 6287de6d739a4c9a6786a03ecd992483da8f7ce4
+      research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.json: de8b4c598ec45237a1e8db74de7c75b227c264a4
+      research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.md: cf2d2e21328ae608d2df07f8e48f975b5f1b8f4a
+    current_head_blob_manifest:
+      research/v2_1/m1_4_2_1b/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V4.json: c57920c556525348c966f8fffa0ec05cc7cc9179
+      research/v2_1/m1_4_2_1b/GIT_BLOB_IMMUTABILITY_MANIFEST.json: 54b09fac7810f02c9e78bf59a03a690c3cbb5678
+      research/v2_1/m1_4_2_1b/MERGED_HISTORICAL_PRODUCT_TYPE_REGISTRY.json: 6287de6d739a4c9a6786a03ecd992483da8f7ce4
+      research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.json: de8b4c598ec45237a1e8db74de7c75b227c264a4
+      research/v2_1/m1_4_2_1b/V2_1_M1_4_2_1B_PRODUCT_PROVENANCE.md: cf2d2e21328ae608d2df07f8e48f975b5f1b8f4a
+    changed_paths: []
+    immutable: true
+  key_files:
+    m13_lifecycle_overlay:
+      path: research/v2_1/m1_3/LIFECYCLE_OVERRIDE_MANIFEST.json
+      bound_commit: 355dbfcb1dcf2d0e5f0fc1b84e478e788ec1b24a
+      bound_blob_oid: be0416db1eac03fb552d6f665f24c5865c7ea567
+      current_head_blob_oid: be0416db1eac03fb552d6f665f24c5865c7ea567
+      immutable: true
+    v1_strategy_spec:
+      path: research/xs_lowvol_v1.yaml
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: fb08a03af9637b8abe6321c30bafa4f984bf35fa
+      current_head_blob_oid: fb08a03af9637b8abe6321c30bafa4f984bf35fa
+      immutable: true
+    v1_protocol:
+      path: research/m1/XS_LOWVOL_M1_PROTOCOL.yaml
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: c7545249d7723a5a819e5c27f35a5ed0cdcca46c
+      current_head_blob_oid: c7545249d7723a5a819e5c27f35a5ed0cdcca46c
+      immutable: true
+    v1_protocol_hash:
+      path: research/m1/XS_LOWVOL_M1_PROTOCOL.sha256
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: ecdf4105a53ec7d9b8cb6b03dd06a4fef9e45e75
+      current_head_blob_oid: ecdf4105a53ec7d9b8cb6b03dd06a4fef9e45e75
+      immutable: true
+    v2_1_spec:
+      path: research/v2_1/XS_LOWVOL_V2_1_SPEC.yaml
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: 5dcf9a919fd9960a4acea76ffef8031bca1a46d6
+      current_head_blob_oid: 5dcf9a919fd9960a4acea76ffef8031bca1a46d6
+      immutable: true
+    v2_1_spec_hash:
+      path: research/v2_1/XS_LOWVOL_V2_1_SPEC.sha256
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: 7ab38124fd3a29f0152da650d696f16810978fe8
+      current_head_blob_oid: 7ab38124fd3a29f0152da650d696f16810978fe8
+      immutable: true
+    v2_1_protocol:
+      path: research/v2_1/XS_LOWVOL_V2_1_PROTOCOL.yaml
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: c46052eda0ff189fe99255577817001ebae7a15f
+      current_head_blob_oid: c46052eda0ff189fe99255577817001ebae7a15f
+      immutable: true
+    v2_1_protocol_hash:
+      path: research/v2_1/XS_LOWVOL_V2_1_PROTOCOL.sha256
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: a9fcc4be99548337fc6fef012b65a57c68693deb
+      current_head_blob_oid: a9fcc4be99548337fc6fef012b65a57c68693deb
+      immutable: true
+    forward_anchor:
+      path: research/v2_1/XS_LOWVOL_V2_1_FORWARD_ANCHOR.yaml
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: 3a607dae8bb6a10fc0b870e844c836743dfa28d5
+      current_head_blob_oid: 3a607dae8bb6a10fc0b870e844c836743dfa28d5
+      immutable: true
+    forward_anchor_hash:
+      path: research/v2_1/XS_LOWVOL_V2_1_FORWARD_ANCHOR.sha256
+      bound_commit: 826a76ffde797b7a8c98e8f3516da322f0bb3f42
+      bound_blob_oid: ac03f7a09f032b5067b2877a33d027cf4a31bf28
+      current_head_blob_oid: ac03f7a09f032b5067b2877a33d027cf4a31bf28
+      immutable: true
+accepted_prestart_state:
+  cutoff_utc: '2026-09-19T00:00:00Z'
+  last_successful_signal_day: '2026-09-17'
+  last_successful_execution_day: '2026-09-18'
+  next_rebalance_due_day: '2026-09-25'
+  pending_retry: false
+  parent_state_complete: true
+  current_position_count: 10
+  funding_issue_count: 0
+  protocol_ineligible_position_count: 0
+  current_parent_state_sha256: 30231392de21231095238dabd25dc279b98e528613b1bcfa01325ecb7c39f278
+  position_state_sha256: c70a81ab4c67b3eba3b47bc3fd9fc06b17fe22e6a6045524356c3a4575a3f26c
+  position_identity:
+  - symbol: 1000PEPEUSDT
+    direction: SHORT
+  - symbol: ARBUSDT
+    direction: SHORT
+  - symbol: AVAXUSDT
+    direction: LONG
+  - symbol: BCHUSDT
+    direction: SHORT
+  - symbol: BNBUSDT
+    direction: LONG
+  - symbol: BTCUSDT
+    direction: LONG
+  - symbol: COTIUSDT
+    direction: SHORT
+  - symbol: DASHUSDT
+    direction: SHORT
+  - symbol: DOGEUSDT
+    direction: LONG
+  - symbol: ETHUSDT
+    direction: LONG
+first_forward_attempt:
+  signal_day: '2026-09-24'
+  logical_signal_time_utc: '2026-09-25T00:00:00.000000Z'
+  execution_day: '2026-09-25'
+  scheduler_interval: 7 UTC calendar days
+  execution_lag_days: 1
+  date_derivation: last_successful_execution_day + interval; signal_day = execution_day
+    - lag; logical time = execution day 00:00:00Z
+warm_start:
+  classification: PRESTART_WARM_START_STATE
+  reference_vol: 0.0681145306765338
+  position_scale: 1.0
+  risk_status: INITIAL_STATE_DIAGNOSTIC_ONLY
+  is_first_forward_scale: false
+start_bridge:
+  classification: PRE_FORWARD_START_BRIDGE_ONLY
+  from_utc: '2026-09-19T00:00:00Z'
+  to_utc_exclusive: '2026-09-25T00:00:00.000000Z'
+  not_forward_evidence: true
+  not_in_successful_forward_cycle_count: true
+  not_in_forward_metric_grid: true
+  actual_data_required_at_future_attempt: true
+  unresolved_state_action: START_BRIDGE_DATA_INTEGRITY_HALT
+  carry_without_reset:
+  - positions
+  - scheduler
+  - accounting_state
+  - lifecycle_overlay
+  - product_eligibility_overlay
+first_attempt_risk_policy:
+  recompute_at_first_attempt: true
+  source: completed V1 Control weekly net returns
+  selection_rule: completed_at < first_forward_logical_signal_time
+  latest_count: 13
+  week_list_frozen_now: false
+  volatility_statistic: population_std
+  annualization: sqrt(52)
+  target_annualized_volatility: 0.15
+  min_scale: 0.0
+  max_scale: 1.0
+  leverage: false
+  exact_zero_reference_vol_scale: 1.0
+  invalid_result: V2_DATA_INTEGRITY_HALT
+scheduler_and_pairing:
+  scheduler_authority: V1_CONTROL_PARENT_ONLY
+  v2_independent_clock: false
+  v2_independent_retry: false
+  v2_independent_target_change: false
+  pair_atomicity: true
+  same_signal_day: true
+  same_execution_day: true
+  same_targets_and_directions: true
+  same_market_data: true
+  same_execution_price: true
+  same_funding_settlements: true
+  same_transaction_cost_model: true
+  only_notional_scale_differs: true
+  integrity_halt_action: HALT_ENTIRE_PAIRED_EXPERIMENT
+forward_measurement:
+  boundary_utc: '2026-09-25T00:00:00.000000Z'
+  include_timestamp_gte_boundary: true
+  week_grid_id: FORWARD_START_ALIGNED_7X24H
+  week_one_start_utc: '2026-09-25T00:00:00.000000Z'
+  week_one_end_utc_exclusive: '2026-10-02T00:00:00.000000Z'
+  accounting_state_reset: false
+  measurement: observational_normalization_only
+  minimum_completed_forward_weeks: 52
+  minimum_successful_paired_rebalance_cycles: 40
+  twenty_six_week_status: CONTINUE_OR_EARLY_FAIL_ONLY
+  twenty_six_week_pass: false
+safety:
+  live_trading: false
+  paper_only: true
+  http_methods:
+  - GET
+  market_data_access_performed: false
+  future_market_data_fetched: false
+  first_forward_attempt_executed: false
+classification:
+- START_IDENTITY_ONLY
+- NOT_FORWARD
+- NOT_VALIDATION_EVIDENCE
+- PRESTART_STATE_INITIALIZATION_ONLY

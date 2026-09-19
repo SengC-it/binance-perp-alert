@@ -1,0 +1,218 @@
+{
+  "accepted_prestart_state": {
+    "current_parent_state_sha256": "30231392de21231095238dabd25dc279b98e528613b1bcfa01325ecb7c39f278",
+    "current_position_count": 10,
+    "cutoff_utc": "2026-09-19T00:00:00Z",
+    "funding_issue_count": 0,
+    "last_successful_execution_day": "2026-09-18",
+    "last_successful_signal_day": "2026-09-17",
+    "next_rebalance_due_day": "2026-09-25",
+    "parent_state_complete": true,
+    "pending_retry": false,
+    "position_identity": [
+      {
+        "direction": "SHORT",
+        "symbol": "1000PEPEUSDT"
+      },
+      {
+        "direction": "SHORT",
+        "symbol": "ARBUSDT"
+      },
+      {
+        "direction": "LONG",
+        "symbol": "AVAXUSDT"
+      },
+      {
+        "direction": "SHORT",
+        "symbol": "BCHUSDT"
+      },
+      {
+        "direction": "LONG",
+        "symbol": "BNBUSDT"
+      },
+      {
+        "direction": "LONG",
+        "symbol": "BTCUSDT"
+      },
+      {
+        "direction": "SHORT",
+        "symbol": "COTIUSDT"
+      },
+      {
+        "direction": "SHORT",
+        "symbol": "DASHUSDT"
+      },
+      {
+        "direction": "LONG",
+        "symbol": "DOGEUSDT"
+      },
+      {
+        "direction": "LONG",
+        "symbol": "ETHUSDT"
+      }
+    ],
+    "position_state_sha256": "c70a81ab4c67b3eba3b47bc3fd9fc06b17fe22e6a6045524356c3a4575a3f26c",
+    "protocol_ineligible_position_count": 0
+  },
+  "binding_git_blob_manifest_path": "research/v2_1/m2/START_BINDING_GIT_BLOB_MANIFEST.json",
+  "binding_git_blob_manifest_sha256": "cc07252069a879f23856b84ccc224fe234916b31a2bc71fb38034297fc18a100",
+  "classification": [
+    "START_IDENTITY_ONLY",
+    "NOT_FORWARD",
+    "NOT_VALIDATION_EVIDENCE",
+    "PRESTART_STATE_INITIALIZATION_ONLY"
+  ],
+  "code_commit_used_by_run": "4f23aecdafd876fc25ea25e2a29474cab0c9d13c",
+  "decision": "V2.1-M2 START FREEZE READY",
+  "failed_gates": [],
+  "first_attempt_risk_policy": {
+    "annualization": "sqrt(52)",
+    "exact_zero_reference_vol_scale": 1.0,
+    "invalid_result": "V2_DATA_INTEGRITY_HALT",
+    "latest_count": 13,
+    "leverage": false,
+    "max_scale": 1.0,
+    "min_scale": 0.0,
+    "recompute_at_first_attempt": true,
+    "selection_rule": "completed_at < first_forward_logical_signal_time",
+    "source": "completed V1 Control weekly net returns",
+    "target_annualized_volatility": 0.15,
+    "volatility_statistic": "population_std",
+    "week_list_frozen_now": false
+  },
+  "first_forward_attempt": {
+    "date_derivation": "last_successful_execution_day + interval; signal_day = execution_day - lag; logical time = execution day 00:00:00Z",
+    "execution_day": "2026-09-25",
+    "execution_lag_days": 1,
+    "logical_signal_time_utc": "2026-09-25T00:00:00.000000Z",
+    "scheduler_interval": "7 UTC calendar days",
+    "signal_day": "2026-09-24"
+  },
+  "formal_process_exit_code": 0,
+  "forward_measurement": {
+    "accounting_state_reset": false,
+    "boundary_utc": "2026-09-25T00:00:00.000000Z",
+    "include_timestamp_gte_boundary": true,
+    "measurement": "observational_normalization_only",
+    "minimum_completed_forward_weeks": 52,
+    "minimum_successful_paired_rebalance_cycles": 40,
+    "twenty_six_week_pass": false,
+    "twenty_six_week_status": "CONTINUE_OR_EARLY_FAIL_ONLY",
+    "week_grid_id": "FORWARD_START_ALIGNED_7X24H",
+    "week_one_end_utc_exclusive": "2026-10-02T00:00:00.000000Z",
+    "week_one_start_utc": "2026-09-25T00:00:00.000000Z"
+  },
+  "freeze_created_at_utc": "2026-09-19T17:17:01.994963Z",
+  "gates": {
+    "S0_identity": "PASS",
+    "S10_start_bridge_policy_frozen": "PASS",
+    "S11_no_prestart_forward_evidence": "PASS",
+    "S12_accounting_carry_no_reset": "PASS",
+    "S13_risk_recompute_policy_frozen": "PASS",
+    "S14_parent_only_scheduler": "PASS",
+    "S15_paired_atomicity": "PASS",
+    "S16_forward_metric_grid_frozen": "PASS",
+    "S17_forward_gates_unchanged": "PASS",
+    "S18_anchor_file_immutable": "PASS",
+    "S19_safety": "PASS",
+    "S1_anchor_binding": "PASS",
+    "S20_ci": "PASS",
+    "S2_parent_state_binding": "PASS",
+    "S3_product_provenance_binding": "PASS",
+    "S4_parent_state_complete": "PASS",
+    "S5_warm_start_risk_valid": "PASS",
+    "S6_scheduler_due_derivation": "PASS",
+    "S7_first_attempt_dates": "PASS",
+    "S8_freeze_before_logical_signal_time": "PASS",
+    "S9_no_future_market_data": "PASS"
+  },
+  "identities": {
+    "forward_anchor_sha256": "a4e61eae444e08ef038fc2108b1b29ef39551e90c4d40b6dab5c04df6004f41b",
+    "forward_anchor_status": "FROZEN_NOT_YET_STARTED",
+    "forward_gate_policy_sha256": "975213055e69d37c0308695cf5feee3955e2f5ef9faacf9cbbbf11eb48d22e2a",
+    "m1_3_overlay_sha256": "7a6f183262580933c4802acb9454b0617c7c095b458b79f1e56fadb1c9ec64c1",
+    "strategy_id": "XS-LOWVOL-V2.1-RISK15",
+    "v1_control_sha256": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+    "v1_protocol_sha256": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+    "v2_1_protocol_sha256": "6aa94ad92fa1811774788d11aecc0326a00e256950df61cb7cbe9db8e504fb7d",
+    "v2_1_spec_sha256": "e5b026c106e46d04fb160ee012789c39ff1b9ef3f318a49da871a6a3cd51959c"
+  },
+  "m1_4_2_1b_bindings": {
+    "code_commit": "1daef982ee523bf57be2ac9741b4f95732aedd02",
+    "effective_timestamp_differences": 0,
+    "git_blob_manifest_sha256": "785fb58dde6146a3b583c3ad12c0f65958461f4c941fae5e6bd4eba2e6a80a18",
+    "membership_set_unchanged": true,
+    "old_139_carried_count": 139,
+    "overlay_path": "research/v2_1/m1_4_2_1b/CONTRACT_TYPE_ELIGIBILITY_OVERLAY_V4.json",
+    "proven_count": 145,
+    "registry_path": "research/v2_1/m1_4_2_1b/MERGED_HISTORICAL_PRODUCT_TYPE_REGISTRY.json",
+    "result_commit": "826a76ffde797b7a8c98e8f3516da322f0bb3f42",
+    "six_added_count": 6,
+    "unresolved_count": 0
+  },
+  "m1_4_2_bindings": {
+    "checkpoint_sha256": "ba4e936f796e024747cd4d75f2b70183a1ea58cd9b77ce6e838881472a0becf1",
+    "code_commit": "82fffabada8da6bd41d919136f22eb4a3405bfb3",
+    "contract_type_overlay_sha256": "64826ae0844073241d6180d4270cb6851401d98951bf65191e757eddb469ed4e",
+    "corrected_extension_sha256": "74e30d6c5f56e2e172614fbb784655115cf958c3da9cd12589e7ca6a90fafb05",
+    "current_parent_state_sha256": "30231392de21231095238dabd25dc279b98e528613b1bcfa01325ecb7c39f278",
+    "current_risk_state_sha256": "c5f39310c5d51fde0a8270bc888933d73532c6bcd75e4c584330255c5a612c7b",
+    "result_commit": "b01086dcc8417f404f369099305a74cf2afaebb1"
+  },
+  "run_id": "XS-LOWVOL-V2.1-M2-START-V1",
+  "run_type": "START_FREEZE_ONLY",
+  "safety": {
+    "first_forward_attempt_executed": false,
+    "future_market_data_fetched": false,
+    "http_methods": [
+      "GET"
+    ],
+    "live_trading": false,
+    "market_data_access_performed": false,
+    "paper_only": true
+  },
+  "scheduler_and_pairing": {
+    "integrity_halt_action": "HALT_ENTIRE_PAIRED_EXPERIMENT",
+    "only_notional_scale_differs": true,
+    "pair_atomicity": true,
+    "same_execution_day": true,
+    "same_execution_price": true,
+    "same_funding_settlements": true,
+    "same_market_data": true,
+    "same_signal_day": true,
+    "same_targets_and_directions": true,
+    "same_transaction_cost_model": true,
+    "scheduler_authority": "V1_CONTROL_PARENT_ONLY",
+    "v2_independent_clock": false,
+    "v2_independent_retry": false,
+    "v2_independent_target_change": false
+  },
+  "schema_version": "V2_1_M2_START_FREEZE.v1",
+  "start_bridge": {
+    "actual_data_required_at_future_attempt": true,
+    "carry_without_reset": [
+      "positions",
+      "scheduler",
+      "accounting_state",
+      "lifecycle_overlay",
+      "product_eligibility_overlay"
+    ],
+    "classification": "PRE_FORWARD_START_BRIDGE_ONLY",
+    "from_utc": "2026-09-19T00:00:00Z",
+    "not_forward_evidence": true,
+    "not_in_forward_metric_grid": true,
+    "not_in_successful_forward_cycle_count": true,
+    "to_utc_exclusive": "2026-09-25T00:00:00.000000Z",
+    "unresolved_state_action": "START_BRIDGE_DATA_INTEGRITY_HALT"
+  },
+  "start_manifest_path": "research/v2_1/m2/XS_LOWVOL_V2_1_FORWARD_START_MANIFEST.yaml",
+  "start_manifest_sha256": "868e2b289fc3ddbdf6f56b4574235a8d21a278e4220caa81fd05325362394f2f",
+  "status": "FROZEN_WAITING_FOR_FIRST_FORWARD_ATTEMPT",
+  "warm_start": {
+    "classification": "PRESTART_WARM_START_STATE",
+    "is_first_forward_scale": false,
+    "position_scale": 1.0,
+    "reference_vol": 0.0681145306765338,
+    "risk_status": "INITIAL_STATE_DIAGNOSTIC_ONLY"
+  }
+}
