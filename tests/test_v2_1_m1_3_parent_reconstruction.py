@@ -1,15 +1,19 @@
 from __future__ import annotations
 
+import json
 from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 
 from backtest.m1_b import build_stateful_schedule
+from backtest.v2_1_m1_engineering import M1_DATASET_FREEZE_PATH
 from backtest.v2_1_m1_1_warm_start_audit import load_frozen_dataset
 from backtest.v2_1_m1_3_parent_reconstruction import (
     DEFAULT_OVERLAY,
     ParentReconstructionError,
     assert_state_only_schema,
+    assert_prestart_state_schema,
     snapshot_legacy_artifacts,
 )
 from backtest.xs_data_quality import HoldingInterval
@@ -239,9 +243,24 @@ def test_state_only_schema_rejects_historical_result_keys():
     with pytest.raises(ParentReconstructionError, match="forbidden key"):
         assert_state_only_schema({"return": 1.0})
     assert_state_only_schema({"combined_component": 1.0, "complete": True})
+    with pytest.raises(ParentReconstructionError, match="forbidden key"):
+        assert_prestart_state_schema({"price_component_total": 1.0})
+    assert_prestart_state_schema(
+        {
+            "count": 1,
+            "complete": True,
+            "issue_count": 0,
+            "holding_interval_count": 1,
+            "rebalance_count": 1,
+            "provenance_hash": "a" * 64,
+            "latest_13_weekly_risk_series": {"status": "RISK_STATE_INITIALIZATION_ONLY"},
+        }
+    )
 
 
 def test_frozen_overlay_removes_all_known_parent_mark_failures_without_new_data():
+    if not M1_DATASET_FREEZE_PATH.is_file():
+        pytest.skip("ignored frozen market-data cache is unavailable in this checkout")
     dataset = load_frozen_dataset()
     histories = tuple(dataset["usable_histories"])
     overlay = DEFAULT_OVERLAY.with_terminal_closes(histories)
@@ -254,5 +273,30 @@ def test_frozen_overlay_removes_all_known_parent_mark_failures_without_new_data(
 
 def test_legacy_snapshot_is_available_and_anchor_remains_unstarted():
     snapshot = snapshot_legacy_artifacts()
-    assert any(key.endswith("research\\evidence\\XS-LOWVOL-V1.json") for key in snapshot)
+    assert any(
+        Path(key).as_posix() == "research/evidence/XS-LOWVOL-V1.json"
+        for key in snapshot
+    )
     assert V21_FORWARD_ANCHOR_STATUS == "FROZEN_NOT_YET_STARTED"
+
+
+def test_m1_3_1_scope_notice_is_quarantined_and_not_a_readiness_decision():
+    scope_path = (
+        Path(__file__).resolve().parents[1]
+        / "research"
+        / "v2_1"
+        / "m1_3_1"
+        / "V2_1_M1_3_EVIDENCE_SCOPE.json"
+    )
+    payload = json.loads(scope_path.read_text(encoding="utf-8"))
+    assert_prestart_state_schema(payload)
+    assert payload["m1_3"]["lifecycle_reconstruction"] == "TECHNICALLY_ACCEPTED"
+    assert payload["m1_3"]["current_warm_start_readiness"] == "NOT_ESTABLISHED"
+    assert payload["lifecycle_technical_conclusions"]["overlay_record_count"] == 22
+    assert (
+        payload["quarantined_contaminated_diagnostics"]["status"]
+        == "QUARANTINED_CONTAMINATED_DIAGNOSTIC"
+    )
+    assert payload["risk_initialization_scope"]["latest_13_weekly_risk_series_status"] == (
+        "RISK_STATE_INITIALIZATION_ONLY"
+    )

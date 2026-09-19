@@ -324,6 +324,15 @@ _FORBIDDEN_SCHEMA_FRAGMENTS = (
     "pnl",
     "performance",
 )
+_FORBIDDEN_PRESTART_AGGREGATE_KEYS = frozenset(
+    {
+        "price_component_total",
+        "funding_component_total",
+        "transaction_cost_component_total",
+        "long_component_total",
+        "short_component_total",
+    }
+)
 
 
 class ParentReconstructionError(RuntimeError):
@@ -334,20 +343,42 @@ def _schema_key(value: Any) -> str:
     return re.sub(r"[^a-z0-9]+", "_", str(value).lower()).strip("_")
 
 
-def assert_state_only_schema(value: Any, path: str = "") -> None:
-    """Reject forbidden historical-result keys before any artifact is written."""
+def _assert_state_schema(
+    value: Any,
+    path: str,
+    forbidden_fragments: Sequence[str],
+    forbidden_exact_keys: frozenset[str] = frozenset(),
+) -> None:
     if isinstance(value, Mapping):
         for key, item in value.items():
             key_text = _schema_key(key)
             key_path = f"{path}.{key}" if path else str(key)
-            if any(fragment in key_text for fragment in _FORBIDDEN_SCHEMA_FRAGMENTS):
+            if (
+                any(fragment in key_text for fragment in forbidden_fragments)
+                or key_text in forbidden_exact_keys
+            ):
                 raise ParentReconstructionError(
                     f"state-only artifact contains forbidden key: {key_path}"
                 )
-            assert_state_only_schema(item, key_path)
+            _assert_state_schema(item, key_path, forbidden_fragments, forbidden_exact_keys)
     elif isinstance(value, (tuple, list)):
         for index, item in enumerate(value):
-            assert_state_only_schema(item, f"{path}[{index}]")
+            _assert_state_schema(item, f"{path}[{index}]", forbidden_fragments, forbidden_exact_keys)
+
+
+def assert_state_only_schema(value: Any, path: str = "") -> None:
+    """Reject forbidden historical-result keys before any artifact is written."""
+    _assert_state_schema(value, path, _FORBIDDEN_SCHEMA_FRAGMENTS)
+
+
+def assert_prestart_state_schema(value: Any, path: str = "") -> None:
+    """Reject contaminated historical aggregates in future prestart artifacts."""
+    _assert_state_schema(
+        value,
+        path,
+        _FORBIDDEN_SCHEMA_FRAGMENTS,
+        _FORBIDDEN_PRESTART_AGGREGATE_KEYS,
+    )
 
 
 def _plain(value: Any) -> Any:
@@ -396,7 +427,7 @@ def snapshot_legacy_artifacts() -> dict[str, str]:
         paths = (root,) if root.is_file() else sorted(root.rglob("*"))
         for path in paths:
             if path.is_file():
-                snapshot[str(path.relative_to(PROJECT_ROOT))] = _file_sha256(path)
+                snapshot[path.relative_to(PROJECT_ROOT).as_posix()] = _file_sha256(path)
     if not snapshot:
         raise ParentReconstructionError("no legacy research artifact was found")
     return snapshot

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "artifact_id": "XS-LOWVOL-V2.1-M1.3.1",
+  "artifact_type": "EVIDENCE_SCOPE_NOTICE",
+  "status": "CORRECTIVE_READY",
+  "m1_3": {
+    "lifecycle_reconstruction": "TECHNICALLY_ACCEPTED",
+    "current_warm_start_readiness": "NOT_ESTABLISHED",
+    "result_commit": "355dbfcb1dcf2d0e5f0fc1b84e478e788ec1b24a",
+    "code_commit": "aebdda0169cddcdf013d24917515d4acfd1d5e74",
+    "data_start": "2020-01-01",
+    "data_end": "2026-08-31",
+    "latest_13_ends": "2026-08-30",
+    "current_prestart_requires": "POST_2026-08-31_STATE",
+    "current_prestart_latest_13_complete": "NOT_ESTABLISHED"
+  },
+  "frozen_identity": {
+    "v1_protocol_sha256": "607d262248a4ef0d0f968c1db61f9f09ffd8ee19a247a46571e131caaa8ea03d",
+    "v1_control_sha256": "5ab2c21a93a965ce363b02ebca5a4e42f8fc573a89b24ac7ad4e88c345aa8678",
+    "v1_shadow_sha256": "97e9025928bc234603139f90e58c077dddec16de55a0c9bd06c45d19b4296bdd",
+    "v2_1_spec_sha256": "e5b026c106e46d04fb160ee012789c39ff1b9ef3f318a49da871a6a3cd51959c",
+    "v2_1_protocol_sha256": "6aa94ad92fa1811774788d11aecc0326a00e256950df61cb7cbe9db8e504fb7d",
+    "forward_anchor_sha256": "a4e61eae444e08ef038fc2108b1b29ef39551e90c4d40b6dab5c04df6004f41b",
+    "anchor_status": "FROZEN_NOT_YET_STARTED"
+  },
+  "lifecycle_technical_conclusions": {
+    "overlay_sha256": "7a6f183262580933c4802acb9454b0617c7c095b458b79f1e56fadb1c9ec64c1",
+    "overlay_record_count": 22,
+    "classification_row_count": 22,
+    "pre_correction_schedule_mismatch_count": 0,
+    "post_correction_unexplained_divergence_count": 0,
+    "old_lifecycle_induced_mark_failure_count": 383,
+    "corrected_lifecycle_induced_mark_failure_count": 0,
+    "ghost_position_after_confirmed_delist_count": 0,
+    "corrected_funding_coverage_issue_count": 0
+  },
+  "quarantined_contaminated_diagnostics": {
+    "status": "QUARANTINED_CONTAMINATED_DIAGNOSTIC",
+    "source_artifact": "research/v2_1/m1_3/V2_1_M1_3_PARENT_RECONSTRUCTION.json",
+    "source_result_commit": "355dbfcb1dcf2d0e5f0fc1b84e478e788ec1b24a",
+    "source_artifact_unchanged": true,
+    "not_validation_evidence": true,
+    "not_forward_evidence": true,
+    "not_parameter_selection_input": true,
+    "not_gate_input": true,
+    "preserved_diagnostic_keys": [
+      "price_component_total",
+      "funding_component_total",
+      "transaction_cost_component_total",
+      "long_component_total",
+      "short_component_total",
+      "weekly combined_component"
+    ]
+  },
+  "risk_initialization_scope": {
+    "historical_cache_p8_meaning": "FROZEN_CACHE_LAST_13_COMPLETE",
+    "current_prestart_p8_meaning": "CURRENT_PRESTART_LATEST_13_COMPLETE_NOT_ESTABLISHED",
+    "latest_13_weekly_risk_series_status": "RISK_STATE_INITIALIZATION_ONLY",
+    "latest_13_values_recomputed": false,
+    "allowed_metadata": [
+      "count",
+      "complete",
+      "incomplete",
+      "issue_count",
+      "holding_interval_count",
+      "rebalance_count",
+      "provenance_hash"
+    ],
+    "not_a_validation_decision": true
+  },
+  "source_artifact_hashes": {
+    "m1_3_result_json_sha256": "eaf37fdd32c8482ab24f707406564cad11c5fedd36814897dc5bfbc9bc5a1ab8",
+    "m1_3_result_markdown_sha256": "008d3f31732b00d0874b67a36c1049dc5c089bdf511f48ef94b216fcab9b585e"
+  },
+  "immutable_m1_3_artifacts": [
+    "research/v2_1/m1_3/V2_1_M1_3_PARENT_RECONSTRUCTION.json",
+    "research/v2_1/m1_3/V2_1_M1_3_PARENT_RECONSTRUCTION.md",
+    "research/v2_1/m1_3/FORCED_EXIT_PROVENANCE.json",
+    "research/v2_1/m1_3/FUNDING_LIFETIME_PROVENANCE.json",
+    "research/v2_1/m1_3/HOLDING_PROVENANCE.json",
+    "research/v2_1/m1_3/LIFECYCLE_OVERRIDE_MANIFEST.json",
+    "research/v2_1/m1_3/SCHEDULE_PROVENANCE.json",
+    "research/v2_1/m1_3/WEEKLY_ACCOUNTING_PROVENANCE.json"
+  ],
+  "safety": {
+    "live_trading": false,
+    "paper_only": true,
+    "http_method_policy": "GET_ONLY",
+    "historical_reconstruction_rerun": false,
+    "new_market_data_downloaded": false,
+    "new_reference_volatility": false,
+    "new_position_scale": false,
+    "forward_evidence_created": false,
+    "m1_4_started": false,
+    "m2_started": false
+  }
+}
