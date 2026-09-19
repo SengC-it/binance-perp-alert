@@ -30,7 +30,11 @@ from src.xs_lowvol_v2_1_anchor import (
     verify_v2_1_forward_anchor_hash,
 )
 
-from .m1_protocol import M1_APPROVED_PROTOCOL_SHA256, verify_protocol_hash
+from .m1_protocol import (
+    M1_APPROVED_PROTOCOL_SHA256,
+    load_protocol,
+    verify_protocol_hash,
+)
 from .v2_1_m1_engineering import (
     EXPECTED_DATASET_SHA256,
     EXPECTED_NORMALIZED_DATASET_SHA256,
@@ -480,7 +484,36 @@ def run_audit() -> dict[str, Any]:
                 ),
             }
         )
-    ambiguous_counts = dict(sorted(Counter(row["classification"] for row in ambiguous_rows).items()))
+    raw_ambiguous_counts = Counter(row["classification"] for row in ambiguous_rows)
+    ambiguous_counts = {
+        category: raw_ambiguous_counts.get(category, 0)
+        for category in (
+            "A_KNOWN_IN_FROZEN_CATALOG",
+            "B_TRADIFI_PERPETUAL_EXCLUDED_BY_PROTOCOL",
+            "C_NON_TRADING_OR_SETTLING_STATE",
+            "D_TRUE_PRESTART_PIT_GAP",
+            "E_UNRESOLVED",
+        )
+    }
+    frozen_protocol = load_protocol(V1_PROTOCOL_PATH)
+    frozen_contract = frozen_protocol["data_source"]
+    frozen_protocol_contract_type = {
+        "market": frozen_contract["market"],
+        "quote_asset": frozen_contract["quote_asset"],
+        "contract_type": frozen_contract["contract_type"],
+        "current_exchange_info_is_not_used_for_history": frozen_protocol[
+            "point_in_time_universe"
+        ]["membership"]["current_exchange_info_is_not_used_for_history"],
+    }
+    if frozen_protocol_contract_type != {
+        "market": "USD-M Futures",
+        "quote_asset": "USDT",
+        "contract_type": "PERPETUAL",
+        "current_exchange_info_is_not_used_for_history": True,
+    }:
+        raise ContractTypeAuditError(
+            f"frozen V1 protocol contract identity changed: {frozen_protocol_contract_type}"
+        )
 
     candidate_rows = []
     for record in lifecycle.get("records", []):
@@ -702,6 +735,7 @@ def run_audit() -> dict[str, Any]:
             "full_catalog_used": True,
         },
         "historical_classifier_audit": _historical_classifier_audit(),
+        "frozen_protocol_contract_type": frozen_protocol_contract_type,
         "m1_4_exchange_info_parser_audit": _parser_audit(),
         "frozen_discovery_membership_table": {
             "path": "research/v2_1/m1_4_1/FROZEN_DISCOVERY_MEMBERSHIP_TABLE.json",
