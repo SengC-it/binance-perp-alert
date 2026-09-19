@@ -1,0 +1,84 @@
+{
+  "affected_holding_symbols": [
+    "AXTIUSDT",
+    "CBRSUSDT",
+    "CRCLUSDT",
+    "DRAMUSDT",
+    "INTCUSDT",
+    "LITEUSDT",
+    "MSTRUSDT",
+    "MUUUSDT",
+    "MVLLUSDT",
+    "NBISUSDT",
+    "SNDKUSDT",
+    "SNXXUSDT",
+    "SOXLUSDT",
+    "SOXSUSDT",
+    "TSLAUSDT"
+  ],
+  "audit_id": "XS-LOWVOL-V2.1-M1.4.1-CONTRACT-TYPE-AUDIT-1",
+  "current_ineligible_position_symbols": [
+    "AMDUSDT",
+    "EWYUSDT",
+    "SNXXUSDT",
+    "SPCXUSDT",
+    "TSLAUSDT"
+  ],
+  "exchange_info_snapshot": {
+    "endpoint": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+    "local_path": "data/v2_1_m1_4_prestart_extension/exchangeInfo.json",
+    "sha256": "5c1dc758964e01c2ef789801890c220e9ccb0a67924a697b2e49cae0b82a84cd",
+    "used_for": "official current product-class cross-check and candidate ID; not a standalone rewrite of old history"
+  },
+  "first_actual_control_impact": {
+    "entered_control_position": true,
+    "entered_legacy_pit_universe": true,
+    "entered_weekly_accounting": true,
+    "entry_timestamp_utc": "2026-03-06T23:59:59.999Z",
+    "execution_day": "2026-03-06",
+    "impact_type": "CONTROL_POSITION_ENTRY",
+    "official_timestamped_evidence": [
+      "https://www.binance.com/en/support/announcement/detail/40c76b4deaa247f09774e5d1ee747cb8"
+    ],
+    "protocol_eligible": false,
+    "signal_day": null,
+    "signal_day_inference": "2026-03-05 would follow the frozen one-day lag, but the M1.3 holding artifact does not preserve target rows",
+    "symbol": "TSLAUSDT",
+    "target_direction": "NOT_RETAINED_IN_FROZEN_PROVENANCE"
+  },
+  "historical_archive_source": "https://data.binance.vision/data/futures/um/monthly",
+  "historical_classification_rule": "timestamped official product/listing evidence plus onboard timestamp; current exchangeInfo alone cannot rewrite old history",
+  "sources": [
+    {
+      "published_utc": "2026-01-08T08:00:00Z",
+      "role": "product_category_boundary; TradFi is a separate product category and is USDT-settled",
+      "title": "Binance Futures Launches TradFi Perpetual Contracts",
+      "url": "https://www.binance.com/en/support/announcement/detail/ecf7318c0d434c339e80878588e700d0"
+    },
+    {
+      "effective_utc": "2026-01-28T14:30:00Z",
+      "published_utc": "2026-01-26T11:29:00Z",
+      "role": "first confirmed Control contamination symbol TSLAUSDT",
+      "title": "Binance Futures Will Launch USDⓈ-Margined TSLAUSDT Equity Perpetual Contract",
+      "url": "https://www.binance.com/en/support/announcement/detail/40c76b4deaa247f09774e5d1ee747cb8"
+    },
+    {
+      "published_utc": "2026-07-16T06:15:00Z",
+      "role": "MUUUSDT and SOXSUSDT timestamped TradFi listing evidence",
+      "title": "Binance Futures Will Launch Multiple USDⓈ-Margined TradFi Perpetual Contracts (2026-07-16)",
+      "url": "https://www.binance.com/en/support/announcement/detail/0a613aed15cc4cf78898594d7c767661"
+    },
+    {
+      "published_utc": "2026-08-28T07:30:00Z",
+      "role": "PDDUSDT timestamped TradFi listing evidence and fixed failure scope",
+      "title": "Binance Futures Will Launch Multiple USDⓈ-Margined TradFi Perpetual Contracts (2026-08-28)",
+      "url": "https://www.binance.com/en/support/announcement/detail/32ac927d1cbe4aa3b527eca1c401a98f"
+    },
+    {
+      "published_utc": "2026-09-04T04:46:00Z",
+      "role": "September candidate TradFi listing evidence",
+      "title": "Binance Futures Will Launch Multiple USDⓈ-Margined TradFi Perpetual Contracts (2026-09-07)",
+      "url": "https://www.binance.com/en/support/announcement/detail/89a035c3ee0e4b7782bf0089323d8e78"
+    }
+  ]
+}
